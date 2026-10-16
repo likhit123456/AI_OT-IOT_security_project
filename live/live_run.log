@@ -1,0 +1,35 @@
+[live] control room: http://127.0.0.1:8765/   (3D plant: http://localhost/)   Ctrl+C to stop
+  [t=    0.0s] brain      brain is now Trained scram-operator (Ollama, every 5s)
+  [t=    0.0s] plant      restarting the simulator and waiting for it to settle
+  [t=   13.8s] plant      settled at P=2700.5 kPa, L=44.18%
+  [t=   13.8s] plant      control loop running; SIS trips at P >= 3000 kPa, level <= 40% or >= 95%
+  [t=   14.3s] monitor    L2 monitor (measured only): measured level frozen (range 0.00000% over last 10 cycles) while process active (product valve moved 0.0%, min product flow 100.0)
+  [t=   15.9s] attack     level transmitter starts drifting high: the model and L1 see a rising level, L1 opens the product valve, the TRUE level falls
+  [t=  150.4s] governance authority set to 0.70
+  [t=  150.5s] monitor    L2 monitor (measured only): measured pressure frozen (range 0.004 kPa over last 10 cycles) while valves moved (purge 0.0%, f1 5.4%)
+  [t=  153.0s] governance authority set to 0.75
+  [t=  153.4s] governance authority set to 0.80
+  [t=  157.2s] governance authority set to 0.90
+  [t=  189.8s] governance authority set to 1.00
+  [t=  477.2s] sis        SIS TRIP: level 40.0% <= 40.0% (true values) | measured view: P=2689 kPa, L=47.7% | safe state: product valve closed, feeds held
+  [t=  492.2s] plant      all sensor faults cleared; attacks stopped
+  [t=  492.3s] monitor    L2 monitor (measured only): measured level 40.2% outside [42,95]
+  [t=  492.3s] monitor    L2 monitor (measured only): measured level moved 7.97% in one cycle (> 2.0)
+  [t=  498.8s] monitor    L2 monitor (measured only): measured level 40.3% outside [42,95]
+  [t=  508.8s] monitor    L2 monitor (measured only): measured level 40.4% outside [42,95]
+  [t=  518.8s] monitor    L2 monitor (measured only): measured level 40.5% outside [42,95]
+  [t=  525.1s] monitor    L2 monitor (measured only): measured level 40.6% outside [42,95]
+  [t=  535.0s] monitor    L2 monitor (measured only): measured level 40.7% outside [42,95]
+  [t=  544.9s] monitor    L2 monitor (measured only): measured level 40.8% outside [42,95]
+  [t=  552.7s] monitor    L2 monitor (measured only): measured level 40.9% outside [42,95]
+  [t=  561.4s] monitor    L2 monitor (measured only): measured level 41.0% outside [42,95]
+  [t=  571.3s] monitor    L2 monitor (measured only): measured level 41.1% outside [42,95]
+  [t=  581.2s] monitor    L2 monitor (measured only): measured level 41.2% outside [42,95]
+  [t=  587.4s] monitor    L2 monitor (measured only): measured level 41.3% outside [42,95]
+  [t=  597.3s] monitor    L2 monitor (measured only): measured level 41.4% outside [42,95]
+  [t=  607.2s] monitor    L2 monitor (measured only): measured level 41.5% outside [42,95]
+  [t=  617.1s] monitor    L2 monitor (measured only): measured level 41.6% outside [42,95]
+  [t=  623.4s] monitor    L2 monitor (measured only): measured level 41.7% outside [42,95]
+  [t=  633.2s] monitor    L2 monitor (measured only): measured level 41.8% outside [42,95]
+  [t=  643.1s] monitor    L2 monitor (measured only): measured level 41.9% outside [42,95]
+  [t=  652.4s] monitor    L2 monitor (measured only): measured level 42.0% outside [42,95]

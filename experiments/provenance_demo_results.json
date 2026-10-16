@@ -1,0 +1,152 @@
+[
+ {
+  "scenario": "A_legit_via_L1",
+  "op_valves": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 0.0,
+   "product_valve_pos": 47.03
+  },
+  "command_C": {
+   "f1_valve": 31.45,
+   "f2_valve": 13.24,
+   "purge_valve": 10.0,
+   "product_valve": 37.03
+  },
+  "valves_after_event_cycle": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 10.0,
+   "product_valve_pos": 37.03
+  },
+  "valves_end": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 10.0,
+   "product_valve_pos": 37.03
+  },
+  "gate_events": [],
+  "sis_tripped": false,
+  "peak_truth_pressure_kpa": 2700.6,
+  "min_truth_level_pct": 44.18
+ },
+ {
+  "scenario": "B_forged_via_enforcer",
+  "op_valves": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 0.0,
+   "product_valve_pos": 47.03
+  },
+  "command_C": {
+   "f1_valve": 31.45,
+   "f2_valve": 13.24,
+   "purge_valve": 10.0,
+   "product_valve": 37.03
+  },
+  "valves_after_event_cycle": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 0.0,
+   "product_valve_pos": 47.03
+  },
+  "valves_end": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 0.0,
+   "product_valve_pos": 47.03
+  },
+  "gate_events": [
+   [
+    "rejected_command",
+    "unsigned command (no provenance tag)"
+   ]
+  ],
+  "sis_tripped": false,
+  "peak_truth_pressure_kpa": 2700.6,
+  "min_truth_level_pct": 44.18
+ },
+ {
+  "scenario": "C_oob_direct_write_gate",
+  "op_valves": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 0.0,
+   "product_valve_pos": 47.03
+  },
+  "command_C": {
+   "f1_valve": 31.45,
+   "f2_valve": 13.24,
+   "purge_valve": 10.0,
+   "product_valve": 37.03
+  },
+  "valves_right_after_injection": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 10.0,
+   "product_valve_pos": 37.03
+  },
+  "valves_after_event_cycle": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 0.0,
+   "product_valve_pos": 47.03
+  },
+  "valves_end": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 0.0,
+   "product_valve_pos": 47.03
+  },
+  "gate_events": [
+   [
+    "out_of_band_write",
+    "purge_valve_pos is 10.0% but enforcer last wrote 0.0%"
+   ],
+   [
+    "out_of_band_write",
+    "product_valve_pos is 37.0% but enforcer last wrote 47.0%"
+   ]
+  ],
+  "sis_tripped": false,
+  "peak_truth_pressure_kpa": 2700.6,
+  "min_truth_level_pct": 44.18
+ },
+ {
+  "scenario": "D_oob_direct_write_no_gate",
+  "op_valves": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 0.0,
+   "product_valve_pos": 47.03
+  },
+  "command_C": {
+   "f1_valve": 31.45,
+   "f2_valve": 13.24,
+   "purge_valve": 10.0,
+   "product_valve": 37.03
+  },
+  "valves_right_after_injection": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 10.0,
+   "product_valve_pos": 37.03
+  },
+  "valves_after_event_cycle": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 0.0,
+   "product_valve_pos": 47.03
+  },
+  "valves_end": {
+   "f1_valve_pos": 31.45,
+   "f2_valve_pos": 13.24,
+   "purge_valve_pos": 0.0,
+   "product_valve_pos": 47.03
+  },
+  "gate_events": [],
+  "sis_tripped": false,
+  "peak_truth_pressure_kpa": 2700.6,
+  "min_truth_level_pct": 44.18
+ }
+]

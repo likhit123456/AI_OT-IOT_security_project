@@ -1,0 +1,6487 @@
+{
+ "summary": {
+  "injection_attempts": 47,
+  "rejected_at_admission": 47,
+  "injected_commands_that_reached_plant": 0,
+  "sis_trip_t_s": 407.2340000000004,
+  "rearm_t_s": 698.5310000000009,
+  "true_level_at_trip": 40.01,
+  "measured_level_at_trip": 46.78,
+  "max_divergence_pct": 11.96,
+  "min_true_level": 40.0,
+  "gate_out_of_band_events": 0
+ },
+ "events": [
+  {
+   "t": 20.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 35.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 50.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 923)); reached plant: False"
+  },
+  {
+   "t": 65.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 80.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 95.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 1752)); reached plant: False"
+  },
+  {
+   "t": 110.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 125.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 140.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 2578)); reached plant: False"
+  },
+  {
+   "t": 155.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 170.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 185.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 3407)); reached plant: False"
+  },
+  {
+   "t": 200.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 215.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 230.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 4236)); reached plant: False"
+  },
+  {
+   "t": 245.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 260.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 275.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 5065)); reached plant: False"
+  },
+  {
+   "t": 290.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 305.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 320.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 5893)); reached plant: False"
+  },
+  {
+   "t": 335.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 350.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 365.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 6722)); reached plant: False"
+  },
+  {
+   "t": 380.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 395.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 407.2,
+   "event": "SIS TRIP on true physics: level 40.0% <= 40.0% | measured level reads 46.8% (cause=level_low; product valve closed, feeds held)"
+  },
+  {
+   "t": 410.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 7550)); reached plant: False"
+  },
+  {
+   "t": 425.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 440.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 455.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 8378)); reached plant: False"
+  },
+  {
+   "t": 470.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 485.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 500.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 9206)); reached plant: False"
+  },
+  {
+   "t": 515.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 530.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 545.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 10034)); reached plant: False"
+  },
+  {
+   "t": 560.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 575.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 590.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 10862)); reached plant: False"
+  },
+  {
+   "t": 605.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 620.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 635.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 11690)); reached plant: False"
+  },
+  {
+   "t": 650.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 665.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  },
+  {
+   "t": 680.0,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 12518)); reached plant: False"
+  },
+  {
+   "t": 695.0,
+   "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
+  },
+  {
+   "t": 698.5,
+   "event": "level recovered to 42.0% -> interlock re-armed"
+  },
+  {
+   "t": 710.0,
+   "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
+  }
+ ],
+ "timeline": [
+  {
+   "t": 0.0,
+   "truth_L": 44.18,
+   "meas_L": 44.18,
+   "divergence": 0.0,
+   "tripped": false,
+   "product_valve": 47.0,
+   "rejections": 0
+  },
+  {
+   "t": 1.0,
+   "truth_L": 44.18,
+   "meas_L": 44.19,
+   "divergence": 0.02,
+   "tripped": false,
+   "product_valve": 47.0,
+   "rejections": 0
+  },
+  {
+   "t": 2.1,
+   "truth_L": 44.17,
+   "meas_L": 44.21,
+   "divergence": 0.03,
+   "tripped": false,
+   "product_valve": 60.0,
+   "rejections": 0
+  },
+  {
+   "t": 3.1,
+   "truth_L": 44.17,
+   "meas_L": 44.22,
+   "divergence": 0.05,
+   "tripped": false,
+   "product_valve": 60.0,
+   "rejections": 0
+  },
+  {
+   "t": 4.1,
+   "truth_L": 44.17,
+   "meas_L": 44.23,
+   "divergence": 0.06,
+   "tripped": false,
+   "product_valve": 60.0,
+   "rejections": 0
+  },
+  {
+   "t": 5.2,
+   "truth_L": 44.17,
+   "meas_L": 44.24,
+   "divergence": 0.08,
+   "tripped": false,
+   "product_valve": 60.0,
+   "rejections": 0
+  },
+  {
+   "t": 6.2,
+   "truth_L": 44.16,
+   "meas_L": 44.26,
+   "divergence": 0.09,
+   "tripped": false,
+   "product_valve": 60.1,
+   "rejections": 0
+  },
+  {
+   "t": 7.2,
+   "truth_L": 44.16,
+   "meas_L": 44.27,
+   "divergence": 0.11,
+   "tripped": false,
+   "product_valve": 60.1,
+   "rejections": 0
+  },
+  {
+   "t": 8.2,
+   "truth_L": 44.16,
+   "meas_L": 44.28,
+   "divergence": 0.13,
+   "tripped": false,
+   "product_valve": 60.1,
+   "rejections": 0
+  },
+  {
+   "t": 9.3,
+   "truth_L": 44.15,
+   "meas_L": 44.3,
+   "divergence": 0.14,
+   "tripped": false,
+   "product_valve": 60.1,
+   "rejections": 0
+  },
+  {
+   "t": 10.3,
+   "truth_L": 44.15,
+   "meas_L": 44.31,
+   "divergence": 0.16,
+   "tripped": false,
+   "product_valve": 60.2,
+   "rejections": 0
+  },
+  {
+   "t": 11.3,
+   "truth_L": 44.15,
+   "meas_L": 44.32,
+   "divergence": 0.17,
+   "tripped": false,
+   "product_valve": 60.2,
+   "rejections": 0
+  },
+  {
+   "t": 12.4,
+   "truth_L": 44.14,
+   "meas_L": 44.33,
+   "divergence": 0.19,
+   "tripped": false,
+   "product_valve": 60.2,
+   "rejections": 0
+  },
+  {
+   "t": 13.4,
+   "truth_L": 44.14,
+   "meas_L": 44.35,
+   "divergence": 0.2,
+   "tripped": false,
+   "product_valve": 60.3,
+   "rejections": 0
+  },
+  {
+   "t": 14.4,
+   "truth_L": 44.14,
+   "meas_L": 44.36,
+   "divergence": 0.22,
+   "tripped": false,
+   "product_valve": 60.3,
+   "rejections": 0
+  },
+  {
+   "t": 15.5,
+   "truth_L": 44.13,
+   "meas_L": 44.37,
+   "divergence": 0.24,
+   "tripped": false,
+   "product_valve": 60.4,
+   "rejections": 0
+  },
+  {
+   "t": 16.5,
+   "truth_L": 44.13,
+   "meas_L": 44.38,
+   "divergence": 0.25,
+   "tripped": false,
+   "product_valve": 60.4,
+   "rejections": 0
+  },
+  {
+   "t": 17.5,
+   "truth_L": 44.13,
+   "meas_L": 44.4,
+   "divergence": 0.27,
+   "tripped": false,
+   "product_valve": 60.4,
+   "rejections": 0
+  },
+  {
+   "t": 18.5,
+   "truth_L": 44.13,
+   "meas_L": 44.41,
+   "divergence": 0.28,
+   "tripped": false,
+   "product_valve": 60.5,
+   "rejections": 0
+  },
+  {
+   "t": 19.6,
+   "truth_L": 44.12,
+   "meas_L": 44.42,
+   "divergence": 0.3,
+   "tripped": false,
+   "product_valve": 60.5,
+   "rejections": 0
+  },
+  {
+   "t": 20.6,
+   "truth_L": 44.12,
+   "meas_L": 44.43,
+   "divergence": 0.31,
+   "tripped": false,
+   "product_valve": 60.6,
+   "rejections": 1
+  },
+  {
+   "t": 21.6,
+   "truth_L": 44.12,
+   "meas_L": 44.45,
+   "divergence": 0.33,
+   "tripped": false,
+   "product_valve": 60.7,
+   "rejections": 1
+  },
+  {
+   "t": 22.6,
+   "truth_L": 44.11,
+   "meas_L": 44.46,
+   "divergence": 0.35,
+   "tripped": false,
+   "product_valve": 60.7,
+   "rejections": 1
+  },
+  {
+   "t": 23.7,
+   "truth_L": 44.11,
+   "meas_L": 44.47,
+   "divergence": 0.37,
+   "tripped": false,
+   "product_valve": 60.8,
+   "rejections": 1
+  },
+  {
+   "t": 24.7,
+   "truth_L": 44.1,
+   "meas_L": 44.51,
+   "divergence": 0.42,
+   "tripped": false,
+   "product_valve": 60.9,
+   "rejections": 1
+  },
+  {
+   "t": 25.7,
+   "truth_L": 44.09,
+   "meas_L": 44.53,
+   "divergence": 0.43,
+   "tripped": false,
+   "product_valve": 60.9,
+   "rejections": 1
+  },
+  {
+   "t": 26.8,
+   "truth_L": 44.09,
+   "meas_L": 44.54,
+   "divergence": 0.45,
+   "tripped": false,
+   "product_valve": 61.0,
+   "rejections": 1
+  },
+  {
+   "t": 27.8,
+   "truth_L": 44.09,
+   "meas_L": 44.55,
+   "divergence": 0.47,
+   "tripped": false,
+   "product_valve": 61.1,
+   "rejections": 1
+  },
+  {
+   "t": 28.8,
+   "truth_L": 44.08,
+   "meas_L": 44.57,
+   "divergence": 0.48,
+   "tripped": false,
+   "product_valve": 61.2,
+   "rejections": 1
+  },
+  {
+   "t": 29.8,
+   "truth_L": 44.08,
+   "meas_L": 44.58,
+   "divergence": 0.5,
+   "tripped": false,
+   "product_valve": 61.2,
+   "rejections": 1
+  },
+  {
+   "t": 30.9,
+   "truth_L": 44.07,
+   "meas_L": 44.59,
+   "divergence": 0.52,
+   "tripped": false,
+   "product_valve": 61.3,
+   "rejections": 1
+  },
+  {
+   "t": 31.9,
+   "truth_L": 44.07,
+   "meas_L": 44.6,
+   "divergence": 0.53,
+   "tripped": false,
+   "product_valve": 61.4,
+   "rejections": 1
+  },
+  {
+   "t": 32.9,
+   "truth_L": 44.07,
+   "meas_L": 44.61,
+   "divergence": 0.55,
+   "tripped": false,
+   "product_valve": 61.5,
+   "rejections": 1
+  },
+  {
+   "t": 34.0,
+   "truth_L": 44.06,
+   "meas_L": 44.63,
+   "divergence": 0.56,
+   "tripped": false,
+   "product_valve": 61.6,
+   "rejections": 1
+  },
+  {
+   "t": 35.0,
+   "truth_L": 44.06,
+   "meas_L": 44.64,
+   "divergence": 0.58,
+   "tripped": false,
+   "product_valve": 61.7,
+   "rejections": 1
+  },
+  {
+   "t": 36.0,
+   "truth_L": 44.06,
+   "meas_L": 44.65,
+   "divergence": 0.59,
+   "tripped": false,
+   "product_valve": 61.8,
+   "rejections": 2
+  },
+  {
+   "t": 37.0,
+   "truth_L": 44.05,
+   "meas_L": 44.66,
+   "divergence": 0.61,
+   "tripped": false,
+   "product_valve": 61.9,
+   "rejections": 2
+  },
+  {
+   "t": 38.1,
+   "truth_L": 44.05,
+   "meas_L": 44.67,
+   "divergence": 0.63,
+   "tripped": false,
+   "product_valve": 62.0,
+   "rejections": 2
+  },
+  {
+   "t": 39.1,
+   "truth_L": 44.04,
+   "meas_L": 44.69,
+   "divergence": 0.64,
+   "tripped": false,
+   "product_valve": 62.1,
+   "rejections": 2
+  },
+  {
+   "t": 40.1,
+   "truth_L": 44.04,
+   "meas_L": 44.7,
+   "divergence": 0.66,
+   "tripped": false,
+   "product_valve": 62.2,
+   "rejections": 2
+  },
+  {
+   "t": 41.2,
+   "truth_L": 44.04,
+   "meas_L": 44.71,
+   "divergence": 0.67,
+   "tripped": false,
+   "product_valve": 62.3,
+   "rejections": 2
+  },
+  {
+   "t": 42.2,
+   "truth_L": 44.03,
+   "meas_L": 44.72,
+   "divergence": 0.69,
+   "tripped": false,
+   "product_valve": 61.9,
+   "rejections": 2
+  },
+  {
+   "t": 43.2,
+   "truth_L": 44.03,
+   "meas_L": 44.73,
+   "divergence": 0.7,
+   "tripped": false,
+   "product_valve": 61.9,
+   "rejections": 2
+  },
+  {
+   "t": 44.3,
+   "truth_L": 44.03,
+   "meas_L": 44.75,
+   "divergence": 0.72,
+   "tripped": false,
+   "product_valve": 61.9,
+   "rejections": 2
+  },
+  {
+   "t": 45.3,
+   "truth_L": 44.02,
+   "meas_L": 44.76,
+   "divergence": 0.74,
+   "tripped": false,
+   "product_valve": 62.0,
+   "rejections": 2
+  },
+  {
+   "t": 46.3,
+   "truth_L": 44.02,
+   "meas_L": 44.77,
+   "divergence": 0.75,
+   "tripped": false,
+   "product_valve": 62.0,
+   "rejections": 2
+  },
+  {
+   "t": 47.3,
+   "truth_L": 44.01,
+   "meas_L": 44.78,
+   "divergence": 0.77,
+   "tripped": false,
+   "product_valve": 62.5,
+   "rejections": 2
+  },
+  {
+   "t": 48.4,
+   "truth_L": 44.01,
+   "meas_L": 44.79,
+   "divergence": 0.78,
+   "tripped": false,
+   "product_valve": 62.6,
+   "rejections": 2
+  },
+  {
+   "t": 49.4,
+   "truth_L": 44.01,
+   "meas_L": 44.81,
+   "divergence": 0.8,
+   "tripped": false,
+   "product_valve": 62.7,
+   "rejections": 2
+  },
+  {
+   "t": 50.4,
+   "truth_L": 44.0,
+   "meas_L": 44.82,
+   "divergence": 0.81,
+   "tripped": false,
+   "product_valve": 62.9,
+   "rejections": 3
+  },
+  {
+   "t": 51.5,
+   "truth_L": 44.0,
+   "meas_L": 44.83,
+   "divergence": 0.83,
+   "tripped": false,
+   "product_valve": 63.0,
+   "rejections": 3
+  },
+  {
+   "t": 52.5,
+   "truth_L": 43.99,
+   "meas_L": 44.84,
+   "divergence": 0.85,
+   "tripped": false,
+   "product_valve": 63.1,
+   "rejections": 3
+  },
+  {
+   "t": 53.5,
+   "truth_L": 43.99,
+   "meas_L": 44.85,
+   "divergence": 0.86,
+   "tripped": false,
+   "product_valve": 63.3,
+   "rejections": 3
+  },
+  {
+   "t": 54.6,
+   "truth_L": 43.99,
+   "meas_L": 44.86,
+   "divergence": 0.88,
+   "tripped": false,
+   "product_valve": 63.4,
+   "rejections": 3
+  },
+  {
+   "t": 55.6,
+   "truth_L": 43.98,
+   "meas_L": 44.88,
+   "divergence": 0.89,
+   "tripped": false,
+   "product_valve": 63.6,
+   "rejections": 3
+  },
+  {
+   "t": 56.6,
+   "truth_L": 43.97,
+   "meas_L": 44.92,
+   "divergence": 0.95,
+   "tripped": false,
+   "product_valve": 63.7,
+   "rejections": 3
+  },
+  {
+   "t": 57.7,
+   "truth_L": 43.96,
+   "meas_L": 44.93,
+   "divergence": 0.97,
+   "tripped": false,
+   "product_valve": 63.8,
+   "rejections": 3
+  },
+  {
+   "t": 58.7,
+   "truth_L": 43.96,
+   "meas_L": 44.94,
+   "divergence": 0.98,
+   "tripped": false,
+   "product_valve": 64.0,
+   "rejections": 3
+  },
+  {
+   "t": 59.7,
+   "truth_L": 43.95,
+   "meas_L": 44.95,
+   "divergence": 1.0,
+   "tripped": false,
+   "product_valve": 64.1,
+   "rejections": 3
+  },
+  {
+   "t": 60.8,
+   "truth_L": 43.95,
+   "meas_L": 44.96,
+   "divergence": 1.01,
+   "tripped": false,
+   "product_valve": 64.3,
+   "rejections": 3
+  },
+  {
+   "t": 61.8,
+   "truth_L": 43.94,
+   "meas_L": 44.98,
+   "divergence": 1.03,
+   "tripped": false,
+   "product_valve": 64.5,
+   "rejections": 3
+  },
+  {
+   "t": 62.8,
+   "truth_L": 43.94,
+   "meas_L": 44.99,
+   "divergence": 1.05,
+   "tripped": false,
+   "product_valve": 64.6,
+   "rejections": 3
+  },
+  {
+   "t": 63.8,
+   "truth_L": 43.93,
+   "meas_L": 45.0,
+   "divergence": 1.07,
+   "tripped": false,
+   "product_valve": 64.8,
+   "rejections": 3
+  },
+  {
+   "t": 64.9,
+   "truth_L": 43.93,
+   "meas_L": 45.01,
+   "divergence": 1.08,
+   "tripped": false,
+   "product_valve": 64.9,
+   "rejections": 3
+  },
+  {
+   "t": 65.9,
+   "truth_L": 43.93,
+   "meas_L": 45.02,
+   "divergence": 1.1,
+   "tripped": false,
+   "product_valve": 65.1,
+   "rejections": 4
+  },
+  {
+   "t": 66.9,
+   "truth_L": 43.92,
+   "meas_L": 45.03,
+   "divergence": 1.11,
+   "tripped": false,
+   "product_valve": 65.3,
+   "rejections": 4
+  },
+  {
+   "t": 68.0,
+   "truth_L": 43.92,
+   "meas_L": 45.04,
+   "divergence": 1.13,
+   "tripped": false,
+   "product_valve": 65.4,
+   "rejections": 4
+  },
+  {
+   "t": 69.0,
+   "truth_L": 43.91,
+   "meas_L": 45.06,
+   "divergence": 1.14,
+   "tripped": false,
+   "product_valve": 65.6,
+   "rejections": 4
+  },
+  {
+   "t": 70.0,
+   "truth_L": 43.91,
+   "meas_L": 45.07,
+   "divergence": 1.16,
+   "tripped": false,
+   "product_valve": 65.8,
+   "rejections": 4
+  },
+  {
+   "t": 71.0,
+   "truth_L": 43.9,
+   "meas_L": 45.08,
+   "divergence": 1.18,
+   "tripped": false,
+   "product_valve": 66.0,
+   "rejections": 4
+  },
+  {
+   "t": 72.1,
+   "truth_L": 43.9,
+   "meas_L": 45.09,
+   "divergence": 1.19,
+   "tripped": false,
+   "product_valve": 66.1,
+   "rejections": 4
+  },
+  {
+   "t": 73.1,
+   "truth_L": 43.89,
+   "meas_L": 45.1,
+   "divergence": 1.21,
+   "tripped": false,
+   "product_valve": 66.3,
+   "rejections": 4
+  },
+  {
+   "t": 74.2,
+   "truth_L": 43.89,
+   "meas_L": 45.11,
+   "divergence": 1.22,
+   "tripped": false,
+   "product_valve": 66.5,
+   "rejections": 4
+  },
+  {
+   "t": 75.2,
+   "truth_L": 43.88,
+   "meas_L": 45.12,
+   "divergence": 1.24,
+   "tripped": false,
+   "product_valve": 66.7,
+   "rejections": 4
+  },
+  {
+   "t": 76.2,
+   "truth_L": 43.88,
+   "meas_L": 45.13,
+   "divergence": 1.25,
+   "tripped": false,
+   "product_valve": 66.9,
+   "rejections": 4
+  },
+  {
+   "t": 77.2,
+   "truth_L": 43.87,
+   "meas_L": 45.14,
+   "divergence": 1.27,
+   "tripped": false,
+   "product_valve": 67.0,
+   "rejections": 4
+  },
+  {
+   "t": 78.3,
+   "truth_L": 43.87,
+   "meas_L": 45.15,
+   "divergence": 1.29,
+   "tripped": false,
+   "product_valve": 67.2,
+   "rejections": 4
+  },
+  {
+   "t": 79.3,
+   "truth_L": 43.86,
+   "meas_L": 45.16,
+   "divergence": 1.3,
+   "tripped": false,
+   "product_valve": 67.4,
+   "rejections": 4
+  },
+  {
+   "t": 80.3,
+   "truth_L": 43.86,
+   "meas_L": 45.17,
+   "divergence": 1.32,
+   "tripped": false,
+   "product_valve": 67.6,
+   "rejections": 5
+  },
+  {
+   "t": 81.4,
+   "truth_L": 43.85,
+   "meas_L": 45.19,
+   "divergence": 1.33,
+   "tripped": false,
+   "product_valve": 67.8,
+   "rejections": 5
+  },
+  {
+   "t": 82.4,
+   "truth_L": 43.85,
+   "meas_L": 45.2,
+   "divergence": 1.35,
+   "tripped": false,
+   "product_valve": 68.0,
+   "rejections": 5
+  },
+  {
+   "t": 83.4,
+   "truth_L": 43.84,
+   "meas_L": 45.21,
+   "divergence": 1.37,
+   "tripped": false,
+   "product_valve": 68.2,
+   "rejections": 5
+  },
+  {
+   "t": 84.5,
+   "truth_L": 43.84,
+   "meas_L": 45.22,
+   "divergence": 1.38,
+   "tripped": false,
+   "product_valve": 68.4,
+   "rejections": 5
+  },
+  {
+   "t": 85.5,
+   "truth_L": 43.83,
+   "meas_L": 45.23,
+   "divergence": 1.4,
+   "tripped": false,
+   "product_valve": 68.6,
+   "rejections": 5
+  },
+  {
+   "t": 86.5,
+   "truth_L": 43.82,
+   "meas_L": 45.24,
+   "divergence": 1.41,
+   "tripped": false,
+   "product_valve": 68.8,
+   "rejections": 5
+  },
+  {
+   "t": 87.6,
+   "truth_L": 43.82,
+   "meas_L": 45.25,
+   "divergence": 1.43,
+   "tripped": false,
+   "product_valve": 69.0,
+   "rejections": 5
+  },
+  {
+   "t": 88.6,
+   "truth_L": 43.81,
+   "meas_L": 45.26,
+   "divergence": 1.45,
+   "tripped": false,
+   "product_valve": 69.2,
+   "rejections": 5
+  },
+  {
+   "t": 89.6,
+   "truth_L": 43.79,
+   "meas_L": 45.29,
+   "divergence": 1.5,
+   "tripped": false,
+   "product_valve": 69.4,
+   "rejections": 5
+  },
+  {
+   "t": 90.6,
+   "truth_L": 43.79,
+   "meas_L": 45.3,
+   "divergence": 1.52,
+   "tripped": false,
+   "product_valve": 69.7,
+   "rejections": 5
+  },
+  {
+   "t": 91.7,
+   "truth_L": 43.78,
+   "meas_L": 45.31,
+   "divergence": 1.53,
+   "tripped": false,
+   "product_valve": 69.9,
+   "rejections": 5
+  },
+  {
+   "t": 92.7,
+   "truth_L": 43.78,
+   "meas_L": 45.32,
+   "divergence": 1.55,
+   "tripped": false,
+   "product_valve": 70.1,
+   "rejections": 5
+  },
+  {
+   "t": 93.7,
+   "truth_L": 43.77,
+   "meas_L": 45.33,
+   "divergence": 1.56,
+   "tripped": false,
+   "product_valve": 70.3,
+   "rejections": 5
+  },
+  {
+   "t": 94.8,
+   "truth_L": 43.76,
+   "meas_L": 45.34,
+   "divergence": 1.58,
+   "tripped": false,
+   "product_valve": 70.6,
+   "rejections": 5
+  },
+  {
+   "t": 95.8,
+   "truth_L": 43.76,
+   "meas_L": 45.35,
+   "divergence": 1.59,
+   "tripped": false,
+   "product_valve": 70.8,
+   "rejections": 6
+  },
+  {
+   "t": 96.8,
+   "truth_L": 43.75,
+   "meas_L": 45.36,
+   "divergence": 1.61,
+   "tripped": false,
+   "product_valve": 71.0,
+   "rejections": 6
+  },
+  {
+   "t": 97.8,
+   "truth_L": 43.75,
+   "meas_L": 45.37,
+   "divergence": 1.63,
+   "tripped": false,
+   "product_valve": 71.2,
+   "rejections": 6
+  },
+  {
+   "t": 98.9,
+   "truth_L": 43.74,
+   "meas_L": 45.38,
+   "divergence": 1.64,
+   "tripped": false,
+   "product_valve": 71.4,
+   "rejections": 6
+  },
+  {
+   "t": 99.9,
+   "truth_L": 43.73,
+   "meas_L": 45.39,
+   "divergence": 1.66,
+   "tripped": false,
+   "product_valve": 71.7,
+   "rejections": 6
+  },
+  {
+   "t": 100.9,
+   "truth_L": 43.73,
+   "meas_L": 45.4,
+   "divergence": 1.67,
+   "tripped": false,
+   "product_valve": 71.9,
+   "rejections": 6
+  },
+  {
+   "t": 101.9,
+   "truth_L": 43.72,
+   "meas_L": 45.41,
+   "divergence": 1.69,
+   "tripped": false,
+   "product_valve": 72.1,
+   "rejections": 6
+  },
+  {
+   "t": 103.0,
+   "truth_L": 43.72,
+   "meas_L": 45.42,
+   "divergence": 1.71,
+   "tripped": false,
+   "product_valve": 72.4,
+   "rejections": 6
+  },
+  {
+   "t": 104.0,
+   "truth_L": 43.71,
+   "meas_L": 45.43,
+   "divergence": 1.72,
+   "tripped": false,
+   "product_valve": 72.6,
+   "rejections": 6
+  },
+  {
+   "t": 105.0,
+   "truth_L": 43.7,
+   "meas_L": 45.44,
+   "divergence": 1.74,
+   "tripped": false,
+   "product_valve": 72.8,
+   "rejections": 6
+  },
+  {
+   "t": 106.0,
+   "truth_L": 43.7,
+   "meas_L": 45.45,
+   "divergence": 1.75,
+   "tripped": false,
+   "product_valve": 73.1,
+   "rejections": 6
+  },
+  {
+   "t": 107.1,
+   "truth_L": 43.69,
+   "meas_L": 45.46,
+   "divergence": 1.77,
+   "tripped": false,
+   "product_valve": 73.3,
+   "rejections": 6
+  },
+  {
+   "t": 108.1,
+   "truth_L": 43.68,
+   "meas_L": 45.47,
+   "divergence": 1.79,
+   "tripped": false,
+   "product_valve": 73.6,
+   "rejections": 6
+  },
+  {
+   "t": 109.1,
+   "truth_L": 43.68,
+   "meas_L": 45.48,
+   "divergence": 1.8,
+   "tripped": false,
+   "product_valve": 73.8,
+   "rejections": 6
+  },
+  {
+   "t": 110.2,
+   "truth_L": 43.67,
+   "meas_L": 45.49,
+   "divergence": 1.82,
+   "tripped": false,
+   "product_valve": 74.1,
+   "rejections": 7
+  },
+  {
+   "t": 111.2,
+   "truth_L": 43.66,
+   "meas_L": 45.5,
+   "divergence": 1.83,
+   "tripped": false,
+   "product_valve": 74.3,
+   "rejections": 7
+  },
+  {
+   "t": 112.2,
+   "truth_L": 43.66,
+   "meas_L": 45.5,
+   "divergence": 1.85,
+   "tripped": false,
+   "product_valve": 74.6,
+   "rejections": 7
+  },
+  {
+   "t": 113.3,
+   "truth_L": 43.65,
+   "meas_L": 45.51,
+   "divergence": 1.86,
+   "tripped": false,
+   "product_valve": 74.8,
+   "rejections": 7
+  },
+  {
+   "t": 114.3,
+   "truth_L": 43.64,
+   "meas_L": 45.52,
+   "divergence": 1.88,
+   "tripped": false,
+   "product_valve": 75.1,
+   "rejections": 7
+  },
+  {
+   "t": 115.3,
+   "truth_L": 43.64,
+   "meas_L": 45.53,
+   "divergence": 1.9,
+   "tripped": false,
+   "product_valve": 75.4,
+   "rejections": 7
+  },
+  {
+   "t": 116.4,
+   "truth_L": 43.63,
+   "meas_L": 45.54,
+   "divergence": 1.91,
+   "tripped": false,
+   "product_valve": 75.6,
+   "rejections": 7
+  },
+  {
+   "t": 117.4,
+   "truth_L": 43.62,
+   "meas_L": 45.55,
+   "divergence": 1.93,
+   "tripped": false,
+   "product_valve": 75.9,
+   "rejections": 7
+  },
+  {
+   "t": 118.4,
+   "truth_L": 43.61,
+   "meas_L": 45.56,
+   "divergence": 1.94,
+   "tripped": false,
+   "product_valve": 76.1,
+   "rejections": 7
+  },
+  {
+   "t": 119.5,
+   "truth_L": 43.61,
+   "meas_L": 45.57,
+   "divergence": 1.96,
+   "tripped": false,
+   "product_valve": 76.4,
+   "rejections": 7
+  },
+  {
+   "t": 120.5,
+   "truth_L": 43.6,
+   "meas_L": 45.57,
+   "divergence": 1.97,
+   "tripped": false,
+   "product_valve": 76.7,
+   "rejections": 7
+  },
+  {
+   "t": 121.5,
+   "truth_L": 43.57,
+   "meas_L": 45.6,
+   "divergence": 2.03,
+   "tripped": false,
+   "product_valve": 77.0,
+   "rejections": 7
+  },
+  {
+   "t": 122.6,
+   "truth_L": 43.56,
+   "meas_L": 45.61,
+   "divergence": 2.05,
+   "tripped": false,
+   "product_valve": 77.2,
+   "rejections": 7
+  },
+  {
+   "t": 123.6,
+   "truth_L": 43.56,
+   "meas_L": 45.62,
+   "divergence": 2.07,
+   "tripped": false,
+   "product_valve": 77.5,
+   "rejections": 7
+  },
+  {
+   "t": 124.6,
+   "truth_L": 43.55,
+   "meas_L": 45.63,
+   "divergence": 2.08,
+   "tripped": false,
+   "product_valve": 77.8,
+   "rejections": 7
+  },
+  {
+   "t": 125.7,
+   "truth_L": 43.54,
+   "meas_L": 45.64,
+   "divergence": 2.1,
+   "tripped": false,
+   "product_valve": 78.1,
+   "rejections": 8
+  },
+  {
+   "t": 126.7,
+   "truth_L": 43.53,
+   "meas_L": 45.65,
+   "divergence": 2.12,
+   "tripped": false,
+   "product_valve": 78.4,
+   "rejections": 8
+  },
+  {
+   "t": 127.7,
+   "truth_L": 43.52,
+   "meas_L": 45.66,
+   "divergence": 2.13,
+   "tripped": false,
+   "product_valve": 78.6,
+   "rejections": 8
+  },
+  {
+   "t": 128.8,
+   "truth_L": 43.52,
+   "meas_L": 45.66,
+   "divergence": 2.15,
+   "tripped": false,
+   "product_valve": 78.9,
+   "rejections": 8
+  },
+  {
+   "t": 129.8,
+   "truth_L": 43.51,
+   "meas_L": 45.67,
+   "divergence": 2.16,
+   "tripped": false,
+   "product_valve": 79.2,
+   "rejections": 8
+  },
+  {
+   "t": 130.8,
+   "truth_L": 43.5,
+   "meas_L": 45.68,
+   "divergence": 2.18,
+   "tripped": false,
+   "product_valve": 79.5,
+   "rejections": 8
+  },
+  {
+   "t": 131.8,
+   "truth_L": 43.49,
+   "meas_L": 45.69,
+   "divergence": 2.19,
+   "tripped": false,
+   "product_valve": 79.8,
+   "rejections": 8
+  },
+  {
+   "t": 132.9,
+   "truth_L": 43.48,
+   "meas_L": 45.7,
+   "divergence": 2.21,
+   "tripped": false,
+   "product_valve": 80.1,
+   "rejections": 8
+  },
+  {
+   "t": 133.9,
+   "truth_L": 43.48,
+   "meas_L": 45.7,
+   "divergence": 2.23,
+   "tripped": false,
+   "product_valve": 80.4,
+   "rejections": 8
+  },
+  {
+   "t": 134.9,
+   "truth_L": 43.47,
+   "meas_L": 45.71,
+   "divergence": 2.24,
+   "tripped": false,
+   "product_valve": 80.7,
+   "rejections": 8
+  },
+  {
+   "t": 136.0,
+   "truth_L": 43.46,
+   "meas_L": 45.72,
+   "divergence": 2.26,
+   "tripped": false,
+   "product_valve": 81.0,
+   "rejections": 8
+  },
+  {
+   "t": 137.0,
+   "truth_L": 43.45,
+   "meas_L": 45.73,
+   "divergence": 2.27,
+   "tripped": false,
+   "product_valve": 81.2,
+   "rejections": 8
+  },
+  {
+   "t": 138.0,
+   "truth_L": 43.44,
+   "meas_L": 45.73,
+   "divergence": 2.29,
+   "tripped": false,
+   "product_valve": 81.5,
+   "rejections": 8
+  },
+  {
+   "t": 139.0,
+   "truth_L": 43.44,
+   "meas_L": 45.74,
+   "divergence": 2.3,
+   "tripped": false,
+   "product_valve": 81.8,
+   "rejections": 8
+  },
+  {
+   "t": 140.1,
+   "truth_L": 43.43,
+   "meas_L": 45.75,
+   "divergence": 2.32,
+   "tripped": false,
+   "product_valve": 82.1,
+   "rejections": 9
+  },
+  {
+   "t": 141.1,
+   "truth_L": 43.42,
+   "meas_L": 45.75,
+   "divergence": 2.34,
+   "tripped": false,
+   "product_valve": 82.4,
+   "rejections": 9
+  },
+  {
+   "t": 142.1,
+   "truth_L": 43.41,
+   "meas_L": 45.76,
+   "divergence": 2.35,
+   "tripped": false,
+   "product_valve": 82.7,
+   "rejections": 9
+  },
+  {
+   "t": 143.2,
+   "truth_L": 43.4,
+   "meas_L": 45.77,
+   "divergence": 2.37,
+   "tripped": false,
+   "product_valve": 83.0,
+   "rejections": 9
+  },
+  {
+   "t": 144.2,
+   "truth_L": 43.39,
+   "meas_L": 45.78,
+   "divergence": 2.38,
+   "tripped": false,
+   "product_valve": 83.3,
+   "rejections": 9
+  },
+  {
+   "t": 145.2,
+   "truth_L": 43.38,
+   "meas_L": 45.78,
+   "divergence": 2.4,
+   "tripped": false,
+   "product_valve": 83.7,
+   "rejections": 9
+  },
+  {
+   "t": 146.3,
+   "truth_L": 43.37,
+   "meas_L": 45.79,
+   "divergence": 2.42,
+   "tripped": false,
+   "product_valve": 84.0,
+   "rejections": 9
+  },
+  {
+   "t": 147.3,
+   "truth_L": 43.37,
+   "meas_L": 45.8,
+   "divergence": 2.43,
+   "tripped": false,
+   "product_valve": 84.3,
+   "rejections": 9
+  },
+  {
+   "t": 148.3,
+   "truth_L": 43.36,
+   "meas_L": 45.8,
+   "divergence": 2.45,
+   "tripped": false,
+   "product_valve": 84.6,
+   "rejections": 9
+  },
+  {
+   "t": 149.4,
+   "truth_L": 43.35,
+   "meas_L": 45.81,
+   "divergence": 2.46,
+   "tripped": false,
+   "product_valve": 84.9,
+   "rejections": 9
+  },
+  {
+   "t": 150.4,
+   "truth_L": 43.34,
+   "meas_L": 45.82,
+   "divergence": 2.48,
+   "tripped": false,
+   "product_valve": 85.2,
+   "rejections": 9
+  },
+  {
+   "t": 151.4,
+   "truth_L": 43.33,
+   "meas_L": 45.82,
+   "divergence": 2.49,
+   "tripped": false,
+   "product_valve": 85.5,
+   "rejections": 9
+  },
+  {
+   "t": 152.5,
+   "truth_L": 43.32,
+   "meas_L": 45.83,
+   "divergence": 2.51,
+   "tripped": false,
+   "product_valve": 85.8,
+   "rejections": 9
+  },
+  {
+   "t": 153.5,
+   "truth_L": 43.31,
+   "meas_L": 45.84,
+   "divergence": 2.53,
+   "tripped": false,
+   "product_valve": 86.1,
+   "rejections": 9
+  },
+  {
+   "t": 154.5,
+   "truth_L": 43.28,
+   "meas_L": 45.86,
+   "divergence": 2.58,
+   "tripped": false,
+   "product_valve": 86.5,
+   "rejections": 9
+  },
+  {
+   "t": 155.5,
+   "truth_L": 43.27,
+   "meas_L": 45.86,
+   "divergence": 2.6,
+   "tripped": false,
+   "product_valve": 86.8,
+   "rejections": 10
+  },
+  {
+   "t": 156.6,
+   "truth_L": 43.26,
+   "meas_L": 45.87,
+   "divergence": 2.61,
+   "tripped": false,
+   "product_valve": 87.1,
+   "rejections": 10
+  },
+  {
+   "t": 157.6,
+   "truth_L": 43.25,
+   "meas_L": 45.88,
+   "divergence": 2.63,
+   "tripped": false,
+   "product_valve": 87.4,
+   "rejections": 10
+  },
+  {
+   "t": 158.7,
+   "truth_L": 43.24,
+   "meas_L": 45.88,
+   "divergence": 2.64,
+   "tripped": false,
+   "product_valve": 87.8,
+   "rejections": 10
+  },
+  {
+   "t": 159.7,
+   "truth_L": 43.23,
+   "meas_L": 45.89,
+   "divergence": 2.66,
+   "tripped": false,
+   "product_valve": 88.1,
+   "rejections": 10
+  },
+  {
+   "t": 160.7,
+   "truth_L": 43.22,
+   "meas_L": 45.89,
+   "divergence": 2.68,
+   "tripped": false,
+   "product_valve": 88.4,
+   "rejections": 10
+  },
+  {
+   "t": 161.8,
+   "truth_L": 43.21,
+   "meas_L": 45.9,
+   "divergence": 2.69,
+   "tripped": false,
+   "product_valve": 88.7,
+   "rejections": 10
+  },
+  {
+   "t": 162.8,
+   "truth_L": 43.2,
+   "meas_L": 45.91,
+   "divergence": 2.71,
+   "tripped": false,
+   "product_valve": 89.1,
+   "rejections": 10
+  },
+  {
+   "t": 163.8,
+   "truth_L": 43.19,
+   "meas_L": 45.91,
+   "divergence": 2.72,
+   "tripped": false,
+   "product_valve": 89.4,
+   "rejections": 10
+  },
+  {
+   "t": 164.8,
+   "truth_L": 43.18,
+   "meas_L": 45.92,
+   "divergence": 2.74,
+   "tripped": false,
+   "product_valve": 89.7,
+   "rejections": 10
+  },
+  {
+   "t": 165.9,
+   "truth_L": 43.17,
+   "meas_L": 45.92,
+   "divergence": 2.76,
+   "tripped": false,
+   "product_valve": 90.1,
+   "rejections": 10
+  },
+  {
+   "t": 166.9,
+   "truth_L": 43.16,
+   "meas_L": 45.93,
+   "divergence": 2.77,
+   "tripped": false,
+   "product_valve": 90.4,
+   "rejections": 10
+  },
+  {
+   "t": 167.9,
+   "truth_L": 43.15,
+   "meas_L": 45.93,
+   "divergence": 2.79,
+   "tripped": false,
+   "product_valve": 90.7,
+   "rejections": 10
+  },
+  {
+   "t": 169.0,
+   "truth_L": 43.14,
+   "meas_L": 45.94,
+   "divergence": 2.8,
+   "tripped": false,
+   "product_valve": 91.1,
+   "rejections": 10
+  },
+  {
+   "t": 170.0,
+   "truth_L": 43.12,
+   "meas_L": 45.94,
+   "divergence": 2.82,
+   "tripped": false,
+   "product_valve": 91.4,
+   "rejections": 10
+  },
+  {
+   "t": 171.0,
+   "truth_L": 43.11,
+   "meas_L": 45.95,
+   "divergence": 2.84,
+   "tripped": false,
+   "product_valve": 91.7,
+   "rejections": 11
+  },
+  {
+   "t": 172.0,
+   "truth_L": 43.1,
+   "meas_L": 45.95,
+   "divergence": 2.85,
+   "tripped": false,
+   "product_valve": 92.1,
+   "rejections": 11
+  },
+  {
+   "t": 173.1,
+   "truth_L": 43.09,
+   "meas_L": 45.96,
+   "divergence": 2.87,
+   "tripped": false,
+   "product_valve": 92.4,
+   "rejections": 11
+  },
+  {
+   "t": 174.1,
+   "truth_L": 43.08,
+   "meas_L": 45.96,
+   "divergence": 2.88,
+   "tripped": false,
+   "product_valve": 92.7,
+   "rejections": 11
+  },
+  {
+   "t": 175.1,
+   "truth_L": 43.07,
+   "meas_L": 45.97,
+   "divergence": 2.9,
+   "tripped": false,
+   "product_valve": 93.1,
+   "rejections": 11
+  },
+  {
+   "t": 176.2,
+   "truth_L": 43.06,
+   "meas_L": 45.97,
+   "divergence": 2.91,
+   "tripped": false,
+   "product_valve": 93.4,
+   "rejections": 11
+  },
+  {
+   "t": 177.2,
+   "truth_L": 43.05,
+   "meas_L": 45.98,
+   "divergence": 2.93,
+   "tripped": false,
+   "product_valve": 93.8,
+   "rejections": 11
+  },
+  {
+   "t": 178.2,
+   "truth_L": 43.04,
+   "meas_L": 45.98,
+   "divergence": 2.95,
+   "tripped": false,
+   "product_valve": 94.1,
+   "rejections": 11
+  },
+  {
+   "t": 179.3,
+   "truth_L": 43.03,
+   "meas_L": 45.99,
+   "divergence": 2.96,
+   "tripped": false,
+   "product_valve": 94.5,
+   "rejections": 11
+  },
+  {
+   "t": 180.3,
+   "truth_L": 43.02,
+   "meas_L": 45.99,
+   "divergence": 2.98,
+   "tripped": false,
+   "product_valve": 94.8,
+   "rejections": 11
+  },
+  {
+   "t": 181.3,
+   "truth_L": 43.0,
+   "meas_L": 46.0,
+   "divergence": 2.99,
+   "tripped": false,
+   "product_valve": 95.1,
+   "rejections": 11
+  },
+  {
+   "t": 182.4,
+   "truth_L": 42.99,
+   "meas_L": 46.0,
+   "divergence": 3.01,
+   "tripped": false,
+   "product_valve": 95.5,
+   "rejections": 11
+  },
+  {
+   "t": 183.4,
+   "truth_L": 42.98,
+   "meas_L": 46.01,
+   "divergence": 3.02,
+   "tripped": false,
+   "product_valve": 95.8,
+   "rejections": 11
+  },
+  {
+   "t": 184.4,
+   "truth_L": 42.97,
+   "meas_L": 46.01,
+   "divergence": 3.04,
+   "tripped": false,
+   "product_valve": 96.2,
+   "rejections": 11
+  },
+  {
+   "t": 185.5,
+   "truth_L": 42.96,
+   "meas_L": 46.01,
+   "divergence": 3.06,
+   "tripped": false,
+   "product_valve": 96.5,
+   "rejections": 12
+  },
+  {
+   "t": 186.5,
+   "truth_L": 42.91,
+   "meas_L": 46.03,
+   "divergence": 3.12,
+   "tripped": false,
+   "product_valve": 96.9,
+   "rejections": 12
+  },
+  {
+   "t": 187.5,
+   "truth_L": 42.9,
+   "meas_L": 46.03,
+   "divergence": 3.13,
+   "tripped": false,
+   "product_valve": 97.2,
+   "rejections": 12
+  },
+  {
+   "t": 188.5,
+   "truth_L": 42.89,
+   "meas_L": 46.04,
+   "divergence": 3.15,
+   "tripped": false,
+   "product_valve": 97.6,
+   "rejections": 12
+  },
+  {
+   "t": 189.6,
+   "truth_L": 42.88,
+   "meas_L": 46.04,
+   "divergence": 3.16,
+   "tripped": false,
+   "product_valve": 97.9,
+   "rejections": 12
+  },
+  {
+   "t": 190.6,
+   "truth_L": 42.87,
+   "meas_L": 46.04,
+   "divergence": 3.18,
+   "tripped": false,
+   "product_valve": 98.3,
+   "rejections": 12
+  },
+  {
+   "t": 191.6,
+   "truth_L": 42.85,
+   "meas_L": 46.05,
+   "divergence": 3.2,
+   "tripped": false,
+   "product_valve": 98.6,
+   "rejections": 12
+  },
+  {
+   "t": 192.7,
+   "truth_L": 42.84,
+   "meas_L": 46.05,
+   "divergence": 3.21,
+   "tripped": false,
+   "product_valve": 99.0,
+   "rejections": 12
+  },
+  {
+   "t": 193.7,
+   "truth_L": 42.83,
+   "meas_L": 46.06,
+   "divergence": 3.23,
+   "tripped": false,
+   "product_valve": 99.4,
+   "rejections": 12
+  },
+  {
+   "t": 194.7,
+   "truth_L": 42.81,
+   "meas_L": 46.06,
+   "divergence": 3.25,
+   "tripped": false,
+   "product_valve": 99.7,
+   "rejections": 12
+  },
+  {
+   "t": 195.8,
+   "truth_L": 42.8,
+   "meas_L": 46.06,
+   "divergence": 3.26,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 12
+  },
+  {
+   "t": 196.8,
+   "truth_L": 42.79,
+   "meas_L": 46.07,
+   "divergence": 3.28,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 12
+  },
+  {
+   "t": 197.8,
+   "truth_L": 42.78,
+   "meas_L": 46.07,
+   "divergence": 3.29,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 12
+  },
+  {
+   "t": 198.9,
+   "truth_L": 42.76,
+   "meas_L": 46.07,
+   "divergence": 3.31,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 12
+  },
+  {
+   "t": 199.9,
+   "truth_L": 42.75,
+   "meas_L": 46.08,
+   "divergence": 3.32,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 12
+  },
+  {
+   "t": 200.9,
+   "truth_L": 42.74,
+   "meas_L": 46.08,
+   "divergence": 3.34,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 202.0,
+   "truth_L": 42.73,
+   "meas_L": 46.08,
+   "divergence": 3.36,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 203.0,
+   "truth_L": 42.71,
+   "meas_L": 46.09,
+   "divergence": 3.37,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 204.0,
+   "truth_L": 42.7,
+   "meas_L": 46.09,
+   "divergence": 3.39,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 205.0,
+   "truth_L": 42.69,
+   "meas_L": 46.09,
+   "divergence": 3.4,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 206.1,
+   "truth_L": 42.68,
+   "meas_L": 46.1,
+   "divergence": 3.42,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 207.1,
+   "truth_L": 42.66,
+   "meas_L": 46.1,
+   "divergence": 3.44,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 208.1,
+   "truth_L": 42.65,
+   "meas_L": 46.1,
+   "divergence": 3.45,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 209.2,
+   "truth_L": 42.64,
+   "meas_L": 46.11,
+   "divergence": 3.47,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 210.2,
+   "truth_L": 42.63,
+   "meas_L": 46.11,
+   "divergence": 3.48,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 211.2,
+   "truth_L": 42.61,
+   "meas_L": 46.11,
+   "divergence": 3.5,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 212.2,
+   "truth_L": 42.6,
+   "meas_L": 46.12,
+   "divergence": 3.51,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 213.3,
+   "truth_L": 42.59,
+   "meas_L": 46.12,
+   "divergence": 3.53,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 214.3,
+   "truth_L": 42.58,
+   "meas_L": 46.12,
+   "divergence": 3.55,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 215.3,
+   "truth_L": 42.56,
+   "meas_L": 46.12,
+   "divergence": 3.56,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 216.4,
+   "truth_L": 42.55,
+   "meas_L": 46.13,
+   "divergence": 3.58,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 217.4,
+   "truth_L": 42.54,
+   "meas_L": 46.13,
+   "divergence": 3.59,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 218.4,
+   "truth_L": 42.53,
+   "meas_L": 46.13,
+   "divergence": 3.61,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 219.5,
+   "truth_L": 42.48,
+   "meas_L": 46.15,
+   "divergence": 3.67,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 220.5,
+   "truth_L": 42.47,
+   "meas_L": 46.15,
+   "divergence": 3.68,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 221.5,
+   "truth_L": 42.46,
+   "meas_L": 46.15,
+   "divergence": 3.7,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 222.6,
+   "truth_L": 42.44,
+   "meas_L": 46.16,
+   "divergence": 3.71,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 223.6,
+   "truth_L": 42.43,
+   "meas_L": 46.16,
+   "divergence": 3.73,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 224.6,
+   "truth_L": 42.42,
+   "meas_L": 46.16,
+   "divergence": 3.74,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 225.7,
+   "truth_L": 42.41,
+   "meas_L": 46.17,
+   "divergence": 3.76,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 226.7,
+   "truth_L": 42.39,
+   "meas_L": 46.17,
+   "divergence": 3.78,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 227.7,
+   "truth_L": 42.38,
+   "meas_L": 46.17,
+   "divergence": 3.79,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 228.8,
+   "truth_L": 42.37,
+   "meas_L": 46.18,
+   "divergence": 3.81,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 229.8,
+   "truth_L": 42.36,
+   "meas_L": 46.18,
+   "divergence": 3.82,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 230.8,
+   "truth_L": 42.34,
+   "meas_L": 46.18,
+   "divergence": 3.84,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 231.9,
+   "truth_L": 42.33,
+   "meas_L": 46.19,
+   "divergence": 3.86,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 232.9,
+   "truth_L": 42.32,
+   "meas_L": 46.19,
+   "divergence": 3.87,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 233.9,
+   "truth_L": 42.31,
+   "meas_L": 46.19,
+   "divergence": 3.89,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 235.0,
+   "truth_L": 42.29,
+   "meas_L": 46.2,
+   "divergence": 3.9,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 236.0,
+   "truth_L": 42.28,
+   "meas_L": 46.2,
+   "divergence": 3.92,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 237.0,
+   "truth_L": 42.27,
+   "meas_L": 46.2,
+   "divergence": 3.93,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 238.0,
+   "truth_L": 42.26,
+   "meas_L": 46.21,
+   "divergence": 3.95,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 239.1,
+   "truth_L": 42.24,
+   "meas_L": 46.21,
+   "divergence": 3.97,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 240.1,
+   "truth_L": 42.23,
+   "meas_L": 46.21,
+   "divergence": 3.98,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 241.1,
+   "truth_L": 42.22,
+   "meas_L": 46.21,
+   "divergence": 4.0,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 242.2,
+   "truth_L": 42.21,
+   "meas_L": 46.22,
+   "divergence": 4.01,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 243.2,
+   "truth_L": 42.19,
+   "meas_L": 46.22,
+   "divergence": 4.03,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 244.2,
+   "truth_L": 42.18,
+   "meas_L": 46.22,
+   "divergence": 4.04,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 245.3,
+   "truth_L": 42.17,
+   "meas_L": 46.23,
+   "divergence": 4.06,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 246.3,
+   "truth_L": 42.15,
+   "meas_L": 46.23,
+   "divergence": 4.08,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 247.3,
+   "truth_L": 42.14,
+   "meas_L": 46.23,
+   "divergence": 4.09,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 248.3,
+   "truth_L": 42.13,
+   "meas_L": 46.24,
+   "divergence": 4.11,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 249.4,
+   "truth_L": 42.12,
+   "meas_L": 46.24,
+   "divergence": 4.12,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 250.4,
+   "truth_L": 42.1,
+   "meas_L": 46.24,
+   "divergence": 4.14,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 251.5,
+   "truth_L": 42.06,
+   "meas_L": 46.26,
+   "divergence": 4.2,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 252.5,
+   "truth_L": 42.04,
+   "meas_L": 46.26,
+   "divergence": 4.22,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 253.5,
+   "truth_L": 42.03,
+   "meas_L": 46.26,
+   "divergence": 4.23,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 254.6,
+   "truth_L": 42.02,
+   "meas_L": 46.27,
+   "divergence": 4.25,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 255.6,
+   "truth_L": 42.0,
+   "meas_L": 46.27,
+   "divergence": 4.27,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 256.6,
+   "truth_L": 41.99,
+   "meas_L": 46.27,
+   "divergence": 4.28,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 257.7,
+   "truth_L": 41.98,
+   "meas_L": 46.28,
+   "divergence": 4.3,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 258.7,
+   "truth_L": 41.97,
+   "meas_L": 46.28,
+   "divergence": 4.31,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 259.7,
+   "truth_L": 41.95,
+   "meas_L": 46.28,
+   "divergence": 4.33,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 260.8,
+   "truth_L": 41.94,
+   "meas_L": 46.29,
+   "divergence": 4.35,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 261.8,
+   "truth_L": 41.93,
+   "meas_L": 46.29,
+   "divergence": 4.36,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 262.8,
+   "truth_L": 41.92,
+   "meas_L": 46.29,
+   "divergence": 4.38,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 263.9,
+   "truth_L": 41.9,
+   "meas_L": 46.3,
+   "divergence": 4.39,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 264.9,
+   "truth_L": 41.89,
+   "meas_L": 46.3,
+   "divergence": 4.41,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 265.9,
+   "truth_L": 41.88,
+   "meas_L": 46.3,
+   "divergence": 4.42,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 267.0,
+   "truth_L": 41.87,
+   "meas_L": 46.31,
+   "divergence": 4.44,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 268.0,
+   "truth_L": 41.85,
+   "meas_L": 46.31,
+   "divergence": 4.46,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 269.0,
+   "truth_L": 41.84,
+   "meas_L": 46.31,
+   "divergence": 4.47,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 270.0,
+   "truth_L": 41.83,
+   "meas_L": 46.31,
+   "divergence": 4.49,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 271.1,
+   "truth_L": 41.81,
+   "meas_L": 46.32,
+   "divergence": 4.5,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 272.1,
+   "truth_L": 41.8,
+   "meas_L": 46.32,
+   "divergence": 4.52,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 273.1,
+   "truth_L": 41.79,
+   "meas_L": 46.32,
+   "divergence": 4.53,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 274.2,
+   "truth_L": 41.78,
+   "meas_L": 46.33,
+   "divergence": 4.55,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 275.2,
+   "truth_L": 41.76,
+   "meas_L": 46.33,
+   "divergence": 4.57,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 276.2,
+   "truth_L": 41.75,
+   "meas_L": 46.33,
+   "divergence": 4.58,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 277.3,
+   "truth_L": 41.74,
+   "meas_L": 46.34,
+   "divergence": 4.6,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 278.3,
+   "truth_L": 41.73,
+   "meas_L": 46.34,
+   "divergence": 4.61,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 279.3,
+   "truth_L": 41.71,
+   "meas_L": 46.34,
+   "divergence": 4.63,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 280.4,
+   "truth_L": 41.7,
+   "meas_L": 46.35,
+   "divergence": 4.64,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 281.4,
+   "truth_L": 41.69,
+   "meas_L": 46.35,
+   "divergence": 4.66,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 282.4,
+   "truth_L": 41.68,
+   "meas_L": 46.35,
+   "divergence": 4.68,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 283.5,
+   "truth_L": 41.66,
+   "meas_L": 46.36,
+   "divergence": 4.69,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 284.5,
+   "truth_L": 41.62,
+   "meas_L": 46.37,
+   "divergence": 4.75,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 285.5,
+   "truth_L": 41.61,
+   "meas_L": 46.37,
+   "divergence": 4.76,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 286.5,
+   "truth_L": 41.59,
+   "meas_L": 46.37,
+   "divergence": 4.78,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 287.6,
+   "truth_L": 41.58,
+   "meas_L": 46.38,
+   "divergence": 4.79,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 288.6,
+   "truth_L": 41.57,
+   "meas_L": 46.38,
+   "divergence": 4.81,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 289.6,
+   "truth_L": 41.55,
+   "meas_L": 46.38,
+   "divergence": 4.83,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 18
+  },
+  {
+   "t": 290.7,
+   "truth_L": 41.54,
+   "meas_L": 46.39,
+   "divergence": 4.84,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 291.7,
+   "truth_L": 41.53,
+   "meas_L": 46.39,
+   "divergence": 4.86,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 292.8,
+   "truth_L": 41.52,
+   "meas_L": 46.39,
+   "divergence": 4.88,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 293.8,
+   "truth_L": 41.5,
+   "meas_L": 46.4,
+   "divergence": 4.89,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 294.8,
+   "truth_L": 41.49,
+   "meas_L": 46.4,
+   "divergence": 4.91,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 295.8,
+   "truth_L": 41.48,
+   "meas_L": 46.4,
+   "divergence": 4.92,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 296.9,
+   "truth_L": 41.47,
+   "meas_L": 46.41,
+   "divergence": 4.94,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 297.9,
+   "truth_L": 41.45,
+   "meas_L": 46.41,
+   "divergence": 4.95,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 298.9,
+   "truth_L": 41.44,
+   "meas_L": 46.41,
+   "divergence": 4.97,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 300.0,
+   "truth_L": 41.43,
+   "meas_L": 46.41,
+   "divergence": 4.99,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 301.0,
+   "truth_L": 41.42,
+   "meas_L": 46.42,
+   "divergence": 5.0,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 302.0,
+   "truth_L": 41.4,
+   "meas_L": 46.42,
+   "divergence": 5.02,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 303.1,
+   "truth_L": 41.39,
+   "meas_L": 46.42,
+   "divergence": 5.03,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 304.1,
+   "truth_L": 41.38,
+   "meas_L": 46.43,
+   "divergence": 5.05,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 305.1,
+   "truth_L": 41.37,
+   "meas_L": 46.43,
+   "divergence": 5.07,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 306.2,
+   "truth_L": 41.35,
+   "meas_L": 46.43,
+   "divergence": 5.08,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 307.2,
+   "truth_L": 41.34,
+   "meas_L": 46.44,
+   "divergence": 5.1,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 308.2,
+   "truth_L": 41.33,
+   "meas_L": 46.44,
+   "divergence": 5.11,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 309.2,
+   "truth_L": 41.32,
+   "meas_L": 46.44,
+   "divergence": 5.13,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 310.3,
+   "truth_L": 41.3,
+   "meas_L": 46.45,
+   "divergence": 5.14,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 311.3,
+   "truth_L": 41.29,
+   "meas_L": 46.45,
+   "divergence": 5.16,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 312.3,
+   "truth_L": 41.28,
+   "meas_L": 46.45,
+   "divergence": 5.18,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 313.4,
+   "truth_L": 41.26,
+   "meas_L": 46.46,
+   "divergence": 5.19,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 314.4,
+   "truth_L": 41.25,
+   "meas_L": 46.46,
+   "divergence": 5.21,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 315.4,
+   "truth_L": 41.24,
+   "meas_L": 46.46,
+   "divergence": 5.22,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 316.5,
+   "truth_L": 41.19,
+   "meas_L": 46.47,
+   "divergence": 5.28,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 317.5,
+   "truth_L": 41.18,
+   "meas_L": 46.48,
+   "divergence": 5.3,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 318.5,
+   "truth_L": 41.17,
+   "meas_L": 46.48,
+   "divergence": 5.31,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 319.6,
+   "truth_L": 41.15,
+   "meas_L": 46.48,
+   "divergence": 5.33,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 320.6,
+   "truth_L": 41.14,
+   "meas_L": 46.49,
+   "divergence": 5.35,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 321.6,
+   "truth_L": 41.13,
+   "meas_L": 46.49,
+   "divergence": 5.36,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 322.6,
+   "truth_L": 41.11,
+   "meas_L": 46.49,
+   "divergence": 5.38,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 323.6,
+   "truth_L": 41.1,
+   "meas_L": 46.5,
+   "divergence": 5.4,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 324.7,
+   "truth_L": 41.09,
+   "meas_L": 46.5,
+   "divergence": 5.41,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 325.7,
+   "truth_L": 41.07,
+   "meas_L": 46.5,
+   "divergence": 5.43,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 326.7,
+   "truth_L": 41.06,
+   "meas_L": 46.51,
+   "divergence": 5.44,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 327.8,
+   "truth_L": 41.05,
+   "meas_L": 46.51,
+   "divergence": 5.46,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 328.8,
+   "truth_L": 41.04,
+   "meas_L": 46.51,
+   "divergence": 5.48,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 329.8,
+   "truth_L": 41.02,
+   "meas_L": 46.52,
+   "divergence": 5.49,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 330.9,
+   "truth_L": 41.01,
+   "meas_L": 46.52,
+   "divergence": 5.51,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 331.9,
+   "truth_L": 41.0,
+   "meas_L": 46.52,
+   "divergence": 5.52,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 332.9,
+   "truth_L": 40.99,
+   "meas_L": 46.52,
+   "divergence": 5.54,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 334.0,
+   "truth_L": 40.97,
+   "meas_L": 46.53,
+   "divergence": 5.55,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 335.0,
+   "truth_L": 40.96,
+   "meas_L": 46.53,
+   "divergence": 5.57,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 21
+  },
+  {
+   "t": 336.0,
+   "truth_L": 40.95,
+   "meas_L": 46.53,
+   "divergence": 5.59,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 337.0,
+   "truth_L": 40.94,
+   "meas_L": 46.54,
+   "divergence": 5.6,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 338.1,
+   "truth_L": 40.92,
+   "meas_L": 46.54,
+   "divergence": 5.62,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 339.1,
+   "truth_L": 40.91,
+   "meas_L": 46.54,
+   "divergence": 5.63,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 340.1,
+   "truth_L": 40.9,
+   "meas_L": 46.55,
+   "divergence": 5.65,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 341.2,
+   "truth_L": 40.88,
+   "meas_L": 46.55,
+   "divergence": 5.66,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 342.2,
+   "truth_L": 40.87,
+   "meas_L": 46.55,
+   "divergence": 5.68,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 343.2,
+   "truth_L": 40.86,
+   "meas_L": 46.56,
+   "divergence": 5.7,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 344.3,
+   "truth_L": 40.85,
+   "meas_L": 46.56,
+   "divergence": 5.71,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 345.3,
+   "truth_L": 40.83,
+   "meas_L": 46.56,
+   "divergence": 5.73,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 346.3,
+   "truth_L": 40.82,
+   "meas_L": 46.56,
+   "divergence": 5.74,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 347.4,
+   "truth_L": 40.81,
+   "meas_L": 46.57,
+   "divergence": 5.76,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 348.4,
+   "truth_L": 40.8,
+   "meas_L": 46.57,
+   "divergence": 5.78,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 349.4,
+   "truth_L": 40.75,
+   "meas_L": 46.58,
+   "divergence": 5.83,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 22
+  },
+  {
+   "t": 350.5,
+   "truth_L": 40.74,
+   "meas_L": 46.59,
+   "divergence": 5.85,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 351.5,
+   "truth_L": 40.73,
+   "meas_L": 46.59,
+   "divergence": 5.86,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 352.5,
+   "truth_L": 40.71,
+   "meas_L": 46.59,
+   "divergence": 5.88,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 353.6,
+   "truth_L": 40.7,
+   "meas_L": 46.59,
+   "divergence": 5.89,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 354.6,
+   "truth_L": 40.69,
+   "meas_L": 46.6,
+   "divergence": 5.91,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 355.6,
+   "truth_L": 40.68,
+   "meas_L": 46.6,
+   "divergence": 5.93,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 356.7,
+   "truth_L": 40.66,
+   "meas_L": 46.6,
+   "divergence": 5.94,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 357.7,
+   "truth_L": 40.65,
+   "meas_L": 46.61,
+   "divergence": 5.96,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 358.7,
+   "truth_L": 40.64,
+   "meas_L": 46.61,
+   "divergence": 5.97,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 359.8,
+   "truth_L": 40.62,
+   "meas_L": 46.61,
+   "divergence": 5.99,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 360.8,
+   "truth_L": 40.61,
+   "meas_L": 46.62,
+   "divergence": 6.0,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 361.8,
+   "truth_L": 40.6,
+   "meas_L": 46.62,
+   "divergence": 6.02,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 362.9,
+   "truth_L": 40.59,
+   "meas_L": 46.62,
+   "divergence": 6.04,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 363.9,
+   "truth_L": 40.57,
+   "meas_L": 46.63,
+   "divergence": 6.05,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 364.9,
+   "truth_L": 40.56,
+   "meas_L": 46.63,
+   "divergence": 6.07,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 23
+  },
+  {
+   "t": 366.0,
+   "truth_L": 40.55,
+   "meas_L": 46.63,
+   "divergence": 6.08,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 367.0,
+   "truth_L": 40.54,
+   "meas_L": 46.63,
+   "divergence": 6.1,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 368.0,
+   "truth_L": 40.52,
+   "meas_L": 46.64,
+   "divergence": 6.11,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 369.0,
+   "truth_L": 40.51,
+   "meas_L": 46.64,
+   "divergence": 6.13,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 370.0,
+   "truth_L": 40.5,
+   "meas_L": 46.64,
+   "divergence": 6.15,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 371.1,
+   "truth_L": 40.49,
+   "meas_L": 46.65,
+   "divergence": 6.16,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 372.1,
+   "truth_L": 40.47,
+   "meas_L": 46.65,
+   "divergence": 6.18,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 373.1,
+   "truth_L": 40.46,
+   "meas_L": 46.65,
+   "divergence": 6.19,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 374.2,
+   "truth_L": 40.45,
+   "meas_L": 46.66,
+   "divergence": 6.21,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 375.2,
+   "truth_L": 40.43,
+   "meas_L": 46.66,
+   "divergence": 6.22,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 376.2,
+   "truth_L": 40.42,
+   "meas_L": 46.66,
+   "divergence": 6.24,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 377.2,
+   "truth_L": 40.41,
+   "meas_L": 46.66,
+   "divergence": 6.26,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 378.3,
+   "truth_L": 40.4,
+   "meas_L": 46.67,
+   "divergence": 6.27,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 379.3,
+   "truth_L": 40.38,
+   "meas_L": 46.67,
+   "divergence": 6.29,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 24
+  },
+  {
+   "t": 380.3,
+   "truth_L": 40.37,
+   "meas_L": 46.67,
+   "divergence": 6.3,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 381.4,
+   "truth_L": 40.32,
+   "meas_L": 46.69,
+   "divergence": 6.36,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 382.4,
+   "truth_L": 40.31,
+   "meas_L": 46.69,
+   "divergence": 6.38,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 383.4,
+   "truth_L": 40.3,
+   "meas_L": 46.69,
+   "divergence": 6.4,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 384.5,
+   "truth_L": 40.28,
+   "meas_L": 46.7,
+   "divergence": 6.41,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 385.5,
+   "truth_L": 40.27,
+   "meas_L": 46.7,
+   "divergence": 6.43,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 386.5,
+   "truth_L": 40.26,
+   "meas_L": 46.7,
+   "divergence": 6.45,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 387.6,
+   "truth_L": 40.24,
+   "meas_L": 46.71,
+   "divergence": 6.46,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 388.6,
+   "truth_L": 40.23,
+   "meas_L": 46.71,
+   "divergence": 6.48,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 389.6,
+   "truth_L": 40.22,
+   "meas_L": 46.71,
+   "divergence": 6.49,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 390.7,
+   "truth_L": 40.2,
+   "meas_L": 46.71,
+   "divergence": 6.51,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 391.7,
+   "truth_L": 40.19,
+   "meas_L": 46.72,
+   "divergence": 6.53,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 392.7,
+   "truth_L": 40.18,
+   "meas_L": 46.72,
+   "divergence": 6.54,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 393.8,
+   "truth_L": 40.17,
+   "meas_L": 46.72,
+   "divergence": 6.56,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 394.8,
+   "truth_L": 40.15,
+   "meas_L": 46.73,
+   "divergence": 6.57,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 25
+  },
+  {
+   "t": 395.8,
+   "truth_L": 40.14,
+   "meas_L": 46.73,
+   "divergence": 6.59,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 396.8,
+   "truth_L": 40.13,
+   "meas_L": 46.73,
+   "divergence": 6.6,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 397.9,
+   "truth_L": 40.12,
+   "meas_L": 46.74,
+   "divergence": 6.62,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 398.9,
+   "truth_L": 40.1,
+   "meas_L": 46.74,
+   "divergence": 6.64,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 400.0,
+   "truth_L": 40.09,
+   "meas_L": 46.74,
+   "divergence": 6.65,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 401.0,
+   "truth_L": 40.08,
+   "meas_L": 46.74,
+   "divergence": 6.67,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 402.0,
+   "truth_L": 40.06,
+   "meas_L": 46.75,
+   "divergence": 6.68,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 403.0,
+   "truth_L": 40.05,
+   "meas_L": 46.75,
+   "divergence": 6.7,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 404.1,
+   "truth_L": 40.04,
+   "meas_L": 46.75,
+   "divergence": 6.72,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 405.1,
+   "truth_L": 40.03,
+   "meas_L": 46.76,
+   "divergence": 6.73,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 406.1,
+   "truth_L": 40.01,
+   "meas_L": 46.76,
+   "divergence": 6.75,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 407.2,
+   "truth_L": 40.0,
+   "meas_L": 46.76,
+   "divergence": 6.76,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 26
+  },
+  {
+   "t": 408.2,
+   "truth_L": 40.01,
+   "meas_L": 46.78,
+   "divergence": 6.78,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 26
+  },
+  {
+   "t": 409.2,
+   "truth_L": 40.01,
+   "meas_L": 46.81,
+   "divergence": 6.79,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 26
+  },
+  {
+   "t": 410.3,
+   "truth_L": 40.02,
+   "meas_L": 46.83,
+   "divergence": 6.81,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 411.3,
+   "truth_L": 40.03,
+   "meas_L": 46.85,
+   "divergence": 6.83,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 412.3,
+   "truth_L": 40.03,
+   "meas_L": 46.88,
+   "divergence": 6.84,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 413.4,
+   "truth_L": 40.04,
+   "meas_L": 46.9,
+   "divergence": 6.86,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 414.4,
+   "truth_L": 40.07,
+   "meas_L": 46.98,
+   "divergence": 6.91,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 415.4,
+   "truth_L": 40.07,
+   "meas_L": 47.0,
+   "divergence": 6.93,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 416.5,
+   "truth_L": 40.08,
+   "meas_L": 47.03,
+   "divergence": 6.94,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 417.5,
+   "truth_L": 40.09,
+   "meas_L": 47.05,
+   "divergence": 6.96,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 418.5,
+   "truth_L": 40.1,
+   "meas_L": 47.07,
+   "divergence": 6.98,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 419.6,
+   "truth_L": 40.1,
+   "meas_L": 47.1,
+   "divergence": 7.0,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 420.6,
+   "truth_L": 40.11,
+   "meas_L": 47.12,
+   "divergence": 7.01,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 421.6,
+   "truth_L": 40.12,
+   "meas_L": 47.15,
+   "divergence": 7.03,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 422.7,
+   "truth_L": 40.13,
+   "meas_L": 47.17,
+   "divergence": 7.04,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 423.7,
+   "truth_L": 40.13,
+   "meas_L": 47.19,
+   "divergence": 7.06,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 424.8,
+   "truth_L": 40.14,
+   "meas_L": 47.21,
+   "divergence": 7.07,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 425.8,
+   "truth_L": 40.15,
+   "meas_L": 47.24,
+   "divergence": 7.09,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 426.8,
+   "truth_L": 40.15,
+   "meas_L": 47.26,
+   "divergence": 7.11,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 427.9,
+   "truth_L": 40.16,
+   "meas_L": 47.28,
+   "divergence": 7.12,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 428.9,
+   "truth_L": 40.17,
+   "meas_L": 47.31,
+   "divergence": 7.14,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 429.9,
+   "truth_L": 40.17,
+   "meas_L": 47.33,
+   "divergence": 7.15,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 431.0,
+   "truth_L": 40.18,
+   "meas_L": 47.35,
+   "divergence": 7.17,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 432.0,
+   "truth_L": 40.19,
+   "meas_L": 47.37,
+   "divergence": 7.19,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 433.0,
+   "truth_L": 40.2,
+   "meas_L": 47.4,
+   "divergence": 7.2,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 434.0,
+   "truth_L": 40.2,
+   "meas_L": 47.42,
+   "divergence": 7.22,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 435.1,
+   "truth_L": 40.21,
+   "meas_L": 47.44,
+   "divergence": 7.23,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 436.1,
+   "truth_L": 40.22,
+   "meas_L": 47.47,
+   "divergence": 7.25,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 437.1,
+   "truth_L": 40.22,
+   "meas_L": 47.49,
+   "divergence": 7.26,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 438.2,
+   "truth_L": 40.23,
+   "meas_L": 47.51,
+   "divergence": 7.28,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 439.2,
+   "truth_L": 40.24,
+   "meas_L": 47.53,
+   "divergence": 7.3,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 440.2,
+   "truth_L": 40.25,
+   "meas_L": 47.56,
+   "divergence": 7.31,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 441.3,
+   "truth_L": 40.25,
+   "meas_L": 47.58,
+   "divergence": 7.33,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 442.3,
+   "truth_L": 40.26,
+   "meas_L": 47.6,
+   "divergence": 7.34,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 443.3,
+   "truth_L": 40.27,
+   "meas_L": 47.62,
+   "divergence": 7.36,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 444.4,
+   "truth_L": 40.27,
+   "meas_L": 47.65,
+   "divergence": 7.37,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 445.4,
+   "truth_L": 40.28,
+   "meas_L": 47.67,
+   "divergence": 7.39,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 446.4,
+   "truth_L": 40.31,
+   "meas_L": 47.75,
+   "divergence": 7.45,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 447.5,
+   "truth_L": 40.31,
+   "meas_L": 47.78,
+   "divergence": 7.46,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 448.5,
+   "truth_L": 40.32,
+   "meas_L": 47.8,
+   "divergence": 7.48,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 449.5,
+   "truth_L": 40.33,
+   "meas_L": 47.82,
+   "divergence": 7.49,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 450.5,
+   "truth_L": 40.33,
+   "meas_L": 47.84,
+   "divergence": 7.51,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 451.6,
+   "truth_L": 40.34,
+   "meas_L": 47.87,
+   "divergence": 7.53,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 452.6,
+   "truth_L": 40.35,
+   "meas_L": 47.89,
+   "divergence": 7.54,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 453.6,
+   "truth_L": 40.36,
+   "meas_L": 47.92,
+   "divergence": 7.56,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 454.7,
+   "truth_L": 40.36,
+   "meas_L": 47.94,
+   "divergence": 7.58,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 455.7,
+   "truth_L": 40.37,
+   "meas_L": 47.96,
+   "divergence": 7.59,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 456.8,
+   "truth_L": 40.38,
+   "meas_L": 47.99,
+   "divergence": 7.61,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 457.8,
+   "truth_L": 40.38,
+   "meas_L": 48.01,
+   "divergence": 7.63,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 458.8,
+   "truth_L": 40.39,
+   "meas_L": 48.03,
+   "divergence": 7.64,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 459.8,
+   "truth_L": 40.4,
+   "meas_L": 48.05,
+   "divergence": 7.66,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 460.9,
+   "truth_L": 40.4,
+   "meas_L": 48.08,
+   "divergence": 7.67,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 461.9,
+   "truth_L": 40.41,
+   "meas_L": 48.1,
+   "divergence": 7.69,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 463.0,
+   "truth_L": 40.42,
+   "meas_L": 48.12,
+   "divergence": 7.7,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 464.0,
+   "truth_L": 40.43,
+   "meas_L": 48.15,
+   "divergence": 7.72,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 465.0,
+   "truth_L": 40.43,
+   "meas_L": 48.17,
+   "divergence": 7.74,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 466.0,
+   "truth_L": 40.44,
+   "meas_L": 48.19,
+   "divergence": 7.75,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 467.1,
+   "truth_L": 40.45,
+   "meas_L": 48.21,
+   "divergence": 7.77,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 468.1,
+   "truth_L": 40.45,
+   "meas_L": 48.24,
+   "divergence": 7.78,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 469.1,
+   "truth_L": 40.46,
+   "meas_L": 48.26,
+   "divergence": 7.8,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 30
+  },
+  {
+   "t": 470.2,
+   "truth_L": 40.47,
+   "meas_L": 48.28,
+   "divergence": 7.81,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 471.2,
+   "truth_L": 40.47,
+   "meas_L": 48.3,
+   "divergence": 7.83,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 472.2,
+   "truth_L": 40.48,
+   "meas_L": 48.33,
+   "divergence": 7.85,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 473.3,
+   "truth_L": 40.49,
+   "meas_L": 48.35,
+   "divergence": 7.86,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 474.3,
+   "truth_L": 40.49,
+   "meas_L": 48.37,
+   "divergence": 7.88,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 475.4,
+   "truth_L": 40.5,
+   "meas_L": 48.39,
+   "divergence": 7.89,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 476.4,
+   "truth_L": 40.51,
+   "meas_L": 48.42,
+   "divergence": 7.91,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 477.4,
+   "truth_L": 40.51,
+   "meas_L": 48.44,
+   "divergence": 7.93,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 478.5,
+   "truth_L": 40.52,
+   "meas_L": 48.46,
+   "divergence": 7.94,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 479.5,
+   "truth_L": 40.55,
+   "meas_L": 48.54,
+   "divergence": 8.0,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 480.5,
+   "truth_L": 40.55,
+   "meas_L": 48.57,
+   "divergence": 8.02,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 481.5,
+   "truth_L": 40.56,
+   "meas_L": 48.59,
+   "divergence": 8.03,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 482.6,
+   "truth_L": 40.57,
+   "meas_L": 48.61,
+   "divergence": 8.05,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 483.6,
+   "truth_L": 40.57,
+   "meas_L": 48.64,
+   "divergence": 8.06,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 484.6,
+   "truth_L": 40.58,
+   "meas_L": 48.66,
+   "divergence": 8.08,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 485.7,
+   "truth_L": 40.59,
+   "meas_L": 48.68,
+   "divergence": 8.09,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 486.7,
+   "truth_L": 40.59,
+   "meas_L": 48.7,
+   "divergence": 8.11,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 487.7,
+   "truth_L": 40.6,
+   "meas_L": 48.73,
+   "divergence": 8.13,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 488.8,
+   "truth_L": 40.61,
+   "meas_L": 48.75,
+   "divergence": 8.14,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 489.8,
+   "truth_L": 40.61,
+   "meas_L": 48.77,
+   "divergence": 8.16,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 490.8,
+   "truth_L": 40.62,
+   "meas_L": 48.79,
+   "divergence": 8.17,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 491.9,
+   "truth_L": 40.63,
+   "meas_L": 48.82,
+   "divergence": 8.19,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 492.9,
+   "truth_L": 40.63,
+   "meas_L": 48.84,
+   "divergence": 8.2,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 493.9,
+   "truth_L": 40.64,
+   "meas_L": 48.86,
+   "divergence": 8.22,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 495.0,
+   "truth_L": 40.65,
+   "meas_L": 48.88,
+   "divergence": 8.24,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 496.0,
+   "truth_L": 40.65,
+   "meas_L": 48.91,
+   "divergence": 8.25,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 497.0,
+   "truth_L": 40.66,
+   "meas_L": 48.93,
+   "divergence": 8.27,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 498.0,
+   "truth_L": 40.67,
+   "meas_L": 48.95,
+   "divergence": 8.28,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 499.1,
+   "truth_L": 40.68,
+   "meas_L": 48.97,
+   "divergence": 8.3,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 500.1,
+   "truth_L": 40.68,
+   "meas_L": 49.0,
+   "divergence": 8.31,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 501.1,
+   "truth_L": 40.69,
+   "meas_L": 49.02,
+   "divergence": 8.33,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 502.2,
+   "truth_L": 40.7,
+   "meas_L": 49.04,
+   "divergence": 8.35,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 503.2,
+   "truth_L": 40.7,
+   "meas_L": 49.06,
+   "divergence": 8.36,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 504.2,
+   "truth_L": 40.71,
+   "meas_L": 49.09,
+   "divergence": 8.38,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 505.3,
+   "truth_L": 40.72,
+   "meas_L": 49.11,
+   "divergence": 8.39,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 506.3,
+   "truth_L": 40.72,
+   "meas_L": 49.13,
+   "divergence": 8.41,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 507.3,
+   "truth_L": 40.73,
+   "meas_L": 49.15,
+   "divergence": 8.43,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 508.4,
+   "truth_L": 40.74,
+   "meas_L": 49.18,
+   "divergence": 8.44,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 509.4,
+   "truth_L": 40.74,
+   "meas_L": 49.2,
+   "divergence": 8.46,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 510.4,
+   "truth_L": 40.75,
+   "meas_L": 49.22,
+   "divergence": 8.47,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 511.5,
+   "truth_L": 40.77,
+   "meas_L": 49.31,
+   "divergence": 8.53,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 512.5,
+   "truth_L": 40.78,
+   "meas_L": 49.33,
+   "divergence": 8.55,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 513.5,
+   "truth_L": 40.79,
+   "meas_L": 49.35,
+   "divergence": 8.56,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 514.6,
+   "truth_L": 40.79,
+   "meas_L": 49.38,
+   "divergence": 8.58,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 515.6,
+   "truth_L": 40.8,
+   "meas_L": 49.4,
+   "divergence": 8.6,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 516.6,
+   "truth_L": 40.81,
+   "meas_L": 49.42,
+   "divergence": 8.61,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 517.7,
+   "truth_L": 40.82,
+   "meas_L": 49.44,
+   "divergence": 8.63,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 518.7,
+   "truth_L": 40.82,
+   "meas_L": 49.47,
+   "divergence": 8.65,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 519.7,
+   "truth_L": 40.83,
+   "meas_L": 49.49,
+   "divergence": 8.66,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 520.8,
+   "truth_L": 40.84,
+   "meas_L": 49.51,
+   "divergence": 8.68,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 521.8,
+   "truth_L": 40.84,
+   "meas_L": 49.53,
+   "divergence": 8.69,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 522.8,
+   "truth_L": 40.85,
+   "meas_L": 49.56,
+   "divergence": 8.71,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 523.9,
+   "truth_L": 40.85,
+   "meas_L": 49.58,
+   "divergence": 8.72,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 524.9,
+   "truth_L": 40.86,
+   "meas_L": 49.6,
+   "divergence": 8.74,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 525.9,
+   "truth_L": 40.87,
+   "meas_L": 49.62,
+   "divergence": 8.76,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 527.0,
+   "truth_L": 40.87,
+   "meas_L": 49.65,
+   "divergence": 8.77,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 528.0,
+   "truth_L": 40.88,
+   "meas_L": 49.67,
+   "divergence": 8.79,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 529.0,
+   "truth_L": 40.89,
+   "meas_L": 49.69,
+   "divergence": 8.8,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 530.1,
+   "truth_L": 40.89,
+   "meas_L": 49.71,
+   "divergence": 8.82,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 531.1,
+   "truth_L": 40.9,
+   "meas_L": 49.74,
+   "divergence": 8.83,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 532.1,
+   "truth_L": 40.91,
+   "meas_L": 49.76,
+   "divergence": 8.85,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 533.2,
+   "truth_L": 40.91,
+   "meas_L": 49.78,
+   "divergence": 8.87,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 534.2,
+   "truth_L": 40.92,
+   "meas_L": 49.8,
+   "divergence": 8.88,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 535.2,
+   "truth_L": 40.93,
+   "meas_L": 49.83,
+   "divergence": 8.9,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 536.2,
+   "truth_L": 40.93,
+   "meas_L": 49.85,
+   "divergence": 8.91,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 537.3,
+   "truth_L": 40.94,
+   "meas_L": 49.87,
+   "divergence": 8.93,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 538.3,
+   "truth_L": 40.95,
+   "meas_L": 49.89,
+   "divergence": 8.94,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 539.3,
+   "truth_L": 40.95,
+   "meas_L": 49.91,
+   "divergence": 8.96,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 540.4,
+   "truth_L": 40.96,
+   "meas_L": 49.94,
+   "divergence": 8.98,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 541.4,
+   "truth_L": 40.97,
+   "meas_L": 49.96,
+   "divergence": 8.99,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 542.4,
+   "truth_L": 40.97,
+   "meas_L": 49.98,
+   "divergence": 9.01,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 543.5,
+   "truth_L": 40.98,
+   "meas_L": 50.0,
+   "divergence": 9.02,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 544.5,
+   "truth_L": 41.0,
+   "meas_L": 50.08,
+   "divergence": 9.08,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 545.5,
+   "truth_L": 41.01,
+   "meas_L": 50.11,
+   "divergence": 9.1,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 546.6,
+   "truth_L": 41.02,
+   "meas_L": 50.13,
+   "divergence": 9.11,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 547.6,
+   "truth_L": 41.02,
+   "meas_L": 50.15,
+   "divergence": 9.13,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 548.6,
+   "truth_L": 41.03,
+   "meas_L": 50.18,
+   "divergence": 9.15,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 549.7,
+   "truth_L": 41.04,
+   "meas_L": 50.2,
+   "divergence": 9.16,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 550.7,
+   "truth_L": 41.04,
+   "meas_L": 50.22,
+   "divergence": 9.18,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 551.7,
+   "truth_L": 41.05,
+   "meas_L": 50.25,
+   "divergence": 9.2,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 552.8,
+   "truth_L": 41.06,
+   "meas_L": 50.27,
+   "divergence": 9.21,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 553.8,
+   "truth_L": 41.06,
+   "meas_L": 50.29,
+   "divergence": 9.23,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 554.8,
+   "truth_L": 41.07,
+   "meas_L": 50.31,
+   "divergence": 9.24,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 555.9,
+   "truth_L": 41.08,
+   "meas_L": 50.33,
+   "divergence": 9.26,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 556.9,
+   "truth_L": 41.08,
+   "meas_L": 50.36,
+   "divergence": 9.27,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 557.9,
+   "truth_L": 41.09,
+   "meas_L": 50.38,
+   "divergence": 9.29,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 559.0,
+   "truth_L": 41.1,
+   "meas_L": 50.4,
+   "divergence": 9.31,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 560.0,
+   "truth_L": 41.1,
+   "meas_L": 50.42,
+   "divergence": 9.32,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 561.0,
+   "truth_L": 41.11,
+   "meas_L": 50.45,
+   "divergence": 9.34,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 562.0,
+   "truth_L": 41.11,
+   "meas_L": 50.47,
+   "divergence": 9.35,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 563.1,
+   "truth_L": 41.12,
+   "meas_L": 50.49,
+   "divergence": 9.37,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 564.1,
+   "truth_L": 41.13,
+   "meas_L": 50.51,
+   "divergence": 9.38,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 565.2,
+   "truth_L": 41.13,
+   "meas_L": 50.53,
+   "divergence": 9.4,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 566.2,
+   "truth_L": 41.14,
+   "meas_L": 50.56,
+   "divergence": 9.42,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 567.2,
+   "truth_L": 41.15,
+   "meas_L": 50.58,
+   "divergence": 9.43,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 568.2,
+   "truth_L": 41.15,
+   "meas_L": 50.6,
+   "divergence": 9.45,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 569.3,
+   "truth_L": 41.16,
+   "meas_L": 50.62,
+   "divergence": 9.46,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 570.3,
+   "truth_L": 41.17,
+   "meas_L": 50.65,
+   "divergence": 9.48,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 571.3,
+   "truth_L": 41.17,
+   "meas_L": 50.67,
+   "divergence": 9.49,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 572.4,
+   "truth_L": 41.18,
+   "meas_L": 50.69,
+   "divergence": 9.51,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 573.4,
+   "truth_L": 41.19,
+   "meas_L": 50.71,
+   "divergence": 9.53,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 574.4,
+   "truth_L": 41.19,
+   "meas_L": 50.73,
+   "divergence": 9.54,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 575.5,
+   "truth_L": 41.2,
+   "meas_L": 50.76,
+   "divergence": 9.56,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 576.5,
+   "truth_L": 41.22,
+   "meas_L": 50.84,
+   "divergence": 9.62,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 577.5,
+   "truth_L": 41.23,
+   "meas_L": 50.86,
+   "divergence": 9.63,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 578.6,
+   "truth_L": 41.23,
+   "meas_L": 50.88,
+   "divergence": 9.65,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 579.6,
+   "truth_L": 41.24,
+   "meas_L": 50.9,
+   "divergence": 9.66,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 580.6,
+   "truth_L": 41.25,
+   "meas_L": 50.93,
+   "divergence": 9.68,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 581.7,
+   "truth_L": 41.25,
+   "meas_L": 50.95,
+   "divergence": 9.7,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 582.7,
+   "truth_L": 41.26,
+   "meas_L": 50.97,
+   "divergence": 9.71,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 583.7,
+   "truth_L": 41.27,
+   "meas_L": 51.0,
+   "divergence": 9.73,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 584.8,
+   "truth_L": 41.27,
+   "meas_L": 51.02,
+   "divergence": 9.75,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 585.8,
+   "truth_L": 41.28,
+   "meas_L": 51.04,
+   "divergence": 9.76,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 586.8,
+   "truth_L": 41.29,
+   "meas_L": 51.07,
+   "divergence": 9.78,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 587.9,
+   "truth_L": 41.29,
+   "meas_L": 51.09,
+   "divergence": 9.79,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 588.9,
+   "truth_L": 41.3,
+   "meas_L": 51.11,
+   "divergence": 9.81,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 589.9,
+   "truth_L": 41.31,
+   "meas_L": 51.13,
+   "divergence": 9.83,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 38
+  },
+  {
+   "t": 591.0,
+   "truth_L": 41.31,
+   "meas_L": 51.15,
+   "divergence": 9.84,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 592.0,
+   "truth_L": 41.32,
+   "meas_L": 51.18,
+   "divergence": 9.86,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 593.0,
+   "truth_L": 41.33,
+   "meas_L": 51.2,
+   "divergence": 9.87,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 594.0,
+   "truth_L": 41.33,
+   "meas_L": 51.22,
+   "divergence": 9.89,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 595.1,
+   "truth_L": 41.34,
+   "meas_L": 51.24,
+   "divergence": 9.9,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 596.1,
+   "truth_L": 41.34,
+   "meas_L": 51.26,
+   "divergence": 9.92,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 597.1,
+   "truth_L": 41.35,
+   "meas_L": 51.29,
+   "divergence": 9.94,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 598.2,
+   "truth_L": 41.36,
+   "meas_L": 51.31,
+   "divergence": 9.95,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 599.2,
+   "truth_L": 41.36,
+   "meas_L": 51.33,
+   "divergence": 9.97,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 600.2,
+   "truth_L": 41.37,
+   "meas_L": 51.35,
+   "divergence": 9.98,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 601.3,
+   "truth_L": 41.38,
+   "meas_L": 51.37,
+   "divergence": 10.0,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 602.3,
+   "truth_L": 41.38,
+   "meas_L": 51.4,
+   "divergence": 10.01,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 603.3,
+   "truth_L": 41.39,
+   "meas_L": 51.42,
+   "divergence": 10.03,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 604.4,
+   "truth_L": 41.39,
+   "meas_L": 51.44,
+   "divergence": 10.05,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 39
+  },
+  {
+   "t": 605.4,
+   "truth_L": 41.4,
+   "meas_L": 51.46,
+   "divergence": 10.06,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 606.4,
+   "truth_L": 41.41,
+   "meas_L": 51.48,
+   "divergence": 10.08,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 607.5,
+   "truth_L": 41.41,
+   "meas_L": 51.51,
+   "divergence": 10.09,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 608.5,
+   "truth_L": 41.42,
+   "meas_L": 51.53,
+   "divergence": 10.11,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 609.5,
+   "truth_L": 41.44,
+   "meas_L": 51.61,
+   "divergence": 10.17,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 610.6,
+   "truth_L": 41.45,
+   "meas_L": 51.63,
+   "divergence": 10.18,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 611.6,
+   "truth_L": 41.45,
+   "meas_L": 51.65,
+   "divergence": 10.2,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 612.6,
+   "truth_L": 41.46,
+   "meas_L": 51.67,
+   "divergence": 10.21,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 613.7,
+   "truth_L": 41.47,
+   "meas_L": 51.7,
+   "divergence": 10.23,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 614.7,
+   "truth_L": 41.47,
+   "meas_L": 51.72,
+   "divergence": 10.24,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 615.7,
+   "truth_L": 41.48,
+   "meas_L": 51.74,
+   "divergence": 10.26,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 616.8,
+   "truth_L": 41.49,
+   "meas_L": 51.76,
+   "divergence": 10.28,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 617.8,
+   "truth_L": 41.49,
+   "meas_L": 51.78,
+   "divergence": 10.29,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 618.8,
+   "truth_L": 41.5,
+   "meas_L": 51.8,
+   "divergence": 10.31,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 619.9,
+   "truth_L": 41.5,
+   "meas_L": 51.83,
+   "divergence": 10.32,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 40
+  },
+  {
+   "t": 620.9,
+   "truth_L": 41.51,
+   "meas_L": 51.85,
+   "divergence": 10.34,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 621.9,
+   "truth_L": 41.52,
+   "meas_L": 51.87,
+   "divergence": 10.35,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 623.0,
+   "truth_L": 41.52,
+   "meas_L": 51.89,
+   "divergence": 10.37,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 624.0,
+   "truth_L": 41.53,
+   "meas_L": 51.92,
+   "divergence": 10.39,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 625.0,
+   "truth_L": 41.53,
+   "meas_L": 51.94,
+   "divergence": 10.4,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 626.1,
+   "truth_L": 41.54,
+   "meas_L": 51.96,
+   "divergence": 10.42,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 627.1,
+   "truth_L": 41.55,
+   "meas_L": 51.98,
+   "divergence": 10.43,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 628.1,
+   "truth_L": 41.55,
+   "meas_L": 52.0,
+   "divergence": 10.45,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 629.1,
+   "truth_L": 41.56,
+   "meas_L": 52.02,
+   "divergence": 10.47,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 630.2,
+   "truth_L": 41.57,
+   "meas_L": 52.05,
+   "divergence": 10.48,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 631.2,
+   "truth_L": 41.57,
+   "meas_L": 52.07,
+   "divergence": 10.5,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 632.2,
+   "truth_L": 41.58,
+   "meas_L": 52.09,
+   "divergence": 10.51,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 633.3,
+   "truth_L": 41.58,
+   "meas_L": 52.11,
+   "divergence": 10.53,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 634.3,
+   "truth_L": 41.59,
+   "meas_L": 52.13,
+   "divergence": 10.54,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 41
+  },
+  {
+   "t": 635.3,
+   "truth_L": 41.6,
+   "meas_L": 52.16,
+   "divergence": 10.56,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 636.4,
+   "truth_L": 41.6,
+   "meas_L": 52.18,
+   "divergence": 10.58,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 637.4,
+   "truth_L": 41.61,
+   "meas_L": 52.2,
+   "divergence": 10.59,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 638.5,
+   "truth_L": 41.61,
+   "meas_L": 52.22,
+   "divergence": 10.61,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 639.5,
+   "truth_L": 41.62,
+   "meas_L": 52.24,
+   "divergence": 10.62,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 640.5,
+   "truth_L": 41.63,
+   "meas_L": 52.27,
+   "divergence": 10.64,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 641.5,
+   "truth_L": 41.65,
+   "meas_L": 52.35,
+   "divergence": 10.7,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 642.6,
+   "truth_L": 41.66,
+   "meas_L": 52.37,
+   "divergence": 10.72,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 643.6,
+   "truth_L": 41.66,
+   "meas_L": 52.4,
+   "divergence": 10.73,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 644.7,
+   "truth_L": 41.67,
+   "meas_L": 52.42,
+   "divergence": 10.75,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 645.7,
+   "truth_L": 41.68,
+   "meas_L": 52.44,
+   "divergence": 10.77,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 646.7,
+   "truth_L": 41.68,
+   "meas_L": 52.47,
+   "divergence": 10.78,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 647.8,
+   "truth_L": 41.69,
+   "meas_L": 52.49,
+   "divergence": 10.8,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 648.8,
+   "truth_L": 41.69,
+   "meas_L": 52.51,
+   "divergence": 10.81,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 649.8,
+   "truth_L": 41.7,
+   "meas_L": 52.53,
+   "divergence": 10.83,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 42
+  },
+  {
+   "t": 650.9,
+   "truth_L": 41.71,
+   "meas_L": 52.55,
+   "divergence": 10.85,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 651.9,
+   "truth_L": 41.71,
+   "meas_L": 52.57,
+   "divergence": 10.86,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 652.9,
+   "truth_L": 41.72,
+   "meas_L": 52.6,
+   "divergence": 10.88,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 654.0,
+   "truth_L": 41.73,
+   "meas_L": 52.62,
+   "divergence": 10.89,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 655.0,
+   "truth_L": 41.73,
+   "meas_L": 52.64,
+   "divergence": 10.91,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 656.0,
+   "truth_L": 41.74,
+   "meas_L": 52.66,
+   "divergence": 10.92,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 657.0,
+   "truth_L": 41.74,
+   "meas_L": 52.68,
+   "divergence": 10.94,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 658.1,
+   "truth_L": 41.75,
+   "meas_L": 52.71,
+   "divergence": 10.96,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 659.1,
+   "truth_L": 41.76,
+   "meas_L": 52.73,
+   "divergence": 10.97,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 660.1,
+   "truth_L": 41.76,
+   "meas_L": 52.75,
+   "divergence": 10.99,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 661.2,
+   "truth_L": 41.77,
+   "meas_L": 52.77,
+   "divergence": 11.0,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 662.2,
+   "truth_L": 41.77,
+   "meas_L": 52.79,
+   "divergence": 11.02,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 663.2,
+   "truth_L": 41.78,
+   "meas_L": 52.81,
+   "divergence": 11.03,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 664.3,
+   "truth_L": 41.79,
+   "meas_L": 52.84,
+   "divergence": 11.05,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 43
+  },
+  {
+   "t": 665.3,
+   "truth_L": 41.79,
+   "meas_L": 52.86,
+   "divergence": 11.07,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 666.3,
+   "truth_L": 41.8,
+   "meas_L": 52.88,
+   "divergence": 11.08,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 667.4,
+   "truth_L": 41.8,
+   "meas_L": 52.9,
+   "divergence": 11.1,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 668.4,
+   "truth_L": 41.81,
+   "meas_L": 52.92,
+   "divergence": 11.11,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 669.5,
+   "truth_L": 41.82,
+   "meas_L": 52.95,
+   "divergence": 11.13,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 670.5,
+   "truth_L": 41.82,
+   "meas_L": 52.97,
+   "divergence": 11.15,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 671.5,
+   "truth_L": 41.83,
+   "meas_L": 52.99,
+   "divergence": 11.16,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 672.5,
+   "truth_L": 41.83,
+   "meas_L": 53.01,
+   "divergence": 11.18,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 673.6,
+   "truth_L": 41.84,
+   "meas_L": 53.03,
+   "divergence": 11.19,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 674.6,
+   "truth_L": 41.86,
+   "meas_L": 53.11,
+   "divergence": 11.25,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 675.6,
+   "truth_L": 41.87,
+   "meas_L": 53.13,
+   "divergence": 11.27,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 676.7,
+   "truth_L": 41.87,
+   "meas_L": 53.15,
+   "divergence": 11.28,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 677.7,
+   "truth_L": 41.88,
+   "meas_L": 53.18,
+   "divergence": 11.3,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 678.7,
+   "truth_L": 41.89,
+   "meas_L": 53.2,
+   "divergence": 11.31,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 679.8,
+   "truth_L": 41.89,
+   "meas_L": 53.22,
+   "divergence": 11.33,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 44
+  },
+  {
+   "t": 680.8,
+   "truth_L": 41.9,
+   "meas_L": 53.25,
+   "divergence": 11.35,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 681.8,
+   "truth_L": 41.9,
+   "meas_L": 53.27,
+   "divergence": 11.36,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 682.9,
+   "truth_L": 41.91,
+   "meas_L": 53.29,
+   "divergence": 11.38,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 683.9,
+   "truth_L": 41.92,
+   "meas_L": 53.31,
+   "divergence": 11.4,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 684.9,
+   "truth_L": 41.92,
+   "meas_L": 53.33,
+   "divergence": 11.41,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 686.0,
+   "truth_L": 41.93,
+   "meas_L": 53.36,
+   "divergence": 11.43,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 687.0,
+   "truth_L": 41.93,
+   "meas_L": 53.38,
+   "divergence": 11.44,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 688.0,
+   "truth_L": 41.94,
+   "meas_L": 53.4,
+   "divergence": 11.46,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 689.1,
+   "truth_L": 41.95,
+   "meas_L": 53.42,
+   "divergence": 11.47,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 690.1,
+   "truth_L": 41.95,
+   "meas_L": 53.44,
+   "divergence": 11.49,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 691.1,
+   "truth_L": 41.96,
+   "meas_L": 53.46,
+   "divergence": 11.51,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 692.2,
+   "truth_L": 41.96,
+   "meas_L": 53.49,
+   "divergence": 11.52,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 693.2,
+   "truth_L": 41.97,
+   "meas_L": 53.51,
+   "divergence": 11.54,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 694.2,
+   "truth_L": 41.98,
+   "meas_L": 53.53,
+   "divergence": 11.55,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 45
+  },
+  {
+   "t": 695.3,
+   "truth_L": 41.98,
+   "meas_L": 53.55,
+   "divergence": 11.57,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 46
+  },
+  {
+   "t": 696.3,
+   "truth_L": 41.99,
+   "meas_L": 53.57,
+   "divergence": 11.58,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 46
+  },
+  {
+   "t": 697.3,
+   "truth_L": 41.99,
+   "meas_L": 53.59,
+   "divergence": 11.6,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 46
+  },
+  {
+   "t": 698.4,
+   "truth_L": 42.0,
+   "meas_L": 53.62,
+   "divergence": 11.62,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 46
+  },
+  {
+   "t": 699.4,
+   "truth_L": 41.99,
+   "meas_L": 53.62,
+   "divergence": 11.63,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 46
+  },
+  {
+   "t": 700.4,
+   "truth_L": 41.98,
+   "meas_L": 53.63,
+   "divergence": 11.65,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 46
+  },
+  {
+   "t": 701.5,
+   "truth_L": 41.97,
+   "meas_L": 53.63,
+   "divergence": 11.66,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 46
+  },
+  {
+   "t": 702.5,
+   "truth_L": 41.95,
+   "meas_L": 53.63,
+   "divergence": 11.68,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 46
+  },
+  {
+   "t": 703.5,
+   "truth_L": 41.94,
+   "meas_L": 53.64,
+   "divergence": 11.7,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 46
+  },
+  {
+   "t": 704.5,
+   "truth_L": 41.93,
+   "meas_L": 53.64,
+   "divergence": 11.71,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 46
+  },
+  {
+   "t": 705.6,
+   "truth_L": 41.91,
+   "meas_L": 53.64,
+   "divergence": 11.73,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 46
+  },
+  {
+   "t": 706.6,
+   "truth_L": 41.87,
+   "meas_L": 53.65,
+   "divergence": 11.78,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 46
+  },
+  {
+   "t": 707.6,
+   "truth_L": 41.85,
+   "meas_L": 53.65,
+   "divergence": 11.8,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 46
+  },
+  {
+   "t": 708.7,
+   "truth_L": 41.84,
+   "meas_L": 53.66,
+   "divergence": 11.82,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 46
+  },
+  {
+   "t": 709.7,
+   "truth_L": 41.83,
+   "meas_L": 53.66,
+   "divergence": 11.83,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 46
+  },
+  {
+   "t": 710.7,
+   "truth_L": 41.82,
+   "meas_L": 53.66,
+   "divergence": 11.85,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 47
+  },
+  {
+   "t": 711.8,
+   "truth_L": 41.8,
+   "meas_L": 53.67,
+   "divergence": 11.86,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 47
+  },
+  {
+   "t": 712.8,
+   "truth_L": 41.79,
+   "meas_L": 53.67,
+   "divergence": 11.88,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 47
+  },
+  {
+   "t": 713.8,
+   "truth_L": 41.78,
+   "meas_L": 53.67,
+   "divergence": 11.89,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 47
+  },
+  {
+   "t": 714.9,
+   "truth_L": 41.76,
+   "meas_L": 53.67,
+   "divergence": 11.91,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 47
+  },
+  {
+   "t": 715.9,
+   "truth_L": 41.75,
+   "meas_L": 53.68,
+   "divergence": 11.93,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 47
+  },
+  {
+   "t": 716.9,
+   "truth_L": 41.74,
+   "meas_L": 53.68,
+   "divergence": 11.94,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 47
+  },
+  {
+   "t": 717.9,
+   "truth_L": 41.73,
+   "meas_L": 53.68,
+   "divergence": 11.96,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 47
+  }
+ ]
+}

@@ -1,0 +1,2897 @@
+{
+ "n": 235,
+ "valid_json_all_4_setpoints": 235,
+ "valid_json_rate": 1.0,
+ "accepted_by_LLMOperator_parser": 235,
+ "mae": {
+  "pressure_sp": 1.492,
+  "level_sp": 0.249,
+  "production_rate_sp": 0.841,
+  "a_comp_sp": 0.0
+ },
+ "mae_n": {
+  "pressure_sp": 202,
+  "level_sp": 202,
+  "production_rate_sp": 202,
+  "a_comp_sp": 202
+ },
+ "hold_recall": "33/33",
+ "false_hold_on_action_states": "0/202",
+ "per_rule": {
+  "hold:tripped": {
+   "n": 24,
+   "valid": 24,
+   "correct_hold": 24,
+   "mae": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null
+   }
+  },
+  "pressure_backoff": {
+   "n": 97,
+   "valid": 97,
+   "mae": {
+    "pressure_sp": 3.107,
+    "level_sp": 0.0,
+    "production_rate_sp": 1.035,
+    "a_comp_sp": 0.0
+   }
+  },
+  "design_targets": {
+   "n": 94,
+   "valid": 94,
+   "mae": {
+    "pressure_sp": 0.0,
+    "level_sp": 0.0,
+    "production_rate_sp": 0.0,
+    "a_comp_sp": 0.0
+   }
+  },
+  "hold:bad_reading": {
+   "n": 9,
+   "valid": 9,
+   "correct_hold": 9,
+   "mae": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null
+   }
+  },
+  "level_high_backoff": {
+   "n": 11,
+   "valid": 11,
+   "mae": {
+    "pressure_sp": 0.0,
+    "level_sp": 4.573,
+    "production_rate_sp": 6.318,
+    "a_comp_sp": 0.0
+   }
+  }
+ },
+ "secs_per_example": 7.99,
+ "predictions": [
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2642.8,
+    "level_sp": 44.2,
+    "production_rate_sp": 82.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2887 kPa is 113 kPa from trip, backing off 58%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2887 kPa is 113 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2985 kPa is 15 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2985 kPa is 15 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2653.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 85.9,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2870 kPa is 130 kPa from trip, backing off 47%."
+   },
+   "raw": "{\"pressure_sp\": 2659.2, \"level_sp\": 44.2, \"production_rate_sp\": 87.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2870 kPa is 130 kPa from trip, backing off 41%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2506 kPa, L 43.7%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2506 kPa, L 43.7%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2605.7,
+    "level_sp": 44.2,
+    "production_rate_sp": 71.5,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2942 kPa is 58 kPa from trip, backing off 95%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2942 kPa is 58 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:bad_reading",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Pressure or level reading implausible (sensor dropout); holding setpoints."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Pressure or level reading implausible (sensor dropout); holding setpoints.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2634 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2634 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2639.0,
+    "level_sp": 44.2,
+    "production_rate_sp": 81.5,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2892 kPa is 108 kPa from trip, backing off 62%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.1, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2892 kPa is 108 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2706 kPa, L 44.8%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2706 kPa, L 44.8%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2797 kPa, L 44.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2797 kPa, L 44.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2600 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2599 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2618 kPa, L 44.3%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2618 kPa, L 44.3%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2732 kPa, L 44.3%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2732 kPa, L 44.3%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2737 kPa, L 45.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2737 kPa, L 45.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2637 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2637 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2687 kPa, L 45.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2687 kPa, L 45.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2644.1,
+    "level_sp": 44.2,
+    "production_rate_sp": 83.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2885 kPa is 115 kPa from trip, backing off 57%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.1, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2885 kPa is 115 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2661.2,
+    "level_sp": 44.2,
+    "production_rate_sp": 88.2,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2859 kPa is 141 kPa from trip, backing off 39%."
+   },
+   "raw": "{\"pressure_sp\": 2660.2, \"level_sp\": 44.2, \"production_rate_sp\": 87.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2859 kPa is 141 kPa from trip, backing off 40%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2513 kPa, L 44.8%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2513 kPa, L 44.8%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2651 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2651 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2498 kPa, L 43.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2498 kPa, L 43.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2648.5,
+    "level_sp": 44.2,
+    "production_rate_sp": 84.4,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2878 kPa is 122 kPa from trip, backing off 52%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.3, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2878 kPa is 122 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2957 kPa is 43 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2957 kPa is 43 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2763 kPa, L 44.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2763 kPa, L 44.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2526 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2526 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2643 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2643 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2959 kPa is 41 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2959 kPa is 41 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2987 kPa is 13 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2987 kPa is 13 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2489 kPa, L 69.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2490 kPa, L 69.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:bad_reading",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Pressure or level reading implausible (sensor dropout); holding setpoints."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Pressure or level reading implausible (sensor dropout); holding setpoints.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2631.8,
+    "level_sp": 44.2,
+    "production_rate_sp": 79.4,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2903 kPa is 97 kPa from trip, backing off 69%."
+   },
+   "raw": "{\"pressure_sp\": 2627.0, \"level_sp\": 44.2, \"production_rate_sp\": 78.2, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2903 kPa is 97 kPa from trip, backing off 74%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2781 kPa, L 44.8%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2781 kPa, L 44.8%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:bad_reading",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Pressure or level reading implausible (sensor dropout); holding setpoints."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Pressure or level reading implausible (sensor dropout); holding setpoints.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2791 kPa, L 44.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2791 kPa, L 44.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2766 kPa, L 43.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2766 kPa, L 43.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2628.8,
+    "level_sp": 44.2,
+    "production_rate_sp": 78.5,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2908 kPa is 92 kPa from trip, backing off 72%."
+   },
+   "raw": "{\"pressure_sp\": 2629.4, \"level_sp\": 44.2, \"production_rate_sp\": 78.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2908 kPa is 92 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2608.1,
+    "level_sp": 44.2,
+    "production_rate_sp": 72.3,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2939 kPa is 61 kPa from trip, backing off 92%."
+   },
+   "raw": "{\"pressure_sp\": 2619.4, \"level_sp\": 44.2, \"production_rate_sp\": 73.5, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2939 kPa is 61 kPa from trip, backing off 81%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "level_high_backoff",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 35.0,
+    "production_rate_sp": 72.4,
+    "a_comp_sp": 47.0,
+    "rationale": "Level 88.8% is near the high trip, lowering level setpoint and production."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 39.9, \"production_rate_sp\": 79.9, \"a_comp_sp\": 47.0, \"rationale\": \"Level 88.8% is near the high trip, lowering level setpoint and production.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2645.4,
+    "level_sp": 44.2,
+    "production_rate_sp": 83.4,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2883 kPa is 117 kPa from trip, backing off 55%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.1, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2883 kPa is 117 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "level_high_backoff",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 35.2,
+    "production_rate_sp": 73.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Level 88.5% is near the high trip, lowering level setpoint and production."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 39.9, \"production_rate_sp\": 79.9, \"a_comp_sp\": 47.0, \"rationale\": \"Level 88.5% is near the high trip, lowering level setpoint and production.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2729 kPa, L 45.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2729 kPa, L 45.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2519 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2519 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2602.1,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.4,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2948 kPa is 52 kPa from trip, backing off 99%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2948 kPa is 52 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2611.8,
+    "level_sp": 44.2,
+    "production_rate_sp": 73.3,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2933 kPa is 67 kPa from trip, backing off 89%."
+   },
+   "raw": "{\"pressure_sp\": 2619.4, \"level_sp\": 44.2, \"production_rate_sp\": 72.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2933 kPa is 67 kPa from trip, backing off 81%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2734 kPa, L 44.3%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2734 kPa, L 44.3%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2617 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2617 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2640 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2640 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2765 kPa, L 43.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2765 kPa, L 43.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2510 kPa, L 44.8%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2510 kPa, L 44.8%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2752 kPa, L 44.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2752 kPa, L 44.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2484 kPa, L 70.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2484 kPa, L 70.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2643 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2643 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2633.3,
+    "level_sp": 44.2,
+    "production_rate_sp": 79.8,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2901 kPa is 99 kPa from trip, backing off 67%."
+   },
+   "raw": "{\"pressure_sp\": 2632.4, \"level_sp\": 44.2, \"production_rate_sp\": 79.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2901 kPa is 99 kPa from trip, backing off 68%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2571 kPa, L 45.4%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2571 kPa, L 45.4%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "level_high_backoff",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 34.8,
+    "production_rate_sp": 71.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Level 89.1% is near the high trip, lowering level setpoint and production."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 39.9, \"production_rate_sp\": 79.9, \"a_comp_sp\": 47.0, \"rationale\": \"Level 89.1% is near the high trip, lowering level setpoint and production.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2658.3,
+    "level_sp": 44.2,
+    "production_rate_sp": 87.3,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2863 kPa is 137 kPa from trip, backing off 42%."
+   },
+   "raw": "{\"pressure_sp\": 2660.2, \"level_sp\": 44.2, \"production_rate_sp\": 87.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2863 kPa is 137 kPa from trip, backing off 40%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2758 kPa, L 44.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2758 kPa, L 44.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "level_high_backoff",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 35.7,
+    "production_rate_sp": 74.4,
+    "a_comp_sp": 47.0,
+    "rationale": "Level 87.8% is near the high trip, lowering level setpoint and production."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 39.9, \"production_rate_sp\": 79.9, \"a_comp_sp\": 47.0, \"rationale\": \"Level 87.8% is near the high trip, lowering level setpoint and production.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2629.9,
+    "level_sp": 44.2,
+    "production_rate_sp": 78.8,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2906 kPa is 94 kPa from trip, backing off 71%."
+   },
+   "raw": "{\"pressure_sp\": 2629.4, \"level_sp\": 44.2, \"production_rate_sp\": 77.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2906 kPa is 94 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2657.4,
+    "level_sp": 44.2,
+    "production_rate_sp": 87.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2865 kPa is 135 kPa from trip, backing off 43%."
+   },
+   "raw": "{\"pressure_sp\": 2660.2, \"level_sp\": 44.2, \"production_rate_sp\": 87.5, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2865 kPa is 135 kPa from trip, backing off 40%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2487 kPa, L 69.7%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2487 kPa, L 69.7%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "level_high_backoff",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 34.9,
+    "production_rate_sp": 72.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Level 89.0% is near the high trip, lowering level setpoint and production."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 39.9, \"production_rate_sp\": 79.7, \"a_comp_sp\": 47.0, \"rationale\": \"Level 89.0% is near the high trip, lowering level setpoint and production.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2658.7,
+    "level_sp": 44.2,
+    "production_rate_sp": 87.4,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2863 kPa is 137 kPa from trip, backing off 42%."
+   },
+   "raw": "{\"pressure_sp\": 2660.1, \"level_sp\": 44.2, \"production_rate_sp\": 87.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2863 kPa is 137 kPa from trip, backing off 41%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2619 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2619 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2649.3,
+    "level_sp": 44.2,
+    "production_rate_sp": 84.6,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2877 kPa is 123 kPa from trip, backing off 51%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.3, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2877 kPa is 123 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2646.0,
+    "level_sp": 44.2,
+    "production_rate_sp": 83.6,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2882 kPa is 118 kPa from trip, backing off 55%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.3, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2882 kPa is 118 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2976 kPa is 24 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2976 kPa is 24 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2630.3,
+    "level_sp": 44.2,
+    "production_rate_sp": 78.9,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2905 kPa is 95 kPa from trip, backing off 70%."
+   },
+   "raw": "{\"pressure_sp\": 2624.0, \"level_sp\": 44.2, \"production_rate_sp\": 77.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2905 kPa is 95 kPa from trip, backing off 77%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2659.4,
+    "level_sp": 44.2,
+    "production_rate_sp": 87.6,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2862 kPa is 138 kPa from trip, backing off 41%."
+   },
+   "raw": "{\"pressure_sp\": 2660.2, \"level_sp\": 44.2, \"production_rate_sp\": 87.9, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2862 kPa is 138 kPa from trip, backing off 40%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2596 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2596 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2625 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2625 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2654.9,
+    "level_sp": 44.2,
+    "production_rate_sp": 86.3,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2869 kPa is 131 kPa from trip, backing off 46%."
+   },
+   "raw": "{\"pressure_sp\": 2659.2, \"level_sp\": 44.2, \"production_rate_sp\": 86.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2869 kPa is 131 kPa from trip, backing off 41%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2603.3,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.8,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2946 kPa is 54 kPa from trip, backing off 97%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2946 kPa is 54 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2631.1,
+    "level_sp": 44.2,
+    "production_rate_sp": 79.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2904 kPa is 96 kPa from trip, backing off 70%."
+   },
+   "raw": "{\"pressure_sp\": 2629.4, \"level_sp\": 44.2, \"production_rate_sp\": 77.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2904 kPa is 96 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2651.1,
+    "level_sp": 44.2,
+    "production_rate_sp": 85.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2874 kPa is 126 kPa from trip, backing off 50%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 82.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2874 kPa is 126 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2640.2,
+    "level_sp": 44.2,
+    "production_rate_sp": 81.9,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2891 kPa is 109 kPa from trip, backing off 60%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 80.2, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2891 kPa is 109 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2710 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2710 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2650.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 85.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2875 kPa is 125 kPa from trip, backing off 50%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 82.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2875 kPa is 125 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:bad_reading",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Pressure or level reading implausible (sensor dropout); holding setpoints."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Pressure or level reading implausible (sensor dropout); holding setpoints.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2630.7,
+    "level_sp": 44.2,
+    "production_rate_sp": 79.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2905 kPa is 95 kPa from trip, backing off 70%."
+   },
+   "raw": "{\"pressure_sp\": 2629.4, \"level_sp\": 44.2, \"production_rate_sp\": 78.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2905 kPa is 95 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2628.5,
+    "level_sp": 44.2,
+    "production_rate_sp": 78.4,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2908 kPa is 92 kPa from trip, backing off 72%."
+   },
+   "raw": "{\"pressure_sp\": 2624.0, \"level_sp\": 44.2, \"production_rate_sp\": 77.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2908 kPa is 92 kPa from trip, backing off 77%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2632.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 79.6,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2902 kPa is 98 kPa from trip, backing off 68%."
+   },
+   "raw": "{\"pressure_sp\": 2628.4, \"level_sp\": 44.2, \"production_rate_sp\": 78.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2902 kPa is 98 kPa from trip, backing off 72%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2660.0,
+    "level_sp": 44.2,
+    "production_rate_sp": 87.8,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2861 kPa is 139 kPa from trip, backing off 41%."
+   },
+   "raw": "{\"pressure_sp\": 2660.1, \"level_sp\": 44.2, \"production_rate_sp\": 88.3, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2861 kPa is 139 kPa from trip, backing off 41%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2774 kPa, L 43.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2774 kPa, L 43.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2657.0,
+    "level_sp": 44.2,
+    "production_rate_sp": 86.9,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2865 kPa is 135 kPa from trip, backing off 44%."
+   },
+   "raw": "{\"pressure_sp\": 2652.4, \"level_sp\": 44.2, \"production_rate_sp\": 84.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2865 kPa is 135 kPa from trip, backing off 48%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2769 kPa, L 44.8%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2769 kPa, L 44.8%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2646.4,
+    "level_sp": 44.2,
+    "production_rate_sp": 83.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2881 kPa is 119 kPa from trip, backing off 54%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 82.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2881 kPa is 119 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2624 kPa, L 44.3%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2624 kPa, L 44.3%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2630 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2629 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2733 kPa, L 45.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2733 kPa, L 45.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2628.1,
+    "level_sp": 44.2,
+    "production_rate_sp": 78.2,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2909 kPa is 91 kPa from trip, backing off 73%."
+   },
+   "raw": "{\"pressure_sp\": 2629.4, \"level_sp\": 44.2, \"production_rate_sp\": 78.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2909 kPa is 91 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2726 kPa, L 45.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2726 kPa, L 45.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2552 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2552 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2568 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2568 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2636.4,
+    "level_sp": 44.2,
+    "production_rate_sp": 80.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2896 kPa is 104 kPa from trip, backing off 64%."
+   },
+   "raw": "{\"pressure_sp\": 2630.1, \"level_sp\": 44.2, \"production_rate_sp\": 77.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2896 kPa is 104 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2523 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2523 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2764 kPa, L 44.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2764 kPa, L 44.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "level_high_backoff",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 35.8,
+    "production_rate_sp": 74.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Level 87.6% is near the high trip, lowering level setpoint and production."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 39.9, \"production_rate_sp\": 78.9, \"a_comp_sp\": 47.0, \"rationale\": \"Level 87.6% is near the high trip, lowering level setpoint and production.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2701 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2612.8,
+    "level_sp": 44.2,
+    "production_rate_sp": 73.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2932 kPa is 68 kPa from trip, backing off 88%."
+   },
+   "raw": "{\"pressure_sp\": 2618.7, \"level_sp\": 44.2, \"production_rate_sp\": 74.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2932 kPa is 68 kPa from trip, backing off 82%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2506 kPa, L 43.7%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2506 kPa, L 43.7%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2641.5,
+    "level_sp": 44.2,
+    "production_rate_sp": 82.3,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2889 kPa is 111 kPa from trip, backing off 59%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.1, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2889 kPa is 111 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2652 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2652 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2581 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2581 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:bad_reading",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Pressure or level reading implausible (sensor dropout); holding setpoints."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Pressure or level reading implausible (sensor dropout); holding setpoints.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2652.3,
+    "level_sp": 44.2,
+    "production_rate_sp": 85.5,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2872 kPa is 128 kPa from trip, backing off 48%."
+   },
+   "raw": "{\"pressure_sp\": 2652.4, \"level_sp\": 44.2, \"production_rate_sp\": 85.1, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2872 kPa is 128 kPa from trip, backing off 48%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2530 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2530 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2575 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2575 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "level_high_backoff",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 35.3,
+    "production_rate_sp": 73.4,
+    "a_comp_sp": 47.0,
+    "rationale": "Level 88.3% is near the high trip, lowering level setpoint and production."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 39.9, \"production_rate_sp\": 79.7, \"a_comp_sp\": 47.0, \"rationale\": \"Level 88.3% is near the high trip, lowering level setpoint and production.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2606.9,
+    "level_sp": 44.2,
+    "production_rate_sp": 71.9,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2941 kPa is 59 kPa from trip, backing off 94%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2941 kPa is 59 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2642.2,
+    "level_sp": 44.2,
+    "production_rate_sp": 82.5,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2888 kPa is 112 kPa from trip, backing off 58%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2888 kPa is 112 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2614.2,
+    "level_sp": 44.2,
+    "production_rate_sp": 74.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2930 kPa is 70 kPa from trip, backing off 86%."
+   },
+   "raw": "{\"pressure_sp\": 2619.4, \"level_sp\": 44.2, \"production_rate_sp\": 72.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2930 kPa is 70 kPa from trip, backing off 81%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2634.9,
+    "level_sp": 44.2,
+    "production_rate_sp": 80.3,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2899 kPa is 101 kPa from trip, backing off 66%."
+   },
+   "raw": "{\"pressure_sp\": 2630.4, \"level_sp\": 44.2, \"production_rate_sp\": 78.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2899 kPa is 101 kPa from trip, backing off 70%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2718 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2718 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2637.2,
+    "level_sp": 44.2,
+    "production_rate_sp": 81.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2895 kPa is 105 kPa from trip, backing off 63%."
+   },
+   "raw": "{\"pressure_sp\": 2630.1, \"level_sp\": 44.2, \"production_rate_sp\": 78.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2895 kPa is 105 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2644.8,
+    "level_sp": 44.2,
+    "production_rate_sp": 83.2,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2884 kPa is 116 kPa from trip, backing off 56%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.3, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2884 kPa is 116 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2528 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2528 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2757 kPa, L 44.8%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2757 kPa, L 44.8%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2698.0,
+    "level_sp": 44.2,
+    "production_rate_sp": 99.2,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2804 kPa is 196 kPa from trip, backing off 3%."
+   },
+   "raw": "{\"pressure_sp\": 2699.0, \"level_sp\": 44.2, \"production_rate_sp\": 99.2, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2804 kPa is 196 kPa from trip, backing off 2%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2983 kPa is 17 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2983 kPa is 17 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "level_high_backoff",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 35.4,
+    "production_rate_sp": 73.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Level 88.1% is near the high trip, lowering level setpoint and production."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 39.9, \"production_rate_sp\": 79.9, \"a_comp_sp\": 47.0, \"rationale\": \"Level 88.1% is near the high trip, lowering level setpoint and production.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2651.8,
+    "level_sp": 44.2,
+    "production_rate_sp": 85.4,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2873 kPa is 127 kPa from trip, backing off 49%."
+   },
+   "raw": "{\"pressure_sp\": 2659.2, \"level_sp\": 44.2, \"production_rate_sp\": 86.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2873 kPa is 127 kPa from trip, backing off 41%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2722 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2722 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2519 kPa, L 44.8%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2519 kPa, L 44.8%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2637.7,
+    "level_sp": 44.2,
+    "production_rate_sp": 81.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2894 kPa is 106 kPa from trip, backing off 63%."
+   },
+   "raw": "{\"pressure_sp\": 2630.6, \"level_sp\": 44.2, \"production_rate_sp\": 78.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2894 kPa is 106 kPa from trip, backing off 70%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "level_high_backoff",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 35.1,
+    "production_rate_sp": 72.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Level 88.6% is near the high trip, lowering level setpoint and production."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 39.9, \"production_rate_sp\": 79.7, \"a_comp_sp\": 47.0, \"rationale\": \"Level 88.6% is near the high trip, lowering level setpoint and production.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2690 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2690 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2978 kPa is 22 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2978 kPa is 22 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2995 kPa is 5 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2995 kPa is 45 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2654.4,
+    "level_sp": 44.2,
+    "production_rate_sp": 86.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2869 kPa is 131 kPa from trip, backing off 46%."
+   },
+   "raw": "{\"pressure_sp\": 2651.8, \"level_sp\": 44.2, \"production_rate_sp\": 83.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2869 kPa is 131 kPa from trip, backing off 49%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2629.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 78.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2907 kPa is 93 kPa from trip, backing off 71%."
+   },
+   "raw": "{\"pressure_sp\": 2629.4, \"level_sp\": 44.2, \"production_rate_sp\": 78.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2907 kPa is 93 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2793 kPa, L 44.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2793 kPa, L 44.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2616 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2616 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2493 kPa, L 68.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2493 kPa, L 68.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2565 kPa, L 45.3%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2565 kPa, L 45.3%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2604.5,
+    "level_sp": 44.2,
+    "production_rate_sp": 71.2,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2944 kPa is 56 kPa from trip, backing off 96%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2944 kPa is 56 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2631.4,
+    "level_sp": 44.2,
+    "production_rate_sp": 79.3,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2904 kPa is 96 kPa from trip, backing off 69%."
+   },
+   "raw": "{\"pressure_sp\": 2629.4, \"level_sp\": 44.2, \"production_rate_sp\": 78.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2904 kPa is 96 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2633.7,
+    "level_sp": 44.2,
+    "production_rate_sp": 79.9,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2900 kPa is 100 kPa from trip, backing off 67%."
+   },
+   "raw": "{\"pressure_sp\": 2632.4, \"level_sp\": 44.2, \"production_rate_sp\": 79.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2900 kPa is 100 kPa from trip, backing off 68%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2991 kPa is 9 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2991 kPa is 9 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2648.0,
+    "level_sp": 44.2,
+    "production_rate_sp": 84.2,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2879 kPa is 121 kPa from trip, backing off 53%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2879 kPa is 121 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2642 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2642 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2620 kPa, L 44.3%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2620 kPa, L 44.3%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:bad_reading",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Pressure or level reading implausible (sensor dropout); holding setpoints."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Pressure or level reading implausible (sensor dropout); holding setpoints.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2570 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2570 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2713 kPa, L 45.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2713 kPa, L 45.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2786 kPa, L 44.8%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2786 kPa, L 44.8%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2634.5,
+    "level_sp": 44.2,
+    "production_rate_sp": 80.2,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2899 kPa is 101 kPa from trip, backing off 66%."
+   },
+   "raw": "{\"pressure_sp\": 2630.1, \"level_sp\": 44.2, \"production_rate_sp\": 78.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2899 kPa is 101 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2779 kPa, L 45.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2779 kPa, L 45.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2511 kPa, L 45.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2511 kPa, L 45.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2610.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 73.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2935 kPa is 65 kPa from trip, backing off 90%."
+   },
+   "raw": "{\"pressure_sp\": 2619.7, \"level_sp\": 44.2, \"production_rate_sp\": 74.5, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2935 kPa is 65 kPa from trip, backing off 81%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2598 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2598 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2998 kPa is 2 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2998 kPa is 1.2 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2631 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2631 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2649.8,
+    "level_sp": 44.2,
+    "production_rate_sp": 84.8,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2876 kPa is 124 kPa from trip, backing off 51%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 82.3, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2876 kPa is 124 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2980 kPa is 20 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2980 kPa is 20 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2997 kPa is 3 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2997 kPa is 3 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2653.1,
+    "level_sp": 44.2,
+    "production_rate_sp": 85.8,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2871 kPa is 129 kPa from trip, backing off 47%."
+   },
+   "raw": "{\"pressure_sp\": 2651.8, \"level_sp\": 44.2, \"production_rate_sp\": 84.2, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2871 kPa is 129 kPa from trip, backing off 49%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2789 kPa, L 44.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2790 kPa, L 44.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2635.1,
+    "level_sp": 44.2,
+    "production_rate_sp": 80.4,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2898 kPa is 102 kPa from trip, backing off 65%."
+   },
+   "raw": "{\"pressure_sp\": 2630.2, \"level_sp\": 44.2, \"production_rate_sp\": 77.9, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2898 kPa is 102 kPa from trip, backing off 70%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2962 kPa is 38 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2962 kPa is 38 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2647.3,
+    "level_sp": 44.2,
+    "production_rate_sp": 84.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2880 kPa is 120 kPa from trip, backing off 53%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 82.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2880 kPa is 120 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2700.5,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2800 kPa is 200 kPa from trip, backing off 0%."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2800 kPa is 200 kPa from trip, backing off 0%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2645 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2645 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2655.7,
+    "level_sp": 44.2,
+    "production_rate_sp": 86.5,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2867 kPa is 133 kPa from trip, backing off 45%."
+   },
+   "raw": "{\"pressure_sp\": 2659.4, \"level_sp\": 44.2, \"production_rate_sp\": 86.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2867 kPa is 133 kPa from trip, backing off 41%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2602 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2602 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2793 kPa, L 44.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2793 kPa, L 44.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2699.9,
+    "level_sp": 44.2,
+    "production_rate_sp": 99.8,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2801 kPa is 199 kPa from trip, backing off 1%."
+   },
+   "raw": "{\"pressure_sp\": 2699.0, \"level_sp\": 44.2, \"production_rate_sp\": 99.5, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2801 kPa is 199 kPa from trip, backing off 2%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2643.5,
+    "level_sp": 44.2,
+    "production_rate_sp": 82.9,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2886 kPa is 114 kPa from trip, backing off 57%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 80.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2886 kPa is 113 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2609.4,
+    "level_sp": 44.2,
+    "production_rate_sp": 72.6,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2937 kPa is 63 kPa from trip, backing off 91%."
+   },
+   "raw": "{\"pressure_sp\": 2618.4, \"level_sp\": 44.2, \"production_rate_sp\": 74.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2937 kPa is 63 kPa from trip, backing off 82%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2727 kPa, L 44.8%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2727 kPa, L 44.8%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2993 kPa is 7 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2993 kPa is 67 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2955 kPa is 45 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2955 kPa is 45 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2697.5,
+    "level_sp": 44.2,
+    "production_rate_sp": 99.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2805 kPa is 195 kPa from trip, backing off 3%."
+   },
+   "raw": "{\"pressure_sp\": 2699.0, \"level_sp\": 44.2, \"production_rate_sp\": 99.2, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2805 kPa is 195 kPa from trip, backing off 2%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2634.1,
+    "level_sp": 44.2,
+    "production_rate_sp": 80.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2900 kPa is 100 kPa from trip, backing off 66%."
+   },
+   "raw": "{\"pressure_sp\": 2630.0, \"level_sp\": 44.2, \"production_rate_sp\": 78.5, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2900 kPa is 100 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2636 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2636 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2541 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2541 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2627.7,
+    "level_sp": 44.2,
+    "production_rate_sp": 78.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2909 kPa is 91 kPa from trip, backing off 73%."
+   },
+   "raw": "{\"pressure_sp\": 2629.4, \"level_sp\": 44.2, \"production_rate_sp\": 77.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2909 kPa is 91 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2566 kPa, L 45.3%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2566 kPa, L 45.3%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "level_high_backoff",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 35.9,
+    "production_rate_sp": 75.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Level 87.5% is near the high trip, lowering level setpoint and production."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 39.9, \"production_rate_sp\": 79.7, \"a_comp_sp\": 47.0, \"rationale\": \"Level 87.5% is near the high trip, lowering level setpoint and production.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:tripped",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Interlock tripped; holding all setpoints until the SIS re-arms."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Interlock tripped; holding all setpoints until the SIS re-arms.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2641 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2641 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:bad_reading",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Pressure or level reading implausible (sensor dropout); holding setpoints."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Pressure or level reading implausible (sensor dropout); holding setpoints.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2717 kPa, L 45.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2717 kPa, L 45.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.9,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2950 kPa is 50 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2950 kPa is 50 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2964 kPa is 36 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2964 kPa is 36 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2715 kPa, L 45.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2715 kPa, L 45.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2989 kPa is 11 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2989 kPa is 111 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2697 kPa, L 44.8%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2697 kPa, L 44.8%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2730 kPa, L 44.3%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2730 kPa, L 44.3%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2763 kPa, L 44.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2763 kPa, L 44.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:bad_reading",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Pressure or level reading implausible (sensor dropout); holding setpoints."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Pressure or level reading implausible (sensor dropout); holding setpoints.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2656.1,
+    "level_sp": 44.2,
+    "production_rate_sp": 86.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2867 kPa is 133 kPa from trip, backing off 44%."
+   },
+   "raw": "{\"pressure_sp\": 2659.2, \"level_sp\": 44.2, \"production_rate_sp\": 86.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2867 kPa is 133 kPa from trip, backing off 41%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2640.9,
+    "level_sp": 44.2,
+    "production_rate_sp": 82.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2889 kPa is 111 kPa from trip, backing off 60%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 80.2, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2890 kPa is 110 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2632.2,
+    "level_sp": 44.2,
+    "production_rate_sp": 79.5,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2903 kPa is 97 kPa from trip, backing off 68%."
+   },
+   "raw": "{\"pressure_sp\": 2624.0, \"level_sp\": 44.2, \"production_rate_sp\": 78.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2903 kPa is 97 kPa from trip, backing off 77%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2953 kPa is 47 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2953 kPa is 47 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2638.4,
+    "level_sp": 44.2,
+    "production_rate_sp": 81.3,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2893 kPa is 107 kPa from trip, backing off 62%."
+   },
+   "raw": "{\"pressure_sp\": 2630.6, \"level_sp\": 44.2, \"production_rate_sp\": 79.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2893 kPa is 107 kPa from trip, backing off 70%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2633.0,
+    "level_sp": 44.2,
+    "production_rate_sp": 79.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2901 kPa is 99 kPa from trip, backing off 68%."
+   },
+   "raw": "{\"pressure_sp\": 2630.1, \"level_sp\": 44.2, \"production_rate_sp\": 78.4, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2901 kPa is 99 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2951 kPa is 49 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2951 kPa is 49 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2790 kPa, L 44.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2790 kPa, L 44.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2639.7,
+    "level_sp": 44.2,
+    "production_rate_sp": 81.7,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2891 kPa is 109 kPa from trip, backing off 61%."
+   },
+   "raw": "{\"pressure_sp\": 2640.2, \"level_sp\": 44.2, \"production_rate_sp\": 81.3, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2891 kPa is 109 kPa from trip, backing off 60%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "level_high_backoff",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 35.5,
+    "production_rate_sp": 74.1,
+    "a_comp_sp": 47.0,
+    "rationale": "Level 88.0% is near the high trip, lowering level setpoint and production."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 39.9, \"production_rate_sp\": 79.7, \"a_comp_sp\": 47.0, \"rationale\": \"Level 88% is near the high trip, lowering level setpoint and production.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2629.2,
+    "level_sp": 44.2,
+    "production_rate_sp": 78.6,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2907 kPa is 93 kPa from trip, backing off 71%."
+   },
+   "raw": "{\"pressure_sp\": 2629.4, \"level_sp\": 44.2, \"production_rate_sp\": 78.7, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2907 kPa is 93 kPa from trip, backing off 71%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2961 kPa is 39 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2961 kPa is 39 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "pressure_backoff",
+   "gold": {
+    "pressure_sp": 2600.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 70.0,
+    "a_comp_sp": 47.0,
+    "rationale": "Pressure 2982 kPa is 18 kPa from trip, backing off 100%."
+   },
+   "raw": "{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"rationale\": \"Pressure 2982 kPa is 178 kPa from trip, backing off 100%.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2715 kPa, L 44.8%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2715 kPa, L 44.8%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2630 kPa, L 44.1%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2629 kPa, L 44.1%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2764 kPa, L 44.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2764 kPa, L 44.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2772 kPa, L 45.0%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2772 kPa, L 45.0%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2522 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2522 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2529 kPa, L 43.9%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2529 kPa, L 43.9%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "design_targets",
+   "gold": {
+    "pressure_sp": 2700.6,
+    "level_sp": 44.2,
+    "production_rate_sp": 100.0,
+    "a_comp_sp": 47.0,
+    "rationale": "In band (P 2522 kPa, L 44.2%); holding design targets."
+   },
+   "raw": "{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"rationale\": \"In band (P 2522 kPa, L 44.2%); holding design targets.\"}",
+   "valid": true
+  },
+  {
+   "rule": "hold:bad_reading",
+   "gold": {
+    "pressure_sp": null,
+    "level_sp": null,
+    "production_rate_sp": null,
+    "a_comp_sp": null,
+    "rationale": "Pressure or level reading implausible (sensor dropout); holding setpoints."
+   },
+   "raw": "{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"rationale\": \"Pressure or level reading implausible (sensor dropout); holding setpoints.\"}",
+   "valid": true
+  }
+ ]
+}

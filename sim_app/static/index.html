@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TE Reactor · Operator Station</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Martian+Mono:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Saira:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<div class="station" id="station">
+  <div class="topbar">
+    <div class="brand">
+      <p class="t">TE Reactor · Operator Station</p>
+      <p class="s">GRFICSv3 Tennessee-Eastman · over-pressure failure mode</p>
+    </div>
+    <div class="topbar-meta">
+      <span class="clock" id="clock">00:00</span>
+      <span class="chip" id="chip">CONNECTING</span>
+      <button class="btn" id="btnReset" type="button">Reset plant</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- DISPLAY : GRFICS 3D plant view -->
+    <section class="card view">
+      <div class="card-h">
+        <h3>Plant view</h3>
+        <div class="view-actions">
+          <span class="note" id="viewNote">live · GRFICS 3D</span>
+          <button class="btn" id="btnFull" type="button">Full screen</button>
+        </div>
+      </div>
+      <div class="screen" id="screen">
+        <iframe id="plant3d" src="http://localhost/" title="3D view of the reactor"></iframe>
+        <div class="screen-hud"><span id="hudP">— kPa</span><span id="hudL">Level —%</span></div>
+        <div class="screen-busy" id="busy" hidden>Resetting plant…</div>
+      </div>
+    </section>
+
+    <!-- HERO : pressure instrument -->
+    <section class="card hero">
+      <div class="card-h"><h3>Reactor pressure</h3><span class="note">design 2700 · rupture 3100 kPa</span></div>
+      <div class="cr-head">
+        <div class="cr-val"><span class="led" id="led"></span><span class="cr-p" id="pVal">—</span><span class="cr-unit">kPa</span></div>
+        <span class="cr-zone z-ok" id="zone">Nominal</span>
+      </div>
+      <svg class="cr-gauge" id="gauge" viewBox="0 0 480 104" aria-hidden="true"></svg>
+      <div class="hero-tiles">
+        <div class="tile"><div class="lab">Liquid level</div><div class="val" id="lVal">—</div></div>
+        <div class="tile"><div class="lab">Product flow · kmol/h</div><div class="val" id="fVal">—</div></div>
+      </div>
+    </section>
+
+    <!-- CONTROL DASHBOARD : valves -->
+    <section class="card valves">
+      <div class="card-h"><h3>Control dashboard</h3><span class="note">valve position %</span></div>
+      <div id="valveList"></div>
+      <button class="estop" id="btnEstop" type="button">EMERGENCY STOP</button>
+      <div class="lockrow" id="lockrow"><span id="lockText"></span></div>
+    </section>
+
+    <!-- AI OPERATOR -->
+    <section class="card ai">
+      <div class="card-h"><h3>AI operator</h3><span class="note" id="aiState">idle</span></div>
+      <form class="ai-cmd" id="cmdForm" autocomplete="off">
+        <input id="cmd" maxlength="300" placeholder="e.g. open feed 1 to 40% and cut purge to 0" aria-label="command">
+        <button class="btn" id="btnSend" type="submit">Send</button>
+      </form>
+      <div class="ai-actions">
+        <button class="btn ai-save" id="btnSave" type="button">Save the reactor</button>
+        <button class="btn" id="btnStop" type="button">Stop AI</button>
+      </div>
+      <div id="aiBody"></div>
+    </section>
+
+    <!-- GRAPHS -->
+    <section class="card graphs">
+      <div class="card-h"><h3>Live telemetry</h3><span class="note">last 2 min</span></div>
+      <div class="graphs-grid">
+        <div>
+          <div class="glabel">Pressure · kPa</div>
+          <canvas class="gcanvas" id="gPressure"></canvas>
+        </div>
+        <div>
+          <div class="glabel">Level · %</div>
+          <canvas class="gcanvas" id="gLevel"></canvas>
+        </div>
+        <div>
+          <div class="glabel">Flows · kmol/h</div>
+          <canvas class="gcanvas" id="gFlows"></canvas>
+          <div class="legend" id="flowLegend"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+# SCRAM plant: run ONLY the prebuilt GRFICS simulation image (no local build).
+#   docker compose pull simulation
+#   docker compose up -d simulation
+# The full GRFICS lab compose is kept in docker-compose.grfics-full.yml.
+#
+# entrypoint.sh requires an interface with a 192.168.95.x address, so the
+# container sits on a plain bridge with that subnet and a static address.
+# Its `route add -net 192.168.90.0/24 gw 192.168.95.200` succeeds without a
+# router: the gateway is on-link in the same /24, so the kernel accepts it.
+
+services:
+  simulation:
+    image: fortiphyd/grfics-simulation
+    pull_policy: missing        # never builds; `docker compose pull simulation` fetches it
+    container_name: simulation
+    hostname: simulation
+    cap_add:
+      - NET_ADMIN               # entrypoint adds IP aliases and a route
+    ports:
+      - "80:80"                 # 3D plant visualization (nginx)
+      - "55555:55555"           # TE simulator, line-delimited JSON over TCP
+    volumes:
+      # simulator only; the image's Modbus devices would overwrite L0's valve writes
+      - ./docker/supervisord.sim-only.conf:/etc/supervisor/conf.d/supervisord.conf:ro
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "55555"]
+      interval: 5s
+      retries: 5
+    networks:
+      plant-net:
+        ipv4_address: 192.168.95.45
+
+networks:
+  plant-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.95.0/24
+          gateway: 192.168.95.1

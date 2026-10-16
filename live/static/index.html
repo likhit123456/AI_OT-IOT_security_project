@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCRAM Control Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Control room: one deliberate dark console. Header bar of plant-wide status,
+   then 3D plant | AI brain, trends, then scenarios | event log. */
+:root{
+  color-scheme:dark;
+  --bg:#0e1413; --panel:#151d1c; --panel2:#1b2524; --ink:#e3ebe9; --muted:#8c9b98; --line:#26322f; --grid:#1f2927;
+  --truth:#3fbfb2; --meas:#e89a45; --sp:#9aa8ff; --trip:#ef6a5f; --tripbg:rgba(239,106,95,.12);
+  --ok:#6cc27a; --okbg:rgba(108,194,122,.12); --warn:#e8c45a;
+  --f-display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--f-body)}
+.wrap{max-width:1600px;margin:0 auto;padding:14px max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px));display:grid;gap:14px}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.mark{font:700 22px var(--f-display);letter-spacing:.06em}
+.mark small{font:500 12px var(--f-mono);color:var(--muted);letter-spacing:.08em;margin-left:8px;text-transform:uppercase}
+.hstat{display:grid;gap:0}
+.hstat .l{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hstat .v{font:600 15px var(--f-mono);font-variant-numeric:tabular-nums}
+.sis{margin-left:auto;display:flex;align-items:center;gap:12px}
+.pill{font:700 14px var(--f-mono);letter-spacing:.08em;padding:6px 14px;border-radius:4px;border:1.5px solid currentColor}
+.pill.armed{color:var(--ok);background:var(--okbg)}
+.pill.tripped{color:var(--trip);background:var(--tripbg);animation:blink 1.2s steps(2,start) infinite}
+@keyframes blink{50%{background:transparent}}
+@media (prefers-reduced-motion:reduce){.pill.tripped{animation:none}}
+.sisreason{font:13px var(--f-mono);color:var(--muted);max-width:44ch}
+.grid2{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(340px,1fr);gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.gridb{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px}
+@media (max-width:1100px){.grid2,.gridb{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px;min-width:0}
+.ph{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+h2{font:600 18px var(--f-display);letter-spacing:.02em;margin:0}
+.sub{font-size:12.5px;color:var(--muted)}
+.plant{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.plant .ph{padding:12px 14px 0}
+.plant .viewport{flex:1;min-height:540px;overflow:hidden;position:relative;background:#000}
+/* the GRFICS dashboard has a 270px sidebar; shift it out of view so the reactor fills the pane */
+.plant iframe{border:0;position:absolute;top:0;left:-270px;width:calc(100% + 270px);height:100%;display:block}
+a{color:var(--truth)}
+/* brain */
+.brainhead{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.seg button{background:transparent;color:var(--muted);border:0;padding:6px 12px;font:600 13px var(--f-body);cursor:pointer}
+.seg button.on{background:var(--panel2);color:var(--ink);box-shadow:inset 0 -2px 0 var(--truth)}
+.think{font:12px var(--f-mono);color:var(--muted)}
+.think.on{color:var(--warn)}
+.cmp{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:4px 12px;margin:12px 0 4px;font-variant-numeric:tabular-nums}
+.cmp .hd{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cmp .k{color:var(--muted);font-size:13px}
+.cmp .n{font:500 15px var(--f-mono);text-align:right}
+.n.meas{color:var(--meas)} .n.truth{color:var(--truth)} .n.sp{color:var(--sp)}
+.gap{font:600 12px var(--f-mono);color:var(--trip)}
+.why{margin:10px 0 0;padding:10px 12px;background:var(--panel2);border-left:3px solid var(--sp);font-size:14px;min-height:44px}
+.meta{font:12px var(--f-mono);color:var(--muted);margin-top:6px}
+.declist{list-style:none;margin:12px 0 0;padding:0;font:12px var(--f-mono);color:var(--muted);max-height:150px;overflow:auto}
+.declist li{padding:3px 0;border-top:1px solid var(--grid);display:grid;grid-template-columns:58px minmax(0,1fr);gap:8px}
+.declist li span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.auth{margin-top:14px;display:grid;gap:6px}
+.auth .row{display:flex;align-items:center;gap:10px}
+input[type=range]{flex:1;accent-color:var(--truth)}
+/* charts */
+canvas{width:100%;height:200px;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.ro{font:13px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+/* scenarios */
+.scen{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:12px;display:grid;gap:6px;align-content:start}
+.card h3{margin:0;font:600 15px var(--f-display);letter-spacing:.02em}
+.card p{margin:0;font-size:13px;color:var(--muted)}
+.card .watch{font-size:12.5px;color:var(--ink)}
+.card.active{border-color:var(--warn)}
+button.go{justify-self:start;background:var(--ink);color:var(--bg);border:0;border-radius:4px;padding:6px 12px;font:600 13px var(--f-body);cursor:pointer}
+button.go.danger{background:var(--trip);color:#1a0d0b}
+button.go:disabled{opacity:.35;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+.ops{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ops button{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:7px 12px;font:600 13px var(--f-body);cursor:pointer}
+.ops button.hot{border-color:var(--ok);color:var(--ok)}
+.ops button:disabled{opacity:.35;cursor:not-allowed}
+.faults{font:12.5px var(--f-mono);color:var(--warn);margin-top:8px;min-height:18px}
+/* log */
+.log{list-style:none;margin:0;padding:0;max-height:430px;overflow:auto;font-size:13px}
+.log li{display:grid;grid-template-columns:62px 86px minmax(0,1fr);gap:8px;padding:5px 2px;border-bottom:1px solid var(--grid)}
+.log .t{font-family:var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.log .k{font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding-top:2px}
+.k.sis{color:var(--trip)} .k.attack{color:var(--warn)} .k.gate{color:var(--ok)} .k.monitor{color:var(--sp)}
+.k.brain,.k.governance,.k.plant{color:var(--truth)} .k.error{color:var(--trip)}
+.banner{padding:10px 14px;border-radius:6px;border:1px solid var(--warn);color:var(--warn);font:13px var(--f-mono)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark">SCRAM<small>live control room</small></div>
+    <div class="hstat"><span class="l">brain</span><span class="v" id="hBrain">–</span></div>
+    <div class="hstat"><span class="l">authority</span><span class="v" id="hAuth">–</span></div>
+    <div class="hstat"><span class="l">pressure (true)</span><span class="v" id="hP">–</span></div>
+    <div class="hstat"><span class="l">level (true)</span><span class="v" id="hL">–</span></div>
+    <div class="hstat"><span class="l">gate rejected</span><span class="v" id="hRej">0</span></div>
+    <div class="hstat"><span class="l">out-of-band</span><span class="v" id="hOob">0</span></div>
+    <div class="hstat"><span class="l">run time</span><span class="v" id="hT">–</span></div>
+    <div class="sis"><span class="sisreason" id="sisReason"></span><span class="pill armed" id="sisPill">SIS ARMED</span></div>
+  </header>
+  <div class="banner" id="banner" hidden></div>
+
+  <section class="grid2">
+    <div class="panel plant">
+      <div class="ph"><h2>Reactor (GRFICS 3D, live)</h2>
+        <span class="sub">The 3D model reads the real simulator. <a href="http://localhost/" target="_blank" rel="noopener">Open full screen</a></span></div>
+      <div class="viewport"><iframe src="http://localhost/" title="GRFICS 3D reactor view" loading="eager"></iframe></div>
+    </div>
+
+    <div class="panel">
+      <div class="ph"><h2>AI operator</h2><span class="think" id="think">idle</span></div>
+      <div class="brainhead">
+        <div class="seg" role="group" aria-label="Brain">
+          <button type="button" id="bOllama" data-brain="ollama">Trained model</button>
+          <button type="button" id="bBase" data-brain="baseline">Baseline rules</button>
+        </div>
+        <span class="sub" id="brainLabel"></span>
+      </div>
+      <div class="cmp">
+        <span></span><span class="hd" style="text-align:right">model saw</span><span class="hd" style="text-align:right">truth</span><span class="hd" style="text-align:right">asked for</span>
+        <span class="k">pressure kPa</span><span class="n meas" id="sawP">–</span><span class="n truth" id="truP">–</span><span class="n sp" id="spP">–</span>
+        <span class="k">level %</span><span class="n meas" id="sawL">–</span><span class="n truth" id="truL">–</span><span class="n sp" id="spL">–</span>
+        <span class="k">production kmol/h</span><span class="n"></span><span class="n"></span><span class="n sp" id="spF">–</span>
+        <span class="k">A in purge mol%</span><span class="n"></span><span class="n"></span><span class="n sp" id="spA">–</span>
+      </div>
+      <div class="gap" id="gap"></div>
+      <div class="why" id="why">Waiting for the first decision.</div>
+      <div class="meta" id="meta"></div>
+      <ul class="declist" id="declist"></ul>
+      <div class="auth">
+        <div class="row"><label for="auth" class="k" style="color:var(--muted)">Governance authority</label>
+          <input id="auth" type="range" min="0" max="1" step="0.05" value="1"><span class="ro" id="authv">1.00</span></div>
+        <span class="sub">1 = the brain's setpoints go through unchanged. 0 = no setpoints: L1 freezes every valve. In between, requests are blended toward the current reading.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid3">
+    <div class="panel"><div class="ph"><h2>Pressure</h2><span class="ro" id="roP"></span></div>
+      <canvas id="cP"></canvas>
+      <div class="legend"><span><i style="background:var(--meas)"></i>measured</span><span><i style="background:var(--truth)"></i>true (SIS)</span><span><i style="background:var(--sp)"></i>setpoint</span><span><i style="background:var(--trip)"></i>trip</span></div></div>
+    <div class="panel"><div class="ph"><h2>Tank level</h2><span class="ro" id="roL"></span></div>
+      <canvas id="cL"></canvas>
+      <div class="legend"><span><i style="background:var(--meas)"></i>measured (what the AI sees)</span><span><i style="background:var(--truth)"></i>true (SIS)</span><span><i style="background:var(--sp)"></i>setpoint</span><span><i style="background:var(--trip)"></i>trip</span></div></div>
+    <div class="panel"><div class="ph"><h2>Valves</h2><span class="ro" id="roV"></span></div>
+      <canvas id="cV"></canvas>
+      <div class="legend"><span><i style="background:#e3ebe9"></i>feed 1</span><span><i style="background:#9aa8ff"></i>feed 2</span><span><i style="background:#e8c45a"></i>purge</span><span><i style="background:#3fbfb2"></i>product</span></div></div>
+  </section>
+  <div class="ph" style="margin:-4px 2px 0"><span class="sub">Shaded = interlock tripped. Window:
+    <span class="seg" role="group" aria-label="Chart window"><button type="button" data-win="120">2 min</button><button type="button" data-win="600" class="on">10 min</button><button type="button" data-win="1800">30 min</button></span></span></div>
+
+  <section class="gridb">
+    <div class="panel">
+      <div class="ph"><h2>Scenarios</h2><span class="sub">Each one attacks a different layer. The interlock never trusts the AI.</span></div>
+      <div class="scen">
+        <div class="card" id="c-level_drift"><h3>Level transmitter drift</h3>
+          <p>The level sensor the AI and L1 read drifts upward. L1 drains the tank to hold the fake reading.</p>
+          <p class="watch">Watch: orange and teal level lines split. The AI keeps saying "in band". The SIS trips on the true level at <span class="lowtrip">40</span>% in about 6 minutes.</p>
+          <button class="go" data-act="level_drift">Start drift</button></div>
+        <div class="card" id="c-pressure_dropout"><h3>Pressure transmitter dropout</h3>
+          <p>The pressure reading drops to 0 for half of every 10 s.</p>
+          <p class="watch">Watch: the trained model refuses to act on an implausible reading and holds.</p>
+          <button class="go" data-act="pressure_dropout">Start dropout</button></div>
+        <div class="card" id="c-forged"><h3>Forged commands</h3>
+          <p>A compromised agent sends valve commands that are unsigned, signed with the wrong key, or replayed, every 4 s for 60 s.</p>
+          <p class="watch">Watch: "gate rejected" climbs; the plant never moves.</p>
+          <button class="go" data-act="forged">Start attack</button></div>
+        <div class="card" id="c-oob_write"><h3>Out-of-band write</h3>
+          <p>An attacker on the plant network writes valves directly to the simulator, around the enforcer.</p>
+          <p class="watch">Watch: the audit flags it and the next cycle overwrites it (one control cycle of dwell).</p>
+          <button class="go" data-act="oob_write">Write once</button></div>
+        <div class="card" id="c-stolen_key"><h3>Stolen L1 key</h3>
+          <p>An attacker with the real signing key opens both feeds and shuts purge and product. The gate admits it.</p>
+          <p class="watch">Watch: pressure climbs about 4 kPa/s. The physics interlock trips at 3000 kPa and forces e-stop.</p>
+          <button class="go danger" data-act="stolen_key">Take over</button></div>
+      </div>
+      <div class="ops">
+        <button type="button" data-act="clear_faults">Clear faults and stop attacks</button>
+        <button type="button" data-act="reset_interlock" id="btnReset">Reset interlock</button>
+        <button type="button" data-act="reset_plant">Reset plant to design point</button>
+      </div>
+      <div class="faults" id="faults"></div>
+    </div>
+    <div class="panel">
+      <div class="ph"><h2>Event log</h2><span class="sub" id="evcount"></span></div>
+      <ul class="log" id="log"></ul>
+    </div>
+  </section>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const H = [];            // [seq,t,Pm,Pt,Lm,Lt,f1,f2,purge,prod,spP,spL,tripped]
+let lastH = 0, lastE = 0, nEv = 0, WIN = 600, S = null;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const fx = (v, d = 1) => v === null || v === undefined ? "–" : Number(v).toFixed(d);
+
+async function act(action, extra = {}) {
+  try {
+    const r = await fetch("/api/action", {method: "POST", headers: {"Content-Type": "application/json"},
+                                         body: JSON.stringify({action, ...extra})});
+    const j = await r.json();
+    if (!j.ok) showBanner(j.error);
+  } catch (e) { showBanner("Control room server not reachable: " + e.message); }
+}
+function showBanner(msg) { const b = $("banner"); b.textContent = msg; b.hidden = !msg; }
+document.querySelectorAll("[data-act]").forEach(b => b.addEventListener("click", () => act(b.dataset.act)));
+document.querySelectorAll("[data-brain]").forEach(b => b.addEventListener("click", () => act("brain", {kind: b.dataset.brain})));
+document.querySelectorAll("[data-win]").forEach(b => b.addEventListener("click", () => {
+  WIN = +b.dataset.win; document.querySelectorAll("[data-win]").forEach(x => x.classList.toggle("on", x === b)); draw();
+}));
+let authTimer = null;
+$("auth").addEventListener("input", e => {
+  $("authv").textContent = (+e.target.value).toFixed(2);
+  clearTimeout(authTimer); authTimer = setTimeout(() => act("authority", {value: +e.target.value}), 150);
+});
+
+async function poll() {
+  try {
+    const r = await fetch(`/api/state?h=${lastH}&e=${lastE}`, {cache: "no-store"});
+    const s = await r.json();
+    S = s;
+    (s.history || []).forEach(h => { H.push(h); lastH = h[0]; });
+    if (H.length > 3600) H.splice(0, H.length - 3600);
+    (s.events || []).forEach(addEvent);
+    render(s);
+    if (s.status === "error") showBanner("Engine error: " + s.error);
+    else if (s.status && s.status !== "running") showBanner(s.status + " …");
+    else showBanner("");
+  } catch (e) { showBanner("Control room server not reachable (is `python -m live` running?)"); }
+  setTimeout(poll, 500);
+}
+
+function addEvent(e) {
+  lastE = e.id; nEv++;
+  const li = document.createElement("li");
+  li.innerHTML = `<span class="t">${e.t.toFixed(0)} s</span><span class="k ${e.kind}">${e.kind}</span><span></span>`;
+  li.lastChild.textContent = e.msg;
+  const log = $("log"); log.prepend(li);
+  while (log.children.length > 250) log.lastChild.remove();
+  $("evcount").textContent = `${nEv} events`;
+}
+
+function render(s) {
+  if (!s.brain) return;
+  $("hBrain").textContent = s.brain.kind === "ollama" ? "scram-operator" : "baseline";
+  $("hAuth").textContent = fx(s.brain.authority, 2);
+  $("hP").textContent = fx(s.truth.pressure, 0) + " kPa";
+  $("hL").textContent = fx(s.truth.level, 2) + " %";
+  $("hRej").textContent = s.gate.rejected; $("hOob").textContent = s.gate.out_of_band;
+  const m = Math.floor(s.t / 60), sec = Math.floor(s.t % 60);
+  $("hT").textContent = `${m}:${String(sec).padStart(2, "0")}`;
+  const pill = $("sisPill");
+  pill.className = "pill " + (s.sis.tripped ? "tripped" : "armed");
+  pill.textContent = s.sis.tripped ? "SIS TRIPPED" : "SIS ARMED";
+  $("sisReason").textContent = s.sis.tripped ? `${s.sis.reason}${s.sis.can_reset ? " · re-arm permitted" : " · waiting for re-arm band"}` :
+    `trips at ${s.sis.limits.pressure_high} kPa · level ${s.sis.limits.level_low}% / ${s.sis.limits.level_high}%`;
+  document.querySelectorAll(".lowtrip").forEach(x => x.textContent = s.sis.limits.level_low);
+  const rb = $("btnReset"); rb.disabled = !s.sis.tripped; rb.classList.toggle("hot", !!s.sis.can_reset);
+  $("bOllama").classList.toggle("on", s.brain.kind === "ollama");
+  $("bBase").classList.toggle("on", s.brain.kind !== "ollama");
+  $("brainLabel").textContent = s.brain.label;
+  if (document.activeElement !== $("auth")) { $("auth").value = s.brain.authority; $("authv").textContent = fx(s.brain.authority, 2); }
+  const th = $("think");
+  th.className = "think" + (s.brain.inflight ? " on" : "");
+  th.textContent = s.sis.tripped ? "not consulted while tripped" : s.brain.inflight ? "model is thinking…" : `${s.brain.calls ?? "–"} decisions`;
+
+  const d = s.decision;
+  if (d) {
+    $("sawP").textContent = fx(d.saw.pressure, 1); $("sawL").textContent = fx(d.saw.level, 2);
+    $("truP").textContent = fx(d.true && d.true.pressure, 1); $("truL").textContent = fx(d.true && d.true.level, 2);
+    const [p, l, f, a] = d.sp;
+    $("spP").textContent = p === null ? "hold" : fx(p, 1); $("spL").textContent = l === null ? "hold" : fx(l, 2);
+    $("spF").textContent = f === null ? "hold" : fx(f, 1); $("spA").textContent = a === null ? "hold" : fx(a, 1);
+    $("why").textContent = d.rationale || "";
+    const g = d.true && d.true.level !== null ? d.saw.level - d.true.level : 0;
+    $("gap").textContent = Math.abs(g) >= 1 ? `The model's level reading is off by ${g.toFixed(1)} points. It cannot know.` : "";
+    $("meta").textContent = `decided at t=${d.t.toFixed(0)} s · ${d.outcome} · ${d.latency_s}s` + (s.targets && s.targets.authority < 1 ? ` · authority ${s.targets.authority.toFixed(2)} applied` : "");
+  }
+  const ds = s.decisions || [], newest = ds.length ? ds[ds.length - 1].t : null;
+  if (newest !== lastDec) { lastDec = newest; renderDecisions(ds); }
+  renderRest(s);
+}
+let lastDec = null;
+function renderDecisions(ds) {
+  const dl = $("declist"); dl.innerHTML = ""; dl.scrollTop = 0;
+  ds.slice().reverse().forEach(x => {
+    const li = document.createElement("li");
+    li.innerHTML = `<span>t=${x.t.toFixed(0)}</span><span></span>`;
+    li.lastChild.textContent = `saw L ${fx(x.saw.level, 1)} → ${x.sp[0] === null ? "hold" : "P " + fx(x.sp[0], 0) + " · L " + fx(x.sp[1], 1) + " · F " + fx(x.sp[2], 0)} | ${x.rationale}`;
+    dl.appendChild(li);
+  });
+}
+function renderRest(s) {
+  const act_ = s.scenarios || {};
+  document.querySelectorAll(".card").forEach(c => c.classList.remove("active"));
+  Object.keys(act_).forEach(k => { const c = $("c-" + k); if (c) c.classList.add("active"); });
+  Object.keys(s.faults || {}).forEach(k => { const c = $("c-" + (k === "tank_level" ? "level_drift" : "pressure_dropout")); if (c) c.classList.add("active"); });
+  const fl = Object.entries(s.faults || {}).map(([k, v]) => `${k}: ${v}`).concat(Object.keys(act_).map(k => `attack: ${k}`));
+  $("faults").textContent = fl.length ? "Active: " + fl.join(" · ") : "";
+  $("roP").textContent = `meas ${fx(s.measured.pressure, 0)} · true ${fx(s.truth.pressure, 0)}`;
+  $("roL").textContent = `meas ${fx(s.measured.level, 2)} · true ${fx(s.truth.level, 2)}`;
+  $("roV").textContent = `F1 ${fx(s.valves.f1, 0)} F2 ${fx(s.valves.f2, 0)} PG ${fx(s.valves.purge, 0)} PR ${fx(s.valves.product, 0)}`;
+  draw();
+}
+
+function chart(id, series, lines, fixed, minSpan = 0) {
+  const c = $(id), dpr = window.devicePixelRatio || 1, w = c.clientWidth, h = c.clientHeight;
+  if (c.width !== w * dpr) { c.width = w * dpr; c.height = h * dpr; }
+  const g = c.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+  if (!H.length) return;
+  const tEnd = H[H.length - 1][1], tStart = Math.max(H[0][1], tEnd - WIN);
+  const pts = H.filter(p => p[1] >= tStart);
+  let lo = Infinity, hi = -Infinity;
+  if (fixed) [lo, hi] = fixed; else {
+    pts.forEach(p => series.forEach(s => { const v = p[s.i]; if (v !== null) { lo = Math.min(lo, v); hi = Math.max(hi, v); } }));
+    lines.forEach(l => { if (l.v >= lo - l.near && l.v <= hi + l.near) { lo = Math.min(lo, l.v); hi = Math.max(hi, l.v); } });
+    if (hi - lo < minSpan) { const mid = (hi + lo) / 2; lo = mid - minSpan / 2; hi = mid + minSpan / 2; }
+    const pad = Math.max((hi - lo) * 0.12, 0.5); lo -= pad; hi += pad;
+  }
+  const L = 46, R = 8, T = 8, B = 20;
+  const X = t => L + (t - tStart) / Math.max(1, tEnd - tStart) * (w - L - R);
+  const Y = v => T + (1 - (v - lo) / (hi - lo)) * (h - T - B);
+  g.font = "11px 'IBM Plex Mono', monospace"; g.fillStyle = css("--muted");
+  g.strokeStyle = css("--grid"); g.lineWidth = 1;
+  for (let k = 0; k <= 4; k++) {
+    const v = lo + (hi - lo) * k / 4, y = Y(v);
+    g.beginPath(); g.moveTo(L, y); g.lineTo(w - R, y); g.stroke();
+    g.textAlign = "right"; g.fillText(v.toFixed(hi - lo < 10 ? 1 : 0), L - 6, y + 4);
+  }
+  g.textAlign = "center";
+  const span = tEnd - tStart, step = span > 900 ? 300 : span > 300 ? 120 : 30;
+  const mmss = t => `${Math.floor(t / 60)}:${String(Math.round(t % 60)).padStart(2, "0")}`;
+  for (let t = Math.ceil(tStart / step) * step; t <= tEnd; t += step) g.fillText(mmss(t), X(t), h - 5);
+  // tripped shading
+  g.fillStyle = css("--tripbg"); let s0 = null;
+  pts.forEach((p, i) => { if (p[12] && s0 === null) s0 = p[1]; if ((!p[12] || i === pts.length - 1) && s0 !== null) { g.fillRect(X(s0), T, X(p[1]) - X(s0), h - T - B); s0 = null; } });
+  lines.forEach(l => { if (l.v < lo || l.v > hi) return; g.strokeStyle = css("--trip"); g.setLineDash([5, 4]); g.beginPath(); g.moveTo(L, Y(l.v)); g.lineTo(w - R, Y(l.v)); g.stroke(); g.setLineDash([]); });
+  series.forEach(s => {
+    g.strokeStyle = s.c.startsWith("--") ? css(s.c) : s.c; g.lineWidth = s.w || 1.8; g.setLineDash(s.dash || []);
+    g.beginPath(); let started = false;
+    pts.forEach(p => { const v = p[s.i]; if (v === null) { started = false; return; } const x = X(p[1]), y = Y(Math.max(lo, Math.min(hi, v))); started ? g.lineTo(x, y) : g.moveTo(x, y); started = true; });
+    g.stroke(); g.setLineDash([]);
+  });
+}
+function draw() {
+  if (!S || !S.sis) return;
+  const lim = S.sis.limits;
+  chart("cP", [{i: 10, c: "--sp", dash: [4, 3], w: 1.3}, {i: 2, c: "--meas"}, {i: 3, c: "--truth"}], [{v: lim.pressure_high, near: 150}], null, 60);
+  chart("cL", [{i: 11, c: "--sp", dash: [4, 3], w: 1.3}, {i: 4, c: "--meas"}, {i: 5, c: "--truth"}], [{v: lim.level_low, near: 6}, {v: lim.level_high, near: 6}], null, 3);
+  chart("cV", [{i: 6, c: "#e3ebe9"}, {i: 7, c: "#9aa8ff"}, {i: 8, c: "#e8c45a"}, {i: 9, c: "#3fbfb2"}], [], [0, 100]);
+}
+window.addEventListener("resize", draw);
+poll();
+</script>
+</body>
+</html>

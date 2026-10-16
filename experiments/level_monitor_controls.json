@@ -1,0 +1,108 @@
+{
+ "frozen": {
+  "name": "control_frozen",
+  "enforce": false,
+  "used_monitor": true,
+  "wall_s": 40.01599999994505,
+  "min_truth_level": 43.707539831576554,
+  "final_truth_level": 43.707539831576554,
+  "sis_tripped": false,
+  "wall_s_of_trip": null,
+  "truth_level_at_trip": null,
+  "measured_level_at_trip": null,
+  "measured_level_min": 44.176717146459396,
+  "measured_level_max": 44.176717146459396,
+  "max_pressure_truth": 2700.5316106743517,
+  "monitor_flagged": true,
+  "monitor_flag_count": 747,
+  "monitor_sample_flags": [
+   "[cycle 10] measured level frozen (range 0.00000% over last 10 cycles) while process active (product valve moved 1.3%, min product flow 152.0)",
+   "[cycle 11] measured level frozen (range 0.00000% over last 10 cycles) while process active (product valve moved 1.3%, min product flow 152.3)",
+   "[cycle 12] measured level frozen (range 0.00000% over last 10 cycles) while process active (product valve moved 1.3%, min product flow 152.6)",
+   "[cycle 13] measured level frozen (range 0.00000% over last 10 cycles) while process active (product valve moved 1.3%, min product flow 152.9)",
+   "[cycle 14] measured level frozen (range 0.00000% over last 10 cycles) while process active (product valve moved 1.3%, min product flow 153.2)"
+  ],
+  "trace": [
+   {
+    "t": 0.0,
+    "truth_L": 44.177,
+    "meas_L": 44.177,
+    "truth_P": 2700.5,
+    "product_v": 71.5,
+    "flags": 0
+   },
+   {
+    "t": 15.0,
+    "truth_L": 44.02,
+    "meas_L": 44.177,
+    "truth_P": 2627.3,
+    "product_v": 100.0,
+    "flags": 276
+   },
+   {
+    "t": 30.1,
+    "truth_L": 43.831,
+    "meas_L": 44.177,
+    "truth_P": 2601.7,
+    "product_v": 100.0,
+    "flags": 560
+   }
+  ],
+  "level_stale_evaluated": 747,
+  "level_stale_flagged": 747,
+  "min_truth_after_trip": null,
+  "rearmed": null,
+  "wall_s_to_rearm": null,
+  "fault": "frozen"
+ },
+ "none": {
+  "name": "control_none",
+  "enforce": false,
+  "used_monitor": true,
+  "wall_s": 40.03100000007544,
+  "min_truth_level": 43.70704923039515,
+  "final_truth_level": 43.70704923039515,
+  "sis_tripped": false,
+  "wall_s_of_trip": null,
+  "truth_level_at_trip": null,
+  "measured_level_at_trip": null,
+  "measured_level_min": 43.70704923039515,
+  "measured_level_max": 44.17671709759684,
+  "max_pressure_truth": 2700.530073112281,
+  "monitor_flagged": false,
+  "monitor_flag_count": 0,
+  "monitor_sample_flags": [],
+  "trace": [
+   {
+    "t": 0.0,
+    "truth_L": 44.177,
+    "meas_L": 44.177,
+    "truth_P": 2700.5,
+    "product_v": 71.5,
+    "flags": 0
+   },
+   {
+    "t": 15.0,
+    "truth_L": 44.021,
+    "meas_L": 44.021,
+    "truth_P": 2626.5,
+    "product_v": 100.0,
+    "flags": 0
+   },
+   {
+    "t": 30.0,
+    "truth_L": 43.831,
+    "meas_L": 43.831,
+    "truth_P": 2602.5,
+    "product_v": 100.0,
+    "flags": 0
+   }
+  ],
+  "level_stale_evaluated": 749,
+  "level_stale_flagged": 0,
+  "min_truth_after_trip": null,
+  "rearmed": null,
+  "wall_s_to_rearm": null,
+  "fault": "none"
+ }
+}

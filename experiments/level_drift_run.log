@@ -1,0 +1,12 @@
+
+=== no_enforcer (enforce=False, monitor=False, drift=60.0%/h) start truth_L=44.18 meas_L=44.18 ===
+  [t=    0.0s] truth_L= 44.18  meas_L= 44.18  P=  2701  prod_v= 71.5  flags=-
+  [t=   60.0s] truth_L= 43.45  meas_L= 44.45  P=  2603  prod_v=100.0  flags=-
+  [t=  120.0s] truth_L= 42.68  meas_L= 44.68  P=  2607  prod_v=100.0  flags=-
+  [t=  180.1s] truth_L= 41.92  meas_L= 44.92  P=  2609  prod_v=100.0  flags=-
+  [t=  240.1s] truth_L= 41.15  meas_L= 45.16  P=  2612  prod_v=100.0  flags=-
+  [t=  300.1s] truth_L= 40.39  meas_L= 45.40  P=  2615  prod_v=100.0  flags=-
+  [t=  360.1s] truth_L= 39.64  meas_L= 45.63  P=  2617  prod_v=100.0  flags=-
+  [t=  420.2s] truth_L= 38.87  meas_L= 45.87  P=  2619  prod_v=100.0  flags=-
+  [t=  480.2s] truth_L= 38.11  meas_L= 46.11  P=  2621  prod_v=100.0  flags=-
+  [t=  540.2s] truth_L= 37.35  meas_L= 46.35  P=  2623  prod_v=100.0  flags=-

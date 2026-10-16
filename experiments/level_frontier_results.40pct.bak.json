@@ -1,0 +1,19 @@
+[
+ {
+  "threshold_pct": 40.0,
+  "rearm_pct": 42.0,
+  "damage_prevented_pct": 35.0,
+  "time_to_first_trip_s": 331.375,
+  "window_s": 800.030999999959,
+  "trips": 3,
+  "rearms": 2,
+  "safed_s_in_window": 482.2970000000205,
+  "throughput_lost_frac": 0.6028478896443328,
+  "min_truth_level": 39.998923111996504,
+  "max_truth_pressure": 2700.550613011393,
+  "monitor_flag_count": 0,
+  "monitor_sample_flags": [],
+  "level_stale_evaluated": 12278,
+  "level_stale_flagged": 0
+ }
+]

@@ -1,0 +1,39 @@
+packaging/dist/
+router/__pycache__/
+
+# Trained operator model outputs (model/): keep configs, eval reports and
+# README in git; keep large weight / checkpoint files out.
+model/**/*.safetensors
+model/**/*.bin
+model/**/*.pt
+model/**/*.pth
+model/**/*.ckpt
+model/**/*.gguf
+model/**/*.onnx
+model/**/*.npz
+model/**/checkpoint-*/
+model/**/optimizer*
+model/**/runs/
+# local training scratch
+training/_rollout_tmp.jsonl
+training/collect.log
+# local training environment / tools / intermediates
+.venv-train/
+.tools/
+model/_merged-16bit/
+model/_trainer/
+model/*.log
+
+# sim_app
+sim_app/run.log
+
+# python / tooling caches
+__pycache__/
+*.pyc
+.pytest_cache/
+unsloth_compiled_cache/
+.playwright-mcp/
+
+# GRFICS Unity build: only Git LFS pointers locally (objects unavailable), so GitHub
+# rejects them. The working 3D build ships in the fortiphyd/grfics-simulation image.
+simulation/web_visualization/Build/*.unityweb

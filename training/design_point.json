@@ -1,0 +1,13 @@
+{
+ "pressure": 2700.6,
+ "level": 44.18,
+ "production": 100.0,
+ "a_comp_pct": 47.0,
+ "valves": {
+  "f1": 31.45,
+  "f2": 13.24,
+  "purge": 0.0,
+  "product": 47.03
+ },
+ "source": "settled operating point read from the live GRFICS sim after reset"
+}
