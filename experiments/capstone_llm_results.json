@@ -3,11 +3,11 @@
   "injection_attempts": 39,
   "rejected_at_admission": 39,
   "injected_commands_that_reached_plant": 0,
-  "sis_trip_t_s": 326.545999999973,
-  "rearm_t_s": 575.5,
+  "sis_trip_t_s": 326.2237329999989,
+  "rearm_t_s": 576.8321523999984,
   "true_level_at_trip": 40.0,
   "measured_level_at_trip": 45.45,
-  "max_divergence_pct": 9.92,
+  "max_divergence_pct": 9.93,
   "min_true_level": 40.0,
   "gate_out_of_band_events": 0
  },
@@ -22,10 +22,10 @@
   },
   {
    "t": 50.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 893)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 917)); reached plant: False"
   },
   {
-   "t": 65.0,
+   "t": 65.1,
    "event": "agent injects unsigned command -> REJECTED at admission (unsigned command (no provenance tag)); reached plant: False"
   },
   {
@@ -34,7 +34,7 @@
   },
   {
    "t": 95.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 1740)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 1741)); reached plant: False"
   },
   {
    "t": 110.0,
@@ -46,7 +46,7 @@
   },
   {
    "t": 140.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 2583)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 2566)); reached plant: False"
   },
   {
    "t": 155.0,
@@ -58,7 +58,7 @@
   },
   {
    "t": 185.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 3363)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 3390)); reached plant: False"
   },
   {
    "t": 200.0,
@@ -70,7 +70,7 @@
   },
   {
    "t": 230.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 4207)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 4209)); reached plant: False"
   },
   {
    "t": 245.0,
@@ -82,7 +82,7 @@
   },
   {
    "t": 275.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 5029)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 5033)); reached plant: False"
   },
   {
    "t": 290.0,
@@ -93,11 +93,11 @@
    "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
   },
   {
-   "t": 320.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 5819)); reached plant: False"
+   "t": 320.1,
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 5858)); reached plant: False"
   },
   {
-   "t": 326.5,
+   "t": 326.2,
    "event": "SIS TRIP on true physics: level 40.0% <= 40.0% | measured level reads 45.4% (cause=level_low; product valve closed, feeds held)"
   },
   {
@@ -110,7 +110,7 @@
   },
   {
    "t": 365.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 6610)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 6681)); reached plant: False"
   },
   {
    "t": 380.0,
@@ -122,7 +122,7 @@
   },
   {
    "t": 410.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 7361)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 7504)); reached plant: False"
   },
   {
    "t": 425.0,
@@ -134,7 +134,7 @@
   },
   {
    "t": 455.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 8208)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 8329)); reached plant: False"
   },
   {
    "t": 470.0,
@@ -146,7 +146,7 @@
   },
   {
    "t": 500.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 8946)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 9154)); reached plant: False"
   },
   {
    "t": 515.0,
@@ -158,7 +158,7 @@
   },
   {
    "t": 545.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 9700)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 9979)); reached plant: False"
   },
   {
    "t": 560.0,
@@ -169,12 +169,12 @@
    "event": "agent injects wrong-key command -> REJECTED at admission (invalid provenance tag); reached plant: False"
   },
   {
-   "t": 575.5,
+   "t": 576.8,
    "event": "level recovered to 42.0% -> interlock re-armed"
   },
   {
    "t": 590.0,
-   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 10500)); reached plant: False"
+   "event": "agent injects replay command -> REJECTED at admission (replayed/stale sequence 1 (last 10804)); reached plant: False"
   }
  ],
  "timeline": [
@@ -197,7 +197,7 @@
    "rejections": 0
   },
   {
-   "t": 2.0,
+   "t": 2.1,
    "truth_L": 44.16,
    "meas_L": 44.2,
    "divergence": 0.03,
@@ -206,7 +206,7 @@
    "rejections": 0
   },
   {
-   "t": 3.0,
+   "t": 3.1,
    "truth_L": 44.16,
    "meas_L": 44.21,
    "divergence": 0.05,
@@ -215,70 +215,79 @@
    "rejections": 0
   },
   {
-   "t": 4.0,
+   "t": 4.1,
    "truth_L": 44.15,
-   "meas_L": 44.22,
-   "divergence": 0.07,
+   "meas_L": 44.21,
+   "divergence": 0.06,
    "tripped": false,
    "product_valve": 82.2,
    "rejections": 0
   },
   {
-   "t": 5.0,
+   "t": 5.2,
    "truth_L": 44.14,
-   "meas_L": 44.23,
-   "divergence": 0.09,
+   "meas_L": 44.22,
+   "divergence": 0.08,
    "tripped": false,
    "product_valve": 84.9,
    "rejections": 0
   },
   {
-   "t": 6.1,
+   "t": 6.2,
    "truth_L": 44.13,
    "meas_L": 44.23,
-   "divergence": 0.1,
+   "divergence": 0.09,
    "tripped": false,
    "product_valve": 87.6,
    "rejections": 0
   },
   {
-   "t": 7.1,
+   "t": 7.2,
    "truth_L": 44.12,
-   "meas_L": 44.24,
-   "divergence": 0.12,
+   "meas_L": 44.23,
+   "divergence": 0.11,
    "tripped": false,
-   "product_valve": 89.4,
+   "product_valve": 90.3,
    "rejections": 0
   },
   {
-   "t": 8.1,
+   "t": 8.3,
    "truth_L": 44.11,
+   "meas_L": 44.24,
+   "divergence": 0.13,
+   "tripped": false,
+   "product_valve": 93.0,
+   "rejections": 0
+  },
+  {
+   "t": 9.3,
+   "truth_L": 44.1,
    "meas_L": 44.25,
    "divergence": 0.14,
    "tripped": false,
-   "product_valve": 92.1,
+   "product_valve": 95.7,
    "rejections": 0
   },
   {
-   "t": 9.1,
-   "truth_L": 44.1,
-   "meas_L": 44.25,
-   "divergence": 0.15,
-   "tripped": false,
-   "product_valve": 94.9,
-   "rejections": 0
-  },
-  {
-   "t": 10.1,
+   "t": 10.4,
    "truth_L": 44.09,
-   "meas_L": 44.26,
+   "meas_L": 44.25,
+   "divergence": 0.16,
+   "tripped": false,
+   "product_valve": 98.4,
+   "rejections": 0
+  },
+  {
+   "t": 11.4,
+   "truth_L": 44.08,
+   "meas_L": 44.25,
    "divergence": 0.17,
    "tripped": false,
-   "product_valve": 97.6,
+   "product_valve": 100.0,
    "rejections": 0
   },
   {
-   "t": 11.1,
+   "t": 12.4,
    "truth_L": 44.07,
    "meas_L": 44.26,
    "divergence": 0.19,
@@ -287,25 +296,25 @@
    "rejections": 0
   },
   {
-   "t": 12.1,
+   "t": 13.5,
    "truth_L": 44.06,
    "meas_L": 44.26,
-   "divergence": 0.2,
+   "divergence": 0.21,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 0
   },
   {
-   "t": 13.1,
-   "truth_L": 44.05,
-   "meas_L": 44.27,
+   "t": 14.5,
+   "truth_L": 44.04,
+   "meas_L": 44.26,
    "divergence": 0.22,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 0
   },
   {
-   "t": 14.1,
+   "t": 15.5,
    "truth_L": 44.03,
    "meas_L": 44.27,
    "divergence": 0.24,
@@ -314,16 +323,16 @@
    "rejections": 0
   },
   {
-   "t": 15.1,
+   "t": 16.6,
    "truth_L": 44.02,
-   "meas_L": 44.28,
+   "meas_L": 44.27,
    "divergence": 0.25,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 0
   },
   {
-   "t": 16.2,
+   "t": 17.6,
    "truth_L": 44.01,
    "meas_L": 44.28,
    "divergence": 0.27,
@@ -332,8 +341,8 @@
    "rejections": 0
   },
   {
-   "t": 17.2,
-   "truth_L": 44.0,
+   "t": 18.7,
+   "truth_L": 43.99,
    "meas_L": 44.28,
    "divergence": 0.29,
    "tripped": false,
@@ -341,35 +350,44 @@
    "rejections": 0
   },
   {
-   "t": 18.3,
+   "t": 19.7,
    "truth_L": 43.98,
-   "meas_L": 44.29,
-   "divergence": 0.31,
+   "meas_L": 44.28,
+   "divergence": 0.3,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 0
   },
   {
-   "t": 19.3,
+   "t": 20.7,
    "truth_L": 43.97,
    "meas_L": 44.29,
    "divergence": 0.32,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 0
+   "rejections": 1
   },
   {
-   "t": 20.3,
+   "t": 21.8,
    "truth_L": 43.96,
-   "meas_L": 44.3,
-   "divergence": 0.34,
+   "meas_L": 44.29,
+   "divergence": 0.33,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 1
   },
   {
-   "t": 21.3,
-   "truth_L": 43.94,
+   "t": 22.8,
+   "truth_L": 43.95,
+   "meas_L": 44.29,
+   "divergence": 0.35,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 1
+  },
+  {
+   "t": 23.8,
+   "truth_L": 43.93,
    "meas_L": 44.3,
    "divergence": 0.36,
    "tripped": false,
@@ -377,53 +395,26 @@
    "rejections": 1
   },
   {
-   "t": 22.3,
-   "truth_L": 43.93,
-   "meas_L": 44.3,
-   "divergence": 0.37,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 1
-  },
-  {
-   "t": 23.3,
+   "t": 24.9,
    "truth_L": 43.92,
-   "meas_L": 44.31,
-   "divergence": 0.39,
+   "meas_L": 44.3,
+   "divergence": 0.38,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 1
   },
   {
-   "t": 24.3,
+   "t": 25.9,
    "truth_L": 43.91,
    "meas_L": 44.31,
-   "divergence": 0.41,
+   "divergence": 0.4,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 1
   },
   {
-   "t": 25.4,
-   "truth_L": 43.89,
-   "meas_L": 44.32,
-   "divergence": 0.42,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 1
-  },
-  {
-   "t": 26.4,
-   "truth_L": 43.88,
-   "meas_L": 44.32,
-   "divergence": 0.44,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 1
-  },
-  {
-   "t": 27.4,
-   "truth_L": 43.87,
+   "t": 26.9,
+   "truth_L": 43.86,
    "meas_L": 44.32,
    "divergence": 0.46,
    "tripped": false,
@@ -431,16 +422,16 @@
    "rejections": 1
   },
   {
-   "t": 28.4,
+   "t": 28.0,
    "truth_L": 43.85,
-   "meas_L": 44.33,
+   "meas_L": 44.32,
    "divergence": 0.47,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 1
   },
   {
-   "t": 29.4,
+   "t": 29.0,
    "truth_L": 43.84,
    "meas_L": 44.33,
    "divergence": 0.49,
@@ -449,16 +440,25 @@
    "rejections": 1
   },
   {
-   "t": 31.7,
-   "truth_L": 43.81,
-   "meas_L": 44.34,
-   "divergence": 0.53,
+   "t": 30.1,
+   "truth_L": 43.83,
+   "meas_L": 44.33,
+   "divergence": 0.5,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 1
   },
   {
-   "t": 32.7,
+   "t": 31.1,
+   "truth_L": 43.81,
+   "meas_L": 44.34,
+   "divergence": 0.52,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 1
+  },
+  {
+   "t": 32.1,
    "truth_L": 43.8,
    "meas_L": 44.34,
    "divergence": 0.54,
@@ -467,44 +467,53 @@
    "rejections": 1
   },
   {
-   "t": 33.7,
+   "t": 33.2,
    "truth_L": 43.79,
-   "meas_L": 44.35,
-   "divergence": 0.56,
+   "meas_L": 44.34,
+   "divergence": 0.55,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 1
   },
   {
-   "t": 34.7,
+   "t": 34.2,
+   "truth_L": 43.78,
+   "meas_L": 44.35,
+   "divergence": 0.57,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 1
+  },
+  {
+   "t": 35.2,
    "truth_L": 43.77,
    "meas_L": 44.35,
    "divergence": 0.58,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 1
+   "rejections": 2
   },
   {
-   "t": 35.7,
-   "truth_L": 43.76,
-   "meas_L": 44.36,
+   "t": 36.3,
+   "truth_L": 43.75,
+   "meas_L": 44.35,
    "divergence": 0.6,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 2
   },
   {
-   "t": 36.7,
-   "truth_L": 43.75,
+   "t": 37.3,
+   "truth_L": 43.74,
    "meas_L": 44.36,
-   "divergence": 0.61,
+   "divergence": 0.62,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 2
   },
   {
-   "t": 37.7,
-   "truth_L": 43.74,
+   "t": 38.3,
+   "truth_L": 43.73,
    "meas_L": 44.36,
    "divergence": 0.63,
    "tripped": false,
@@ -512,7 +521,7 @@
    "rejections": 2
   },
   {
-   "t": 38.7,
+   "t": 39.4,
    "truth_L": 43.72,
    "meas_L": 44.37,
    "divergence": 0.65,
@@ -521,7 +530,7 @@
    "rejections": 2
   },
   {
-   "t": 39.8,
+   "t": 40.4,
    "truth_L": 43.71,
    "meas_L": 44.37,
    "divergence": 0.66,
@@ -530,25 +539,25 @@
    "rejections": 2
   },
   {
-   "t": 40.8,
-   "truth_L": 43.7,
-   "meas_L": 44.38,
+   "t": 41.5,
+   "truth_L": 43.69,
+   "meas_L": 44.37,
    "divergence": 0.68,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 2
   },
   {
-   "t": 41.8,
+   "t": 42.5,
    "truth_L": 43.68,
    "meas_L": 44.38,
-   "divergence": 0.7,
+   "divergence": 0.69,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 2
   },
   {
-   "t": 42.8,
+   "t": 43.5,
    "truth_L": 43.67,
    "meas_L": 44.38,
    "divergence": 0.71,
@@ -557,124 +566,133 @@
    "rejections": 2
   },
   {
-   "t": 43.8,
+   "t": 44.6,
    "truth_L": 43.66,
-   "meas_L": 44.39,
+   "meas_L": 44.38,
    "divergence": 0.73,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 2
   },
   {
-   "t": 44.8,
+   "t": 45.6,
    "truth_L": 43.65,
    "meas_L": 44.39,
-   "divergence": 0.75,
+   "divergence": 0.74,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 2
   },
   {
-   "t": 45.8,
+   "t": 46.7,
    "truth_L": 43.63,
-   "meas_L": 44.4,
+   "meas_L": 44.39,
    "divergence": 0.76,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 2
   },
   {
-   "t": 46.8,
+   "t": 47.7,
    "truth_L": 43.62,
-   "meas_L": 44.4,
-   "divergence": 0.78,
+   "meas_L": 44.39,
+   "divergence": 0.77,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 2
   },
   {
-   "t": 47.9,
+   "t": 48.7,
    "truth_L": 43.61,
    "meas_L": 44.4,
-   "divergence": 0.8,
+   "divergence": 0.79,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 2
   },
   {
-   "t": 48.9,
-   "truth_L": 43.59,
-   "meas_L": 44.41,
+   "t": 49.8,
+   "truth_L": 43.6,
+   "meas_L": 44.4,
    "divergence": 0.81,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 2
   },
   {
-   "t": 49.9,
+   "t": 50.8,
    "truth_L": 43.58,
    "meas_L": 44.41,
-   "divergence": 0.83,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 2
-  },
-  {
-   "t": 50.9,
-   "truth_L": 43.57,
-   "meas_L": 44.42,
-   "divergence": 0.85,
+   "divergence": 0.82,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 3
   },
   {
-   "t": 51.9,
-   "truth_L": 43.56,
-   "meas_L": 44.42,
-   "divergence": 0.86,
+   "t": 51.8,
+   "truth_L": 43.57,
+   "meas_L": 44.41,
+   "divergence": 0.84,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 3
   },
   {
    "t": 52.9,
-   "truth_L": 43.54,
-   "meas_L": 44.42,
-   "divergence": 0.88,
+   "truth_L": 43.56,
+   "meas_L": 44.41,
+   "divergence": 0.85,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 3
   },
   {
    "t": 53.9,
-   "truth_L": 43.53,
-   "meas_L": 44.43,
-   "divergence": 0.9,
+   "truth_L": 43.55,
+   "meas_L": 44.42,
+   "divergence": 0.87,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 3
   },
   {
    "t": 54.9,
-   "truth_L": 43.52,
-   "meas_L": 44.43,
-   "divergence": 0.91,
+   "truth_L": 43.54,
+   "meas_L": 44.42,
+   "divergence": 0.89,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 3
   },
   {
-   "t": 55.9,
+   "t": 56.0,
+   "truth_L": 43.52,
+   "meas_L": 44.42,
+   "divergence": 0.9,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 3
+  },
+  {
+   "t": 57.0,
    "truth_L": 43.51,
-   "meas_L": 44.44,
+   "meas_L": 44.43,
+   "divergence": 0.92,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 3
+  },
+  {
+   "t": 58.1,
+   "truth_L": 43.5,
+   "meas_L": 44.43,
    "divergence": 0.93,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 3
   },
   {
-   "t": 56.9,
+   "t": 59.1,
    "truth_L": 43.49,
    "meas_L": 44.44,
    "divergence": 0.95,
@@ -683,34 +701,7 @@
    "rejections": 3
   },
   {
-   "t": 57.9,
-   "truth_L": 43.48,
-   "meas_L": 44.44,
-   "divergence": 0.96,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 3
-  },
-  {
-   "t": 58.9,
-   "truth_L": 43.47,
-   "meas_L": 44.45,
-   "divergence": 0.98,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 3
-  },
-  {
-   "t": 59.9,
-   "truth_L": 43.45,
-   "meas_L": 44.45,
-   "divergence": 1.0,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 3
-  },
-  {
-   "t": 61.0,
+   "t": 60.1,
    "truth_L": 43.44,
    "meas_L": 44.45,
    "divergence": 1.01,
@@ -719,26 +710,35 @@
    "rejections": 3
   },
   {
-   "t": 62.0,
+   "t": 61.2,
    "truth_L": 43.43,
-   "meas_L": 44.46,
+   "meas_L": 44.45,
    "divergence": 1.03,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 3
   },
   {
-   "t": 63.0,
+   "t": 62.2,
    "truth_L": 43.42,
    "meas_L": 44.46,
-   "divergence": 1.05,
+   "divergence": 1.04,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 3
   },
   {
-   "t": 64.0,
+   "t": 63.2,
    "truth_L": 43.4,
+   "meas_L": 44.46,
+   "divergence": 1.06,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 3
+  },
+  {
+   "t": 64.3,
+   "truth_L": 43.39,
    "meas_L": 44.47,
    "divergence": 1.07,
    "tripped": false,
@@ -746,8 +746,8 @@
    "rejections": 3
   },
   {
-   "t": 65.0,
-   "truth_L": 43.39,
+   "t": 65.3,
+   "truth_L": 43.38,
    "meas_L": 44.47,
    "divergence": 1.09,
    "tripped": false,
@@ -755,16 +755,16 @@
    "rejections": 4
   },
   {
-   "t": 66.0,
+   "t": 66.4,
    "truth_L": 43.37,
-   "meas_L": 44.48,
+   "meas_L": 44.47,
    "divergence": 1.1,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 4
   },
   {
-   "t": 67.0,
+   "t": 67.4,
    "truth_L": 43.36,
    "meas_L": 44.48,
    "divergence": 1.12,
@@ -773,8 +773,8 @@
    "rejections": 4
   },
   {
-   "t": 68.0,
-   "truth_L": 43.35,
+   "t": 68.4,
+   "truth_L": 43.34,
    "meas_L": 44.48,
    "divergence": 1.14,
    "tripped": false,
@@ -782,16 +782,16 @@
    "rejections": 4
   },
   {
-   "t": 69.0,
+   "t": 69.5,
    "truth_L": 43.33,
-   "meas_L": 44.49,
+   "meas_L": 44.48,
    "divergence": 1.15,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 4
   },
   {
-   "t": 70.0,
+   "t": 70.5,
    "truth_L": 43.32,
    "meas_L": 44.49,
    "divergence": 1.17,
@@ -800,16 +800,16 @@
    "rejections": 4
   },
   {
-   "t": 71.1,
+   "t": 71.5,
    "truth_L": 43.31,
-   "meas_L": 44.5,
-   "divergence": 1.19,
+   "meas_L": 44.49,
+   "divergence": 1.18,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 4
   },
   {
-   "t": 72.1,
+   "t": 72.6,
    "truth_L": 43.3,
    "meas_L": 44.5,
    "divergence": 1.2,
@@ -818,7 +818,7 @@
    "rejections": 4
   },
   {
-   "t": 73.1,
+   "t": 73.6,
    "truth_L": 43.28,
    "meas_L": 44.5,
    "divergence": 1.22,
@@ -827,16 +827,16 @@
    "rejections": 4
   },
   {
-   "t": 74.1,
+   "t": 74.7,
    "truth_L": 43.27,
-   "meas_L": 44.51,
-   "divergence": 1.24,
+   "meas_L": 44.5,
+   "divergence": 1.23,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 4
   },
   {
-   "t": 75.1,
+   "t": 75.7,
    "truth_L": 43.26,
    "meas_L": 44.51,
    "divergence": 1.25,
@@ -845,26 +845,35 @@
    "rejections": 4
   },
   {
-   "t": 76.1,
-   "truth_L": 43.24,
-   "meas_L": 44.52,
-   "divergence": 1.27,
+   "t": 76.7,
+   "truth_L": 43.25,
+   "meas_L": 44.51,
+   "divergence": 1.26,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 4
   },
   {
-   "t": 77.1,
+   "t": 77.8,
    "truth_L": 43.23,
-   "meas_L": 44.52,
-   "divergence": 1.29,
+   "meas_L": 44.51,
+   "divergence": 1.28,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 4
   },
   {
-   "t": 78.1,
+   "t": 78.8,
    "truth_L": 43.22,
+   "meas_L": 44.52,
+   "divergence": 1.3,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 4
+  },
+  {
+   "t": 79.8,
+   "truth_L": 43.21,
    "meas_L": 44.52,
    "divergence": 1.31,
    "tripped": false,
@@ -872,16 +881,16 @@
    "rejections": 4
   },
   {
-   "t": 79.1,
-   "truth_L": 43.21,
-   "meas_L": 44.53,
-   "divergence": 1.32,
+   "t": 80.9,
+   "truth_L": 43.2,
+   "meas_L": 44.52,
+   "divergence": 1.33,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 4
+   "rejections": 5
   },
   {
-   "t": 80.1,
+   "t": 81.9,
    "truth_L": 43.19,
    "meas_L": 44.53,
    "divergence": 1.34,
@@ -890,17 +899,17 @@
    "rejections": 5
   },
   {
-   "t": 81.2,
-   "truth_L": 43.18,
-   "meas_L": 44.54,
+   "t": 82.9,
+   "truth_L": 43.17,
+   "meas_L": 44.53,
    "divergence": 1.36,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 5
   },
   {
-   "t": 82.2,
-   "truth_L": 43.17,
+   "t": 84.0,
+   "truth_L": 43.16,
    "meas_L": 44.54,
    "divergence": 1.37,
    "tripped": false,
@@ -908,7 +917,7 @@
    "rejections": 5
   },
   {
-   "t": 83.2,
+   "t": 85.0,
    "truth_L": 43.15,
    "meas_L": 44.54,
    "divergence": 1.39,
@@ -917,16 +926,16 @@
    "rejections": 5
   },
   {
-   "t": 84.2,
+   "t": 86.0,
    "truth_L": 43.14,
-   "meas_L": 44.55,
+   "meas_L": 44.54,
    "divergence": 1.41,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 5
   },
   {
-   "t": 85.2,
+   "t": 87.1,
    "truth_L": 43.13,
    "meas_L": 44.55,
    "divergence": 1.42,
@@ -935,8 +944,8 @@
    "rejections": 5
   },
   {
-   "t": 86.2,
-   "truth_L": 43.12,
+   "t": 88.1,
+   "truth_L": 43.11,
    "meas_L": 44.55,
    "divergence": 1.44,
    "tripped": false,
@@ -944,16 +953,16 @@
    "rejections": 5
   },
   {
-   "t": 87.2,
+   "t": 89.1,
    "truth_L": 43.1,
-   "meas_L": 44.56,
-   "divergence": 1.46,
+   "meas_L": 44.55,
+   "divergence": 1.45,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 5
   },
   {
-   "t": 88.2,
+   "t": 90.2,
    "truth_L": 43.09,
    "meas_L": 44.56,
    "divergence": 1.47,
@@ -962,44 +971,26 @@
    "rejections": 5
   },
   {
-   "t": 89.2,
-   "truth_L": 43.08,
-   "meas_L": 44.57,
-   "divergence": 1.49,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 5
-  },
-  {
-   "t": 90.2,
-   "truth_L": 43.06,
-   "meas_L": 44.57,
-   "divergence": 1.51,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 5
-  },
-  {
    "t": 91.2,
-   "truth_L": 43.05,
-   "meas_L": 44.57,
-   "divergence": 1.52,
+   "truth_L": 43.08,
+   "meas_L": 44.56,
+   "divergence": 1.48,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 5
   },
   {
-   "t": 92.2,
-   "truth_L": 43.04,
+   "t": 92.3,
+   "truth_L": 43.03,
    "meas_L": 44.58,
-   "divergence": 1.54,
+   "divergence": 1.55,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 5
   },
   {
    "t": 93.3,
-   "truth_L": 43.03,
+   "truth_L": 43.02,
    "meas_L": 44.58,
    "divergence": 1.56,
    "tripped": false,
@@ -1009,15 +1000,15 @@
   {
    "t": 94.3,
    "truth_L": 43.01,
-   "meas_L": 44.59,
-   "divergence": 1.57,
+   "meas_L": 44.58,
+   "divergence": 1.58,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 5
   },
   {
-   "t": 95.3,
-   "truth_L": 43.0,
+   "t": 95.4,
+   "truth_L": 42.99,
    "meas_L": 44.59,
    "divergence": 1.59,
    "tripped": false,
@@ -1025,8 +1016,8 @@
    "rejections": 6
   },
   {
-   "t": 96.3,
-   "truth_L": 42.99,
+   "t": 96.4,
+   "truth_L": 42.98,
    "meas_L": 44.59,
    "divergence": 1.61,
    "tripped": false,
@@ -1034,16 +1025,16 @@
    "rejections": 6
   },
   {
-   "t": 97.3,
+   "t": 97.4,
    "truth_L": 42.97,
    "meas_L": 44.6,
-   "divergence": 1.62,
+   "divergence": 1.63,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 6
   },
   {
-   "t": 98.3,
+   "t": 98.5,
    "truth_L": 42.96,
    "meas_L": 44.6,
    "divergence": 1.64,
@@ -1052,25 +1043,25 @@
    "rejections": 6
   },
   {
-   "t": 99.3,
+   "t": 99.5,
    "truth_L": 42.95,
-   "meas_L": 44.61,
+   "meas_L": 44.6,
    "divergence": 1.66,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 6
   },
   {
-   "t": 100.4,
+   "t": 100.5,
    "truth_L": 42.93,
    "meas_L": 44.61,
-   "divergence": 1.68,
+   "divergence": 1.67,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 6
   },
   {
-   "t": 101.4,
+   "t": 101.6,
    "truth_L": 42.92,
    "meas_L": 44.61,
    "divergence": 1.69,
@@ -1079,44 +1070,53 @@
    "rejections": 6
   },
   {
-   "t": 102.4,
+   "t": 102.6,
    "truth_L": 42.91,
-   "meas_L": 44.62,
-   "divergence": 1.71,
+   "meas_L": 44.61,
+   "divergence": 1.7,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 6
   },
   {
-   "t": 103.4,
+   "t": 103.7,
    "truth_L": 42.9,
    "meas_L": 44.62,
-   "divergence": 1.73,
+   "divergence": 1.72,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 6
   },
   {
-   "t": 104.4,
-   "truth_L": 42.88,
-   "meas_L": 44.63,
+   "t": 104.7,
+   "truth_L": 42.89,
+   "meas_L": 44.62,
    "divergence": 1.74,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 6
   },
   {
-   "t": 105.4,
+   "t": 105.7,
    "truth_L": 42.87,
    "meas_L": 44.63,
-   "divergence": 1.76,
+   "divergence": 1.75,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 6
   },
   {
-   "t": 106.4,
+   "t": 106.8,
    "truth_L": 42.86,
+   "meas_L": 44.63,
+   "divergence": 1.77,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 6
+  },
+  {
+   "t": 107.8,
+   "truth_L": 42.85,
    "meas_L": 44.63,
    "divergence": 1.78,
    "tripped": false,
@@ -1124,43 +1124,43 @@
    "rejections": 6
   },
   {
-   "t": 107.5,
+   "t": 108.9,
    "truth_L": 42.84,
    "meas_L": 44.64,
-   "divergence": 1.79,
+   "divergence": 1.8,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 6
   },
   {
-   "t": 108.5,
-   "truth_L": 42.83,
-   "meas_L": 44.64,
-   "divergence": 1.81,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 6
-  },
-  {
-   "t": 109.5,
+   "t": 109.9,
    "truth_L": 42.82,
-   "meas_L": 44.65,
-   "divergence": 1.83,
+   "meas_L": 44.64,
+   "divergence": 1.82,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 6
   },
   {
-   "t": 110.5,
+   "t": 110.9,
    "truth_L": 42.81,
-   "meas_L": 44.65,
-   "divergence": 1.84,
+   "meas_L": 44.64,
+   "divergence": 1.83,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 7
   },
   {
-   "t": 111.5,
+   "t": 112.0,
+   "truth_L": 42.8,
+   "meas_L": 44.65,
+   "divergence": 1.85,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 7
+  },
+  {
+   "t": 113.0,
    "truth_L": 42.79,
    "meas_L": 44.65,
    "divergence": 1.86,
@@ -1169,7 +1169,7 @@
    "rejections": 7
   },
   {
-   "t": 112.5,
+   "t": 114.0,
    "truth_L": 42.78,
    "meas_L": 44.66,
    "divergence": 1.88,
@@ -1178,8 +1178,8 @@
    "rejections": 7
   },
   {
-   "t": 113.5,
-   "truth_L": 42.77,
+   "t": 115.1,
+   "truth_L": 42.76,
    "meas_L": 44.66,
    "divergence": 1.89,
    "tripped": false,
@@ -1187,16 +1187,16 @@
    "rejections": 7
   },
   {
-   "t": 114.6,
+   "t": 116.1,
    "truth_L": 42.75,
-   "meas_L": 44.67,
+   "meas_L": 44.66,
    "divergence": 1.91,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 7
   },
   {
-   "t": 115.6,
+   "t": 117.2,
    "truth_L": 42.74,
    "meas_L": 44.67,
    "divergence": 1.93,
@@ -1205,7 +1205,7 @@
    "rejections": 7
   },
   {
-   "t": 116.6,
+   "t": 118.2,
    "truth_L": 42.73,
    "meas_L": 44.67,
    "divergence": 1.94,
@@ -1214,34 +1214,34 @@
    "rejections": 7
   },
   {
-   "t": 117.6,
+   "t": 119.2,
    "truth_L": 42.72,
-   "meas_L": 44.68,
+   "meas_L": 44.67,
    "divergence": 1.96,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 7
   },
   {
-   "t": 118.6,
+   "t": 120.3,
    "truth_L": 42.7,
    "meas_L": 44.68,
-   "divergence": 1.98,
+   "divergence": 1.97,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 7
   },
   {
-   "t": 119.6,
+   "t": 121.3,
    "truth_L": 42.69,
-   "meas_L": 44.69,
+   "meas_L": 44.68,
    "divergence": 1.99,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 7
   },
   {
-   "t": 120.6,
+   "t": 122.3,
    "truth_L": 42.68,
    "meas_L": 44.69,
    "divergence": 2.01,
@@ -1250,43 +1250,25 @@
    "rejections": 7
   },
   {
-   "t": 121.6,
+   "t": 123.4,
    "truth_L": 42.67,
    "meas_L": 44.69,
-   "divergence": 2.03,
+   "divergence": 2.02,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 7
   },
   {
-   "t": 122.6,
+   "t": 124.4,
    "truth_L": 42.65,
-   "meas_L": 44.7,
+   "meas_L": 44.69,
    "divergence": 2.04,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 7
   },
   {
-   "t": 123.7,
-   "truth_L": 42.64,
-   "meas_L": 44.7,
-   "divergence": 2.06,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 7
-  },
-  {
-   "t": 124.7,
-   "truth_L": 42.63,
-   "meas_L": 44.71,
-   "divergence": 2.08,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 7
-  },
-  {
-   "t": 125.7,
+   "t": 125.5,
    "truth_L": 42.61,
    "meas_L": 44.71,
    "divergence": 2.1,
@@ -1295,7 +1277,7 @@
    "rejections": 8
   },
   {
-   "t": 126.7,
+   "t": 126.5,
    "truth_L": 42.6,
    "meas_L": 44.71,
    "divergence": 2.11,
@@ -1304,16 +1286,16 @@
    "rejections": 8
   },
   {
-   "t": 127.7,
-   "truth_L": 42.59,
-   "meas_L": 44.72,
+   "t": 127.5,
+   "truth_L": 42.58,
+   "meas_L": 44.71,
    "divergence": 2.13,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 8
   },
   {
-   "t": 128.7,
+   "t": 128.6,
    "truth_L": 42.57,
    "meas_L": 44.72,
    "divergence": 2.15,
@@ -1322,16 +1304,16 @@
    "rejections": 8
   },
   {
-   "t": 129.7,
+   "t": 129.6,
    "truth_L": 42.56,
-   "meas_L": 44.73,
+   "meas_L": 44.72,
    "divergence": 2.16,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 8
   },
   {
-   "t": 130.7,
+   "t": 130.6,
    "truth_L": 42.55,
    "meas_L": 44.73,
    "divergence": 2.18,
@@ -1343,7 +1325,7 @@
    "t": 131.7,
    "truth_L": 42.54,
    "meas_L": 44.73,
-   "divergence": 2.2,
+   "divergence": 2.19,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 8
@@ -1351,7 +1333,7 @@
   {
    "t": 132.7,
    "truth_L": 42.52,
-   "meas_L": 44.74,
+   "meas_L": 44.73,
    "divergence": 2.21,
    "tripped": false,
    "product_valve": 100.0,
@@ -1367,62 +1349,71 @@
    "rejections": 8
   },
   {
-   "t": 134.7,
+   "t": 134.8,
    "truth_L": 42.5,
    "meas_L": 44.74,
-   "divergence": 2.25,
+   "divergence": 2.24,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 8
   },
   {
-   "t": 135.7,
-   "truth_L": 42.48,
-   "meas_L": 44.75,
+   "t": 135.8,
+   "truth_L": 42.49,
+   "meas_L": 44.74,
    "divergence": 2.26,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 8
   },
   {
-   "t": 136.8,
+   "t": 136.9,
    "truth_L": 42.47,
    "meas_L": 44.75,
-   "divergence": 2.28,
+   "divergence": 2.27,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 8
   },
   {
-   "t": 137.8,
+   "t": 137.9,
    "truth_L": 42.46,
-   "meas_L": 44.76,
+   "meas_L": 44.75,
+   "divergence": 2.29,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 8
+  },
+  {
+   "t": 138.9,
+   "truth_L": 42.45,
+   "meas_L": 44.75,
    "divergence": 2.3,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 8
   },
   {
-   "t": 138.8,
-   "truth_L": 42.45,
+   "t": 140.0,
+   "truth_L": 42.44,
    "meas_L": 44.76,
-   "divergence": 2.31,
+   "divergence": 2.32,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 8
   },
   {
-   "t": 139.8,
+   "t": 141.0,
    "truth_L": 42.43,
    "meas_L": 44.76,
-   "divergence": 2.33,
+   "divergence": 2.34,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 8
+   "rejections": 9
   },
   {
-   "t": 140.8,
-   "truth_L": 42.42,
+   "t": 142.0,
+   "truth_L": 42.41,
    "meas_L": 44.77,
    "divergence": 2.35,
    "tripped": false,
@@ -1430,8 +1421,8 @@
    "rejections": 9
   },
   {
-   "t": 141.8,
-   "truth_L": 42.41,
+   "t": 143.1,
+   "truth_L": 42.4,
    "meas_L": 44.77,
    "divergence": 2.37,
    "tripped": false,
@@ -1439,16 +1430,16 @@
    "rejections": 9
   },
   {
-   "t": 142.8,
+   "t": 144.1,
    "truth_L": 42.39,
-   "meas_L": 44.78,
+   "meas_L": 44.77,
    "divergence": 2.38,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 9
   },
   {
-   "t": 143.8,
+   "t": 145.1,
    "truth_L": 42.38,
    "meas_L": 44.78,
    "divergence": 2.4,
@@ -1457,7 +1448,7 @@
    "rejections": 9
   },
   {
-   "t": 144.8,
+   "t": 146.2,
    "truth_L": 42.37,
    "meas_L": 44.78,
    "divergence": 2.42,
@@ -1466,26 +1457,44 @@
    "rejections": 9
   },
   {
-   "t": 145.9,
-   "truth_L": 42.36,
-   "meas_L": 44.79,
+   "t": 147.2,
+   "truth_L": 42.35,
+   "meas_L": 44.78,
    "divergence": 2.43,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 9
   },
   {
-   "t": 148.5,
+   "t": 148.2,
+   "truth_L": 42.34,
+   "meas_L": 44.79,
+   "divergence": 2.45,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 9
+  },
+  {
+   "t": 149.3,
+   "truth_L": 42.33,
+   "meas_L": 44.79,
+   "divergence": 2.46,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 9
+  },
+  {
+   "t": 150.3,
    "truth_L": 42.32,
-   "meas_L": 44.8,
+   "meas_L": 44.79,
    "divergence": 2.48,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 9
   },
   {
-   "t": 149.5,
-   "truth_L": 42.31,
+   "t": 151.3,
+   "truth_L": 42.3,
    "meas_L": 44.8,
    "divergence": 2.49,
    "tripped": false,
@@ -1493,16 +1502,16 @@
    "rejections": 9
   },
   {
-   "t": 150.5,
-   "truth_L": 42.3,
-   "meas_L": 44.81,
+   "t": 152.4,
+   "truth_L": 42.29,
+   "meas_L": 44.8,
    "divergence": 2.51,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 9
   },
   {
-   "t": 151.5,
+   "t": 153.4,
    "truth_L": 42.28,
    "meas_L": 44.81,
    "divergence": 2.53,
@@ -1511,7 +1520,7 @@
    "rejections": 9
   },
   {
-   "t": 152.5,
+   "t": 154.5,
    "truth_L": 42.27,
    "meas_L": 44.81,
    "divergence": 2.54,
@@ -1520,37 +1529,19 @@
    "rejections": 9
   },
   {
-   "t": 153.5,
+   "t": 155.5,
    "truth_L": 42.26,
-   "meas_L": 44.82,
+   "meas_L": 44.81,
    "divergence": 2.56,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 9
-  },
-  {
-   "t": 154.5,
-   "truth_L": 42.24,
-   "meas_L": 44.82,
-   "divergence": 2.58,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 9
-  },
-  {
-   "t": 155.6,
-   "truth_L": 42.23,
-   "meas_L": 44.83,
-   "divergence": 2.59,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 10
   },
   {
-   "t": 156.6,
-   "truth_L": 42.22,
-   "meas_L": 44.83,
-   "divergence": 2.61,
+   "t": 156.5,
+   "truth_L": 42.24,
+   "meas_L": 44.82,
+   "divergence": 2.57,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 10
@@ -1566,8 +1557,8 @@
   },
   {
    "t": 158.6,
-   "truth_L": 42.19,
-   "meas_L": 44.84,
+   "truth_L": 42.18,
+   "meas_L": 44.83,
    "divergence": 2.65,
    "tripped": false,
    "product_valve": 100.0,
@@ -1575,15 +1566,15 @@
   },
   {
    "t": 159.6,
-   "truth_L": 42.18,
+   "truth_L": 42.17,
    "meas_L": 44.84,
-   "divergence": 2.66,
+   "divergence": 2.67,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 10
   },
   {
-   "t": 160.6,
+   "t": 160.7,
    "truth_L": 42.16,
    "meas_L": 44.84,
    "divergence": 2.68,
@@ -1592,7 +1583,7 @@
    "rejections": 10
   },
   {
-   "t": 161.6,
+   "t": 161.7,
    "truth_L": 42.15,
    "meas_L": 44.85,
    "divergence": 2.7,
@@ -1601,25 +1592,34 @@
    "rejections": 10
   },
   {
-   "t": 163.5,
-   "truth_L": 42.13,
-   "meas_L": 44.86,
+   "t": 162.7,
+   "truth_L": 42.14,
+   "meas_L": 44.85,
+   "divergence": 2.71,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 10
+  },
+  {
+   "t": 163.8,
+   "truth_L": 42.12,
+   "meas_L": 44.85,
    "divergence": 2.73,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 10
   },
   {
-   "t": 164.5,
+   "t": 164.8,
    "truth_L": 42.11,
    "meas_L": 44.86,
-   "divergence": 2.74,
+   "divergence": 2.75,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 10
   },
   {
-   "t": 165.5,
+   "t": 165.9,
    "truth_L": 42.1,
    "meas_L": 44.86,
    "divergence": 2.76,
@@ -1628,25 +1628,25 @@
    "rejections": 10
   },
   {
-   "t": 166.5,
+   "t": 166.9,
    "truth_L": 42.09,
-   "meas_L": 44.87,
+   "meas_L": 44.86,
    "divergence": 2.78,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 10
   },
   {
-   "t": 167.5,
-   "truth_L": 42.08,
+   "t": 167.9,
+   "truth_L": 42.07,
    "meas_L": 44.87,
-   "divergence": 2.8,
+   "divergence": 2.79,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 10
   },
   {
-   "t": 168.5,
+   "t": 169.0,
    "truth_L": 42.06,
    "meas_L": 44.87,
    "divergence": 2.81,
@@ -1655,44 +1655,53 @@
    "rejections": 10
   },
   {
-   "t": 169.5,
+   "t": 170.0,
    "truth_L": 42.05,
-   "meas_L": 44.88,
-   "divergence": 2.83,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 10
-  },
-  {
-   "t": 170.6,
-   "truth_L": 42.04,
-   "meas_L": 44.88,
-   "divergence": 2.85,
+   "meas_L": 44.87,
+   "divergence": 2.82,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 11
   },
   {
-   "t": 171.6,
+   "t": 171.1,
+   "truth_L": 42.04,
+   "meas_L": 44.88,
+   "divergence": 2.84,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 11
+  },
+  {
+   "t": 172.1,
    "truth_L": 42.02,
-   "meas_L": 44.89,
+   "meas_L": 44.88,
    "divergence": 2.86,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 11
   },
   {
-   "t": 172.6,
+   "t": 173.1,
    "truth_L": 42.01,
-   "meas_L": 44.89,
-   "divergence": 2.88,
+   "meas_L": 44.88,
+   "divergence": 2.87,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 11
   },
   {
-   "t": 173.6,
+   "t": 174.2,
    "truth_L": 42.0,
+   "meas_L": 44.89,
+   "divergence": 2.89,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 11
+  },
+  {
+   "t": 175.2,
+   "truth_L": 41.99,
    "meas_L": 44.89,
    "divergence": 2.9,
    "tripped": false,
@@ -1700,26 +1709,26 @@
    "rejections": 11
   },
   {
-   "t": 174.6,
-   "truth_L": 41.99,
+   "t": 176.3,
+   "truth_L": 41.98,
    "meas_L": 44.9,
-   "divergence": 2.91,
+   "divergence": 2.92,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 11
   },
   {
-   "t": 175.6,
-   "truth_L": 41.97,
-   "meas_L": 44.9,
-   "divergence": 2.93,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 11
-  },
-  {
-   "t": 176.6,
+   "t": 177.3,
    "truth_L": 41.96,
+   "meas_L": 44.9,
+   "divergence": 2.94,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 11
+  },
+  {
+   "t": 178.3,
+   "truth_L": 41.95,
    "meas_L": 44.9,
    "divergence": 2.95,
    "tripped": false,
@@ -1727,16 +1736,16 @@
    "rejections": 11
   },
   {
-   "t": 177.6,
-   "truth_L": 41.95,
+   "t": 179.4,
+   "truth_L": 41.94,
    "meas_L": 44.91,
-   "divergence": 2.96,
+   "divergence": 2.97,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 11
   },
   {
-   "t": 178.6,
+   "t": 180.4,
    "truth_L": 41.93,
    "meas_L": 44.91,
    "divergence": 2.98,
@@ -1745,25 +1754,25 @@
    "rejections": 11
   },
   {
-   "t": 179.6,
-   "truth_L": 41.92,
-   "meas_L": 44.92,
+   "t": 181.4,
+   "truth_L": 41.91,
+   "meas_L": 44.91,
    "divergence": 3.0,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 11
   },
   {
-   "t": 180.7,
-   "truth_L": 41.91,
+   "t": 182.5,
+   "truth_L": 41.9,
    "meas_L": 44.92,
-   "divergence": 3.01,
+   "divergence": 3.02,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 11
   },
   {
-   "t": 181.7,
+   "t": 183.5,
    "truth_L": 41.89,
    "meas_L": 44.92,
    "divergence": 3.03,
@@ -1772,43 +1781,43 @@
    "rejections": 11
   },
   {
-   "t": 182.7,
+   "t": 184.6,
    "truth_L": 41.88,
-   "meas_L": 44.93,
+   "meas_L": 44.92,
    "divergence": 3.05,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 11
   },
   {
-   "t": 183.7,
+   "t": 185.6,
    "truth_L": 41.87,
    "meas_L": 44.93,
    "divergence": 3.06,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 11
+   "rejections": 12
   },
   {
-   "t": 184.7,
-   "truth_L": 41.86,
-   "meas_L": 44.94,
+   "t": 186.6,
+   "truth_L": 41.85,
+   "meas_L": 44.93,
    "divergence": 3.08,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 11
-  },
-  {
-   "t": 185.7,
-   "truth_L": 41.84,
-   "meas_L": 44.94,
-   "divergence": 3.1,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 12
   },
   {
-   "t": 186.7,
+   "t": 187.7,
+   "truth_L": 41.84,
+   "meas_L": 44.93,
+   "divergence": 3.09,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 12
+  },
+  {
+   "t": 188.7,
    "truth_L": 41.83,
    "meas_L": 44.94,
    "divergence": 3.11,
@@ -1817,37 +1826,19 @@
    "rejections": 12
   },
   {
-   "t": 187.7,
+   "t": 189.7,
    "truth_L": 41.82,
-   "meas_L": 44.95,
+   "meas_L": 44.94,
    "divergence": 3.13,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 12
   },
   {
-   "t": 188.7,
-   "truth_L": 41.8,
-   "meas_L": 44.95,
-   "divergence": 3.15,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 12
-  },
-  {
-   "t": 189.7,
-   "truth_L": 41.79,
-   "meas_L": 44.95,
-   "divergence": 3.16,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 12
-  },
-  {
-   "t": 190.7,
-   "truth_L": 41.78,
+   "t": 190.8,
+   "truth_L": 41.77,
    "meas_L": 44.96,
-   "divergence": 3.18,
+   "divergence": 3.19,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 12
@@ -1863,16 +1854,16 @@
   },
   {
    "t": 192.8,
-   "truth_L": 41.75,
-   "meas_L": 44.97,
-   "divergence": 3.21,
+   "truth_L": 41.74,
+   "meas_L": 44.96,
+   "divergence": 3.22,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 12
   },
   {
-   "t": 193.8,
-   "truth_L": 41.74,
+   "t": 193.9,
+   "truth_L": 41.73,
    "meas_L": 44.97,
    "divergence": 3.23,
    "tripped": false,
@@ -1880,7 +1871,7 @@
    "rejections": 12
   },
   {
-   "t": 194.8,
+   "t": 194.9,
    "truth_L": 41.72,
    "meas_L": 44.97,
    "divergence": 3.25,
@@ -1889,17 +1880,17 @@
    "rejections": 12
   },
   {
-   "t": 195.8,
+   "t": 195.9,
    "truth_L": 41.71,
-   "meas_L": 44.98,
+   "meas_L": 44.97,
    "divergence": 3.27,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 12
   },
   {
-   "t": 196.8,
-   "truth_L": 41.7,
+   "t": 197.0,
+   "truth_L": 41.69,
    "meas_L": 44.98,
    "divergence": 3.28,
    "tripped": false,
@@ -1907,8 +1898,8 @@
    "rejections": 12
   },
   {
-   "t": 197.8,
-   "truth_L": 41.69,
+   "t": 198.0,
+   "truth_L": 41.68,
    "meas_L": 44.98,
    "divergence": 3.3,
    "tripped": false,
@@ -1916,43 +1907,43 @@
    "rejections": 12
   },
   {
-   "t": 198.8,
+   "t": 199.0,
    "truth_L": 41.67,
-   "meas_L": 44.99,
-   "divergence": 3.32,
+   "meas_L": 44.98,
+   "divergence": 3.31,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 12
   },
   {
-   "t": 199.8,
+   "t": 200.1,
    "truth_L": 41.66,
    "meas_L": 44.99,
    "divergence": 3.33,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 12
+   "rejections": 13
   },
   {
-   "t": 200.8,
+   "t": 201.1,
    "truth_L": 41.65,
-   "meas_L": 45.0,
+   "meas_L": 44.99,
    "divergence": 3.35,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 13
   },
   {
-   "t": 201.8,
+   "t": 202.2,
    "truth_L": 41.63,
-   "meas_L": 45.0,
-   "divergence": 3.37,
+   "meas_L": 44.99,
+   "divergence": 3.36,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 13
   },
   {
-   "t": 202.8,
+   "t": 203.2,
    "truth_L": 41.62,
    "meas_L": 45.0,
    "divergence": 3.38,
@@ -1961,17 +1952,26 @@
    "rejections": 13
   },
   {
-   "t": 203.9,
+   "t": 204.2,
    "truth_L": 41.61,
-   "meas_L": 45.01,
-   "divergence": 3.4,
+   "meas_L": 45.0,
+   "divergence": 3.39,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 13
   },
   {
-   "t": 204.9,
-   "truth_L": 41.59,
+   "t": 205.3,
+   "truth_L": 41.6,
+   "meas_L": 45.01,
+   "divergence": 3.41,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 206.3,
+   "truth_L": 41.58,
    "meas_L": 45.01,
    "divergence": 3.42,
    "tripped": false,
@@ -1979,26 +1979,26 @@
    "rejections": 13
   },
   {
-   "t": 205.9,
-   "truth_L": 41.58,
-   "meas_L": 45.01,
-   "divergence": 3.43,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 13
-  },
-  {
-   "t": 206.9,
+   "t": 207.3,
    "truth_L": 41.57,
-   "meas_L": 45.02,
-   "divergence": 3.45,
+   "meas_L": 45.01,
+   "divergence": 3.44,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 13
   },
   {
-   "t": 207.9,
+   "t": 208.4,
    "truth_L": 41.56,
+   "meas_L": 45.02,
+   "divergence": 3.46,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 13
+  },
+  {
+   "t": 209.4,
+   "truth_L": 41.55,
    "meas_L": 45.02,
    "divergence": 3.47,
    "tripped": false,
@@ -2006,17 +2006,17 @@
    "rejections": 13
   },
   {
-   "t": 208.9,
-   "truth_L": 41.54,
+   "t": 210.5,
+   "truth_L": 41.53,
    "meas_L": 45.02,
-   "divergence": 3.48,
+   "divergence": 3.49,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 13
   },
   {
-   "t": 209.9,
-   "truth_L": 41.53,
+   "t": 211.5,
+   "truth_L": 41.52,
    "meas_L": 45.03,
    "divergence": 3.5,
    "tripped": false,
@@ -2024,8 +2024,8 @@
    "rejections": 13
   },
   {
-   "t": 211.0,
-   "truth_L": 41.52,
+   "t": 212.5,
+   "truth_L": 41.51,
    "meas_L": 45.03,
    "divergence": 3.52,
    "tripped": false,
@@ -2033,17 +2033,17 @@
    "rejections": 13
   },
   {
-   "t": 212.0,
+   "t": 213.6,
    "truth_L": 41.5,
-   "meas_L": 45.04,
-   "divergence": 3.53,
+   "meas_L": 45.03,
+   "divergence": 3.54,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 13
   },
   {
-   "t": 213.0,
-   "truth_L": 41.49,
+   "t": 214.6,
+   "truth_L": 41.48,
    "meas_L": 45.04,
    "divergence": 3.55,
    "tripped": false,
@@ -2051,25 +2051,25 @@
    "rejections": 13
   },
   {
-   "t": 214.0,
-   "truth_L": 41.48,
+   "t": 215.6,
+   "truth_L": 41.47,
    "meas_L": 45.04,
    "divergence": 3.57,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 13
+   "rejections": 14
   },
   {
-   "t": 215.0,
+   "t": 216.7,
    "truth_L": 41.46,
-   "meas_L": 45.05,
-   "divergence": 3.59,
+   "meas_L": 45.04,
+   "divergence": 3.58,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 13
+   "rejections": 14
   },
   {
-   "t": 216.0,
+   "t": 217.7,
    "truth_L": 41.45,
    "meas_L": 45.05,
    "divergence": 3.6,
@@ -2078,25 +2078,25 @@
    "rejections": 14
   },
   {
-   "t": 217.0,
+   "t": 218.8,
    "truth_L": 41.44,
    "meas_L": 45.05,
-   "divergence": 3.62,
+   "divergence": 3.61,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 14
   },
   {
-   "t": 218.0,
+   "t": 219.8,
    "truth_L": 41.42,
-   "meas_L": 45.06,
-   "divergence": 3.64,
+   "meas_L": 45.05,
+   "divergence": 3.63,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 14
   },
   {
-   "t": 219.0,
+   "t": 220.8,
    "truth_L": 41.41,
    "meas_L": 45.06,
    "divergence": 3.65,
@@ -2105,43 +2105,25 @@
    "rejections": 14
   },
   {
-   "t": 220.0,
+   "t": 221.9,
    "truth_L": 41.4,
-   "meas_L": 45.07,
+   "meas_L": 45.06,
+   "divergence": 3.66,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 14
+  },
+  {
+   "t": 222.9,
+   "truth_L": 41.39,
+   "meas_L": 45.06,
    "divergence": 3.67,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 14
   },
   {
-   "t": 221.0,
-   "truth_L": 41.38,
-   "meas_L": 45.07,
-   "divergence": 3.69,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 14
-  },
-  {
-   "t": 222.1,
-   "truth_L": 41.37,
-   "meas_L": 45.07,
-   "divergence": 3.7,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 14
-  },
-  {
-   "t": 223.1,
-   "truth_L": 41.36,
-   "meas_L": 45.08,
-   "divergence": 3.72,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 14
-  },
-  {
-   "t": 224.1,
+   "t": 223.9,
    "truth_L": 41.34,
    "meas_L": 45.08,
    "divergence": 3.74,
@@ -2150,18 +2132,18 @@
    "rejections": 14
   },
   {
-   "t": 225.1,
+   "t": 225.0,
    "truth_L": 41.33,
    "meas_L": 45.08,
-   "divergence": 3.75,
+   "divergence": 3.76,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 14
   },
   {
-   "t": 226.1,
-   "truth_L": 41.32,
-   "meas_L": 45.09,
+   "t": 226.0,
+   "truth_L": 41.31,
+   "meas_L": 45.08,
    "divergence": 3.77,
    "tripped": false,
    "product_valve": 100.0,
@@ -2179,14 +2161,14 @@
   {
    "t": 228.1,
    "truth_L": 41.29,
-   "meas_L": 45.1,
-   "divergence": 3.81,
+   "meas_L": 45.09,
+   "divergence": 3.8,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 14
   },
   {
-   "t": 229.2,
+   "t": 229.1,
    "truth_L": 41.28,
    "meas_L": 45.1,
    "divergence": 3.82,
@@ -2198,7 +2180,7 @@
    "t": 230.2,
    "truth_L": 41.26,
    "meas_L": 45.1,
-   "divergence": 3.84,
+   "divergence": 3.83,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 15
@@ -2206,14 +2188,14 @@
   {
    "t": 231.2,
    "truth_L": 41.25,
-   "meas_L": 45.11,
-   "divergence": 3.86,
+   "meas_L": 45.1,
+   "divergence": 3.85,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 15
   },
   {
-   "t": 232.2,
+   "t": 232.3,
    "truth_L": 41.24,
    "meas_L": 45.11,
    "divergence": 3.87,
@@ -2222,17 +2204,26 @@
    "rejections": 15
   },
   {
-   "t": 233.2,
-   "truth_L": 41.22,
+   "t": 233.3,
+   "truth_L": 41.23,
    "meas_L": 45.11,
-   "divergence": 3.89,
+   "divergence": 3.88,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 15
   },
   {
-   "t": 234.2,
+   "t": 234.3,
    "truth_L": 41.21,
+   "meas_L": 45.11,
+   "divergence": 3.9,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 235.4,
+   "truth_L": 41.2,
    "meas_L": 45.12,
    "divergence": 3.91,
    "tripped": false,
@@ -2240,26 +2231,26 @@
    "rejections": 15
   },
   {
-   "t": 235.2,
-   "truth_L": 41.2,
-   "meas_L": 45.12,
-   "divergence": 3.92,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 15
-  },
-  {
-   "t": 236.3,
+   "t": 236.4,
    "truth_L": 41.19,
    "meas_L": 45.12,
-   "divergence": 3.94,
+   "divergence": 3.93,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 15
   },
   {
-   "t": 237.3,
-   "truth_L": 41.17,
+   "t": 237.4,
+   "truth_L": 41.18,
+   "meas_L": 45.12,
+   "divergence": 3.95,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 15
+  },
+  {
+   "t": 238.5,
+   "truth_L": 41.16,
    "meas_L": 45.13,
    "divergence": 3.96,
    "tripped": false,
@@ -2267,25 +2258,25 @@
    "rejections": 15
   },
   {
-   "t": 238.3,
-   "truth_L": 41.16,
+   "t": 239.5,
+   "truth_L": 41.15,
    "meas_L": 45.13,
-   "divergence": 3.97,
+   "divergence": 3.98,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 15
   },
   {
-   "t": 239.3,
-   "truth_L": 41.15,
-   "meas_L": 45.14,
+   "t": 240.6,
+   "truth_L": 41.14,
+   "meas_L": 45.13,
    "divergence": 3.99,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 15
   },
   {
-   "t": 240.3,
+   "t": 241.6,
    "truth_L": 41.13,
    "meas_L": 45.14,
    "divergence": 4.01,
@@ -2294,25 +2285,25 @@
    "rejections": 15
   },
   {
-   "t": 241.3,
-   "truth_L": 41.12,
+   "t": 242.6,
+   "truth_L": 41.11,
    "meas_L": 45.14,
-   "divergence": 4.02,
+   "divergence": 4.03,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 15
   },
   {
-   "t": 242.3,
-   "truth_L": 41.11,
-   "meas_L": 45.15,
+   "t": 243.7,
+   "truth_L": 41.1,
+   "meas_L": 45.14,
    "divergence": 4.04,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 15
   },
   {
-   "t": 243.3,
+   "t": 244.7,
    "truth_L": 41.09,
    "meas_L": 45.15,
    "divergence": 4.06,
@@ -2321,34 +2312,34 @@
    "rejections": 15
   },
   {
-   "t": 244.3,
+   "t": 245.7,
    "truth_L": 41.08,
    "meas_L": 45.15,
    "divergence": 4.07,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 15
+   "rejections": 16
   },
   {
-   "t": 245.3,
-   "truth_L": 41.07,
-   "meas_L": 45.16,
+   "t": 246.8,
+   "truth_L": 41.06,
+   "meas_L": 45.15,
    "divergence": 4.09,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 16
   },
   {
-   "t": 246.3,
+   "t": 247.8,
    "truth_L": 41.05,
    "meas_L": 45.16,
-   "divergence": 4.11,
+   "divergence": 4.1,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 16
   },
   {
-   "t": 247.4,
+   "t": 248.8,
    "truth_L": 41.04,
    "meas_L": 45.16,
    "divergence": 4.12,
@@ -2357,89 +2348,71 @@
    "rejections": 16
   },
   {
-   "t": 248.4,
+   "t": 249.9,
    "truth_L": 41.03,
-   "meas_L": 45.17,
+   "meas_L": 45.16,
    "divergence": 4.14,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 16
   },
   {
-   "t": 249.4,
-   "truth_L": 41.01,
+   "t": 250.9,
+   "truth_L": 41.02,
    "meas_L": 45.17,
-   "divergence": 4.16,
+   "divergence": 4.15,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 16
   },
   {
-   "t": 250.4,
+   "t": 252.0,
    "truth_L": 41.0,
-   "meas_L": 45.18,
+   "meas_L": 45.17,
+   "divergence": 4.17,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 16
+  },
+  {
+   "t": 253.0,
+   "truth_L": 40.99,
+   "meas_L": 45.17,
    "divergence": 4.18,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 16
   },
   {
-   "t": 251.4,
-   "truth_L": 40.99,
+   "t": 254.0,
+   "truth_L": 40.98,
    "meas_L": 45.18,
-   "divergence": 4.19,
+   "divergence": 4.2,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 16
   },
   {
-   "t": 252.4,
+   "t": 255.1,
    "truth_L": 40.97,
    "meas_L": 45.18,
-   "divergence": 4.21,
+   "divergence": 4.22,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 16
   },
   {
-   "t": 253.4,
-   "truth_L": 40.96,
-   "meas_L": 45.19,
-   "divergence": 4.23,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 16
-  },
-  {
-   "t": 254.5,
-   "truth_L": 40.95,
-   "meas_L": 45.19,
-   "divergence": 4.24,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 16
-  },
-  {
-   "t": 255.5,
-   "truth_L": 40.93,
-   "meas_L": 45.19,
-   "divergence": 4.26,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 16
-  },
-  {
-   "t": 256.5,
+   "t": 256.1,
    "truth_L": 40.92,
-   "meas_L": 45.2,
+   "meas_L": 45.19,
    "divergence": 4.28,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 16
   },
   {
-   "t": 257.5,
-   "truth_L": 40.91,
+   "t": 257.2,
+   "truth_L": 40.9,
    "meas_L": 45.2,
    "divergence": 4.29,
    "tripped": false,
@@ -2447,7 +2420,7 @@
    "rejections": 16
   },
   {
-   "t": 258.5,
+   "t": 258.2,
    "truth_L": 40.89,
    "meas_L": 45.2,
    "divergence": 4.31,
@@ -2456,16 +2429,16 @@
    "rejections": 16
   },
   {
-   "t": 259.5,
+   "t": 259.2,
    "truth_L": 40.88,
-   "meas_L": 45.21,
-   "divergence": 4.33,
+   "meas_L": 45.2,
+   "divergence": 4.32,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 16
   },
   {
-   "t": 260.5,
+   "t": 260.3,
    "truth_L": 40.87,
    "meas_L": 45.21,
    "divergence": 4.34,
@@ -2474,25 +2447,25 @@
    "rejections": 17
   },
   {
-   "t": 261.5,
-   "truth_L": 40.85,
-   "meas_L": 45.22,
+   "t": 261.3,
+   "truth_L": 40.86,
+   "meas_L": 45.21,
    "divergence": 4.36,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 17
   },
   {
-   "t": 262.5,
+   "t": 262.3,
    "truth_L": 40.84,
-   "meas_L": 45.22,
-   "divergence": 4.38,
+   "meas_L": 45.21,
+   "divergence": 4.37,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 17
   },
   {
-   "t": 263.6,
+   "t": 263.4,
    "truth_L": 40.83,
    "meas_L": 45.22,
    "divergence": 4.39,
@@ -2501,25 +2474,25 @@
    "rejections": 17
   },
   {
-   "t": 264.6,
+   "t": 264.4,
    "truth_L": 40.82,
-   "meas_L": 45.23,
-   "divergence": 4.41,
+   "meas_L": 45.22,
+   "divergence": 4.4,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 17
   },
   {
-   "t": 265.6,
-   "truth_L": 40.8,
-   "meas_L": 45.23,
-   "divergence": 4.43,
+   "t": 265.4,
+   "truth_L": 40.81,
+   "meas_L": 45.22,
+   "divergence": 4.42,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 17
   },
   {
-   "t": 266.6,
+   "t": 266.5,
    "truth_L": 40.79,
    "meas_L": 45.23,
    "divergence": 4.44,
@@ -2528,70 +2501,88 @@
    "rejections": 17
   },
   {
-   "t": 268.3,
+   "t": 267.5,
+   "truth_L": 40.78,
+   "meas_L": 45.23,
+   "divergence": 4.45,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 268.6,
    "truth_L": 40.77,
-   "meas_L": 45.24,
+   "meas_L": 45.23,
    "divergence": 4.47,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 17
   },
   {
-   "t": 269.3,
-   "truth_L": 40.75,
+   "t": 269.6,
+   "truth_L": 40.76,
    "meas_L": 45.24,
-   "divergence": 4.49,
+   "divergence": 4.48,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 17
   },
   {
-   "t": 270.3,
+   "t": 270.6,
    "truth_L": 40.74,
-   "meas_L": 45.25,
+   "meas_L": 45.24,
+   "divergence": 4.5,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 17
+  },
+  {
+   "t": 271.7,
+   "truth_L": 40.73,
+   "meas_L": 45.24,
    "divergence": 4.51,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 17
   },
   {
-   "t": 271.4,
-   "truth_L": 40.73,
+   "t": 272.7,
+   "truth_L": 40.72,
    "meas_L": 45.25,
-   "divergence": 4.52,
+   "divergence": 4.53,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 17
   },
   {
-   "t": 272.4,
+   "t": 273.7,
    "truth_L": 40.71,
    "meas_L": 45.25,
-   "divergence": 4.54,
+   "divergence": 4.55,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 17
   },
   {
-   "t": 273.4,
-   "truth_L": 40.7,
-   "meas_L": 45.26,
+   "t": 274.8,
+   "truth_L": 40.69,
+   "meas_L": 45.25,
    "divergence": 4.56,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 17
   },
   {
-   "t": 274.4,
-   "truth_L": 40.69,
+   "t": 275.8,
+   "truth_L": 40.68,
    "meas_L": 45.26,
    "divergence": 4.58,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 17
+   "rejections": 18
   },
   {
-   "t": 275.4,
+   "t": 276.9,
    "truth_L": 40.67,
    "meas_L": 45.26,
    "divergence": 4.59,
@@ -2600,17 +2591,17 @@
    "rejections": 18
   },
   {
-   "t": 276.5,
+   "t": 277.9,
    "truth_L": 40.66,
-   "meas_L": 45.27,
+   "meas_L": 45.26,
    "divergence": 4.61,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 18
   },
   {
-   "t": 277.5,
-   "truth_L": 40.65,
+   "t": 278.9,
+   "truth_L": 40.64,
    "meas_L": 45.27,
    "divergence": 4.63,
    "tripped": false,
@@ -2618,16 +2609,16 @@
    "rejections": 18
   },
   {
-   "t": 278.5,
+   "t": 280.0,
    "truth_L": 40.63,
-   "meas_L": 45.28,
+   "meas_L": 45.27,
    "divergence": 4.64,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 18
   },
   {
-   "t": 279.5,
+   "t": 281.0,
    "truth_L": 40.62,
    "meas_L": 45.28,
    "divergence": 4.66,
@@ -2636,89 +2627,71 @@
    "rejections": 18
   },
   {
-   "t": 280.5,
+   "t": 282.1,
    "truth_L": 40.61,
    "meas_L": 45.28,
-   "divergence": 4.68,
+   "divergence": 4.67,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 18
   },
   {
-   "t": 281.5,
+   "t": 283.1,
    "truth_L": 40.59,
-   "meas_L": 45.29,
+   "meas_L": 45.28,
    "divergence": 4.69,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 18
   },
   {
-   "t": 282.5,
+   "t": 284.1,
    "truth_L": 40.58,
    "meas_L": 45.29,
-   "divergence": 4.71,
+   "divergence": 4.7,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 18
   },
   {
-   "t": 283.5,
+   "t": 285.2,
    "truth_L": 40.57,
    "meas_L": 45.29,
-   "divergence": 4.73,
+   "divergence": 4.72,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 18
   },
   {
-   "t": 284.5,
-   "truth_L": 40.55,
-   "meas_L": 45.3,
+   "t": 286.2,
+   "truth_L": 40.56,
+   "meas_L": 45.29,
    "divergence": 4.74,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 18
   },
   {
-   "t": 285.5,
+   "t": 287.2,
    "truth_L": 40.54,
    "meas_L": 45.3,
-   "divergence": 4.76,
+   "divergence": 4.75,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 18
   },
   {
-   "t": 286.6,
+   "t": 288.3,
    "truth_L": 40.53,
    "meas_L": 45.3,
-   "divergence": 4.78,
+   "divergence": 4.77,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 18
   },
   {
-   "t": 287.6,
-   "truth_L": 40.51,
-   "meas_L": 45.31,
-   "divergence": 4.79,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 18
-  },
-  {
-   "t": 288.6,
-   "truth_L": 40.5,
-   "meas_L": 45.31,
-   "divergence": 4.81,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 18
-  },
-  {
-   "t": 289.6,
-   "truth_L": 40.49,
+   "t": 289.3,
+   "truth_L": 40.48,
    "meas_L": 45.31,
    "divergence": 4.83,
    "tripped": false,
@@ -2726,16 +2699,16 @@
    "rejections": 18
   },
   {
-   "t": 290.6,
+   "t": 290.4,
    "truth_L": 40.47,
-   "meas_L": 45.32,
+   "meas_L": 45.31,
    "divergence": 4.85,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 19
   },
   {
-   "t": 291.6,
+   "t": 291.4,
    "truth_L": 40.46,
    "meas_L": 45.32,
    "divergence": 4.86,
@@ -2744,25 +2717,25 @@
    "rejections": 19
   },
   {
-   "t": 292.6,
-   "truth_L": 40.45,
-   "meas_L": 45.33,
+   "t": 292.4,
+   "truth_L": 40.44,
+   "meas_L": 45.32,
    "divergence": 4.88,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 19
   },
   {
-   "t": 293.6,
+   "t": 293.5,
    "truth_L": 40.43,
-   "meas_L": 45.33,
-   "divergence": 4.9,
+   "meas_L": 45.32,
+   "divergence": 4.89,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 19
   },
   {
-   "t": 294.7,
+   "t": 294.5,
    "truth_L": 40.42,
    "meas_L": 45.33,
    "divergence": 4.91,
@@ -2771,19 +2744,28 @@
    "rejections": 19
   },
   {
-   "t": 295.7,
+   "t": 295.5,
    "truth_L": 40.41,
-   "meas_L": 45.34,
-   "divergence": 4.93,
+   "meas_L": 45.33,
+   "divergence": 4.92,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 19
   },
   {
-   "t": 296.7,
+   "t": 296.6,
    "truth_L": 40.39,
+   "meas_L": 45.33,
+   "divergence": 4.94,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 297.6,
+   "truth_L": 40.38,
    "meas_L": 45.34,
-   "divergence": 4.95,
+   "divergence": 4.96,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 19
@@ -2791,17 +2773,17 @@
   {
    "t": 298.7,
    "truth_L": 40.37,
-   "meas_L": 45.35,
-   "divergence": 4.98,
+   "meas_L": 45.34,
+   "divergence": 4.97,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 19
   },
   {
    "t": 299.7,
-   "truth_L": 40.35,
-   "meas_L": 45.35,
-   "divergence": 5.0,
+   "truth_L": 40.36,
+   "meas_L": 45.34,
+   "divergence": 4.99,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 19
@@ -2810,22 +2792,31 @@
    "t": 300.7,
    "truth_L": 40.34,
    "meas_L": 45.35,
-   "divergence": 5.01,
+   "divergence": 5.0,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 19
   },
   {
-   "t": 301.7,
+   "t": 301.8,
    "truth_L": 40.33,
-   "meas_L": 45.36,
-   "divergence": 5.03,
+   "meas_L": 45.35,
+   "divergence": 5.02,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 19
   },
   {
    "t": 302.8,
+   "truth_L": 40.32,
+   "meas_L": 45.35,
+   "divergence": 5.04,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 19
+  },
+  {
+   "t": 303.8,
    "truth_L": 40.31,
    "meas_L": 45.36,
    "divergence": 5.05,
@@ -2834,25 +2825,25 @@
    "rejections": 19
   },
   {
-   "t": 303.8,
-   "truth_L": 40.3,
+   "t": 304.9,
+   "truth_L": 40.29,
    "meas_L": 45.36,
-   "divergence": 5.06,
+   "divergence": 5.07,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 19
   },
   {
-   "t": 304.8,
-   "truth_L": 40.29,
-   "meas_L": 45.37,
+   "t": 305.9,
+   "truth_L": 40.28,
+   "meas_L": 45.36,
    "divergence": 5.08,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 19
+   "rejections": 20
   },
   {
-   "t": 305.8,
+   "t": 306.9,
    "truth_L": 40.27,
    "meas_L": 45.37,
    "divergence": 5.1,
@@ -2861,25 +2852,25 @@
    "rejections": 20
   },
   {
-   "t": 306.8,
+   "t": 308.0,
    "truth_L": 40.26,
    "meas_L": 45.37,
-   "divergence": 5.12,
+   "divergence": 5.11,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 20
   },
   {
-   "t": 307.8,
-   "truth_L": 40.25,
-   "meas_L": 45.38,
+   "t": 309.0,
+   "truth_L": 40.24,
+   "meas_L": 45.37,
    "divergence": 5.13,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 20
   },
   {
-   "t": 308.8,
+   "t": 310.1,
    "truth_L": 40.23,
    "meas_L": 45.38,
    "divergence": 5.15,
@@ -2888,116 +2879,107 @@
    "rejections": 20
   },
   {
-   "t": 309.8,
+   "t": 311.1,
    "truth_L": 40.22,
-   "meas_L": 45.39,
-   "divergence": 5.17,
+   "meas_L": 45.38,
+   "divergence": 5.16,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 20
   },
   {
-   "t": 310.8,
+   "t": 312.1,
    "truth_L": 40.21,
-   "meas_L": 45.39,
+   "meas_L": 45.38,
    "divergence": 5.18,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 20
   },
   {
-   "t": 311.9,
+   "t": 313.2,
    "truth_L": 40.19,
    "meas_L": 45.39,
-   "divergence": 5.2,
+   "divergence": 5.19,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 20
   },
   {
-   "t": 313.7,
+   "t": 314.2,
+   "truth_L": 40.18,
+   "meas_L": 45.39,
+   "divergence": 5.21,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 315.2,
    "truth_L": 40.17,
-   "meas_L": 45.4,
+   "meas_L": 45.39,
    "divergence": 5.23,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 20
   },
   {
-   "t": 314.7,
-   "truth_L": 40.15,
+   "t": 316.3,
+   "truth_L": 40.16,
    "meas_L": 45.4,
-   "divergence": 5.25,
+   "divergence": 5.24,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 20
   },
   {
-   "t": 315.7,
+   "t": 317.3,
    "truth_L": 40.14,
-   "meas_L": 45.41,
+   "meas_L": 45.4,
    "divergence": 5.26,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 20
   },
   {
-   "t": 316.8,
+   "t": 318.4,
    "truth_L": 40.13,
-   "meas_L": 45.41,
-   "divergence": 5.28,
+   "meas_L": 45.4,
+   "divergence": 5.27,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 20
   },
   {
-   "t": 317.8,
+   "t": 319.4,
+   "truth_L": 40.12,
+   "meas_L": 45.41,
+   "divergence": 5.29,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 20
+  },
+  {
+   "t": 320.4,
    "truth_L": 40.11,
    "meas_L": 45.41,
    "divergence": 5.3,
    "tripped": false,
    "product_valve": 100.0,
-   "rejections": 20
-  },
-  {
-   "t": 318.8,
-   "truth_L": 40.1,
-   "meas_L": 45.42,
-   "divergence": 5.32,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 20
-  },
-  {
-   "t": 319.8,
-   "truth_L": 40.09,
-   "meas_L": 45.42,
-   "divergence": 5.33,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 20
-  },
-  {
-   "t": 320.8,
-   "truth_L": 40.07,
-   "meas_L": 45.42,
-   "divergence": 5.35,
-   "tripped": false,
-   "product_valve": 100.0,
    "rejections": 21
   },
   {
-   "t": 321.8,
+   "t": 321.5,
    "truth_L": 40.06,
-   "meas_L": 45.43,
+   "meas_L": 45.42,
    "divergence": 5.37,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 21
   },
   {
-   "t": 322.8,
-   "truth_L": 40.05,
+   "t": 322.5,
+   "truth_L": 40.04,
    "meas_L": 45.43,
    "divergence": 5.38,
    "tripped": false,
@@ -3005,7 +2987,7 @@
    "rejections": 21
   },
   {
-   "t": 323.8,
+   "t": 323.6,
    "truth_L": 40.03,
    "meas_L": 45.43,
    "divergence": 5.4,
@@ -3014,16 +2996,16 @@
    "rejections": 21
   },
   {
-   "t": 324.9,
+   "t": 324.6,
    "truth_L": 40.02,
-   "meas_L": 45.44,
-   "divergence": 5.42,
+   "meas_L": 45.43,
+   "divergence": 5.41,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 21
   },
   {
-   "t": 325.9,
+   "t": 325.6,
    "truth_L": 40.01,
    "meas_L": 45.44,
    "divergence": 5.43,
@@ -3032,7 +3014,7 @@
    "rejections": 21
   },
   {
-   "t": 326.9,
+   "t": 326.7,
    "truth_L": 40.0,
    "meas_L": 45.45,
    "divergence": 5.45,
@@ -3041,7 +3023,16 @@
    "rejections": 21
   },
   {
-   "t": 328.8,
+   "t": 327.7,
+   "truth_L": 40.01,
+   "meas_L": 45.47,
+   "divergence": 5.46,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 21
+  },
+  {
+   "t": 328.7,
    "truth_L": 40.02,
    "meas_L": 45.5,
    "divergence": 5.48,
@@ -3053,7 +3044,7 @@
    "t": 329.8,
    "truth_L": 40.03,
    "meas_L": 45.52,
-   "divergence": 5.5,
+   "divergence": 5.49,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 21
@@ -3061,7 +3052,7 @@
   {
    "t": 330.8,
    "truth_L": 40.04,
-   "meas_L": 45.55,
+   "meas_L": 45.54,
    "divergence": 5.51,
    "tripped": true,
    "product_valve": 0.0,
@@ -3071,22 +3062,22 @@
    "t": 331.8,
    "truth_L": 40.04,
    "meas_L": 45.57,
-   "divergence": 5.53,
+   "divergence": 5.52,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 21
   },
   {
-   "t": 332.8,
+   "t": 332.9,
    "truth_L": 40.05,
-   "meas_L": 45.6,
-   "divergence": 5.55,
+   "meas_L": 45.59,
+   "divergence": 5.54,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 21
   },
   {
-   "t": 333.8,
+   "t": 333.9,
    "truth_L": 40.06,
    "meas_L": 45.62,
    "divergence": 5.56,
@@ -3095,25 +3086,34 @@
    "rejections": 21
   },
   {
-   "t": 334.8,
+   "t": 335.0,
    "truth_L": 40.07,
-   "meas_L": 45.65,
-   "divergence": 5.58,
+   "meas_L": 45.64,
+   "divergence": 5.57,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 21
   },
   {
-   "t": 335.8,
+   "t": 336.0,
    "truth_L": 40.08,
-   "meas_L": 45.68,
+   "meas_L": 45.67,
+   "divergence": 5.59,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 22
+  },
+  {
+   "t": 337.0,
+   "truth_L": 40.09,
+   "meas_L": 45.69,
    "divergence": 5.6,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 22
   },
   {
-   "t": 336.9,
+   "t": 338.1,
    "truth_L": 40.09,
    "meas_L": 45.71,
    "divergence": 5.62,
@@ -3122,16 +3122,16 @@
    "rejections": 22
   },
   {
-   "t": 337.9,
+   "t": 339.1,
    "truth_L": 40.1,
-   "meas_L": 45.73,
-   "divergence": 5.63,
+   "meas_L": 45.74,
+   "divergence": 5.64,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 22
   },
   {
-   "t": 338.9,
+   "t": 340.1,
    "truth_L": 40.11,
    "meas_L": 45.76,
    "divergence": 5.65,
@@ -3140,17 +3140,17 @@
    "rejections": 22
   },
   {
-   "t": 339.9,
+   "t": 341.2,
    "truth_L": 40.12,
-   "meas_L": 45.78,
+   "meas_L": 45.79,
    "divergence": 5.67,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 22
   },
   {
-   "t": 340.9,
-   "truth_L": 40.12,
+   "t": 342.2,
+   "truth_L": 40.13,
    "meas_L": 45.81,
    "divergence": 5.68,
    "tripped": true,
@@ -3158,8 +3158,8 @@
    "rejections": 22
   },
   {
-   "t": 341.9,
-   "truth_L": 40.13,
+   "t": 343.3,
+   "truth_L": 40.14,
    "meas_L": 45.83,
    "divergence": 5.7,
    "tripped": true,
@@ -3167,7 +3167,16 @@
    "rejections": 22
   },
   {
-   "t": 343.7,
+   "t": 344.3,
+   "truth_L": 40.14,
+   "meas_L": 45.86,
+   "divergence": 5.71,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 22
+  },
+  {
+   "t": 345.3,
    "truth_L": 40.15,
    "meas_L": 45.88,
    "divergence": 5.73,
@@ -3176,7 +3185,7 @@
    "rejections": 22
   },
   {
-   "t": 344.8,
+   "t": 346.4,
    "truth_L": 40.16,
    "meas_L": 45.91,
    "divergence": 5.75,
@@ -3185,7 +3194,7 @@
    "rejections": 22
   },
   {
-   "t": 345.8,
+   "t": 347.4,
    "truth_L": 40.17,
    "meas_L": 45.93,
    "divergence": 5.76,
@@ -3194,89 +3203,71 @@
    "rejections": 22
   },
   {
-   "t": 346.8,
+   "t": 348.4,
    "truth_L": 40.18,
-   "meas_L": 45.96,
+   "meas_L": 45.95,
    "divergence": 5.78,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 22
   },
   {
-   "t": 347.8,
+   "t": 349.5,
    "truth_L": 40.18,
    "meas_L": 45.98,
-   "divergence": 5.8,
+   "divergence": 5.79,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 22
   },
   {
-   "t": 348.8,
+   "t": 350.5,
    "truth_L": 40.19,
-   "meas_L": 46.01,
-   "divergence": 5.82,
+   "meas_L": 46.0,
+   "divergence": 5.81,
    "tripped": true,
    "product_valve": 0.0,
-   "rejections": 22
+   "rejections": 23
   },
   {
-   "t": 349.8,
+   "t": 351.6,
    "truth_L": 40.2,
    "meas_L": 46.03,
    "divergence": 5.83,
    "tripped": true,
    "product_valve": 0.0,
-   "rejections": 22
+   "rejections": 23
   },
   {
-   "t": 350.8,
+   "t": 352.6,
    "truth_L": 40.21,
-   "meas_L": 46.06,
-   "divergence": 5.85,
+   "meas_L": 46.05,
+   "divergence": 5.84,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 23
   },
   {
-   "t": 351.8,
+   "t": 353.6,
    "truth_L": 40.22,
-   "meas_L": 46.08,
-   "divergence": 5.87,
+   "meas_L": 46.07,
+   "divergence": 5.86,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 23
   },
   {
-   "t": 352.9,
-   "truth_L": 40.23,
-   "meas_L": 46.11,
-   "divergence": 5.88,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 23
-  },
-  {
-   "t": 353.9,
-   "truth_L": 40.24,
-   "meas_L": 46.14,
-   "divergence": 5.9,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 23
-  },
-  {
-   "t": 354.9,
-   "truth_L": 40.24,
-   "meas_L": 46.16,
+   "t": 354.7,
+   "truth_L": 40.25,
+   "meas_L": 46.17,
    "divergence": 5.92,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 23
   },
   {
-   "t": 355.9,
-   "truth_L": 40.25,
+   "t": 355.7,
+   "truth_L": 40.26,
    "meas_L": 46.19,
    "divergence": 5.93,
    "tripped": true,
@@ -3284,16 +3275,16 @@
    "rejections": 23
   },
   {
-   "t": 356.9,
-   "truth_L": 40.26,
-   "meas_L": 46.21,
+   "t": 356.8,
+   "truth_L": 40.27,
+   "meas_L": 46.22,
    "divergence": 5.95,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 23
   },
   {
-   "t": 357.9,
+   "t": 357.8,
    "truth_L": 40.27,
    "meas_L": 46.24,
    "divergence": 5.97,
@@ -3302,7 +3293,7 @@
    "rejections": 23
   },
   {
-   "t": 358.9,
+   "t": 358.8,
    "truth_L": 40.28,
    "meas_L": 46.26,
    "divergence": 5.98,
@@ -3323,14 +3314,14 @@
    "t": 360.9,
    "truth_L": 40.3,
    "meas_L": 46.31,
-   "divergence": 6.02,
+   "divergence": 6.01,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 23
   },
   {
    "t": 361.9,
-   "truth_L": 40.3,
+   "truth_L": 40.31,
    "meas_L": 46.34,
    "divergence": 6.03,
    "tripped": true,
@@ -3349,95 +3340,113 @@
   {
    "t": 364.0,
    "truth_L": 40.32,
-   "meas_L": 46.39,
-   "divergence": 6.07,
+   "meas_L": 46.38,
+   "divergence": 6.06,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 23
   },
   {
-   "t": 365.0,
+   "t": 365.1,
    "truth_L": 40.33,
-   "meas_L": 46.42,
+   "meas_L": 46.41,
    "divergence": 6.08,
    "tripped": true,
    "product_valve": 0.0,
-   "rejections": 23
+   "rejections": 24
   },
   {
-   "t": 366.0,
+   "t": 366.1,
    "truth_L": 40.34,
-   "meas_L": 46.44,
-   "divergence": 6.1,
+   "meas_L": 46.43,
+   "divergence": 6.09,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 24
   },
   {
-   "t": 367.0,
+   "t": 367.1,
    "truth_L": 40.35,
-   "meas_L": 46.47,
-   "divergence": 6.12,
+   "meas_L": 46.46,
+   "divergence": 6.11,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 24
   },
   {
-   "t": 368.8,
+   "t": 368.2,
    "truth_L": 40.36,
-   "meas_L": 46.51,
-   "divergence": 6.15,
+   "meas_L": 46.48,
+   "divergence": 6.13,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 24
   },
   {
-   "t": 369.8,
+   "t": 369.2,
+   "truth_L": 40.36,
+   "meas_L": 46.5,
+   "divergence": 6.14,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 24
+  },
+  {
+   "t": 370.3,
    "truth_L": 40.37,
-   "meas_L": 46.54,
+   "meas_L": 46.53,
+   "divergence": 6.16,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 24
+  },
+  {
+   "t": 371.3,
+   "truth_L": 40.38,
+   "meas_L": 46.55,
    "divergence": 6.17,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 24
   },
   {
-   "t": 370.8,
-   "truth_L": 40.38,
-   "meas_L": 46.56,
-   "divergence": 6.18,
+   "t": 372.3,
+   "truth_L": 40.39,
+   "meas_L": 46.58,
+   "divergence": 6.19,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 24
   },
   {
-   "t": 371.8,
-   "truth_L": 40.39,
-   "meas_L": 46.59,
+   "t": 373.4,
+   "truth_L": 40.4,
+   "meas_L": 46.6,
    "divergence": 6.2,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 24
   },
   {
-   "t": 372.8,
+   "t": 374.4,
    "truth_L": 40.4,
-   "meas_L": 46.61,
+   "meas_L": 46.62,
    "divergence": 6.22,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 24
   },
   {
-   "t": 373.8,
+   "t": 375.4,
    "truth_L": 40.41,
-   "meas_L": 46.64,
-   "divergence": 6.23,
+   "meas_L": 46.65,
+   "divergence": 6.24,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 24
   },
   {
-   "t": 374.9,
+   "t": 376.5,
    "truth_L": 40.42,
    "meas_L": 46.67,
    "divergence": 6.25,
@@ -3446,25 +3455,25 @@
    "rejections": 24
   },
   {
-   "t": 375.9,
-   "truth_L": 40.42,
-   "meas_L": 46.69,
+   "t": 377.5,
+   "truth_L": 40.43,
+   "meas_L": 46.7,
    "divergence": 6.27,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 24
   },
   {
-   "t": 377.0,
-   "truth_L": 40.43,
+   "t": 378.6,
+   "truth_L": 40.44,
    "meas_L": 46.72,
-   "divergence": 6.29,
+   "divergence": 6.28,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 24
   },
   {
-   "t": 378.0,
+   "t": 379.6,
    "truth_L": 40.44,
    "meas_L": 46.74,
    "divergence": 6.3,
@@ -3473,25 +3482,25 @@
    "rejections": 24
   },
   {
-   "t": 379.0,
+   "t": 380.6,
    "truth_L": 40.45,
    "meas_L": 46.77,
    "divergence": 6.32,
    "tripped": true,
    "product_valve": 0.0,
-   "rejections": 24
+   "rejections": 25
   },
   {
-   "t": 380.0,
+   "t": 381.7,
    "truth_L": 40.46,
-   "meas_L": 46.8,
-   "divergence": 6.34,
+   "meas_L": 46.79,
+   "divergence": 6.33,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 25
   },
   {
-   "t": 381.0,
+   "t": 382.7,
    "truth_L": 40.47,
    "meas_L": 46.82,
    "divergence": 6.35,
@@ -3500,16 +3509,25 @@
    "rejections": 25
   },
   {
-   "t": 382.1,
+   "t": 383.8,
    "truth_L": 40.48,
-   "meas_L": 46.85,
-   "divergence": 6.37,
+   "meas_L": 46.84,
+   "divergence": 6.36,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 25
   },
   {
-   "t": 383.8,
+   "t": 384.8,
+   "truth_L": 40.48,
+   "meas_L": 46.86,
+   "divergence": 6.38,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 25
+  },
+  {
+   "t": 385.9,
    "truth_L": 40.49,
    "meas_L": 46.89,
    "divergence": 6.4,
@@ -3518,79 +3536,61 @@
    "rejections": 25
   },
   {
-   "t": 384.8,
-   "truth_L": 40.5,
-   "meas_L": 46.91,
-   "divergence": 6.41,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 25
-  },
-  {
-   "t": 385.8,
-   "truth_L": 40.51,
-   "meas_L": 46.94,
-   "divergence": 6.43,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 25
-  },
-  {
-   "t": 386.8,
+   "t": 386.9,
    "truth_L": 40.52,
-   "meas_L": 46.96,
-   "divergence": 6.45,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 25
-  },
-  {
-   "t": 387.8,
-   "truth_L": 40.52,
-   "meas_L": 46.99,
+   "meas_L": 46.98,
    "divergence": 6.46,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 25
   },
   {
-   "t": 388.8,
+   "t": 387.9,
    "truth_L": 40.53,
-   "meas_L": 47.01,
-   "divergence": 6.48,
+   "meas_L": 47.0,
+   "divergence": 6.47,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 25
   },
   {
-   "t": 389.8,
+   "t": 389.0,
    "truth_L": 40.54,
-   "meas_L": 47.04,
+   "meas_L": 47.03,
+   "divergence": 6.49,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 25
+  },
+  {
+   "t": 390.0,
+   "truth_L": 40.55,
+   "meas_L": 47.05,
    "divergence": 6.5,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 25
   },
   {
-   "t": 390.8,
-   "truth_L": 40.55,
-   "meas_L": 47.06,
-   "divergence": 6.51,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 25
-  },
-  {
-   "t": 391.9,
+   "t": 391.0,
    "truth_L": 40.56,
-   "meas_L": 47.09,
-   "divergence": 6.53,
+   "meas_L": 47.08,
+   "divergence": 6.52,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 25
   },
   {
-   "t": 392.9,
+   "t": 392.1,
+   "truth_L": 40.56,
+   "meas_L": 47.1,
+   "divergence": 6.54,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 25
+  },
+  {
+   "t": 393.1,
    "truth_L": 40.57,
    "meas_L": 47.12,
    "divergence": 6.55,
@@ -3599,26 +3599,26 @@
    "rejections": 25
   },
   {
-   "t": 393.9,
+   "t": 394.2,
    "truth_L": 40.58,
-   "meas_L": 47.14,
+   "meas_L": 47.15,
    "divergence": 6.57,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 25
   },
   {
-   "t": 394.9,
-   "truth_L": 40.58,
+   "t": 395.2,
+   "truth_L": 40.59,
    "meas_L": 47.17,
    "divergence": 6.58,
    "tripped": true,
    "product_valve": 0.0,
-   "rejections": 25
+   "rejections": 26
   },
   {
-   "t": 395.9,
-   "truth_L": 40.59,
+   "t": 396.2,
+   "truth_L": 40.6,
    "meas_L": 47.19,
    "divergence": 6.6,
    "tripped": true,
@@ -3626,25 +3626,43 @@
    "rejections": 26
   },
   {
-   "t": 398.5,
-   "truth_L": 40.61,
-   "meas_L": 47.26,
-   "divergence": 6.64,
+   "t": 397.3,
+   "truth_L": 40.6,
+   "meas_L": 47.22,
+   "divergence": 6.62,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 26
   },
   {
-   "t": 399.5,
+   "t": 398.3,
+   "truth_L": 40.61,
+   "meas_L": 47.24,
+   "divergence": 6.63,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 26
+  },
+  {
+   "t": 399.4,
    "truth_L": 40.62,
-   "meas_L": 47.28,
+   "meas_L": 47.27,
+   "divergence": 6.65,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 26
+  },
+  {
+   "t": 400.4,
+   "truth_L": 40.63,
+   "meas_L": 47.29,
    "divergence": 6.66,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 26
   },
   {
-   "t": 400.5,
+   "t": 401.4,
    "truth_L": 40.63,
    "meas_L": 47.31,
    "divergence": 6.68,
@@ -3653,16 +3671,16 @@
    "rejections": 26
   },
   {
-   "t": 401.5,
+   "t": 402.5,
    "truth_L": 40.64,
-   "meas_L": 47.33,
+   "meas_L": 47.34,
    "divergence": 6.69,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 26
   },
   {
-   "t": 402.5,
+   "t": 403.5,
    "truth_L": 40.65,
    "meas_L": 47.36,
    "divergence": 6.71,
@@ -3671,7 +3689,7 @@
    "rejections": 26
   },
   {
-   "t": 403.5,
+   "t": 404.6,
    "truth_L": 40.66,
    "meas_L": 47.38,
    "divergence": 6.73,
@@ -3680,8 +3698,8 @@
    "rejections": 26
   },
   {
-   "t": 404.5,
-   "truth_L": 40.66,
+   "t": 405.6,
+   "truth_L": 40.67,
    "meas_L": 47.41,
    "divergence": 6.74,
    "tripped": true,
@@ -3689,7 +3707,7 @@
    "rejections": 26
   },
   {
-   "t": 405.5,
+   "t": 406.6,
    "truth_L": 40.67,
    "meas_L": 47.43,
    "divergence": 6.76,
@@ -3698,16 +3716,16 @@
    "rejections": 26
   },
   {
-   "t": 406.5,
+   "t": 407.7,
    "truth_L": 40.68,
    "meas_L": 47.46,
-   "divergence": 6.78,
+   "divergence": 6.77,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 26
   },
   {
-   "t": 407.5,
+   "t": 408.7,
    "truth_L": 40.69,
    "meas_L": 47.48,
    "divergence": 6.79,
@@ -3716,115 +3734,97 @@
    "rejections": 26
   },
   {
-   "t": 408.6,
+   "t": 409.7,
    "truth_L": 40.7,
-   "meas_L": 47.51,
+   "meas_L": 47.5,
    "divergence": 6.81,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 26
   },
   {
-   "t": 409.6,
+   "t": 410.8,
    "truth_L": 40.71,
    "meas_L": 47.53,
-   "divergence": 6.83,
+   "divergence": 6.82,
    "tripped": true,
    "product_valve": 0.0,
-   "rejections": 26
+   "rejections": 27
   },
   {
-   "t": 410.6,
+   "t": 411.8,
    "truth_L": 40.71,
-   "meas_L": 47.56,
+   "meas_L": 47.55,
+   "divergence": 6.84,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 27
+  },
+  {
+   "t": 412.9,
+   "truth_L": 40.72,
+   "meas_L": 47.57,
    "divergence": 6.85,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 27
   },
   {
-   "t": 411.6,
-   "truth_L": 40.72,
-   "meas_L": 47.58,
-   "divergence": 6.86,
+   "t": 413.9,
+   "truth_L": 40.73,
+   "meas_L": 47.6,
+   "divergence": 6.87,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 27
   },
   {
-   "t": 412.6,
-   "truth_L": 40.73,
-   "meas_L": 47.61,
+   "t": 414.9,
+   "truth_L": 40.74,
+   "meas_L": 47.62,
    "divergence": 6.88,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 27
   },
   {
-   "t": 413.6,
+   "t": 416.0,
    "truth_L": 40.74,
-   "meas_L": 47.63,
+   "meas_L": 47.65,
    "divergence": 6.9,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 27
   },
   {
-   "t": 414.6,
+   "t": 417.0,
    "truth_L": 40.75,
-   "meas_L": 47.66,
-   "divergence": 6.91,
+   "meas_L": 47.67,
+   "divergence": 6.92,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 27
   },
   {
-   "t": 415.7,
+   "t": 418.0,
    "truth_L": 40.76,
-   "meas_L": 47.68,
+   "meas_L": 47.69,
    "divergence": 6.93,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 27
   },
   {
-   "t": 416.7,
-   "truth_L": 40.76,
-   "meas_L": 47.71,
+   "t": 419.1,
+   "truth_L": 40.77,
+   "meas_L": 47.72,
    "divergence": 6.95,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 27
   },
   {
-   "t": 417.7,
-   "truth_L": 40.77,
-   "meas_L": 47.73,
-   "divergence": 6.96,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 27
-  },
-  {
-   "t": 418.7,
-   "truth_L": 40.78,
-   "meas_L": 47.76,
-   "divergence": 6.98,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 27
-  },
-  {
-   "t": 419.7,
-   "truth_L": 40.79,
-   "meas_L": 47.78,
-   "divergence": 7.0,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 27
-  },
-  {
-   "t": 420.7,
+   "t": 420.1,
    "truth_L": 40.8,
    "meas_L": 47.81,
    "divergence": 7.01,
@@ -3833,7 +3833,7 @@
    "rejections": 27
   },
   {
-   "t": 421.7,
+   "t": 421.1,
    "truth_L": 40.81,
    "meas_L": 47.83,
    "divergence": 7.03,
@@ -3842,16 +3842,16 @@
    "rejections": 27
   },
   {
-   "t": 422.7,
+   "t": 422.2,
    "truth_L": 40.81,
    "meas_L": 47.86,
-   "divergence": 7.05,
+   "divergence": 7.04,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 27
   },
   {
-   "t": 423.7,
+   "t": 423.2,
    "truth_L": 40.82,
    "meas_L": 47.88,
    "divergence": 7.06,
@@ -3860,53 +3860,62 @@
    "rejections": 27
   },
   {
-   "t": 424.7,
+   "t": 424.2,
    "truth_L": 40.83,
-   "meas_L": 47.91,
-   "divergence": 7.08,
+   "meas_L": 47.9,
+   "divergence": 7.07,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 27
   },
   {
-   "t": 425.8,
+   "t": 425.3,
    "truth_L": 40.84,
-   "meas_L": 47.94,
+   "meas_L": 47.93,
+   "divergence": 7.09,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 28
+  },
+  {
+   "t": 426.3,
+   "truth_L": 40.85,
+   "meas_L": 47.95,
    "divergence": 7.1,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 28
   },
   {
-   "t": 426.8,
+   "t": 427.4,
    "truth_L": 40.85,
-   "meas_L": 47.96,
-   "divergence": 7.11,
+   "meas_L": 47.97,
+   "divergence": 7.12,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 28
   },
   {
-   "t": 427.8,
+   "t": 428.4,
    "truth_L": 40.86,
-   "meas_L": 47.99,
-   "divergence": 7.13,
+   "meas_L": 48.0,
+   "divergence": 7.14,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 28
   },
   {
-   "t": 428.8,
-   "truth_L": 40.86,
-   "meas_L": 48.01,
+   "t": 429.4,
+   "truth_L": 40.87,
+   "meas_L": 48.02,
    "divergence": 7.15,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 28
   },
   {
-   "t": 429.8,
-   "truth_L": 40.87,
+   "t": 430.5,
+   "truth_L": 40.88,
    "meas_L": 48.04,
    "divergence": 7.17,
    "tripped": true,
@@ -3914,16 +3923,16 @@
    "rejections": 28
   },
   {
-   "t": 430.8,
+   "t": 431.5,
    "truth_L": 40.88,
-   "meas_L": 48.06,
+   "meas_L": 48.07,
    "divergence": 7.18,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 28
   },
   {
-   "t": 431.8,
+   "t": 432.5,
    "truth_L": 40.89,
    "meas_L": 48.09,
    "divergence": 7.2,
@@ -3932,7 +3941,7 @@
    "rejections": 28
   },
   {
-   "t": 432.8,
+   "t": 433.6,
    "truth_L": 40.9,
    "meas_L": 48.11,
    "divergence": 7.22,
@@ -3941,7 +3950,7 @@
    "rejections": 28
   },
   {
-   "t": 433.8,
+   "t": 434.6,
    "truth_L": 40.91,
    "meas_L": 48.14,
    "divergence": 7.23,
@@ -3950,7 +3959,7 @@
    "rejections": 28
   },
   {
-   "t": 434.8,
+   "t": 435.7,
    "truth_L": 40.91,
    "meas_L": 48.16,
    "divergence": 7.25,
@@ -3959,16 +3968,16 @@
    "rejections": 28
   },
   {
-   "t": 435.8,
+   "t": 436.7,
    "truth_L": 40.92,
    "meas_L": 48.19,
-   "divergence": 7.27,
+   "divergence": 7.26,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 28
   },
   {
-   "t": 436.9,
+   "t": 437.7,
    "truth_L": 40.93,
    "meas_L": 48.21,
    "divergence": 7.28,
@@ -3977,97 +3986,106 @@
    "rejections": 28
   },
   {
-   "t": 437.9,
+   "t": 438.8,
    "truth_L": 40.94,
-   "meas_L": 48.24,
-   "divergence": 7.3,
+   "meas_L": 48.23,
+   "divergence": 7.29,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 28
   },
   {
-   "t": 438.9,
+   "t": 439.8,
    "truth_L": 40.95,
    "meas_L": 48.26,
-   "divergence": 7.32,
+   "divergence": 7.31,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 28
   },
   {
-   "t": 439.9,
+   "t": 440.8,
    "truth_L": 40.95,
-   "meas_L": 48.29,
+   "meas_L": 48.28,
    "divergence": 7.33,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 28
-  },
-  {
-   "t": 440.9,
-   "truth_L": 40.96,
-   "meas_L": 48.31,
-   "divergence": 7.35,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 29
   },
   {
    "t": 441.9,
-   "truth_L": 40.97,
-   "meas_L": 48.34,
-   "divergence": 7.37,
+   "truth_L": 40.96,
+   "meas_L": 48.3,
+   "divergence": 7.34,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 29
   },
   {
    "t": 442.9,
-   "truth_L": 40.98,
-   "meas_L": 48.36,
-   "divergence": 7.38,
+   "truth_L": 40.97,
+   "meas_L": 48.33,
+   "divergence": 7.36,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 29
   },
   {
    "t": 443.9,
-   "truth_L": 40.99,
-   "meas_L": 48.39,
-   "divergence": 7.4,
+   "truth_L": 40.98,
+   "meas_L": 48.35,
+   "divergence": 7.37,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 29
   },
   {
-   "t": 444.9,
-   "truth_L": 40.99,
-   "meas_L": 48.41,
-   "divergence": 7.42,
+   "t": 445.0,
+   "truth_L": 40.98,
+   "meas_L": 48.37,
+   "divergence": 7.39,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 29
   },
   {
    "t": 446.0,
-   "truth_L": 41.0,
-   "meas_L": 48.44,
-   "divergence": 7.43,
+   "truth_L": 40.99,
+   "meas_L": 48.4,
+   "divergence": 7.41,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 29
   },
   {
-   "t": 447.0,
+   "t": 447.1,
+   "truth_L": 41.0,
+   "meas_L": 48.42,
+   "divergence": 7.42,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 448.1,
    "truth_L": 41.01,
-   "meas_L": 48.46,
+   "meas_L": 48.44,
+   "divergence": 7.44,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 449.1,
+   "truth_L": 41.01,
+   "meas_L": 48.47,
    "divergence": 7.45,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 29
   },
   {
-   "t": 448.0,
+   "t": 450.2,
    "truth_L": 41.02,
    "meas_L": 48.49,
    "divergence": 7.47,
@@ -4076,7 +4094,7 @@
    "rejections": 29
   },
   {
-   "t": 449.0,
+   "t": 451.2,
    "truth_L": 41.03,
    "meas_L": 48.51,
    "divergence": 7.48,
@@ -4085,34 +4103,7 @@
    "rejections": 29
   },
   {
-   "t": 450.0,
-   "truth_L": 41.03,
-   "meas_L": 48.54,
-   "divergence": 7.5,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 29
-  },
-  {
-   "t": 451.0,
-   "truth_L": 41.04,
-   "meas_L": 48.56,
-   "divergence": 7.52,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 29
-  },
-  {
-   "t": 452.0,
-   "truth_L": 41.05,
-   "meas_L": 48.58,
-   "divergence": 7.53,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 29
-  },
-  {
-   "t": 453.0,
+   "t": 452.2,
    "truth_L": 41.06,
    "meas_L": 48.61,
    "divergence": 7.55,
@@ -4121,61 +4112,70 @@
    "rejections": 29
   },
   {
-   "t": 454.0,
+   "t": 453.3,
    "truth_L": 41.07,
    "meas_L": 48.63,
-   "divergence": 7.57,
+   "divergence": 7.56,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 29
   },
   {
-   "t": 455.0,
+   "t": 454.3,
+   "truth_L": 41.07,
+   "meas_L": 48.65,
+   "divergence": 7.58,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 29
+  },
+  {
+   "t": 455.3,
    "truth_L": 41.08,
-   "meas_L": 48.66,
+   "meas_L": 48.68,
    "divergence": 7.59,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 30
   },
   {
-   "t": 456.0,
-   "truth_L": 41.08,
-   "meas_L": 48.69,
-   "divergence": 7.6,
+   "t": 456.4,
+   "truth_L": 41.09,
+   "meas_L": 48.7,
+   "divergence": 7.61,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 30
   },
   {
-   "t": 457.0,
-   "truth_L": 41.09,
-   "meas_L": 48.71,
+   "t": 457.4,
+   "truth_L": 41.1,
+   "meas_L": 48.72,
    "divergence": 7.62,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 30
   },
   {
-   "t": 458.1,
-   "truth_L": 41.1,
-   "meas_L": 48.74,
+   "t": 458.4,
+   "truth_L": 41.11,
+   "meas_L": 48.75,
    "divergence": 7.64,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 30
   },
   {
-   "t": 459.1,
+   "t": 459.5,
    "truth_L": 41.11,
-   "meas_L": 48.76,
-   "divergence": 7.65,
+   "meas_L": 48.77,
+   "divergence": 7.66,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 30
   },
   {
-   "t": 460.1,
+   "t": 460.5,
    "truth_L": 41.12,
    "meas_L": 48.79,
    "divergence": 7.67,
@@ -4184,17 +4184,17 @@
    "rejections": 30
   },
   {
-   "t": 461.1,
-   "truth_L": 41.12,
-   "meas_L": 48.81,
+   "t": 461.6,
+   "truth_L": 41.13,
+   "meas_L": 48.82,
    "divergence": 7.69,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 30
   },
   {
-   "t": 462.1,
-   "truth_L": 41.13,
+   "t": 462.6,
+   "truth_L": 41.14,
    "meas_L": 48.84,
    "divergence": 7.7,
    "tripped": true,
@@ -4202,7 +4202,7 @@
    "rejections": 30
   },
   {
-   "t": 463.1,
+   "t": 463.6,
    "truth_L": 41.14,
    "meas_L": 48.86,
    "divergence": 7.72,
@@ -4211,7 +4211,7 @@
    "rejections": 30
   },
   {
-   "t": 464.1,
+   "t": 464.7,
    "truth_L": 41.15,
    "meas_L": 48.89,
    "divergence": 7.74,
@@ -4220,7 +4220,7 @@
    "rejections": 30
   },
   {
-   "t": 465.1,
+   "t": 465.7,
    "truth_L": 41.16,
    "meas_L": 48.91,
    "divergence": 7.75,
@@ -4229,79 +4229,97 @@
    "rejections": 30
   },
   {
-   "t": 466.2,
-   "truth_L": 41.16,
-   "meas_L": 48.94,
+   "t": 466.7,
+   "truth_L": 41.17,
+   "meas_L": 48.93,
    "divergence": 7.77,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 30
   },
   {
-   "t": 467.2,
+   "t": 467.8,
    "truth_L": 41.17,
    "meas_L": 48.96,
-   "divergence": 7.79,
+   "divergence": 7.78,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 30
   },
   {
-   "t": 468.2,
+   "t": 468.8,
    "truth_L": 41.18,
-   "meas_L": 48.99,
+   "meas_L": 48.98,
    "divergence": 7.8,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 30
   },
   {
-   "t": 469.2,
+   "t": 469.8,
    "truth_L": 41.19,
-   "meas_L": 49.01,
-   "divergence": 7.82,
+   "meas_L": 49.0,
+   "divergence": 7.81,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 30
   },
   {
-   "t": 470.2,
+   "t": 470.9,
    "truth_L": 41.2,
-   "meas_L": 49.04,
-   "divergence": 7.84,
+   "meas_L": 49.03,
+   "divergence": 7.83,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 31
   },
   {
-   "t": 471.2,
+   "t": 471.9,
    "truth_L": 41.2,
-   "meas_L": 49.06,
+   "meas_L": 49.05,
+   "divergence": 7.85,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 473.0,
+   "truth_L": 41.21,
+   "meas_L": 49.07,
    "divergence": 7.86,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 31
   },
   {
-   "t": 473.7,
+   "t": 474.0,
    "truth_L": 41.22,
-   "meas_L": 49.12,
-   "divergence": 7.9,
+   "meas_L": 49.1,
+   "divergence": 7.88,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 31
   },
   {
-   "t": 474.7,
+   "t": 475.0,
    "truth_L": 41.23,
-   "meas_L": 49.15,
+   "meas_L": 49.12,
+   "divergence": 7.89,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 476.1,
+   "truth_L": 41.23,
+   "meas_L": 49.14,
    "divergence": 7.91,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 31
   },
   {
-   "t": 475.8,
+   "t": 477.1,
    "truth_L": 41.24,
    "meas_L": 49.17,
    "divergence": 7.93,
@@ -4310,133 +4328,133 @@
    "rejections": 31
   },
   {
-   "t": 476.8,
+   "t": 478.1,
    "truth_L": 41.25,
-   "meas_L": 49.2,
-   "divergence": 7.95,
+   "meas_L": 49.19,
+   "divergence": 7.94,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 31
   },
   {
-   "t": 479.0,
-   "truth_L": 41.27,
-   "meas_L": 49.25,
-   "divergence": 7.98,
+   "t": 479.2,
+   "truth_L": 41.26,
+   "meas_L": 49.21,
+   "divergence": 7.96,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 31
   },
   {
-   "t": 480.0,
+   "t": 480.2,
+   "truth_L": 41.26,
+   "meas_L": 49.24,
+   "divergence": 7.97,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 481.2,
    "truth_L": 41.27,
-   "meas_L": 49.27,
+   "meas_L": 49.26,
+   "divergence": 7.99,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 31
+  },
+  {
+   "t": 482.3,
+   "truth_L": 41.28,
+   "meas_L": 49.28,
    "divergence": 8.0,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 31
   },
   {
-   "t": 481.0,
-   "truth_L": 41.28,
-   "meas_L": 49.3,
+   "t": 483.3,
+   "truth_L": 41.29,
+   "meas_L": 49.31,
    "divergence": 8.02,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 31
   },
   {
-   "t": 482.1,
+   "t": 484.4,
    "truth_L": 41.29,
-   "meas_L": 49.32,
-   "divergence": 8.03,
+   "meas_L": 49.33,
+   "divergence": 8.04,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 31
   },
   {
-   "t": 483.1,
-   "truth_L": 41.3,
-   "meas_L": 49.35,
-   "divergence": 8.05,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 31
-  },
-  {
-   "t": 484.1,
-   "truth_L": 41.31,
-   "meas_L": 49.37,
-   "divergence": 8.07,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 31
-  },
-  {
-   "t": 485.1,
-   "truth_L": 41.31,
-   "meas_L": 49.4,
-   "divergence": 8.09,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 32
-  },
-  {
-   "t": 486.2,
+   "t": 485.4,
    "truth_L": 41.32,
-   "meas_L": 49.43,
+   "meas_L": 49.42,
    "divergence": 8.1,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 32
   },
   {
-   "t": 487.2,
+   "t": 486.4,
    "truth_L": 41.33,
-   "meas_L": 49.45,
-   "divergence": 8.12,
+   "meas_L": 49.44,
+   "divergence": 8.11,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 32
   },
   {
-   "t": 488.2,
+   "t": 487.5,
    "truth_L": 41.34,
-   "meas_L": 49.48,
-   "divergence": 8.14,
+   "meas_L": 49.47,
+   "divergence": 8.13,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 32
   },
   {
-   "t": 489.2,
+   "t": 488.5,
+   "truth_L": 41.34,
+   "meas_L": 49.49,
+   "divergence": 8.15,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 32
+  },
+  {
+   "t": 489.5,
    "truth_L": 41.35,
-   "meas_L": 49.5,
+   "meas_L": 49.51,
    "divergence": 8.16,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 32
   },
   {
-   "t": 490.2,
-   "truth_L": 41.35,
-   "meas_L": 49.53,
-   "divergence": 8.17,
+   "t": 490.6,
+   "truth_L": 41.36,
+   "meas_L": 49.54,
+   "divergence": 8.18,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 32
   },
   {
-   "t": 491.2,
-   "truth_L": 41.36,
-   "meas_L": 49.55,
+   "t": 491.6,
+   "truth_L": 41.37,
+   "meas_L": 49.56,
    "divergence": 8.19,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 32
   },
   {
-   "t": 492.3,
+   "t": 492.6,
    "truth_L": 41.37,
    "meas_L": 49.58,
    "divergence": 8.21,
@@ -4445,16 +4463,16 @@
    "rejections": 32
   },
   {
-   "t": 493.3,
+   "t": 493.7,
    "truth_L": 41.38,
-   "meas_L": 49.6,
+   "meas_L": 49.61,
    "divergence": 8.22,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 32
   },
   {
-   "t": 494.3,
+   "t": 494.7,
    "truth_L": 41.39,
    "meas_L": 49.63,
    "divergence": 8.24,
@@ -4463,8 +4481,8 @@
    "rejections": 32
   },
   {
-   "t": 495.3,
-   "truth_L": 41.39,
+   "t": 495.8,
+   "truth_L": 41.4,
    "meas_L": 49.65,
    "divergence": 8.26,
    "tripped": true,
@@ -4472,16 +4490,16 @@
    "rejections": 32
   },
   {
-   "t": 496.4,
+   "t": 496.8,
    "truth_L": 41.4,
    "meas_L": 49.68,
-   "divergence": 8.28,
+   "divergence": 8.27,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 32
   },
   {
-   "t": 497.4,
+   "t": 497.8,
    "truth_L": 41.41,
    "meas_L": 49.7,
    "divergence": 8.29,
@@ -4490,61 +4508,70 @@
    "rejections": 32
   },
   {
-   "t": 498.4,
+   "t": 498.9,
    "truth_L": 41.42,
-   "meas_L": 49.73,
-   "divergence": 8.31,
+   "meas_L": 49.72,
+   "divergence": 8.3,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 32
   },
   {
-   "t": 499.4,
+   "t": 499.9,
    "truth_L": 41.43,
    "meas_L": 49.75,
-   "divergence": 8.33,
+   "divergence": 8.32,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 32
   },
   {
-   "t": 500.5,
+   "t": 500.9,
    "truth_L": 41.43,
-   "meas_L": 49.78,
+   "meas_L": 49.77,
    "divergence": 8.34,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 33
   },
   {
-   "t": 501.5,
+   "t": 502.0,
    "truth_L": 41.44,
-   "meas_L": 49.8,
-   "divergence": 8.36,
+   "meas_L": 49.79,
+   "divergence": 8.35,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 33
   },
   {
-   "t": 502.5,
+   "t": 503.0,
    "truth_L": 41.45,
-   "meas_L": 49.83,
+   "meas_L": 49.81,
+   "divergence": 8.37,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 33
+  },
+  {
+   "t": 504.1,
+   "truth_L": 41.46,
+   "meas_L": 49.84,
    "divergence": 8.38,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 33
   },
   {
-   "t": 503.5,
+   "t": 505.1,
    "truth_L": 41.46,
-   "meas_L": 49.85,
-   "divergence": 8.39,
+   "meas_L": 49.86,
+   "divergence": 8.4,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 33
   },
   {
-   "t": 504.6,
+   "t": 506.1,
    "truth_L": 41.47,
    "meas_L": 49.88,
    "divergence": 8.41,
@@ -4553,25 +4580,25 @@
    "rejections": 33
   },
   {
-   "t": 505.6,
-   "truth_L": 41.47,
-   "meas_L": 49.9,
+   "t": 507.2,
+   "truth_L": 41.48,
+   "meas_L": 49.91,
    "divergence": 8.43,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 33
   },
   {
-   "t": 506.6,
+   "t": 508.2,
    "truth_L": 41.48,
    "meas_L": 49.93,
-   "divergence": 8.44,
+   "divergence": 8.45,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 33
   },
   {
-   "t": 507.7,
+   "t": 509.2,
    "truth_L": 41.49,
    "meas_L": 49.95,
    "divergence": 8.46,
@@ -4580,7 +4607,7 @@
    "rejections": 33
   },
   {
-   "t": 508.7,
+   "t": 510.3,
    "truth_L": 41.5,
    "meas_L": 49.98,
    "divergence": 8.48,
@@ -4589,169 +4616,160 @@
    "rejections": 33
   },
   {
-   "t": 510.0,
+   "t": 511.3,
    "truth_L": 41.51,
-   "meas_L": 50.01,
-   "divergence": 8.5,
+   "meas_L": 50.0,
+   "divergence": 8.49,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 33
   },
   {
-   "t": 511.0,
+   "t": 512.3,
    "truth_L": 41.51,
-   "meas_L": 50.03,
-   "divergence": 8.52,
+   "meas_L": 50.02,
+   "divergence": 8.51,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 33
   },
   {
-   "t": 512.0,
+   "t": 513.4,
    "truth_L": 41.52,
-   "meas_L": 50.06,
+   "meas_L": 50.05,
    "divergence": 8.53,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 33
   },
   {
-   "t": 513.0,
+   "t": 514.4,
    "truth_L": 41.53,
-   "meas_L": 50.08,
-   "divergence": 8.55,
+   "meas_L": 50.07,
+   "divergence": 8.54,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 33
   },
   {
-   "t": 514.0,
+   "t": 515.5,
    "truth_L": 41.54,
-   "meas_L": 50.1,
+   "meas_L": 50.09,
+   "divergence": 8.56,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 516.5,
+   "truth_L": 41.54,
+   "meas_L": 50.12,
    "divergence": 8.57,
    "tripped": true,
    "product_valve": 0.0,
-   "rejections": 33
+   "rejections": 34
   },
   {
-   "t": 515.1,
+   "t": 517.5,
    "truth_L": 41.55,
    "meas_L": 50.13,
-   "divergence": 8.58,
+   "divergence": 8.59,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 34
   },
   {
-   "t": 516.1,
-   "truth_L": 41.55,
-   "meas_L": 50.16,
-   "divergence": 8.6,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 34
-  },
-  {
-   "t": 517.2,
-   "truth_L": 41.56,
-   "meas_L": 50.18,
-   "divergence": 8.62,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 34
-  },
-  {
-   "t": 518.2,
-   "truth_L": 41.57,
-   "meas_L": 50.21,
-   "divergence": 8.64,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 34
-  },
-  {
-   "t": 519.2,
+   "t": 518.6,
    "truth_L": 41.58,
    "meas_L": 50.23,
-   "divergence": 8.66,
+   "divergence": 8.65,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 34
   },
   {
-   "t": 520.2,
+   "t": 519.6,
    "truth_L": 41.59,
-   "meas_L": 50.26,
+   "meas_L": 50.25,
    "divergence": 8.67,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 34
   },
   {
-   "t": 521.2,
+   "t": 520.6,
    "truth_L": 41.59,
-   "meas_L": 50.28,
-   "divergence": 8.69,
+   "meas_L": 50.27,
+   "divergence": 8.68,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 34
   },
   {
-   "t": 522.3,
+   "t": 521.7,
    "truth_L": 41.6,
-   "meas_L": 50.31,
+   "meas_L": 50.3,
+   "divergence": 8.7,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 34
+  },
+  {
+   "t": 522.7,
+   "truth_L": 41.61,
+   "meas_L": 50.32,
    "divergence": 8.71,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 34
   },
   {
-   "t": 523.3,
+   "t": 523.7,
    "truth_L": 41.61,
-   "meas_L": 50.33,
-   "divergence": 8.72,
+   "meas_L": 50.34,
+   "divergence": 8.73,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 34
   },
   {
-   "t": 524.3,
+   "t": 524.8,
    "truth_L": 41.62,
-   "meas_L": 50.36,
+   "meas_L": 50.37,
    "divergence": 8.74,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 34
   },
   {
-   "t": 525.3,
+   "t": 525.8,
    "truth_L": 41.63,
-   "meas_L": 50.38,
+   "meas_L": 50.39,
    "divergence": 8.76,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 34
   },
   {
-   "t": 526.4,
-   "truth_L": 41.63,
+   "t": 526.8,
+   "truth_L": 41.64,
    "meas_L": 50.41,
-   "divergence": 8.77,
+   "divergence": 8.78,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 34
   },
   {
-   "t": 527.4,
+   "t": 527.9,
    "truth_L": 41.64,
-   "meas_L": 50.43,
+   "meas_L": 50.44,
    "divergence": 8.79,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 34
   },
   {
-   "t": 528.5,
+   "t": 528.9,
    "truth_L": 41.65,
    "meas_L": 50.46,
    "divergence": 8.81,
@@ -4760,17 +4778,17 @@
    "rejections": 34
   },
   {
-   "t": 529.5,
+   "t": 530.0,
    "truth_L": 41.66,
-   "meas_L": 50.49,
-   "divergence": 8.83,
+   "meas_L": 50.48,
+   "divergence": 8.82,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 34
   },
   {
-   "t": 530.5,
-   "truth_L": 41.66,
+   "t": 531.0,
+   "truth_L": 41.67,
    "meas_L": 50.51,
    "divergence": 8.84,
    "tripped": true,
@@ -4778,7 +4796,7 @@
    "rejections": 35
   },
   {
-   "t": 531.6,
+   "t": 532.0,
    "truth_L": 41.67,
    "meas_L": 50.53,
    "divergence": 8.86,
@@ -4787,106 +4805,133 @@
    "rejections": 35
   },
   {
-   "t": 532.6,
+   "t": 533.1,
    "truth_L": 41.68,
-   "meas_L": 50.56,
-   "divergence": 8.88,
+   "meas_L": 50.55,
+   "divergence": 8.87,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 35
   },
   {
-   "t": 533.6,
+   "t": 534.1,
    "truth_L": 41.69,
-   "meas_L": 50.58,
+   "meas_L": 50.57,
    "divergence": 8.89,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 35
   },
   {
-   "t": 534.6,
-   "truth_L": 41.7,
-   "meas_L": 50.61,
-   "divergence": 8.91,
+   "t": 535.1,
+   "truth_L": 41.69,
+   "meas_L": 50.6,
+   "divergence": 8.9,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 35
   },
   {
-   "t": 535.6,
+   "t": 536.2,
    "truth_L": 41.7,
-   "meas_L": 50.63,
+   "meas_L": 50.62,
+   "divergence": 8.92,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 35
+  },
+  {
+   "t": 537.2,
+   "truth_L": 41.71,
+   "meas_L": 50.64,
    "divergence": 8.93,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 35
   },
   {
-   "t": 536.7,
-   "truth_L": 41.71,
-   "meas_L": 50.66,
+   "t": 538.2,
+   "truth_L": 41.72,
+   "meas_L": 50.67,
    "divergence": 8.95,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 35
   },
   {
-   "t": 537.7,
+   "t": 539.3,
    "truth_L": 41.72,
-   "meas_L": 50.68,
-   "divergence": 8.96,
+   "meas_L": 50.69,
+   "divergence": 8.97,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 35
   },
   {
    "t": 540.3,
-   "truth_L": 41.74,
-   "meas_L": 50.74,
-   "divergence": 9.01,
+   "truth_L": 41.73,
+   "meas_L": 50.71,
+   "divergence": 8.98,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 35
   },
   {
    "t": 541.4,
-   "truth_L": 41.75,
-   "meas_L": 50.77,
-   "divergence": 9.02,
+   "truth_L": 41.74,
+   "meas_L": 50.74,
+   "divergence": 9.0,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 35
   },
   {
    "t": 542.4,
-   "truth_L": 41.75,
-   "meas_L": 50.8,
-   "divergence": 9.04,
+   "truth_L": 41.74,
+   "meas_L": 50.76,
+   "divergence": 9.01,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 35
   },
   {
-   "t": 543.5,
-   "truth_L": 41.76,
-   "meas_L": 50.82,
-   "divergence": 9.06,
+   "t": 543.4,
+   "truth_L": 41.75,
+   "meas_L": 50.78,
+   "divergence": 9.03,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 35
   },
   {
    "t": 544.5,
-   "truth_L": 41.77,
-   "meas_L": 50.84,
-   "divergence": 9.07,
+   "truth_L": 41.76,
+   "meas_L": 50.8,
+   "divergence": 9.05,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 35
   },
   {
    "t": 545.5,
+   "truth_L": 41.77,
+   "meas_L": 50.83,
+   "divergence": 9.06,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 546.5,
+   "truth_L": 41.77,
+   "meas_L": 50.85,
+   "divergence": 9.08,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 36
+  },
+  {
+   "t": 547.6,
    "truth_L": 41.78,
    "meas_L": 50.87,
    "divergence": 9.09,
@@ -4895,106 +4940,88 @@
    "rejections": 36
   },
   {
-   "t": 546.5,
+   "t": 548.6,
    "truth_L": 41.79,
-   "meas_L": 50.89,
+   "meas_L": 50.9,
    "divergence": 9.11,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 36
   },
   {
-   "t": 547.5,
+   "t": 549.6,
    "truth_L": 41.79,
    "meas_L": 50.92,
-   "divergence": 9.13,
+   "divergence": 9.12,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 36
   },
   {
-   "t": 548.5,
-   "truth_L": 41.8,
-   "meas_L": 50.94,
-   "divergence": 9.14,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 36
-  },
-  {
-   "t": 549.5,
-   "truth_L": 41.81,
-   "meas_L": 50.97,
-   "divergence": 9.16,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 36
-  },
-  {
-   "t": 550.5,
+   "t": 550.7,
    "truth_L": 41.82,
-   "meas_L": 50.99,
-   "divergence": 9.18,
+   "meas_L": 51.01,
+   "divergence": 9.19,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 36
   },
   {
-   "t": 551.6,
-   "truth_L": 41.82,
-   "meas_L": 51.02,
+   "t": 551.7,
+   "truth_L": 41.83,
+   "meas_L": 51.03,
    "divergence": 9.2,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 36
   },
   {
-   "t": 552.6,
-   "truth_L": 41.83,
-   "meas_L": 51.04,
-   "divergence": 9.21,
+   "t": 552.8,
+   "truth_L": 41.84,
+   "meas_L": 51.05,
+   "divergence": 9.22,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 36
   },
   {
-   "t": 553.6,
+   "t": 553.8,
    "truth_L": 41.84,
-   "meas_L": 51.07,
+   "meas_L": 51.08,
    "divergence": 9.23,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 36
   },
   {
-   "t": 554.6,
+   "t": 554.8,
    "truth_L": 41.85,
-   "meas_L": 51.09,
+   "meas_L": 51.1,
    "divergence": 9.25,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 36
   },
   {
-   "t": 555.6,
-   "truth_L": 41.85,
+   "t": 555.9,
+   "truth_L": 41.86,
    "meas_L": 51.12,
-   "divergence": 9.26,
+   "divergence": 9.27,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 36
   },
   {
-   "t": 556.7,
+   "t": 556.9,
    "truth_L": 41.86,
-   "meas_L": 51.14,
+   "meas_L": 51.15,
    "divergence": 9.28,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 36
   },
   {
-   "t": 557.7,
+   "t": 557.9,
    "truth_L": 41.87,
    "meas_L": 51.17,
    "divergence": 9.3,
@@ -5003,7 +5030,7 @@
    "rejections": 36
   },
   {
-   "t": 558.7,
+   "t": 559.0,
    "truth_L": 41.88,
    "meas_L": 51.19,
    "divergence": 9.31,
@@ -5012,25 +5039,25 @@
    "rejections": 36
   },
   {
-   "t": 559.7,
-   "truth_L": 41.88,
+   "t": 560.0,
+   "truth_L": 41.89,
    "meas_L": 51.21,
    "divergence": 9.33,
-   "tripped": true,
-   "product_valve": 0.0,
-   "rejections": 36
-  },
-  {
-   "t": 560.7,
-   "truth_L": 41.89,
-   "meas_L": 51.24,
-   "divergence": 9.35,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 37
   },
   {
-   "t": 561.7,
+   "t": 561.1,
+   "truth_L": 41.89,
+   "meas_L": 51.24,
+   "divergence": 9.34,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 562.1,
    "truth_L": 41.9,
    "meas_L": 51.26,
    "divergence": 9.36,
@@ -5039,89 +5066,98 @@
    "rejections": 37
   },
   {
-   "t": 562.8,
+   "t": 563.1,
    "truth_L": 41.91,
-   "meas_L": 51.29,
+   "meas_L": 51.28,
    "divergence": 9.38,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 37
   },
   {
-   "t": 563.8,
+   "t": 564.2,
    "truth_L": 41.91,
    "meas_L": 51.31,
-   "divergence": 9.4,
+   "divergence": 9.39,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 37
   },
   {
-   "t": 564.8,
+   "t": 565.2,
    "truth_L": 41.92,
-   "meas_L": 51.34,
+   "meas_L": 51.33,
    "divergence": 9.41,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 37
   },
   {
-   "t": 565.8,
+   "t": 566.2,
    "truth_L": 41.93,
-   "meas_L": 51.36,
-   "divergence": 9.43,
+   "meas_L": 51.35,
+   "divergence": 9.42,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 37
   },
   {
-   "t": 566.8,
+   "t": 567.3,
    "truth_L": 41.94,
    "meas_L": 51.38,
-   "divergence": 9.45,
+   "divergence": 9.44,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 37
   },
   {
-   "t": 567.8,
+   "t": 568.3,
    "truth_L": 41.94,
-   "meas_L": 51.41,
+   "meas_L": 51.4,
    "divergence": 9.46,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 37
   },
   {
-   "t": 568.8,
+   "t": 569.4,
    "truth_L": 41.95,
-   "meas_L": 51.43,
-   "divergence": 9.48,
+   "meas_L": 51.42,
+   "divergence": 9.47,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 37
   },
   {
-   "t": 569.9,
+   "t": 570.4,
    "truth_L": 41.96,
-   "meas_L": 51.46,
+   "meas_L": 51.44,
+   "divergence": 9.49,
+   "tripped": true,
+   "product_valve": 0.0,
+   "rejections": 37
+  },
+  {
+   "t": 571.4,
+   "truth_L": 41.96,
+   "meas_L": 51.47,
    "divergence": 9.5,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 37
   },
   {
-   "t": 570.9,
+   "t": 572.5,
    "truth_L": 41.97,
-   "meas_L": 51.48,
+   "meas_L": 51.49,
    "divergence": 9.52,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 37
   },
   {
-   "t": 571.9,
-   "truth_L": 41.97,
+   "t": 573.5,
+   "truth_L": 41.98,
    "meas_L": 51.51,
    "divergence": 9.53,
    "tripped": true,
@@ -5129,107 +5165,89 @@
    "rejections": 37
   },
   {
-   "t": 572.9,
+   "t": 574.5,
    "truth_L": 41.98,
-   "meas_L": 51.53,
+   "meas_L": 51.54,
    "divergence": 9.55,
    "tripped": true,
    "product_valve": 0.0,
    "rejections": 37
   },
   {
-   "t": 574.0,
+   "t": 575.6,
    "truth_L": 41.99,
-   "meas_L": 51.55,
+   "meas_L": 51.56,
    "divergence": 9.57,
    "tripped": true,
    "product_valve": 0.0,
-   "rejections": 37
+   "rejections": 38
   },
   {
-   "t": 575.0,
+   "t": 576.6,
    "truth_L": 42.0,
    "meas_L": 51.58,
    "divergence": 9.58,
    "tripped": true,
    "product_valve": 0.0,
-   "rejections": 37
+   "rejections": 38
   },
   {
-   "t": 576.0,
-   "truth_L": 42.0,
-   "meas_L": 51.6,
+   "t": 577.7,
+   "truth_L": 41.99,
+   "meas_L": 51.59,
    "divergence": 9.6,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 38
   },
   {
-   "t": 577.0,
+   "t": 578.7,
    "truth_L": 41.98,
-   "meas_L": 51.6,
-   "divergence": 9.62,
+   "meas_L": 51.59,
+   "divergence": 9.61,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 38
   },
   {
-   "t": 578.0,
+   "t": 579.7,
    "truth_L": 41.97,
    "meas_L": 51.6,
-   "divergence": 9.64,
+   "divergence": 9.63,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 38
   },
   {
-   "t": 579.1,
-   "truth_L": 41.96,
-   "meas_L": 51.61,
+   "t": 580.8,
+   "truth_L": 41.95,
+   "meas_L": 51.6,
    "divergence": 9.65,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 38
   },
   {
-   "t": 580.1,
+   "t": 581.8,
    "truth_L": 41.94,
-   "meas_L": 51.61,
-   "divergence": 9.67,
+   "meas_L": 51.6,
+   "divergence": 9.66,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 38
   },
   {
-   "t": 581.1,
+   "t": 582.8,
    "truth_L": 41.93,
    "meas_L": 51.61,
-   "divergence": 9.69,
+   "divergence": 9.68,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 38
   },
   {
-   "t": 582.1,
-   "truth_L": 41.91,
-   "meas_L": 51.62,
-   "divergence": 9.7,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 38
-  },
-  {
-   "t": 583.2,
-   "truth_L": 41.9,
-   "meas_L": 51.62,
-   "divergence": 9.72,
-   "tripped": false,
-   "product_valve": 100.0,
-   "rejections": 38
-  },
-  {
-   "t": 584.2,
-   "truth_L": 41.89,
+   "t": 583.9,
+   "truth_L": 41.88,
    "meas_L": 51.62,
    "divergence": 9.74,
    "tripped": false,
@@ -5237,17 +5255,26 @@
    "rejections": 38
   },
   {
-   "t": 586.0,
-   "truth_L": 41.86,
-   "meas_L": 51.63,
+   "t": 584.9,
+   "truth_L": 41.87,
+   "meas_L": 51.62,
+   "divergence": 9.75,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 38
+  },
+  {
+   "t": 585.9,
+   "truth_L": 41.85,
+   "meas_L": 51.62,
    "divergence": 9.77,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 38
   },
   {
-   "t": 587.1,
-   "truth_L": 41.85,
+   "t": 587.0,
+   "truth_L": 41.84,
    "meas_L": 51.63,
    "divergence": 9.79,
    "tripped": false,
@@ -5255,9 +5282,9 @@
    "rejections": 38
   },
   {
-   "t": 588.1,
+   "t": 588.0,
    "truth_L": 41.83,
-   "meas_L": 51.64,
+   "meas_L": 51.63,
    "divergence": 9.8,
    "tripped": false,
    "product_valve": 100.0,
@@ -5265,26 +5292,26 @@
   },
   {
    "t": 589.1,
-   "truth_L": 41.82,
-   "meas_L": 51.64,
+   "truth_L": 41.81,
+   "meas_L": 51.63,
    "divergence": 9.82,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 38
   },
   {
-   "t": 590.2,
-   "truth_L": 41.81,
+   "t": 590.1,
+   "truth_L": 41.8,
    "meas_L": 51.64,
-   "divergence": 9.84,
+   "divergence": 9.83,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 39
   },
   {
-   "t": 591.2,
+   "t": 591.1,
    "truth_L": 41.79,
-   "meas_L": 51.65,
+   "meas_L": 51.64,
    "divergence": 9.85,
    "tripped": false,
    "product_valve": 100.0,
@@ -5293,7 +5320,7 @@
   {
    "t": 592.2,
    "truth_L": 41.78,
-   "meas_L": 51.65,
+   "meas_L": 51.64,
    "divergence": 9.87,
    "tripped": false,
    "product_valve": 100.0,
@@ -5302,8 +5329,8 @@
   {
    "t": 593.2,
    "truth_L": 41.76,
-   "meas_L": 51.65,
-   "divergence": 9.89,
+   "meas_L": 51.64,
+   "divergence": 9.88,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 39
@@ -5311,17 +5338,26 @@
   {
    "t": 594.2,
    "truth_L": 41.75,
-   "meas_L": 51.66,
+   "meas_L": 51.65,
    "divergence": 9.9,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 39
   },
   {
-   "t": 595.2,
+   "t": 595.3,
    "truth_L": 41.74,
-   "meas_L": 51.66,
-   "divergence": 9.92,
+   "meas_L": 51.65,
+   "divergence": 9.91,
+   "tripped": false,
+   "product_valve": 100.0,
+   "rejections": 39
+  },
+  {
+   "t": 596.3,
+   "truth_L": 41.72,
+   "meas_L": 51.65,
+   "divergence": 9.93,
    "tripped": false,
    "product_valve": 100.0,
    "rejections": 39
