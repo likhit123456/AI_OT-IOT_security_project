@@ -62,12 +62,13 @@ class MonitorLimits:
     # rate and staleness). Level is a slow, integrating variable, so the rate
     # cap is in % per cycle and the dead-flat epsilon is far tighter than for
     # pressure. "Process clearly doing something" for level = the product
-    # valve moved, OR measured product flow is above `staleness_level_active_flow`
-    # (liquid is demonstrably leaving the vessel, so a perfectly flat level
-    # reading is not credible).
+    # valve moved by at least `staleness_valve_move_pct`: the level should have
+    # responded to a deliberate valve change. Product flow alone is not a
+    # trigger - at the design point inflow balances outflow and the level is
+    # legitimately flat while product flows (a frozen level at steady state is
+    # still covered by the SIS on its independent channel).
     max_level_rate_pct: float = 2.0
     staleness_level_eps_pct: float = 1e-4
-    staleness_level_active_flow: float = 1.0
 
 
 class BehaviorMonitor:
@@ -168,8 +169,7 @@ class BehaviorMonitor:
         if len(self._level_window) == lim.staleness_window and not settling:
             level_range = max(self._level_window) - min(self._level_window)
             product_range = max(self._product_window) - min(self._product_window)
-            active = (product_range >= lim.staleness_valve_move_pct
-                      or min(self._product_flow_window) > lim.staleness_level_active_flow)
+            active = product_range >= lim.staleness_valve_move_pct
             if active:
                 self.level_stale_evaluated += 1
                 if level_range <= lim.staleness_level_eps_pct:

@@ -43,7 +43,7 @@ from l3_brain.prompt_format import DESIGN_POINT
 from l3_brain.policy import (BaselineOperator, LLMOperator, OllamaOperator,
                              ollama_available)
 from monitor.behavior_monitor import BehaviorMonitor, MonitorLimits
-from monitor.sequential_monitor import SequentialMonitor
+from monitor.sequential_monitor import SequentialMonitor, Suspicion
 from scripts.reset_plant import DESIGN_PURGE_VALVE_PCT, reset_and_settle
 
 L1_KEY = b"scram-live-l1-key-not-a-real-secret"
@@ -311,7 +311,11 @@ class Engine:
         if self._seq_reset_at_call is not None and self.policy.calls > self._seq_reset_at_call:
             self.seq_monitor.reset_all(SEQ_BASELINE)   # first post-re-arm model decision: start clean
             self._seq_reset_at_call = None
-        sus =self.seq_monitor.observe(state, intent, t, keel_codes=codes)       # advisory
+        if self._seq_reset_at_call is not None:
+            # still serving the pre-re-arm cached answer: not new intent, don't score it
+            sus = Suspicion(t, 0.0, "awaiting first post-re-arm decision", "none")
+        else:
+            sus = self.seq_monitor.observe(state, intent, t, keel_codes=codes)   # advisory
         raw = self.l1.regulate(targets, state, dt=DT)
         dec = self.keel.step(raw, state, SisFrame.from_state(state), t, sus.score)
         cmd = self.signer.sign(dec.command)                                       # sign AFTER Keel

@@ -194,9 +194,28 @@ def test_monitor_settling_grace_mutes_only_staleness():
                       product_flow=100.0, a_in_purge=0.47, b_in_purge=0, c_in_purge=0,
                       f1_valve_pos=31.45, f2_valve_pos=13.24, purge_valve_pos=0.0,
                       product_valve_pos=47.03, cost=0.0)
+
+    def moving(i):          # product valve stepping 6% while the level stays dead flat
+        return PlantState(**{**flat.__dict__, "product_valve_pos": 47.03 + 6.0 * (i % 2)})
+
+    def frozen_flags(n=20):
+        return [f for i in range(n) for f in m.observe(moving(i), SupervisoryTargets()) if "frozen" in f]
+
     m.arm_settling(30.0)
-    assert not any("frozen" in f for _ in range(20) for f in m.observe(flat, SupervisoryTargets()))
+    assert not frozen_flags()
     hot = PlantState(**{**flat.__dict__, "pressure": 2960.0})
     assert any("soft ceiling" in f for f in m.observe(hot, SupervisoryTargets()))   # other checks live
     now[0] = 31.0                                                                   # window over
-    assert any("frozen" in f for _ in range(20) for f in m.observe(flat, SupervisoryTargets()))
+    assert any("level frozen" in f for f in frozen_flags())
+
+
+def test_flat_level_at_steady_state_is_not_frozen():
+    from contracts import PlantState, SupervisoryTargets
+    from monitor.behavior_monitor import BehaviorMonitor
+    m = BehaviorMonitor()
+    flat = PlantState(pressure=2700.0, level=44.18, f1_flow=0, f2_flow=0, purge_flow=0,
+                      product_flow=100.0, a_in_purge=0.47, b_in_purge=0, c_in_purge=0,
+                      f1_valve_pos=31.45, f2_valve_pos=13.24, purge_valve_pos=0.0,
+                      product_valve_pos=47.03, cost=0.0)
+    # product flowing, valve still, level flat: the design point, not a frozen sensor
+    assert not any("level frozen" in f for _ in range(30) for f in m.observe(flat, SupervisoryTargets()))
