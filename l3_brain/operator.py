@@ -45,8 +45,11 @@ class AIOperator:
     def __init__(self,
                  policy: Optional[Policy] = None,
                  authority_fn: Optional[Callable[[], float]] = None):
-        self.policy = policy or make_policy()     # SCRAM_POLICY=baseline|llm (default baseline)
+        self.policy = policy or make_policy()     # SCRAM_POLICY=baseline|ollama (default baseline)
         self.authority_fn = authority_fn or (lambda: 1.0)
+        # the policy's own request from the last step, before the authority blend:
+        # what an auditor of the brain's intent should look at
+        self.last_intent: Optional[SupervisoryTargets] = None
 
     def _apply_authority(self, targets: SupervisoryTargets,
                          state: PlantState) -> SupervisoryTargets:
@@ -97,6 +100,7 @@ class AIOperator:
     def step(self, state: PlantState) -> SupervisoryTargets:
         """One decision cycle. Pure function of state + current authority."""
         targets = self.policy.decide(state)
+        self.last_intent = targets
         return self._apply_authority(targets, state)
 
 

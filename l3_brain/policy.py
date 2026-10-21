@@ -25,7 +25,8 @@ from typing import Callable, Deque, Optional, Protocol, Tuple
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from contracts import PlantState, SupervisoryTargets   # noqa: E402
-from l3_brain.prompt_format import state_to_json, system_prompt   # noqa: E402
+from l0_plant.safety import TripLimits   # noqa: E402
+from l3_brain.prompt_format import DESIGN_POINT, state_to_json, system_prompt   # noqa: E402
 
 
 class Policy(Protocol):
@@ -44,10 +45,10 @@ class BaselineOperator:
     """
 
     def __init__(self,
-                 pressure_target: float = 2700.0,
-                 level_target: float = 50.0,
-                 production_target: float = 100.0,
-                 a_comp_target: float = 47.0):
+                 pressure_target: float = DESIGN_POINT["pressure"],
+                 level_target: float = DESIGN_POINT["level"],
+                 production_target: float = DESIGN_POINT["production"],
+                 a_comp_target: float = DESIGN_POINT["a_comp_pct"]):
         self.pressure_target = pressure_target
         self.level_target = level_target
         self.production_target = production_target
@@ -63,7 +64,7 @@ class BaselineOperator:
 
         # Margin to the high-pressure hazard drives how aggressive we allow the
         # economic target to be. Closer to the limit => lower production ask.
-        pressure_margin = (3000.0 - state.pressure)  # kPa to trip
+        pressure_margin = (TripLimits().pressure_high - state.pressure)  # kPa to trip
         if pressure_margin < 150.0:
             prod = min(self.production_target, state.product_flow * 0.9)
             rationale = f"pressure margin low ({pressure_margin:.0f} kPa); easing production"
@@ -82,7 +83,7 @@ class BaselineOperator:
 
 
 # =============================================================================
-# LLM operator (server-side Claude policy)
+# LLM operator (server-side model policy)
 # =============================================================================
 #
 # Same Policy.decide(state) -> SupervisoryTargets interface as BaselineOperator,
@@ -90,11 +91,11 @@ class BaselineOperator:
 # only: the four setpoints plus a short rationale - never valve positions - and
 # it reads only PlantState's measured fields, never `.truth` (the independent
 # SIS channel belongs to L0's interlock). The model call runs here, in Python,
-# with the key taken from the environment; nothing is ever sent to a client.
+# against the local Ollama server (OllamaOperator); no hosted API, no API key.
 #
 # The model is untrusted by design: its output is parsed, validated and clamped
 # to a safe operating envelope, and any failure (timeout, refusal, bad JSON,
-# missing key) degrades to "hold" (all setpoints None -> L1 freezes the
+# backend down) degrades to "hold" (all setpoints None -> L1 freezes the
 # valves). Whatever it asks for, the enforcer underneath (interlock + provenance
 # gate) does not depend on it behaving.
 
@@ -173,19 +174,22 @@ def build_state_prompt(state: PlantState) -> str:
 
 class LLMOperator:
     """
-    Claude-backed supervisory policy. decide() never blocks on the network and
+    Model-backed supervisory policy (base class; the served backend is
+    OllamaOperator below). decide() never blocks on the network and
     never raises: it returns the cached decision immediately, and when the
     supervisory interval has elapsed kicks off ONE background model call whose
     result becomes the new cached decision. L1 keeps regulating every cycle
     against the cached setpoints in between. `background=False` runs the call
-    inline (tests).
+    inline (tests). `client` is an injected object with a
+    `messages.create(...)` method returning `.stop_reason` / `.content` (test
+    fakes and the scripted demo stand-in); there is no hosted-API default.
     """
 
     def __init__(self, client=None, model: Optional[str] = None,
                  interval_s: float = 20.0, timeout_s: float = 25.0,
                  envelope: Optional[Envelope] = None, max_tokens: int = 1500,
                  clock: Callable[[], float] = time.monotonic, background: bool = True):
-        self.model = model or os.environ.get("SCRAM_LLM_MODEL", "claude-opus-5-5")
+        self.model = model or ""
         self.interval_s, self.timeout_s = interval_s, timeout_s
         self.envelope = envelope or Envelope()
         self.max_tokens = max_tokens
@@ -224,16 +228,13 @@ class LLMOperator:
     # ---- model call (any failure -> hold) --------------------------------------
     def _get_client(self):
         if self._client is None:
-            import anthropic                      # lazy: offline/tests need no SDK
-            self._client = anthropic.Anthropic(timeout=self.timeout_s, max_retries=0)
+            raise RuntimeError("no model client configured (use OllamaOperator)")
         return self._client
 
     def _call_model(self, state: PlantState, last: SupervisoryTargets) -> str:
         resp = self._get_client().messages.create(
             model=self.model, max_tokens=self.max_tokens, system=SYSTEM_PROMPT,
-            output_config={"effort": "low"},
-            messages=[{"role": "user", "content": build_state_prompt(state)}],
-        )
+            messages=[{"role": "user", "content": build_state_prompt(state)}])
         if resp.stop_reason in ("refusal", "max_tokens"):
             raise RuntimeError(f"model stopped with {resp.stop_reason}")
         return next((b.text for b in resp.content if b.type == "text"), "")
@@ -323,10 +324,9 @@ def ollama_available(model: Optional[str] = None, base_url: Optional[str] = None
 def make_policy(kind: Optional[str] = None) -> Policy:
     """
     Select the brain by argument, SCRAM_OPERATOR or SCRAM_POLICY (default
-    "baseline"). "ollama" = the locally fine-tuned model; "llm" = Claude. Either
-    one, when its backend is unavailable (Ollama down / model not registered, or
-    no Anthropic credentials), falls back to the offline BaselineOperator rather
-    than a permanent hold.
+    "baseline"). "ollama" = the locally fine-tuned model; when Ollama is down or
+    the model is not registered it falls back to the offline BaselineOperator
+    rather than a permanent hold. Anything else selects BaselineOperator.
     """
     kind = (kind or os.environ.get("SCRAM_OPERATOR") or os.environ.get("SCRAM_POLICY")
             or "baseline").strip().lower()
@@ -334,10 +334,5 @@ def make_policy(kind: Optional[str] = None) -> Policy:
         if ollama_available():
             return OllamaOperator()
         print("[policy] SCRAM_OPERATOR=ollama but the Ollama server / model is unavailable; "
-              "using BaselineOperator", file=sys.stderr)
-    if kind == "llm":
-        if os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN"):
-            return LLMOperator()
-        print("[policy] SCRAM_POLICY=llm but no Anthropic credentials in the environment; "
               "using BaselineOperator", file=sys.stderr)
     return BaselineOperator()

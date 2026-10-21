@@ -26,7 +26,7 @@ from __future__ import annotations
 
 from collections import deque
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Deque, List, Optional
 
 import sys
 import os
@@ -76,7 +76,9 @@ class BehaviorMonitor:
         self.limits = limits or MonitorLimits()
         self._last_pressure: Optional[float] = None
         self._last_pressure_sp: Optional[float] = None
-        self.flags: List[str] = []          # every flag ever raised, with cycle index
+        # recent flags with cycle index; bounded so a long run can't grow it forever
+        self.flags: Deque[str] = deque(maxlen=1000)
+        self.flag_count = 0                 # every flag ever raised (not capped)
         self._cycle = 0
         # Bounded (maxlen) rolling windows for the staleness check - never
         # grows past `staleness_window` regardless of run length.
@@ -182,4 +184,5 @@ class BehaviorMonitor:
         self._last_pressure = state.pressure
         if raised:
             self.flags.extend(f"[cycle {self._cycle}] {f}" for f in raised)
+            self.flag_count += len(raised)
         return raised

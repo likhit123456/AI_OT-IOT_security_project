@@ -51,16 +51,16 @@ class L1ControlStub:
 
     def regulate(self, targets: SupervisoryTargets, state: PlantState,
                  dt: float) -> ControlCommand:
-        purge = self.pressure_pi((targets.pressure_sp or state.pressure) - state.pressure, dt) \
+        purge = self.pressure_pi(targets.pressure_sp - state.pressure, dt) \
             if targets.pressure_sp is not None else state.purge_valve_pos
-        product = self.level_pi((targets.level_sp or state.level) - state.level, dt) \
+        product = self.level_pi(targets.level_sp - state.level, dt) \
             if targets.level_sp is not None else state.product_valve_pos
-        f1 = self.prod_pi((targets.production_rate_sp or state.product_flow) - state.product_flow, dt) \
+        f1 = self.prod_pi(targets.production_rate_sp - state.product_flow, dt) \
             if targets.production_rate_sp is not None else state.f1_valve_pos
         # a_in_purge arrives as a mole fraction (~0.47); a_comp_sp is a mol %
         # target (e.g. 47.0) - convert before comparing (see module docstring).
         a_comp_pct = state.a_in_purge * 100.0
-        f2 = self.comp_pi((targets.a_comp_sp or a_comp_pct) - a_comp_pct, dt) \
+        f2 = self.comp_pi(targets.a_comp_sp - a_comp_pct, dt) \
             if targets.a_comp_sp is not None else state.f2_valve_pos
         return ControlCommand(f1_valve=f1, f2_valve=f2,
                               purge_valve=purge, product_valve=product).clamped()

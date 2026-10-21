@@ -1,0 +1,8 @@
+# Runtime deps for the SCRAM stack (sim_app, live, l0-l3, experiments).
+# Versions are the ones installed and tested on the dev machine.
+fastapi==0.111.0
+uvicorn==0.29.0
+pydantic==2.11.7
+
+# Tests: fastapi.testclient needs httpx (pytest -q).
+# httpx==0.27.0

@@ -1,0 +1,9 @@
+# Training-only deps (training/train_local.py). Not needed to run the app.
+# torch/transformers are pinned to the versions installed on the dev machine;
+# the others weren't installed there, so they're left unpinned.
+torch==2.12.0
+transformers==5.9.0
+unsloth
+trl
+datasets
+peft

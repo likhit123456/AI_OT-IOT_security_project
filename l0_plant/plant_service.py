@@ -107,7 +107,10 @@ class PlantService:
             # Anything on the plant that the enforcer didn't write is, by
             # construction, an out-of-band write: record it; the write below
             # re-asserts last-good over it.
-            gate.audit(self.client.read().get("state", {}))
+            readback = self.client.read().get("state", {})
+            gate.audit(readback)
+            if not self.safety.tripped:
+                gate.clear_e_stop(readback)
             ok, _why = gate.admit(command)
             # rejected -> fall back to the last-good command, not the injected one
             command = command if ok else gate.last_good

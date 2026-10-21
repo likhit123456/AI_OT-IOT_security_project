@@ -189,7 +189,7 @@ def run_condition(name: str, enforce: bool, use_monitor: bool,
                 "measured_p": round(state.pressure, 2),
                 "purge_v": round(state.purge_valve_pos, 1),
                 "f1v": round(state.f1_valve_pos, 1),
-                "monitor_flags_so_far": len(monitor.flags) if monitor else 0,
+                "monitor_flags_so_far": monitor.flag_count if monitor else 0,
             })
             last_trace = now
 
@@ -213,8 +213,8 @@ def run_condition(name: str, enforce: bool, use_monitor: bool,
         tripped=wall_s_of_trip is not None, wall_s_of_trip=wall_s_of_trip,
         rearmed=rearmed, wall_s_forced_safe=wall_s_forced_safe,
         monitor_ever_flagged=bool(monitor.ever_flagged) if monitor else False,
-        monitor_flag_count=len(monitor.flags) if monitor else 0,
-        monitor_sample_flags=(monitor.flags[:5] if monitor else []),
+        monitor_flag_count=monitor.flag_count if monitor else 0,
+        monitor_sample_flags=(list(monitor.flags)[:5] if monitor else []),
         trace=trace,
     )
     if verbose:

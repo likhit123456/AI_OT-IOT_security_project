@@ -175,12 +175,12 @@ def run_condition(name: str, enforce: bool, use_monitor: bool,
                           "meas_L": round(state.level, 3),
                           "truth_P": round(state.truth["pressure"], 1),
                           "product_v": round(state.product_valve_pos, 1),
-                          "flags": len(monitor.flags) if monitor else 0})
+                          "flags": monitor.flag_count if monitor else 0})
             last_trace = now
         if verbose and now - last_print >= 60.0:
             print(f"  [t={elapsed:7.1f}s] truth_L={truth_l:6.2f}  meas_L={state.level:6.2f}  "
                   f"P={state.truth['pressure']:6.0f}  prod_v={state.product_valve_pos:5.1f}  "
-                  f"flags={len(monitor.flags) if monitor else '-'}", flush=True)
+                  f"flags={monitor.flag_count if monitor else '-'}", flush=True)
             last_print = now
         time.sleep(POLL_S)
 
@@ -195,8 +195,8 @@ def run_condition(name: str, enforce: bool, use_monitor: bool,
         truth_level_at_trip=truth_at_trip, measured_level_at_trip=meas_at_trip,
         measured_level_min=m_min, measured_level_max=m_max, max_pressure_truth=peak_p,
         monitor_flagged=(monitor.ever_flagged if monitor else None),
-        monitor_flag_count=(len(monitor.flags) if monitor else None),
-        monitor_sample_flags=(monitor.flags[:5] if monitor else []),
+        monitor_flag_count=(monitor.flag_count if monitor else None),
+        monitor_sample_flags=(list(monitor.flags)[:5] if monitor else []),
         trace=trace,
         level_stale_evaluated=(monitor.level_stale_evaluated if monitor else None),
         level_stale_flagged=(monitor.level_stale_flagged if monitor else None),

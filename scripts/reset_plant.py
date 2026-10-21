@@ -34,6 +34,7 @@ As a library:
 from __future__ import annotations
 
 import argparse
+import math
 import socket
 import subprocess
 import sys
@@ -129,10 +130,15 @@ def wait_settled(
         if raw is None:
             time.sleep(poll_s)
             continue
+        o = raw.get("outputs") or {}
+        p, l = o.get("pressure"), o.get("liquid_level")
+        # a null/missing/non-finite reading is a transient bad read, not data
+        if not all(isinstance(x, (int, float)) and math.isfinite(x) for x in (p, l)):
+            time.sleep(poll_s)
+            continue
         last_raw = raw
-        o = last_raw["outputs"]
-        pressures.append(o["pressure"])
-        levels.append(o["liquid_level"])
+        pressures.append(p)
+        levels.append(l)
         if len(pressures) >= stable_cycles:
             window_p = pressures[-stable_cycles:]
             window_l = levels[-stable_cycles:]

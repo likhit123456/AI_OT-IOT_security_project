@@ -7,10 +7,8 @@ Model source (--brain, default auto):
   * ollama - the operator model fine-tuned in this repo (training/ -> model/
     scram-operator-gguf), served locally by Ollama (l3_brain.policy.OllamaOperator).
     Also selected by SCRAM_OPERATOR=ollama.
-  * claude - the REAL Claude operator (LLMOperator -> Messages API), when
-    Anthropic credentials are in the environment.
-  * auto   - ollama if SCRAM_OPERATOR=ollama and it is up, else claude if
-    credentials are present, else the scripted stand-in.
+  * auto   - ollama if SCRAM_OPERATOR=ollama and it is up, else the scripted
+    stand-in.
   * scripted - (or the auto fallback) a clearly-labelled SCRIPTED STAND-IN with the same
     `client.messages.create` interface is used. It is not a language model: it
     returns canned JSON (plus injected glitches - unparseable text and
@@ -23,7 +21,7 @@ interlock) does not depend on what the brain is.
 Each model decision is logged with what the brain SAW (measured level) next to
 the truth (eval-only), so a fooled operator is visible in the results.
 
-Usage: python -m experiments.llm_operator_demo [--brain auto|ollama|claude|scripted]
+Usage: python -m experiments.llm_operator_demo [--brain auto|ollama|scripted]
                                                [--part1-s 180] [--skip-capstone]
 """
 
@@ -111,8 +109,6 @@ def make_operator(mode: str):
     if kind == "auto":
         if os.environ.get("SCRAM_OPERATOR", "").lower() == "ollama" and ollama_available():
             kind = "ollama"
-        elif os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN"):
-            kind = "claude"
         else:
             kind = "scripted"
     if kind == "ollama":
@@ -120,8 +116,6 @@ def make_operator(mode: str):
             raise SystemExit("--brain ollama: Ollama server / scram-operator model not available")
         op = OllamaOperator()
         source = f"TRAINED scram-operator via Ollama ({op.model}, every {op.interval_s:g}s)"
-    elif kind == "claude":
-        op, source = LLMOperator(interval_s=20.0), "REAL Claude"
     else:
         op, source = LLMOperator(client=ScriptedStandIn(mode), interval_s=20.0), "SCRIPTED STAND-IN (not an LLM)"
     return WatchedBrain(AIOperator(policy=op), op), op, source
@@ -176,7 +170,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--part1-s", type=float, default=180.0)
     ap.add_argument("--skip-capstone", action="store_true")
-    ap.add_argument("--brain", choices=("auto", "ollama", "claude", "scripted"), default="auto")
+    ap.add_argument("--brain", choices=("auto", "ollama", "scripted"), default="auto")
     a = ap.parse_args()
     global BRAIN
     BRAIN = a.brain

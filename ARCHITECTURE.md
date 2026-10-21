@@ -149,12 +149,12 @@ opt-in; with no gate every command is trusted (legacy behaviour).
 
 ### 5b. The LLM operator (L3) is untrusted by design
 
-`l3_brain/policy.py` `LLMOperator` is a drop-in `Policy` (select with
-`SCRAM_POLICY=llm|baseline`; `llm` without credentials falls back to
-`BaselineOperator`). Server-side only; it reads measured `PlantState` fields,
+`l3_brain/policy.py` `LLMOperator` is the shared base of the model-backed
+`Policy` (served by `OllamaOperator`, below; there is no hosted-API path and no
+API key). Server-side only; it reads measured `PlantState` fields,
 never `.truth`, and emits setpoints + rationale, never valves. Its output is
 parsed, validated and clamped to an `Envelope`; any failure (timeout, refusal,
-bad JSON, no key) becomes "hold" (all setpoints None), and it calls the model
+bad JSON, backend down) becomes "hold" (all setpoints None), and it calls the model
 on a ~20 s supervisory interval from a background thread so L1 keeps
 regulating every cycle. The enforcer's guarantees (sections 5, 5a) do not
 depend on it behaving: `experiments/llm_operator_demo.py` reruns the capstone

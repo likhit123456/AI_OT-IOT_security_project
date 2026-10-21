@@ -172,10 +172,8 @@ def test_any_failure_degrades_to_hold_and_never_raises(r):
     assert is_hold(t) and t.rationale.startswith("hold:")
 
 
-def test_missing_sdk_or_key_degrades_to_hold(monkeypatch):
-    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
-    monkeypatch.delenv("ANTHROPIC_AUTH_TOKEN", raising=False)
-    op = LLMOperator(background=False)          # real client path, no credentials
+def test_no_client_degrades_to_hold():
+    op = LLMOperator(background=False)          # no hosted-API default: no client at all
     t = op.decide(make_state())
     assert is_hold(t)
     assert op.log and op.log[-1]["outcome"].startswith("error")
@@ -223,17 +221,11 @@ def test_make_policy_defaults_to_baseline(monkeypatch):
     assert isinstance(make_policy(), BaselineOperator)
 
 
-def test_make_policy_llm_without_credentials_falls_back_to_baseline(monkeypatch):
+def test_make_policy_has_no_hosted_api_path(monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")      # a key must not select anything
     monkeypatch.setenv("SCRAM_POLICY", "llm")
     monkeypatch.delenv("SCRAM_OPERATOR", raising=False)
-    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
-    monkeypatch.delenv("ANTHROPIC_AUTH_TOKEN", raising=False)
     assert isinstance(make_policy(), BaselineOperator)
-
-
-def test_make_policy_llm_with_key_selects_llm(monkeypatch):
-    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
-    assert isinstance(make_policy("llm"), LLMOperator)
 
 
 # ---- Ollama path (locally fine-tuned model; HTTP mocked, no network) ------------

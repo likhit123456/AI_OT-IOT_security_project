@@ -136,15 +136,15 @@ def run_threshold(threshold: float, window_s: float = WINDOW_S) -> dict:
         "throughput_lost_frac": (safed_s / window_actual) if window_actual > 0 else None,
         "min_truth_level": min_truth,
         "max_truth_pressure": peak_p,
-        "monitor_flag_count": len(monitor.flags),
-        "monitor_sample_flags": monitor.flags[:3],
+        "monitor_flag_count": monitor.flag_count,
+        "monitor_sample_flags": list(monitor.flags)[:3],
         "level_stale_evaluated": monitor.level_stale_evaluated,
         "level_stale_flagged": monitor.level_stale_flagged,
         "trace": trace,
     }
     print(f"  done: trips={trips} rearms={rearms} safed={safed_s:.0f}s/"
           f"{window_actual:.0f}s lost={row['throughput_lost_frac']} "
-          f"monitor_flags={len(monitor.flags)}", flush=True)
+          f"monitor_flags={monitor.flag_count}", flush=True)
     return row
 
 

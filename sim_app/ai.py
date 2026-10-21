@@ -372,6 +372,7 @@ class Rescue:
                                   f"(decision every {TICK_S:g}s). Goal: back to "
                                   f"{DESIGN_POINT['pressure']:g} kPa / {DESIGN_POINT['level']:g}%.")
         t0, near, io_fails, model_fails, first = time.monotonic(), 0, 0, 0, True
+        write_fails = 0     # separate: a successful read resets io_fails every tick
         end = ("info", "AI disengaged. Manual control.")
         try:
             while not stop.is_set():
@@ -415,10 +416,16 @@ class Rescue:
                         self.plant.apply_valves(valves, source="ai")
                     except Exception as e:                  # noqa: BLE001 - ruptured / resetting / socket
                         if not (self.plant.ruptured or self.plant.resetting):
-                            io_fails += 1
-                            self.activity.add("error", f"Valve write failed ({type(e).__name__}); retrying.")
+                            write_fails += 1
+                            if write_fails >= MAX_IO_FAILS:
+                                end = ("error", f"Valve write failed {write_fails} times in a row "
+                                                f"({type(e).__name__}). AI disengaged: take manual control.")
+                                break
+                            self.activity.add("error", f"Valve write failed ({type(e).__name__}); retrying "
+                                                       f"({write_fails}/{MAX_IO_FAILS}).")
                             stop.wait(TICK_S)
                         continue                             # ruptured / resetting handled at loop top
+                    write_fails = 0
                 self.activity.add(
                     "decision",
                     targets.rationale,

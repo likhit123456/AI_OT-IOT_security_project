@@ -22,6 +22,7 @@ from __future__ import annotations
 import json
 import math
 import queue
+import re
 import threading
 import time
 from collections import deque
@@ -30,6 +31,7 @@ from pathlib import Path
 from typing import Callable, Deque, Optional
 
 from contracts import ControlCommand, PlantState, SupervisoryTargets
+from enforcer.keel import Keel, KeelLimits, SisFrame
 from l0_plant import fault_injection as fi
 from l0_plant.grfics_client import GrficsClient
 from l0_plant.plant_service import PlantService
@@ -37,13 +39,16 @@ from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
 from l0_plant.safety import TripLimits
 from l1_stub import L1ControlStub
 from l3_brain.operator import AIOperator
+from l3_brain.prompt_format import DESIGN_POINT
 from l3_brain.policy import (BaselineOperator, LLMOperator, OllamaOperator,
                              ollama_available)
 from monitor.behavior_monitor import BehaviorMonitor, MonitorLimits
+from monitor.sequential_monitor import SequentialMonitor
 from scripts.reset_plant import DESIGN_PURGE_VALVE_PCT, reset_and_settle
 
 L1_KEY = b"scram-live-l1-key-not-a-real-secret"
 ATTACKER_KEY = b"attacker-guess"
+KEEL_KEY = b"scram-keel-log-key-not-a-real-secret"
 POLL_S = 0.05                 # same cadence as the validated experiments
 DT = 0.5                      # L1 integration step (as in every experiment)
 HISTORY_S = 0.5               # trend sample period
@@ -65,6 +70,10 @@ DESIGN_VALVES = {**DESIGN_VALVES, "purge": DESIGN_PURGE_VALVE_PCT}
 
 
 DESIGN_PRODUCTION = 100.0
+# after a re-arm the sequential monitor measures the brain's moves from design
+SEQ_BASELINE = {"pressure_sp": DESIGN_POINT["pressure"], "level_sp": DESIGN_POINT["level"],
+                "production_rate_sp": DESIGN_POINT["production"], "a_comp_sp": DESIGN_POINT["a_comp_pct"]}
+REARM_SETTLE_S = 30.0       # staleness flags muted this long after a re-arm or (re)connect
 
 
 class LiveL1(L1ControlStub):
@@ -78,12 +87,43 @@ class LiveL1(L1ControlStub):
     pressure (purge), level (product) and composition (feed 2) PI loops are
     the stub's own. The teammate's real L1 replaces all of this."""
 
+    # STUB STOPGAP (the teammate's real L1 supersedes this): after an e-stop vents
+    # the vessel, purge is the stub's only pressure lever and it is already shut,
+    # so pressure creeps back at ~0.05 kPa/s. While purge sits saturated near 0
+    # and pressure is below setpoint, scale both feeds up in proportion to the
+    # deficit; the boost fades to zero as pressure reaches setpoint, is capped,
+    # and only ever targets a setpoint held well below the SIS trip. Also: the stub
+    # integrates with DT per cycle at a faster real cadence, so venting from above
+    # setpoint winds the purge integral far open and pressure undershoots ~70 kPa;
+    # once pressure is clearly below setpoint, drop integral still holding purge open.
+    # Within the deadband (normal operation) neither piece does anything.
+    BOOST_PURGE_SAT = 1.0         # % purge opening counted as "saturated shut"
+    BOOST_DEADBAND = 2.0          # kPa: no boost when this close to setpoint
+    BOOST_PER_KPA = 1.0 / 200.0   # fractional feed increase per kPa of deficit
+    BOOST_MAX = 0.30              # never more than +30% on either feed
+    BOOST_SP_CEIL = DEMO_LIMITS.pressure_high - 250.0   # never chase a setpoint near the trip
+
+    def _pressure_boost(self, targets: SupervisoryTargets, state: PlantState, cmd: ControlCommand) -> float:
+        p = state.pressure
+        if targets.pressure_sp is None or p is None or not math.isfinite(p) \
+                or cmd.purge_valve > self.BOOST_PURGE_SAT:
+            return 0.0
+        deficit = min(targets.pressure_sp, self.BOOST_SP_CEIL) - p - self.BOOST_DEADBAND
+        return max(0.0, min(self.BOOST_MAX, deficit * self.BOOST_PER_KPA))
+
     def regulate(self, targets: SupervisoryTargets, state: PlantState, dt: float) -> ControlCommand:
+        p = state.pressure
+        if targets.pressure_sp is not None and p is not None and math.isfinite(p)                 and targets.pressure_sp - p > self.BOOST_DEADBAND and self.pressure_pi.i < 0.0:
+            self.pressure_pi.i = 0.0      # i < 0 is what holds purge open (ki < 0)
         cmd = super().regulate(targets, state, dt)
-        if targets.production_rate_sp is None:
-            return cmd
-        f1 = DESIGN_VALVES["f1"] * targets.production_rate_sp / DESIGN_PRODUCTION
-        return replace(cmd, f1_valve=max(0.0, min(100.0, f1)))
+        if targets.production_rate_sp is not None:
+            f1 = DESIGN_VALVES["f1"] * targets.production_rate_sp / DESIGN_PRODUCTION
+            cmd = replace(cmd, f1_valve=max(0.0, min(100.0, f1)))
+        g = self._pressure_boost(targets, state, cmd)
+        if g > 0.0:
+            cmd = replace(cmd, f1_valve=min(100.0, cmd.f1_valve * (1.0 + g)),
+                          f2_valve=min(100.0, cmd.f2_valve * (1.0 + g)))
+        return cmd
 
 
 def prime_l1(l1: L1ControlStub, state: PlantState) -> None:
@@ -137,7 +177,9 @@ class Engine:
         self.brain_kind = kind
         self.policy = policy
         self._seen_calls = 0
-        self.brain = AIOperator(policy=policy, authority_fn=lambda: self.authority)
+        # the slider is a cap; Keel's authority budget is the live value
+        self.brain = AIOperator(policy=policy,
+                                authority_fn=lambda: min(self.authority, self.keel.authority()))
         self.log("brain", f"brain is now {self.brain_label()}")
 
     def brain_label(self) -> str:
@@ -158,7 +200,14 @@ class Engine:
         self.signer = CommandSigner(L1_KEY)
         self.l1 = LiveL1()
         self.monitor = BehaviorMonitor(MonitorLimits(level_low_pct=self.limits.level_low + 2.0))
-        self._n_gate_events = 0
+        self.keel = Keel(KEEL_KEY, KeelLimits(trip=self.limits))   # same limits as L0's SIS
+        self.seq_monitor = SequentialMonitor()
+        self._seq_reset_at_call: Optional[int] = None
+        # the plant was just restarted/attached: same settle window as a re-arm
+        self._rearm_t, self._settle_logged, self._settle_why = self.now(), False, "plant start"
+        self._keel_logged: Optional[tuple] = None
+        self._keel_log_t = -1e9
+        self._last_gate_id = 0
         self.state = self.svc.read()
         prime_l1(self.l1, self.state)
         self._first_signed: Optional[ControlCommand] = None
@@ -242,14 +291,42 @@ class Engine:
         targets = self.brain.step(state)
         self._last_targets = targets
         self._note_decision(state, targets, t)
-        for f in self.monitor.observe(state, targets):
-            key = " ".join(f.split(" ")[:3])          # same kind of flag
+        flags = self.monitor.observe(state, targets)
+        if self._rearm_t is not None and t - self._rearm_t < REARM_SETTLE_S:
+            # the sim's level reading is legitimately flat while it settles after a
+            # restart; the frozen-sensor check keeps full strength outside this window
+            if any("frozen" in f for f in flags) and not self._settle_logged:
+                self._settle_logged = True
+                self.log("monitor", f"L2 monitor settling after {self._settle_why}: staleness checks "
+                                    f"muted for {REARM_SETTLE_S:.0f} s")
+            flags = [f for f in flags if "frozen" not in f]
+        for f in flags:
+            key = re.sub(r"[-+]?\d+(\.\d+)?", "#", f)   # same kind of flag, values stripped
             if t - self._last_flag_t.get(key, -1e9) > 120:   # repeat at most every 2 min
                 self._last_flag_t[key] = t
                 self.monitor_flags.append({"t": round(t, 1), "msg": f})
                 self.log("monitor", f"L2 monitor (measured only): {f}")
 
-        cmd = self.signer.sign(self.l1.regulate(targets, state, dt=DT))
+        codes = [r.code for r in (self.keel.last.reasons if self.keel.last else ())]
+        # audit the brain's intent, not the authority-blended targets: below full
+        # authority the blend tracks measured values and reads as a staircase
+        intent = self.brain.last_intent or targets
+        if self._seq_reset_at_call is not None and self.policy.calls > self._seq_reset_at_call:
+            self.seq_monitor.reset_all(SEQ_BASELINE)   # first post-re-arm model decision: start clean
+            self._seq_reset_at_call = None
+        sus =self.seq_monitor.observe(state, intent, t, keel_codes=codes)       # advisory
+        raw = self.l1.regulate(targets, state, dt=DT)
+        dec = self.keel.step(raw, state, SisFrame.from_state(state), t, sus.score)
+        cmd = self.signer.sign(dec.command)                                       # sign AFTER Keel
+        # log only when the verdict or (rounded) severity changes, at most ~1/s:
+        # every cycle would flood the 300-entry event stream
+        key = (dec.verdict, round(dec.severity, 1))
+        if dec.verdict != "allow" and key != self._keel_logged and t - self._keel_log_t >= 1.0:
+            self._keel_logged, self._keel_log_t = key, t
+            self.log("keel", f"{dec.verdict} A={dec.authority:.2f} sev={dec.severity:.2f} "
+                             + "; ".join(f"{r.code}:{r.detail}" for r in dec.reasons))
+        elif dec.verdict == "allow":
+            self._keel_logged = None
         stolen = self.scenarios.get("stolen_key")
         if stolen and not self.svc.safety.tripped:
             # attacker holds the L1 key: its commands are validly signed
@@ -300,12 +377,9 @@ class Engine:
                                    "rationale": targets.rationale, "latency_s": 0.0})
 
     def _gate_bookkeeping(self, admitted: int = 0) -> None:
-        new = self.gate.events[self._n_gate_events:]
-        self._n_gate_events = len(self.gate.events)
-        # keep the gate's own event list bounded on a long run
-        if len(self.gate.events) > 1000:
-            del self.gate.events[:500]
-            self._n_gate_events = len(self.gate.events)
+        # by id, not position: gate.events is a bounded deque that evicts from the left
+        new = [e for e in self.gate.events if e.id > self._last_gate_id]
+        self._last_gate_id = self.gate.n_events
         rej = sum(e.kind == "rejected_command" for e in new)
         oob = [e for e in new if e.kind == "out_of_band_write"]
         self.gate_counts["admitted"] += admitted - rej
@@ -313,6 +387,9 @@ class Engine:
         self.gate_counts["out_of_band"] += len(oob)
         for e in oob:
             self.log("gate", f"out-of-band write detected and overwritten: {e.detail}")
+        for e in new:
+            if e.kind == "rejected_command":
+                self.keel.note_gate_rejection(self.now(), e.detail)
         return new
 
     def _inject_forged(self, forged: dict) -> None:
@@ -373,6 +450,10 @@ class Engine:
                                "level_low": lim.level_low, "level_low_rearm": lim.level_low_rearm,
                                "level_high": lim.level_high, "level_high_rearm": lim.level_high_rearm}},
             "gate": dict(self.gate_counts),
+            "keel": {"authority": self.keel.authority(), "verdict": getattr(self.keel.last, "verdict", None),
+                     "reasons": [r.code for r in (self.keel.last.reasons if self.keel.last else ())],
+                     "divert": self.keel.divert, "suspicion": self.seq_monitor.history[-1].as_dict()
+                     if self.seq_monitor.history else None},
             "scenarios": {k: {kk: (round(vv, 1) if isinstance(vv, float) else vv) for kk, vv in v.items()}
                           for k, v in self.scenarios.items()},
             "faults": dict(self.faults),
@@ -441,6 +522,17 @@ class Engine:
             self.state = self.svc.apply(self.signer.sign(ControlCommand(
                 f1_valve=v["f1"], f2_valve=v["f2"], purge_valve=v["purge"], product_valve=v["product"])))
             prime_l1(self.l1, self.state)
+            # deliberate operator action: re-prime the defenses too, like prime_l1
+            self.keel.rearm(self.state)
+            self.seq_monitor.reset_all(SEQ_BASELINE)
+            # an LLM policy keeps serving its pre-trip decision until its next call
+            # returns; reset again then, so that stale value doesn't seed the monitor
+            # and the return to design read as one big creep
+            self._seq_reset_at_call = getattr(self.policy, "calls", None)
+            # fresh window: the pre-trip history would read as "measured level frozen"
+            self.monitor = BehaviorMonitor(self.monitor.limits)
+            self._rearm_t, self._settle_logged, self._settle_why = self.now(), False, "re-arm"
+            self._keel_logged = None
             self.log("sis", "interlock RE-ARMED by operator (safety channel back inside the re-arm band); "
                             "restarting from the design valve lineup, then the AI and L1 take over")
         else:

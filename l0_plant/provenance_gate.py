@@ -36,8 +36,9 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+from collections import deque
 from dataclasses import dataclass, field, replace
-from typing import Dict, List, Optional, Tuple
+from typing import Deque, Dict, List, Optional, Tuple
 
 from contracts import ControlCommand
 
@@ -66,6 +67,7 @@ class CommandSigner:
 class GateEvent:
     kind: str        # "rejected_command" | "out_of_band_write"
     detail: str
+    id: int = 0      # strictly increasing per gate; readers track new events by it
 
 
 @dataclass
@@ -77,7 +79,8 @@ class ProvenanceGate:
     last_seq: int = 0
     last_good: Optional[ControlCommand] = None
     expect_e_stop: bool = False
-    events: List[GateEvent] = field(default_factory=list)
+    events: Deque[GateEvent] = field(default_factory=lambda: deque(maxlen=2000))
+    n_events: int = 0    # events ever recorded (the last one's id)
 
     def seed(self, valves: Dict[str, float]) -> None:
         """Initial last-good = what the plant holds when the enforcer takes over."""
@@ -103,8 +106,22 @@ class ProvenanceGate:
         return True, "ok"
 
     def _reject(self, why: str) -> Tuple[bool, str]:
-        self.events.append(GateEvent("rejected_command", why))
+        self._event("rejected_command", why)
         return False, why
+
+    def clear_e_stop(self, valves: Dict[str, float]) -> None:
+        """
+        The enforcer is releasing e_stop. The plant's valves are where e_stop
+        left them, not at the pre-trip last-good, so reseed last-good from the
+        readback - otherwise the first post-trip audit false-flags them.
+        """
+        if self.expect_e_stop:
+            self.seed(valves)
+        self.expect_e_stop = False
+
+    def _event(self, kind: str, detail: str) -> None:
+        self.n_events += 1
+        self.events.append(GateEvent(kind, detail, self.n_events))
 
     def note_safe_state(self, inputs: dict) -> None:
         """
@@ -134,5 +151,5 @@ class ProvenanceGate:
                 if abs(got - w) > AUDIT_TOLERANCE_PCT:
                     found.append(f"{k} is {got:.1f}% but enforcer last wrote {w:.1f}%")
         for f in found:
-            self.events.append(GateEvent("out_of_band_write", f))
+            self._event("out_of_band_write", f)
         return found

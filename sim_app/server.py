@@ -27,6 +27,7 @@ Run:  python -m sim_app            (http://127.0.0.1:8770)
 
 from __future__ import annotations
 
+import math
 import threading
 from contextlib import asynccontextmanager
 import time
@@ -48,6 +49,15 @@ PRESSURE_CEILING_KPA = 3200.0      # simulator clamp (TE_process.cc)
 POLL_S = 0.5
 HISTORY_N = 2400                   # 20 min at 2 Hz
 VALVES = ("f1", "f2", "purge", "product")
+
+
+def _num(v) -> float:
+    """A plant reading as a float; null/missing/non-finite reads as 0.0."""
+    try:
+        f = float(v)
+    except (TypeError, ValueError):
+        return 0.0
+    return f if math.isfinite(f) else 0.0
 STATIC = Path(__file__).resolve().parent / "static"
 
 
@@ -104,14 +114,14 @@ class Plant:
                 try:
                     raw = self.read()
                     self._ingest(raw)
-                except (OSError, ValueError):
+                except (OSError, ValueError, TypeError):
                     self.connected = False
             time.sleep(POLL_S)
 
     def _ingest(self, raw: dict) -> None:
         o, s = raw.get("outputs", {}), raw.get("state", {})
         t = round(time.monotonic() - self.t0, 1)
-        p = float(o.get("pressure", 0.0))
+        p = _num(o.get("pressure"))
         with self._data:
             self.raw, self.connected = raw, True
             # Valves follow their setpoint instantly in this sim, except that e_stop forces
@@ -123,8 +133,8 @@ class Plant:
             if not self.ruptured and p >= RUPTURE_THRESHOLD_KPA:
                 self.ruptured, self.ruptured_t, self.rupture_pressure = True, t, round(p, 1)
             self.seq += 1
-            self.history.append([self.seq, t, round(p, 2), round(o.get("liquid_level", 0.0), 3),
-                                 *(round(o.get(f"{v}_flow", 0.0), 2) for v in VALVES),
+            self.history.append([self.seq, t, round(p, 2), round(_num(o.get("liquid_level")), 3),
+                                 *(round(_num(o.get(f"{v}_flow")), 2) for v in VALVES),
                                  *(round(s.get(f"{v}_valve_pos", 0.0), 2) for v in VALVES)])
 
     # ---- views / actions ----------------------------------------------------

@@ -70,6 +70,15 @@ def main(brain=None, out_path: Optional[Path] = None) -> dict:
     next_inject, kind_i = INJECT_FIRST_S, 0
     trip_t = rearm_t = None
     last_trace = t0 - 1e9
+    seen_id = oob = 0
+
+    def new_gate_events():
+        # by id, not position: gate.events is a bounded deque that evicts from the left
+        nonlocal seen_id, oob
+        new = [e for e in gate.events if e.id > seen_id]
+        seen_id = gate.n_events
+        oob += sum(e.kind == "out_of_band_write" for e in new)
+        return new
 
     def log(t, msg):
         events.append({"t": round(t, 1), "event": msg})
@@ -87,6 +96,7 @@ def main(brain=None, out_path: Optional[Path] = None) -> dict:
         cmd = signer.sign(l1.regulate(targets, state, dt=0.5))
         first_signed = first_signed or cmd
         state = svc.apply(cmd)
+        new_gate_events()
 
         # --- channel 1: compromised agent injects at the enforcer ---
         if t >= next_inject:
@@ -104,10 +114,9 @@ def main(brain=None, out_path: Optional[Path] = None) -> dict:
             else:                       # captured legitimate command, replayed
                 bad = first_signed
             attempts += 1
-            n_before = len(gate.events)
             svc.apply(bad)
             after = svc.client.read()["state"]
-            new_events = gate.events[n_before:]
+            new_events = new_gate_events()
             was_rejected = any(e.kind == "rejected_command" for e in new_events)
             rejected += was_rejected
             # did the injected values reach the plant? (not meaningful while the
@@ -144,6 +153,7 @@ def main(brain=None, out_path: Optional[Path] = None) -> dict:
                       f"tripped={svc.safety.tripped} rejections={rejected}", flush=True)
         time.sleep(POLL_S)
 
+    new_gate_events()
     fi.clear_all(svc.client)
     svc.stop()
     summary = {
@@ -154,7 +164,7 @@ def main(brain=None, out_path: Optional[Path] = None) -> dict:
         "measured_level_at_trip": next((x["meas_L"] for x in timeline if x["tripped"]), None),
         "max_divergence_pct": max(x["divergence"] for x in timeline),
         "min_true_level": min(x["truth_L"] for x in timeline),
-        "gate_out_of_band_events": sum(e.kind == "out_of_band_write" for e in gate.events),
+        "gate_out_of_band_events": oob,
     }
     (out_path or OUT).write_text(json.dumps(
         {"summary": summary, "events": events, "timeline": timeline}, indent=1))
