@@ -204,7 +204,8 @@ class Engine:
         self.seq_monitor = SequentialMonitor()
         self._seq_reset_at_call: Optional[int] = None
         # the plant was just restarted/attached: same settle window as a re-arm
-        self._rearm_t, self._settle_logged, self._settle_why = self.now(), False, "plant start"
+        self.monitor.arm_settling(REARM_SETTLE_S)
+        self._settle_logged, self._settle_why = False, "plant start"
         self._keel_logged: Optional[tuple] = None
         self._keel_log_t = -1e9
         self._last_gate_id = 0
@@ -292,14 +293,10 @@ class Engine:
         self._last_targets = targets
         self._note_decision(state, targets, t)
         flags = self.monitor.observe(state, targets)
-        if self._rearm_t is not None and t - self._rearm_t < REARM_SETTLE_S:
-            # the sim's level reading is legitimately flat while it settles after a
-            # restart; the frozen-sensor check keeps full strength outside this window
-            if any("frozen" in f for f in flags) and not self._settle_logged:
-                self._settle_logged = True
-                self.log("monitor", f"L2 monitor settling after {self._settle_why}: staleness checks "
-                                    f"muted for {REARM_SETTLE_S:.0f} s")
-            flags = [f for f in flags if "frozen" not in f]
+        if self.monitor.settling and not self._settle_logged:
+            self._settle_logged = True
+            self.log("monitor", f"L2 monitor settling after {self._settle_why}: staleness checks "
+                                f"muted for {REARM_SETTLE_S:.0f} s")
         for f in flags:
             key = re.sub(r"[-+]?\d+(\.\d+)?", "#", f)   # same kind of flag, values stripped
             if t - self._last_flag_t.get(key, -1e9) > 120:   # repeat at most every 2 min
@@ -531,7 +528,8 @@ class Engine:
             self._seq_reset_at_call = getattr(self.policy, "calls", None)
             # fresh window: the pre-trip history would read as "measured level frozen"
             self.monitor = BehaviorMonitor(self.monitor.limits)
-            self._rearm_t, self._settle_logged, self._settle_why = self.now(), False, "re-arm"
+            self.monitor.arm_settling(REARM_SETTLE_S)
+            self._settle_logged, self._settle_why = False, "re-arm"
             self._keel_logged = None
             self.log("sis", "interlock RE-ARMED by operator (safety channel back inside the re-arm band); "
                             "restarting from the design valve lineup, then the AI and L1 take over")

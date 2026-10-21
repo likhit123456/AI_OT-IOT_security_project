@@ -183,3 +183,20 @@ def test_cannot_rearm_on_invalid_reading():
     assert sis.can_reset(float("nan"), 50.0) is False
     assert sis.reset(None, 50.0) is False and sis.tripped
     assert sis.reset(2700.0, 50.0) is True and not sis.tripped
+
+
+def test_monitor_settling_grace_mutes_only_staleness():
+    from contracts import PlantState, SupervisoryTargets
+    from monitor.behavior_monitor import BehaviorMonitor
+    now = [0.0]
+    m = BehaviorMonitor(clock=lambda: now[0])
+    flat = PlantState(pressure=2700.0, level=44.18, f1_flow=0, f2_flow=0, purge_flow=0,
+                      product_flow=100.0, a_in_purge=0.47, b_in_purge=0, c_in_purge=0,
+                      f1_valve_pos=31.45, f2_valve_pos=13.24, purge_valve_pos=0.0,
+                      product_valve_pos=47.03, cost=0.0)
+    m.arm_settling(30.0)
+    assert not any("frozen" in f for _ in range(20) for f in m.observe(flat, SupervisoryTargets()))
+    hot = PlantState(**{**flat.__dict__, "pressure": 2960.0})
+    assert any("soft ceiling" in f for f in m.observe(hot, SupervisoryTargets()))   # other checks live
+    now[0] = 31.0                                                                   # window over
+    assert any("frozen" in f for _ in range(20) for f in m.observe(flat, SupervisoryTargets()))

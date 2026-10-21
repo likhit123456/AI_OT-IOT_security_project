@@ -24,9 +24,10 @@ class (or anything like it) for protective action - see ARCHITECTURE.md.
 
 from __future__ import annotations
 
+import time
 from collections import deque
 from dataclasses import dataclass
-from typing import Deque, List, Optional
+from typing import Callable, Deque, List, Optional
 
 import sys
 import os
@@ -72,8 +73,11 @@ class MonitorLimits:
 class BehaviorMonitor:
     """Stateful, one instance per run. Call observe() once per cycle."""
 
-    def __init__(self, limits: Optional[MonitorLimits] = None):
+    def __init__(self, limits: Optional[MonitorLimits] = None,
+                 clock: Callable[[], float] = time.monotonic):
         self.limits = limits or MonitorLimits()
+        self._clock = clock
+        self._settle_until = -1.0           # see arm_settling()
         self._last_pressure: Optional[float] = None
         self._last_pressure_sp: Optional[float] = None
         # recent flags with cycle index; bounded so a long run can't grow it forever
@@ -95,6 +99,17 @@ class BehaviorMonitor:
         # many of those it flagged.
         self.level_stale_evaluated = 0
         self.level_stale_flagged = 0
+
+    def arm_settling(self, seconds: float = 30.0) -> None:
+        """Bounded grace after an operator re-arm / plant restart: the sim's level
+        reading is legitimately flat while it settles, so the staleness
+        (frozen-sensor) flags are suppressed for `seconds`. Thresholds and
+        windows are unchanged; every other check stays live."""
+        self._settle_until = self._clock() + seconds
+
+    @property
+    def settling(self) -> bool:
+        return self._clock() < self._settle_until
 
     @property
     def ever_flagged(self) -> bool:
@@ -149,7 +164,8 @@ class BehaviorMonitor:
         self._level_window.append(state.level)
         self._product_window.append(state.product_valve_pos)
         self._product_flow_window.append(state.product_flow)
-        if len(self._level_window) == lim.staleness_window:
+        settling = self.settling
+        if len(self._level_window) == lim.staleness_window and not settling:
             level_range = max(self._level_window) - min(self._level_window)
             product_range = max(self._product_window) - min(self._product_window)
             active = (product_range >= lim.staleness_valve_move_pct
@@ -169,7 +185,7 @@ class BehaviorMonitor:
         self._pressure_window.append(state.pressure)
         self._purge_window.append(state.purge_valve_pos)
         self._f1_window.append(state.f1_valve_pos)
-        if len(self._pressure_window) == lim.staleness_window:
+        if len(self._pressure_window) == lim.staleness_window and not settling:
             pressure_range = max(self._pressure_window) - min(self._pressure_window)
             purge_range = max(self._purge_window) - min(self._purge_window)
             f1_range = max(self._f1_window) - min(self._f1_window)
