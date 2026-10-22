@@ -43,6 +43,7 @@ from l3_brain.prompt_format import DESIGN_POINT
 from l3_brain.policy import (BaselineOperator, LLMOperator, OllamaOperator,
                              ollama_available)
 from monitor.behavior_monitor import BehaviorMonitor, MonitorLimits
+from monitor.governance import Governor
 from monitor.observer import Observer, observer_available
 from monitor.sequential_monitor import SequentialMonitor, Suspicion
 from scripts.reset_plant import DESIGN_PURGE_VALVE_PCT, reset_and_settle
@@ -181,7 +182,8 @@ class Engine:
         self._seen_calls = 0
         # the slider is a cap; Keel's authority budget is the live value
         self.brain = AIOperator(policy=policy,
-                                authority_fn=lambda: min(self.authority, self.keel.authority()))
+                                authority_fn=lambda: min(self.authority, self.keel.authority(),
+                                                         self.governor.applied))
         self.log("brain", f"brain is now {self.brain_label()}")
 
     def brain_label(self) -> str:
@@ -204,6 +206,10 @@ class Engine:
         self.monitor = BehaviorMonitor(MonitorLimits(level_low_pct=self.limits.level_low + 2.0))
         self.keel = Keel(KEEL_KEY, KeelLimits(trip=self.limits))   # same limits as L0's SIS
         self.seq_monitor = SequentialMonitor()
+        self.governor = Governor()          # L2 authority ceiling from the monitors' suspicion
+        self.gov_trace: Deque[dict] = deque(maxlen=600)
+        self._gov_logged: Optional[tuple] = None
+        self._gov_chain_t = -1e9
         self._seq_reset_at_call: Optional[int] = None
         # L2 observer model (advisory, beside the rule monitor); rule-monitor-only without it
         self.observer: Optional[Observer] = Observer() if observer_available() else None
@@ -345,11 +351,17 @@ class Engine:
             self.observer.feed(t, state, None if self._seq_reset_at_call is not None else intent)
             obs_sus = self.observer.suspicion()
             self._note_observer()
-        # Keel gets one advisory suspicion: the observer owns the proposal-side labels,
-        # the rule monitor its own; take the larger (telemetry stays with rules + SIS)
+        # governance: the observer's proposal-side verdicts and the rule monitor become a
+        # corroborated suspicion -> authority ceiling (telemetry stays with rules + SIS)
         self._l2_sus = max(sus.score, obs_sus)
+        gov = self.governor.update(t, sus.score, sus.source,
+                                   self.observer.last.get("proposals") if self.observer else None,
+                                   obs_sus, None if self._seq_reset_at_call is not None else intent)
+        self._note_governance(gov)
         raw = self.l1.regulate(targets, state, dt=DT)
-        dec = self.keel.step(raw, state, SisFrame.from_state(state), t, self._l2_sus)
+        # L2 now acts only through the governance ceiling, not Keel's own authority
+        # (which stays physics / gate driven, so an L2 verdict alone can never divert)
+        dec = self.keel.step(raw, state, SisFrame.from_state(state), t, 0.0)
         cmd = self.signer.sign(dec.command)                                       # sign AFTER Keel
         # log only when the verdict or (rounded) severity changes, at most ~1/s:
         # every cycle would flood the 300-entry event stream
@@ -408,6 +420,25 @@ class Engine:
                                    "true": {"pressure": _num(truth.get("pressure")),
                                             "level": _num(truth.get("liquid_level"))},
                                    "rationale": targets.rationale, "latency_s": 0.0})
+
+    def _note_governance(self, g) -> None:
+        """Trace every cycle; hash-chained log at 1 Hz and on any change; event stream on
+        a change of driving label, ceiling tier or recovery state."""
+        d = g.as_dict()
+        if not self.gov_trace or g.t - self.gov_trace[-1]["t"] >= 0.5:
+            self.gov_trace.append(d)
+        key = (g.label, round(g.ceiling, 2), round(g.applied, 2), g.recovering)
+        if self._gov_logged is None or key != self._gov_logged[:4] or g.t - self._gov_chain_t >= 1.0:
+            self._gov_chain_t = g.t
+            self.keel.log.append(g.t, "governance", d)
+        ev = (g.label, round(g.ceiling, 1), g.recovering, g.applied >= 1.0)
+        if self._gov_logged is None or ev != self._gov_logged[4:]:
+            if g.label or g.applied < 1.0 or (self._gov_logged and self._gov_logged[0]):
+                state = "recovering" if g.recovering else ("throttled" if g.applied < 1.0 else "full authority")
+                self.log("governance", f"suspicion raw {g.raw:.2f} corroborated {g.corroborated:.2f} "
+                                       f"({g.label or 'none'}) -> ceiling {g.ceiling:.2f}, applied "
+                                       f"{g.applied:.2f} [{state}]")
+        self._gov_logged = key + ev
 
     def _note_observer(self) -> None:
         """Log each new observer verdict whose label changed, per input type."""
@@ -500,6 +531,7 @@ class Engine:
                      "reasons": [r.code for r in (self.keel.last.reasons if self.keel.last else ())],
                      "divert": self.keel.divert, "suspicion": self.seq_monitor.history[-1].as_dict()
                      if self.seq_monitor.history else None, "l2_suspicion": round(self._l2_sus, 3)},
+            "governance": self.governor.last.as_dict() if self.governor.last else None,
             "observer": self.observer.snapshot() if self.observer else {"available": False},
             "scenarios": {k: {kk: (round(vv, 1) if isinstance(vv, float) else vv) for kk, vv in v.items()}
                           for k, v in self.scenarios.items()},
@@ -588,6 +620,7 @@ class Engine:
             self._settle_logged, self._settle_why = False, "re-arm"
             if self.observer is not None:
                 self.observer.reset()
+            self.governor.reset()
             self._keel_logged = None
             self.log("sis", "interlock RE-ARMED by operator (safety channel back inside the re-arm band); "
                             "restarting from the design valve lineup, then the AI and L1 take over")
