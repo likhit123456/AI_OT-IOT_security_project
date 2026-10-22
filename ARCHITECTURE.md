@@ -182,8 +182,10 @@ and logs each decision's measured view next to the truth.
 
 `python -m live` runs the full stack continuously against the plant: the trained
 operator (`OllamaOperator`, falls back to baseline) -> governance authority ->
-L2 `BehaviorMonitor` -> L1 (`live/engine.py` `LiveL1`: the stub, bumpless-primed,
-production by feedforward instead of the stub's mis-paired loop) -> signed ->
+L2 `BehaviorMonitor` -> L1 (`l1_regulator.py` `L1Regulator`: four PI loops - pressure on
+purge with split range onto the feeds, level on product, production by feed-1
+feedforward plus a slow trim, A on feed 2 - bumpless, real-time integration) ->
+Keel -> signed by L1 ->
 `PlantService(gate, limits)`. It serves http://127.0.0.1:8765 with the GRFICS 3D
 reactor embedded, the AI's decisions (what it saw vs. the truth), trends, and
 scenario buttons (level drift, pressure dropout, forged commands, out-of-band
