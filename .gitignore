@@ -41,3 +41,6 @@ simulation/web_visualization/Build/*.unityweb
 model/scram-observer-gguf/hf-merged/
 training/_observer_rollout_tmp.jsonl
 training/collect_observer.log
+/training/_observer_v3_outputs/
+training/scram_observer_finetune.run.ipynb
+training/_observer_v3_train.log
