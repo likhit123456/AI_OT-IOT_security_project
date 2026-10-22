@@ -13,15 +13,14 @@ functions and compares the strings - change nothing here without that test.
   assistant = {"label", "score", "reason"} with LABELS (7, incl. provenance_violation)
 
 Measured fields only, never the SIS channel. The v3 observer has its own format
-(monitor/observer_prompt_format.py); this module only serves v2.
+(monitor/observer_v3_format.py), which reuses this module's proposals turn verbatim.
 """
 
 from __future__ import annotations
 
 import json
+import math
 from typing import Optional, Sequence, Tuple
-
-from monitor.observer_prompt_format import parse as _parse
 
 LABELS = ("normal", "excursion", "sensor_fault", "actuator_fault",
           "provenance_violation", "rationale_mismatch", "setpoint_drift")
@@ -67,6 +66,29 @@ def messages(user: str) -> list:
     return [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": user}]
 
 
-def parse(text: str) -> Tuple[Optional[dict], str]:
-    """{label, score, reason} over the v2 label set (same tolerant rules as v3)."""
-    return _parse(text, LABELS)
+def parse(text: str, labels: Sequence[str] = LABELS) -> Tuple[Optional[dict], str]:
+    """Model output -> ({label, score, reason}, "ok") or (None, why). Tolerates a
+    fenced reply or text around the object (same extraction as the operator's
+    l3_brain.policy.parse_llm_targets); rejects unknown labels and non-numbers,
+    clamps score to [0, 1]."""
+    if not isinstance(text, str) or not text.strip():
+        return None, "empty model output"
+    body = text.strip()
+    start, end = body.find("{"), body.rfind("}")
+    if start < 0 or end <= start:
+        return None, "no JSON object in model output"
+    try:
+        obj = json.loads(body[start:end + 1])
+    except ValueError as e:
+        return None, f"invalid JSON: {e}"
+    if not isinstance(obj, dict):
+        return None, "model output is not a JSON object"
+    label = obj.get("label")
+    if label not in labels:
+        return None, f"unknown label {label!r}"
+    score = obj.get("score", 0.0)
+    if isinstance(score, bool) or not isinstance(score, (int, float)) or not math.isfinite(score):
+        return None, f"score is not a finite number: {score!r}"
+    reason = obj.get("reason", "")
+    reason = reason.strip()[:200] if isinstance(reason, str) else ""
+    return {"label": label, "score": max(0.0, min(1.0, float(score))), "reason": reason}, "ok"

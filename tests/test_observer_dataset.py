@@ -1,77 +1,76 @@
-"""Fast tests for the L2 observer prompt format and dataset builder (no container, no model)."""
+"""Fast tests for the v3 observer format and dataset builder (no container, no model)."""
 from __future__ import annotations
 
 import json
-import re
 from collections import Counter
 
-from monitor import observer_prompt_format as F
-from monitor.sequential_monitor import INJECTION_PATTERNS
+import pytest
+
+from monitor import observer_v2_format as V2
+from monitor import observer_v3_format as V3
 from training import build_observer_dataset as B
 
 MEAS = {"pressure": 2700.0, "level": 44.18, "f1_flow": 384.0, "f2_flow": 21.2, "purge_flow": 717.9,
-        "product_flow": 127.5, "a_in_purge": 0.47, "b_in_purge": 0.14, "c_in_purge": 0.39,
-        "f1_valve_pos": 31.45, "f2_valve_pos": 13.24, "purge_valve_pos": 0.39, "product_valve_pos": 47.03,
-        "scrammed": False}
-SP = {"pressure_sp": 2700.6, "level_sp": 44.18, "production_rate_sp": 100.0, "a_comp_sp": 47.0}
+        "product_flow": 127.5, "a_in_purge": 0.47, "f1_valve_pos": 31.45, "f2_valve_pos": 13.24,
+        "purge_valve_pos": 0.39, "product_valve_pos": 47.03, "scrammed": False}
+SMALL = {"train": {"normal": 20, "excursion": 15, "sensor_fault": 15, "actuator_fault": 15},
+         "val": {"normal": 6, "excursion": 5, "sensor_fault": 5, "actuator_fault": 5},
+         "unseen": {"normal": 5, "excursion": 5, "sensor_fault": 5, "actuator_fault": 5}}
 
 
-def test_proposal_turn_round_trips_and_caps_history():
-    hist = [{**SP, "pressure_sp": 2700.0 + i} for i in range(12)]
-    obj = json.loads(F.proposal_to_json(SP, " holding design targets ", hist, 2701.234, 44.1789))
-    assert obj["input"] == "proposal" and obj["setpoints"] == SP
-    assert obj["rationale"] == "holding design targets"
-    assert len(obj["recent_setpoints"]) == F.HISTORY_N and obj["recent_setpoints"][-1]["pressure_sp"] == 2711.0
-    assert obj["measured"] == {"pressure": 2701.2, "level": 44.18}
-    assert "provenance" not in obj
+def test_v3_prompt_changes_only_the_telemetry_paragraph():
+    v2, v3 = V2.SYSTEM_PROMPT.split("\n"), V3.SYSTEM_PROMPT.split("\n")
+    assert len(v2) == len(v3) and [i for i, (a, b) in enumerate(zip(v2, v3)) if a != b] == [1]
+    assert "_valve_cmd" in v3[1] and v3[1].startswith('If input is "telemetry"')
+    assert V3.LABELS == V2.LABELS and V3.proposals_to_json is V2.proposals_to_json
 
 
-def test_telemetry_turn_has_stats_and_commanded_vs_actual():
-    meas = [{**MEAS, "pressure": 2700.0 + i} for i in range(60)]
-    cmd = [{"f1": 31.45, "f2": 13.24, "purge": 0.39, "product": 47.03 + (10 if i > 30 else 0)} for i in range(60)]
-    obj = json.loads(F.telemetry_to_json(meas, cmd))
-    assert obj["input"] == "telemetry" and obj["window_s"] == 29.5
-    p = obj["channels"]["pressure"]
-    assert (p["first"], p["last"], p["min"], p["max"]) == (2700.0, 2759.0, 2700.0, 2759.0)
-    assert abs(p["slope"] - 2.0) < 1e-6                      # 1 kPa per 0.5 s sample
-    assert obj["valves"]["product"]["max_gap"] == 10.0 and obj["valves"]["f1"]["max_gap"] == 0.0
-    assert set(obj["channels"]) == set(F.CHANNELS) and "truth" not in json.dumps(obj)
+def test_v3_telemetry_turn_has_long_window_all_flows_and_commanded_valves():
+    meas = [{**MEAS, "pressure": 2700.0 + i} for i in range(V3.WINDOW_N)]
+    cmd = [{"f1": 31.45, "f2": 13.24, "purge": 0.39, "product": 47.03 + (10 if i > 8 else 0)} for i in range(V3.WINDOW_N)]
+    obj = json.loads(V3.telemetry_to_json(meas, cmd, 15.0))
+    assert obj["input"] == "telemetry" and obj["window_s"] == 15.0
+    assert all(len(obj[k]) == V3.WINDOW_N for k in obj if isinstance(obj[k], list))
+    assert {"f2_flow", "f2_valve_pos", "f2_valve_cmd", "product_valve_cmd"} <= set(obj)
+    assert obj["product_valve_cmd"][-1] == 57.03 and obj["product_valve_pos"][-1] == 47.03
+    assert "truth" not in json.dumps(obj)
 
 
-def test_parse_is_tolerant_but_strict_on_labels():
-    v, note = F.parse('```json\n{"label": "sensor_fault", "score": 0.7, "reason": "Level frozen."}\n```')
-    assert note == "ok" and v == {"label": "sensor_fault", "score": 0.7, "reason": "Level frozen."}
-    assert F.parse('{"label": "excursion", "score": 3, "reason": ""}')[0]["score"] == 1.0
-    assert F.parse('{"label": "provenance_violation", "score": 0.9}')[0] is None    # dropped class
-    assert F.parse('{"label": "normal", "score": "high"}')[0] is None
-    assert F.parse("no json here")[0] is None
-    assert json.loads(F.verdict_to_json("normal", 0.8, "fine"))["score"] == 0.0
+@pytest.fixture(scope="module")
+def built(tmp_path_factory):
+    out = tmp_path_factory.mktemp("v3")
+    report = B.build(seed=1, out_dir=out, counts=SMALL, obs_states=out / "none.jsonl")
+    return out, report
 
 
-def test_training_injection_phrases_are_ones_the_rule_monitor_knows():
-    pats = [re.compile(p, re.I) for p, _ in INJECTION_PATTERNS]
-    for phrase in B.INJECTION_TRAIN:
-        assert any(p.search(phrase) for p in pats), phrase
+def _read(path):
+    return [json.loads(line)["messages"] for line in path.open(encoding="utf-8")]
 
 
-def test_builder_emits_valid_balanced_jsonl(tmp_path):
-    c = B.build(per_class=30, n_val=10, n_unseen=10, seed=1, out_dir=tmp_path,
-                obs_states=tmp_path / "none.jsonl")
-    assert c["train"]["by_label"] == {lab: 30 for lab in F.LABELS}
-    assert c["val"]["by_label"] == {lab: 10 for lab in F.LABELS}
-    assert set(c["unseen"]["by_label"]) == set(F.LABELS)
+def test_v2_proposal_examples_are_carried_over_byte_for_byte(built):
+    out, _ = built
+    for split in ("train", "val"):
+        v2 = Counter((m[1]["content"], m[2]["content"]) for m in _read(B.V2_DIR / f"observer_{split}.jsonl")
+                     if json.loads(m[1]["content"])["input"] == "proposals")   # v2 has a few duplicates; keep them
+        v3 = [(m[1]["content"], m[2]["content"]) for m in _read(out / f"observer_v3_{split}.jsonl")
+              if json.loads(m[1]["content"])["input"] == "proposals"]
+        assert Counter(v3) == v2
+
+
+def test_builder_emits_valid_jsonl_with_the_requested_telemetry_counts(built):
+    out, report = built
     users = {}
     for split in ("train", "val", "unseen"):
-        labels = Counter()
+        tel = Counter()
         users[split] = set()
-        for line in (tmp_path / f"observer_{split}.jsonl").open():
-            m = json.loads(line)["messages"]
-            assert [t["role"] for t in m] == ["system", "user", "assistant"]
-            assert m[0]["content"] == F.system_prompt()
-            assert json.loads(m[1]["content"])["input"] in ("proposal", "telemetry")
-            v, note = F.parse(m[2]["content"])
+        for m in _read(out / f"observer_v3_{split}.jsonl"):
+            assert [t["role"] for t in m] == ["system", "user", "assistant"] and m[0]["content"] == V3.SYSTEM_PROMPT
+            u = json.loads(m[1]["content"])
+            v, note = V3.parse(m[2]["content"])
             assert note == "ok" and (v["score"] == 0.0) == (v["label"] == "normal")
-            labels[v["label"]] += 1
-            users[split].add(m[1]["content"])
-        assert "provenance_violation" not in labels
-    assert not users["unseen"] & users["train"]                # held-out scenarios never trained on
+            if u["input"] == "telemetry":
+                tel[v["label"]] += 1
+                assert len(u["pressure"]) == V3.WINDOW_N and 14.0 <= u["window_s"] <= 20.0   # real recordings: small timing gaps
+                users[split].add(m[1]["content"])
+        assert dict(tel) == SMALL[split], split
+    assert not users["unseen"] & users["train"]               # held-out scenarios never trained on
