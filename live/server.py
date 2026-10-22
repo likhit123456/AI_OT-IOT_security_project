@@ -17,7 +17,7 @@ from urllib.parse import parse_qs, urlparse
 from live.engine import Engine
 
 STATIC = Path(__file__).resolve().parent / "static"
-ACTIONS = {"authority", "brain", "level_drift", "pressure_dropout", "forged", "stolen_key",
+ACTIONS = {"authority", "brain", "level_drift", "pressure_dropout", "forged", "operator_injection", "stolen_key",
            "oob_write", "clear_faults", "reset_interlock", "reset_plant"}
 TYPES = {".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css"}
 

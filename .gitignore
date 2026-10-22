@@ -37,3 +37,7 @@ unsloth_compiled_cache/
 # GRFICS Unity build: only Git LFS pointers locally (objects unavailable), so GitHub
 # rejects them. The working 3D build ships in the fortiphyd/grfics-simulation image.
 simulation/web_visualization/Build/*.unityweb
+# observer model build intermediates (weights are covered by model/**/*.safetensors|*.gguf)
+model/scram-observer-gguf/hf-merged/
+training/_observer_rollout_tmp.jsonl
+training/collect_observer.log
