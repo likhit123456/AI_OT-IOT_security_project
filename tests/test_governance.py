@@ -68,7 +68,7 @@ def test_drop_is_fast_recovery_slow_and_gated():
     s = drive(g, 40.0, 54.0, 0.0, DESIGN)                         # back in envelope; clean since t~5
     assert s.recovering and abs(s.applied - (G.FLOOR + G.RECOVER_PER_S * 14.0)) < 0.01
     g2 = G.Governor()
-    drive(g2, 0.0, 5.0, 1.0, DESIGN)
+    drive(g2, 0.0, 5.0, 1.0, OFF)
     s = drive(g2, 5.0, 19.0, 0.0, DESIGN)                         # < CLEAN_WINDOW_S of clean
     assert s.applied == G.FLOOR
     s = drive(g2, 19.0, 30.0, 0.0, DESIGN)
@@ -81,3 +81,54 @@ def test_floor_holds_under_sustained_maximal_suspicion():
     for i in range(200):
         s = g.update(i * 5.0, 1.0, "rationale", verdict(i * 5.0, "provenance_violation", 1.0), 1.0, OFF)
     assert s.applied == G.FLOOR_PROVENANCE > 0
+
+
+def test_residual_rule_evidence_fades_fast_only_inside_the_envelope():
+    def cusum(t):                                   # the rule monitor's own 120 s fade from 0.9
+        return 0.9 * 0.5 ** (t / 120.0)
+    out = G.Governor()
+    drive(out, 0.0, 2.0, 0.9, OFF)
+    t = 2.0
+    while t < 40.0:                                 # attack still on: raw score used as-is
+        s = out.update(t, cusum(t), "cusum", None, 0.0, OFF)
+        t += 0.1
+    assert abs(s.corroborated - cusum(39.0)) < 0.02 and s.corroborated > G.TIER1
+    inn = G.Governor()
+    drive(inn, 0.0, 2.0, 0.9, OFF)
+    t, cleared = 2.0, None
+    while t < 40.0:                                 # proposals back at design
+        s = inn.update(t, cusum(t), "cusum", None, 0.0, DESIGN)
+        if cleared is None and s.corroborated < G.TIER1:
+            cleared = t
+        t += 0.1
+    assert cleared is not None and cleared - 2.0 <= 16.0
+
+
+def test_reattack_during_recovery_clamps_to_floor_fast():
+    g = G.Governor()
+    drive(g, 0.0, 5.0, 0.9, OFF)
+    s = drive(g, 5.0, 45.0, 0.9, DESIGN)            # flat residual discounted, recovery under way
+    assert s.corroborated == 0.0 and s.recovering and s.applied > G.FLOOR
+    a0, t, hit = s.applied, 45.0, None
+    while t < 55.0:                                 # proposals leave the envelope again
+        s = g.update(t, 0.9, "cusum", None, 0.0, OFF)
+        if hit is None and s.applied <= G.FLOOR + 1e-9:
+            hit = t
+        t += 0.1
+    assert hit is not None and hit - 45.0 <= 2.0 + (a0 - G.FLOOR) / G.DROP_PER_S
+
+
+def test_per_cycle_rule_checks_are_never_discounted():
+    g = G.Governor()
+    s = drive(g, 0.0, 60.0, 0.9, DESIGN)            # injection-pattern rationale with design setpoints
+    g.update(60.0, 0.9, "rationale", None, 0.0, DESIGN)
+    s = drive_src(g, 60.1, 80.0, 0.9, "rationale", DESIGN)
+    assert s.corroborated == 0.9 and s.applied == G.FLOOR
+
+
+def drive_src(g, t0, t1, rule, src, intent, dt=0.1):
+    t, s = t0, None
+    while t < t1:
+        s = g.update(t, rule, src, None, 0.0, intent)
+        t += dt
+    return s

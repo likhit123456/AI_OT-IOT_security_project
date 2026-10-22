@@ -45,6 +45,15 @@ DROP_PER_S = 0.25             # applied ceiling may fall this fast (1.0 -> 0.15 
 RECOVER_PER_S = 0.03          # ... and rise only this fast
 CLEAN_WINDOW_S = 15.0         # suspicion below TIER1 this long before any recovery
 RULE_SAMPLE_S = 1.0           # one rule-monitor "call" per second (it scores every cycle)
+# Once the operator's proposals are back inside the design envelope, the rule monitor's
+# RESIDUAL evidence (its CUSUM fades with a 120 s half-life, by design, so slow attacks
+# accumulate) is discounted with this much shorter half-life: 0.9 -> below TIER1 in
+# ~14 s instead of ~190 s. Outside the envelope (during an attack) the raw score is used
+# unchanged, and any NEW rise in the raw score counts in full even inside the envelope.
+# Only the ACCUMULATED sources are residual; per-cycle checks (rationale patterns, Keel
+# codes) are re-evaluated every cycle and always count in full.
+RESIDUAL_HALF_LIFE_S = 9.0
+RESIDUAL_SOURCES = ("cusum", "run")
 
 # design envelope for recovery: the operator's proposal must be this close to design
 ENVELOPE = {"pressure_sp": 30.0, "level_sp": 2.0, "production_rate_sp": 5.0}
@@ -105,6 +114,8 @@ class Governor:
         self._rule_prev: Optional[float] = None
         self._rule_corr, self._rule_label = 0.0, None
         self._rule_sample_t = -1e9
+        self._rule_eff: Optional[float] = None       # rule score after the residual discount
+        self._rule_raw_prev: Optional[float] = None
         self._clean_since: Optional[float] = None
         self.last: Optional[GovState] = None
 
@@ -120,10 +131,16 @@ class Governor:
             self._obs_corr, self._obs_label = min(self._obs_prev[1], cur[1]), cur[0]
         self._obs_prev = cur
 
-    def _rule(self, t: float, score: float, source: str) -> None:
+    def _rule(self, t: float, raw: float, source: str, env: bool) -> None:
         if t - self._rule_sample_t < RULE_SAMPLE_S:
             return
-        self._rule_sample_t = t
+        dt, self._rule_sample_t = t - self._rule_sample_t, t
+        if env and source in RESIDUAL_SOURCES and self._rule_eff is not None:
+            fresh = max(0.0, raw - self._rule_raw_prev)          # new evidence counts in full
+            score = min(raw, self._rule_eff * 0.5 ** (dt / RESIDUAL_HALF_LIFE_S) + fresh)
+        else:
+            score = raw
+        self._rule_eff, self._rule_raw_prev = score, raw
         if self._rule_prev is not None and min(self._rule_prev, score) >= TIER1:
             self._rule_corr, self._rule_label = min(self._rule_prev, score), f"rule:{source}"
         elif score < TIER1:
@@ -135,7 +152,8 @@ class Governor:
         dt = 0.0 if self._last_t is None else max(0.0, min(t - self._last_t, 5.0))
         self._last_t = t
         self._observer(obs_verdict)
-        self._rule(t, rule_score, rule_source)
+        env = in_envelope(intent)
+        self._rule(t, rule_score, rule_source, env)
         if self._obs_corr >= self._rule_corr:
             s, label = self._obs_corr, self._obs_label
         else:
@@ -145,7 +163,6 @@ class Governor:
             self._clean_since = t if self._clean_since is None else self._clean_since
         else:
             self._clean_since = None
-        env = in_envelope(intent)
         recovering = False
         if g < self.applied:
             self.applied = max(g, self.applied - DROP_PER_S * dt)
