@@ -1,6 +1,6 @@
 """Phase 4b live sanity set (python experiments/observer_v3_live.py), in-process on live.engine.Engine
 Audits every telemetry prompt against the v3 parity gate and every observer verdict handed
-to governance. Writes JSON results to argv[1]."""
+to governance. Writes JSON results to argv[1] (default: experiments/observer_v3_live_results.json)."""
 import json, sys, time
 from collections import Counter
 sys.path[:0] = [".", "tests"]

@@ -67,9 +67,11 @@ class PlantService:
         # sensor fault injected via fault_injection.py corrupts "measured"
         # only, so it can mislead L1/L2/L3 but can never stop or delay a real
         # trip here (assumes standard SIS independence - see ARCHITECTURE.md).
+        # no default: a missing reading is invalid and trips as sis_sensor_fault (a 0.0
+        # default would read as an empty vessel and trip with the wrong cause, level_low)
         scrammed = self.safety.evaluate(
-            pressure=o.get("pressure", 0.0),
-            level=o.get("liquid_level", 0.0),
+            pressure=o.get("pressure"),
+            level=o.get("liquid_level"),
         )
         return PlantState(
             pressure=m.get("pressure", 0.0),
@@ -116,7 +118,7 @@ class PlantService:
             command = command if ok else gate.last_good
         # A non-finite valve value is never applied: fall back to last-good, or
         # hold the valves where they are (not writing a setpoint holds it).
-        if not command.is_finite():
+        if command is not None and not command.is_finite():
             command = gate.last_good if gate is not None and gate.last_good is not None else None
         cmd = command.clamped() if command is not None else None
         if self.safety.tripped:
@@ -148,4 +150,4 @@ class PlantService:
         """
         raw = self.client.read()
         o = raw.get("outputs", {})
-        return self.safety.reset(o.get("pressure", 0.0), o.get("liquid_level", 0.0))
+        return self.safety.reset(o.get("pressure"), o.get("liquid_level"))

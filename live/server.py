@@ -71,7 +71,11 @@ def make_handler(engine: Engine):
                 return self._proxy(u.path, u.query)
             if u.path == "/api/state":
                 q = parse_qs(u.query)
-                data = engine.read(int(q.get("h", ["0"])[0]), int(q.get("e", ["0"])[0]))
+                try:
+                    since_h, since_e = int(q.get("h", ["0"])[0]), int(q.get("e", ["0"])[0])
+                except ValueError:
+                    return self._send(400, b'{"error":"h and e must be integers"}')
+                data = engine.read(since_h, since_e)
                 return self._send(200, json.dumps(data).encode())
             name = "index.html" if u.path in ("/", "") else u.path.lstrip("/")
             f = (STATIC / name).resolve()
@@ -84,6 +88,8 @@ def make_handler(engine: Engine):
                 return self._send(404, b'{"error":"not found"}')
             try:
                 body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))) or b"{}")
+                if not isinstance(body, dict):
+                    raise ValueError("request body must be a JSON object")
                 action = body.pop("action", None)
                 if action not in ACTIONS:
                     raise ValueError(f"unknown action {action!r}")

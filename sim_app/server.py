@@ -128,14 +128,14 @@ class Plant:
             # 0/0/100/100 and those positions persist after release. Mirroring the plant keeps
             # the +/- steps based on where each valve really is, however it got there.
             if s:
-                self.setpoints = {v: float(s.get(f"{v}_valve_pos", 0.0)) for v in VALVES}
+                self.setpoints = {v: _num(s.get(f"{v}_valve_pos")) for v in VALVES}
             self.peak_pressure = max(self.peak_pressure, p)
             if not self.ruptured and p >= RUPTURE_THRESHOLD_KPA:
                 self.ruptured, self.ruptured_t, self.rupture_pressure = True, t, round(p, 1)
             self.seq += 1
             self.history.append([self.seq, t, round(p, 2), round(_num(o.get("liquid_level")), 3),
                                  *(round(_num(o.get(f"{v}_flow")), 2) for v in VALVES),
-                                 *(round(s.get(f"{v}_valve_pos", 0.0), 2) for v in VALVES)])
+                                 *(round(_num(s.get(f"{v}_valve_pos")), 2) for v in VALVES)])
 
     # ---- views / actions ----------------------------------------------------
     def snapshot(self, since: int = 0) -> dict:

@@ -146,6 +146,7 @@ class Engine:
         self.gate = ProvenanceGate(L1_KEY)
         self.svc = PlantService(self.host, self.port, limits=self.limits, gate=self.gate).start()
         fi.clear_all(self.svc.client)
+        self._clear_actuator_faults()       # attaching without a reset: drop a previous run's valve faults
         self.faults.clear()
         self.l1 = L1Regulator(L1_KEY)       # regulates AND signs (after Keel) with the L1 key
         self._l1_t: Optional[float] = None
@@ -217,7 +218,7 @@ class Engine:
         while not self._stop.is_set():
             try:
                 while not self._q.empty():
-                    self._q.get_nowait()()
+                    self._run_action(self._q.get_nowait())
                 self._cycle()
             except (ConnectionError, OSError, ValueError) as e:
                 self._reconnect(e)
@@ -230,6 +231,20 @@ class Engine:
                 last_hist = self.now()
                 self._record()
             time.sleep(POLL_S)
+
+    def _run_action(self, fn: Callable[[], None]) -> None:
+        """A queued operator action. Its own errors (e.g. a bad argument) are logged as
+        such; only a real plant I/O error is left to the loop's reconnect handler."""
+        try:
+            fn()
+        except (ConnectionError, OSError):
+            raise
+        except Exception as e:                       # noqa: BLE001
+            self.log("error", f"action failed: {type(e).__name__}: {e}")
+
+    def _clear_actuator_faults(self) -> None:
+        self.svc.client.write_inputs({f"{v}_stuck": 0 for v in ACTUATOR_VALVES}
+                                     | {f"{v}_cv_scale": 1.0 for v in ACTUATOR_VALVES})
 
     def _reconnect(self, err: Exception) -> None:
         self.status = "plant connection lost; reconnecting"
@@ -591,13 +606,14 @@ class Engine:
 
     def _act_clear_faults(self) -> None:
         fi.clear_all(self.svc.client)
-        self.svc.client.write_inputs({f"{v}_stuck": 0 for v in ACTUATOR_VALVES}
-                                     | {f"{v}_cv_scale": 1.0 for v in ACTUATOR_VALVES})
+        self._clear_actuator_faults()
         self.faults.clear()
         self.scenarios.pop("forged", None)
         self.scenarios.pop("valve_stick", None)
         if self.scenarios.pop("stolen_key", None):
             self.log("attack", "stolen-key attacker stopped")
+        if self.scenarios.pop("operator_injection", None):
+            self.log("attack", "operator injection stopped; the brain is back on its own reading")
         self.log("plant", "all sensor and actuator faults cleared; attacks stopped")
 
     def _act_reset_interlock(self) -> None:

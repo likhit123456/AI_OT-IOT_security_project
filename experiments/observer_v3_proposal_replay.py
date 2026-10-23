@@ -1,4 +1,7 @@
 """Capture live proposal inputs (clean, then product cv fault) and replay each through v3 and v2.
+
+    python experiments/observer_v3_proposal_replay.py [OUT]   (default: experiments/observer_v3_proposal_replay.json)
+"""
 import json, sys, time, urllib.request
 sys.path[:0] = ["."]
 from live.engine import Engine
@@ -13,7 +16,8 @@ caps, seen = [], set()
 def grab(phase, seconds):
     end = time.monotonic() + seconds
     while time.monotonic() < end:
-        u = eng.observer.last_user.get("proposals") if eng.observer else None
+        path = eng.observer.paths.get("proposals") if eng.observer else None
+        u = path.last_user.get("proposals") if path else None
         if u and u not in seen:
             seen.add(u)
             caps.append({"phase": phase, "t": round(eng.now(), 1), "user": u})

@@ -295,7 +295,7 @@ class OllamaOperator(LLMOperator):
 
     def _call_model(self, state: PlantState, last: SupervisoryTargets) -> str:
         resp = self._http_post(f"{self.base_url}/api/chat", {
-            "model": self.model, "stream": False,
+            "model": self.model, "stream": False, "keep_alive": "30m",   # stay resident beside the observers
             "messages": [{"role": "system", "content": SYSTEM_PROMPT},
                          {"role": "user", "content": build_state_prompt(state)}],
             "options": {"temperature": 0, "num_predict": 160}}, self.timeout_s)

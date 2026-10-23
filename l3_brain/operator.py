@@ -30,6 +30,7 @@ client. The loop here is already server-side.
 
 from __future__ import annotations
 
+import math
 import sys
 import os
 from dataclasses import replace
@@ -66,7 +67,9 @@ class AIOperator:
         downstream by governance/L1 and, ultimately, by L0's interlock, which
         acts on the independent SIS channel regardless of what L3 asks for.
         """
-        a = max(0.0, min(1.0, self.authority_fn()))
+        a = float(self.authority_fn())
+        # fail closed: NaN would otherwise read as FULL authority (min(1.0, nan) is 1.0)
+        a = max(0.0, min(1.0, a)) if math.isfinite(a) else 0.0
         if a >= 1.0:
             return replace(targets, authority=a)
         if a <= 0.0:

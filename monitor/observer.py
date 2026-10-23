@@ -41,7 +41,7 @@ import threading
 import time
 import urllib.request
 from collections import deque
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Callable, Deque, Optional
 
 from l3_brain.prompt_format import measured_dict
@@ -165,19 +165,23 @@ class Observer:
                 return                              # a call (this path's or the other's) is in flight
             self._last_check_t = t
             self._next_kind = "telemetry" if kind == "proposals" else "proposals"
-            if kind == "proposals":
-                self._proposals_dirty = False
-                user = self.fmt.proposals_to_json(list(self._proposals))
-            else:
-                ts = [s[0] for s in self._samples]
-                meas = [s[1] for s in self._samples]
-                user = (self.fmt.telemetry_to_json(meas, [s[2] for s in self._samples], ts[-1] - ts[0])
-                        if self.commanded else self.fmt.telemetry_to_json(meas, ts[-1] - ts[0]))
-            self.last_user[kind] = user
-            if self._background:
-                threading.Thread(target=self._run, args=(t, kind, user), daemon=True).start()
-            else:
-                self._run(t, kind, user)
+            try:
+                if kind == "proposals":
+                    self._proposals_dirty = False
+                    user = self.fmt.proposals_to_json(list(self._proposals))
+                else:
+                    ts = [s[0] for s in self._samples]
+                    meas = [s[1] for s in self._samples]
+                    user = (self.fmt.telemetry_to_json(meas, [s[2] for s in self._samples], ts[-1] - ts[0])
+                            if self.commanded else self.fmt.telemetry_to_json(meas, ts[-1] - ts[0]))
+                self.last_user[kind] = user
+                if self._background:
+                    threading.Thread(target=self._run, args=(t, kind, user), daemon=True).start()
+                    return
+            except Exception:                       # noqa: BLE001 - never hold the shared gate
+                self._gate.release()
+                raise
+            self._run(t, kind, user)
             return
 
     # ---- model call (any failure -> no verdict, suspicion 0) -----------------

@@ -53,6 +53,10 @@ RULE_SAMPLE_S = 1.0           # one rule-monitor "call" per second (it scores ev
 # Only the ACCUMULATED sources are residual; per-cycle checks (rationale patterns, Keel
 # codes) are re-evaluated every cycle and always count in full.
 RESIDUAL_HALF_LIFE_S = 9.0
+# Observer evidence expires: with no verdict for this long (model down, path fallen back to
+# rule-monitor-only, observer reset) its corroborated suspicion no longer holds the ceiling.
+# Proposals are checked every ~5 s, so this is several missed calls.
+OBS_STALE_S = 30.0
 RESIDUAL_SOURCES = ("cusum", "run")
 
 # design envelope for recovery: the operator's proposal must be this close to design
@@ -119,9 +123,13 @@ class Governor:
         self._clean_since: Optional[float] = None
         self.last: Optional[GovState] = None
 
-    def _observer(self, verdict) -> None:
+    def _observer(self, verdict, t: float) -> None:
         """One observer call = one new proposals verdict (invalid ones are skipped)."""
-        if verdict is None or verdict.label is None or verdict.t == self._obs_seen_t:
+        if verdict is None or t - verdict.t > OBS_STALE_S:
+            # no observer evidence (none yet, model gone, or stale): it holds nothing
+            self._obs_corr, self._obs_label, self._obs_prev = 0.0, None, None
+            return
+        if verdict.label is None or verdict.t == self._obs_seen_t:
             return
         self._obs_seen_t = verdict.t
         cur = (verdict.label, verdict.score) if verdict.label in PROPOSAL_LABELS else None
@@ -151,7 +159,7 @@ class Governor:
                obs_suspicion: float = 0.0, intent=None) -> GovState:
         dt = 0.0 if self._last_t is None else max(0.0, min(t - self._last_t, 5.0))
         self._last_t = t
-        self._observer(obs_verdict)
+        self._observer(obs_verdict, t)
         env = in_envelope(intent)
         self._rule(t, rule_score, rule_source, env)
         if self._obs_corr >= self._rule_corr:

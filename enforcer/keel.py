@@ -202,7 +202,6 @@ class Keel:
 
     def step(self, cmd: ControlCommand, state: PlantState, sis: SisFrame, t: float,
              suspicion: float = 0.0) -> Decision:
-        lim = self.lim
         dt = 0.0 if self._last_t is None else max(0.0, min(t - self._last_t, 5.0))
         self._last_t = t
 
