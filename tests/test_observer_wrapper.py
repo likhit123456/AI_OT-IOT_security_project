@@ -92,3 +92,101 @@ def test_live_inputs_use_the_exact_v2_format():
             assert len(u["pressure"]) == V2.WINDOW_N and 2.0 <= u["window_s"] <= 3.0
         else:
             assert u["cycles"] == V2.HISTORY_N and u["proposals"][-1]["provenance"] == V2.OPERATOR_CHAIN
+
+
+# ---- v3 path (served first; monitor/observer_v3_format) ---------------------------------
+from contracts import ControlCommand
+from monitor import observer_v3_format as V3
+from test_observer_v3_format import rebuild
+
+CMD = ControlCommand(f1_valve=31.45, f2_valve=13.24, purge_valve=0.3926, product_valve=52.0)
+
+
+def make_v3(replies, **kw):
+    bodies = []
+
+    def post(url, body, timeout):
+        bodies.append(body)
+        r = replies(json.loads(body["messages"][1]["content"])["input"])
+        if isinstance(r, Exception):
+            raise r
+        return {"message": {"content": r}} if isinstance(r, str) else r
+
+    return O.Observer(fmt=V3, model="scram-observer-v3", num_ctx=3072, background=False, http_post=post, **kw), bodies
+
+
+def run_v3(obs, seconds=40.0, cmd=CMD, start=0.0):
+    t = start
+    while t < start + seconds:
+        obs.feed(t, STATE, INTENT, commanded=cmd)
+        t += 0.1
+
+
+def test_v3_live_built_telemetry_passes_the_v3_parity_gate():
+    obs, bodies = make_v3(lambda kind: verdict("normal", 0))
+    run_v3(obs)
+    tel = [b for b in bodies if json.loads(b["messages"][1]["content"])["input"] == "telemetry"]
+    assert tel and all(b["options"]["num_ctx"] == 3072 for b in bodies)
+    for b in tel:
+        assert b["messages"][0]["content"] == V3.SYSTEM_PROMPT
+        user = b["messages"][1]["content"]
+        assert rebuild(user) == user                         # byte-for-byte through the v3 module
+        u = json.loads(user)
+        assert len(u["pressure"]) == V3.WINDOW_N and 14.0 <= u["window_s"] <= 20.0   # training range
+        assert u["f2_flow"][-1] == 21.2 and u["product_valve_cmd"][-1] == 52.0 and u["product_valve_pos"][-1] == 47.03
+        assert all(isinstance(x, float) for k, xs in u.items() if isinstance(xs, list) and k != "scrammed" for x in xs)
+
+
+def test_v3_live_window_has_the_stored_key_order():
+    from test_observer_v3_format import telemetry_key_order
+    obs, bodies = make_v3(lambda kind: verdict("normal", 0))
+    run_v3(obs)
+    u = next(json.loads(b["messages"][1]["content"]) for b in bodies
+             if json.loads(b["messages"][1]["content"])["input"] == "telemetry")
+    assert list(u) == telemetry_key_order()
+
+
+def test_v3_takes_no_telemetry_sample_without_a_command():
+    obs, bodies = make_v3(lambda kind: verdict("normal", 0))
+    run_v3(obs, cmd=None)
+    assert not any(json.loads(b["messages"][1]["content"])["input"] == "telemetry" for b in bodies)
+
+
+def test_v3_telemetry_verdicts_never_reach_authority():
+    for label in V3.ATTACK_LABELS:                           # even a proposal label on a telemetry window
+        obs, _ = make_v3(lambda kind, lab=label: verdict("normal", 0) if kind == "proposals" else verdict(lab, 0.95))
+        run_v3(obs)
+        assert obs.last["telemetry"].label == label and obs.suspicion() == 0.0
+
+
+def test_v3_proposal_side_feeds_authority_exactly_as_v2():
+    obs, _ = make_v3(lambda kind: verdict("provenance_violation", 0.9) if kind == "proposals" else verdict("normal", 0))
+    run_v3(obs)
+    assert obs.suspicion() == 0.9
+    obs2, _ = make_v3(lambda kind: verdict("setpoint_drift", 0.05) if kind == "proposals" else verdict("normal", 0))
+    run_v3(obs2)
+    assert obs2.suspicion() == O.SCORE_FLOOR
+
+
+def test_chain_prefers_v3_then_v2_then_rule_monitor_only():
+    pick = lambda installed, skip=(): O.make_observer(skip=skip, available=lambda m: m in installed)
+    o = pick({"scram-observer-v3", "scram-observer"})
+    assert o.model == "scram-observer-v3" and o.fmt is V3 and o.num_ctx == 3072
+    o = pick({"scram-observer"})
+    assert o.model == "scram-observer" and o.fmt is V2 and o.num_ctx is None
+    assert pick({"scram-observer-v3", "scram-observer"}, skip=("scram-observer-v3",)).model == "scram-observer"
+    assert pick(set()) is None
+    assert pick({"scram-observer"}, skip=("scram-observer-v3", "scram-observer")) is None
+
+
+def test_backend_errors_count_up_and_a_reply_resets_them():
+    state = {"fail": True}
+    obs, _ = make_v3(lambda kind: RuntimeError("model not loaded") if state["fail"] else verdict("normal", 0))
+    run_v3(obs)
+    assert obs.consecutive_errors >= O.MAX_CONSECUTIVE_ERRORS and obs.suspicion() == 0.0
+    state["fail"] = False
+    run_v3(obs, seconds=10.0, start=40.0)
+    assert obs.consecutive_errors == 0
+    bad, _ = make_v3(lambda kind: "not json")             # a bad OUTPUT is not a backend error
+    run_v3(bad)
+    assert bad.consecutive_errors == 0 and bad.failures >= 1

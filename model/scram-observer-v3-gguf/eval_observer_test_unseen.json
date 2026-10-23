@@ -1,0 +1,2480 @@
+{
+ "split": "observer_test_unseen",
+ "n": 480,
+ "valid_json": 1.0,
+ "accuracy": 0.7145833333333333,
+ "per_class_recall": {
+  "normal": 0.925,
+  "excursion": 0.9916666666666667,
+  "sensor_fault": 0.21666666666666667,
+  "actuator_fault": 0.725,
+  "provenance_violation": null,
+  "rationale_mismatch": null,
+  "setpoint_drift": null
+ },
+ "detection_rate": 0.6472222222222223,
+ "false_alarm_rate": 0.075,
+ "n_normal": 120,
+ "confusion": {
+  "normal": {
+   "sensor_fault": 7,
+   "normal": 111,
+   "actuator_fault": 2
+  },
+  "sensor_fault": {
+   "normal": 93,
+   "sensor_fault": 26,
+   "actuator_fault": 1
+  },
+  "excursion": {
+   "excursion": 119,
+   "normal": 1
+  },
+  "actuator_fault": {
+   "normal": 33,
+   "actuator_fault": 87
+  }
+ },
+ "by_kind": {
+  "proposals": null,
+  "telemetry": {
+   "n": 480,
+   "valid_json": 1.0,
+   "accuracy": 0.7145833333333333,
+   "per_class_recall": {
+    "normal": 0.925,
+    "excursion": 0.9916666666666667,
+    "sensor_fault": 0.21666666666666667,
+    "actuator_fault": 0.725,
+    "provenance_violation": null,
+    "rationale_mismatch": null,
+    "setpoint_drift": null
+   },
+   "detection_rate": 0.6472222222222223,
+   "false_alarm_rate": 0.075,
+   "n_normal": 120,
+   "confusion": {
+    "normal": {
+     "sensor_fault": 7,
+     "normal": 111,
+     "actuator_fault": 2
+    },
+    "sensor_fault": {
+     "normal": 93,
+     "sensor_fault": 26,
+     "actuator_fault": 1
+    },
+    "excursion": {
+     "excursion": 119,
+     "normal": 1
+    },
+    "actuator_fault": {
+     "normal": 33,
+     "actuator_fault": 87
+    }
+   }
+  }
+ },
+ "predictions": [
+  {
+   "gold": "normal",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts down by 0.0 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2566 kPa (range 47.4), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2547 kPa (range 15.0), level 44.0 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2541 kPa (range 27.2), level 44.3 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.36, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2756 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2645 kPa (range 41.1), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2546 kPa (range 10.9), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2561 kPa (range 14.5), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2653 kPa (range 31.4), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2530 kPa (range 21.8), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2573 kPa (range 41.2), level 44.1 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2835 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2616 kPa (range 14.4), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2544 kPa (range 17.1), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Pressure drifts down by 16.7 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2470 kPa (range 20.0), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2640 kPa (range 27.2), level 44.3 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2913 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2555 kPa (range 43.0), level 44.4 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2546 kPa (range 11.6), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2488 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2512 kPa (range 19.9), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 57.7% but sits at 60.3% (gap up to 2.6%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2548 kPa (range 31.0), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2564 kPa (range 10.5), level 44.0 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2502 kPa (range 19.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2588 kPa (range 52.8), level 44.1 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.63, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2852 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"F1 valve is commanded to 37.0% but sits at 51.5% (gap up to 14.5%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2774 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2540 kPa (range 18.7), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2547 kPa (range 26.7), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2809 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2649 kPa (range 31.5), level 44.3 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2497 kPa (range 20.0), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2624 kPa (range 8.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"F1 valve is commanded to 43.6% but sits at 60.0% (gap up to 16.4%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2583 kPa (range 46.2), level 44.4 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2591 kPa (range 44.6), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Purge valve is commanded to 47.1% but sits at 31.8% (gap up to 16.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2547 kPa (range 16.8), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2800 kPa, rising +4.2 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2548 kPa (range 14.0), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2606 kPa (range 43.1), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2612 kPa (range 43.2), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2506 kPa (range 19.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2544 kPa (range 9.8), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2537 kPa (range 19.5), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"Purge valve is commanded to 41.3% but sits at 30.0% (gap up to 11.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2810 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2620 kPa (range 43.5), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"F1 valve is commanded to 52.9% but sits at 60.0% (gap up to 57.1%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2589 kPa (range 45.0), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2650 kPa (range 41.2), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2530 kPa (range 15.7), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.51, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2816 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.42, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2872 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2536 kPa (range 21.8), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 55.4% but sits at 60.3% (gap up to 14.9%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2532 kPa (range 20.0), level 43.9 % (range 0.03); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2562 kPa (range 15.3), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"Purge valve is commanded to 4.2% but sits at 4.2% (gap up to 0.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2622 kPa (range 43.7), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2563 kPa (range 36.7), level 44.0 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.53, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2903 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2801 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Product valve is commanded to 46.4% but sits at 60.5% (gap up to 14.1%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.55, \"reason\": \"Product valve is commanded to 52.1% but sits at 60.4% (gap up to 5.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2553 kPa (range 10.0), level 44.0 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2684 kPa (range 35.1), level 44.3 % (range 0.07); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2995 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2551 kPa (range 38.9), level 44.4 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 4.1 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts down by 0.0 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.46, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2899 kPa, rising +3.7 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Purge flow drops to 0 in 3 of 16 s while the process keeps moving.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Purge valve is commanded to 13.5% but sits at 0.0% (gap up to 13.5%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2497 kPa (range 19.6), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2542 kPa (range 18.0), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"F1 valve is commanded to 36.9% but sits at 45.3% (gap up to 9.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2528 kPa (range 16.5), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"F1 valve is commanded to 14.7% but sits at 1.0% (gap up to 5.1%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"F1 valve is commanded to 12.5% but sits at 0.0% (gap up to 12.5%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2498 kPa (range 19.7), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.53, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2814 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2580 kPa (range 49.0), level 44.1 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2550 kPa (range 33.5), level 44.4 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2548 kPa (range 16.0), level 44.0 % (range 0.04); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2507 kPa (range 19.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2578 kPa (range 62.2), level 44.1 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2528 kPa (range 16.5), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"Purge valve is commanded to 8.9% but sits at 0.0% (gap up to 8.9%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.75, \"reason\": \"F1 valve is commanded to 19.4% but sits at 1.0% (gap up to 18.4%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2689 kPa (range 33.9), level 44.4 % (range 0.08 ); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2543 kPa (range 17.6), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2511 kPa (range 19.9), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2872 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2542 kPa (range 27.2), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2680 kPa (range 25.8), level 44.3 % (range 0.07); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 4.0 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2551 kPa (range 9.3), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"F1 valve is commanded to 32.5% but sits at 38.0% (gap up to 5.5%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2524 kPa (range 18.9), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2484 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.6, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2864 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.63, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2853 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2530 kPa (range 15.3), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 4.1 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2781 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2552 kPa (range 13.1), level 44.0 % (range 0.04); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2546 kPa (range 12.3), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.36, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2756 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2481 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 53.7% but sits at 60.6% (gap up to 6.9%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Product valve is commanded to 48.9% but sits at 60.6% (gap up to 12.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2558 kPa (range 44.8), level 44.4 % (range 0.04); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"F1 valve is commanded to 13.9% but sits at 0.0% (gap up to 13.9%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2538 kPa (range 19.1), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 54.6% but sits at 60.3% (gap up to 55.7%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2813 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2615 kPa (range 43.3), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2571 kPa (range 36.7), level 44.1 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.42, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2874 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.61, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2844 kPa/s rise.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Feed 1 flow jumps up by 30.0 with no matching change in the valves or flows.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2641 kPa (range 31.0), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2542 kPa (range 27.2), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2546 kPa (range 15.8), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2805 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.46, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2796 kPa, rising +4.2 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 56.7% but sits at 60.3% (gap up to 3.6%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps up by 96.0 with no matching change in the valves or flows.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Purge valve is commanded to 10.8% but sits at 0.0% (gap up to 10.8%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2687 kPa (range 34.4), level 44.3 % (range 0.07); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2584 kPa (range 45.9), level 44.4 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2808 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2569 kPa (range 31.9), level 44.1 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2897 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Purge valve is commanded to 38.5% but sits at 30.0% (gap up to 11.5%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2893 kPa (range 115.6), level 44.8 % (range 0.08); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2527 kPa (range 17.2), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 58.1% but sits at 60.3% (gap up to 12.2%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.53, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2823 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2563 kPa (range 25.6), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2567 kPa (range 38.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2760 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2686 kPa (range 34.9), level 44.3 % (range 0.07); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2594 kPa (range 43.7), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"F2 valve is commanded to 91.1% but sits at 49.8% (gap up to 46.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.62, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2839 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2572 kPa (range 56.4), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Purge flow drops to 0 in 1 of 16 s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2568 kPa (range 29.3), level 44.0 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2791 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2869 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2663 kPa (range 32.5), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2532 kPa (range 14.4), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.39, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2759 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps up by 13.9 with no matching change in the valves or flows.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 60.6% but sits at 60.6% (gap up to 0.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2549 kPa (range 32.4), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2522 kPa (range 19.6), level 44.2 % (range 0.07); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 3.1 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2602 kPa (range 43.0), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"F1 valve is commanded to 46.7% but sits at 28.5% (gap up to 20.2%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2581 kPa (range 63.5), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2761 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2489 kPa (range 20.0), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2547 kPa (range 18.9), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2547 kPa (range 23.0), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.51, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2820 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2900 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2550 kPa (range 34.6), level 44.4 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2547 kPa (range 15.8), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 3.4 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2763 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2621 kPa (range 19.0), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.61, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2844 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 3.4 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2508 kPa (range 19.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2494 kPa (range 19.5), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.63, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2925 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2487 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Purge valve is commanded to 14.1% but sits at 0.0% (gap up to 14.1%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2800 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2791 kPa, rising +4.2 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 55.2% but sits at 60.3% (gap up to 9.1%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2612 kPa (range 43.3), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 57.3% but sits at 60.3% (gap up to 3.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.6, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2853 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2485 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2607 kPa (range 43.1), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2547 kPa (range 17.9), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2541 kPa (range 18.1), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2613 kPa (range 43.3), level 44.4 % (range 0.11); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 4.0 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2551 kPa (range 36.8), level 44.4 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 60.6% but sits at 60.6% (gap up to 0.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2768 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2660 kPa (range 41.2), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2880 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.63, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2863 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2603 kPa (range 43.0), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.62, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2932 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2789 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.31, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2865 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2564 kPa (range 31.0), level 44.0 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2546 kPa (range 14.8), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2554 kPa (range 11.1), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.6, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2934 kPa, rising +3.4 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Product valve is commanded to 48.6% but sits at 60.4% (gap up to 14.8%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.95, \"reason\": \"Product valve is commanded to 71.5% but sits at 60.4% (gap up to 11.1%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"F1 valve is commanded to 49.4% but sits at 60.0% (gap up to 16.6%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2614 kPa (range 16.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.46, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2836 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2520 kPa (range 18.9), level 57.3 % (range 3.3); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Purge valve is commanded to 59.7% but sits at 0.0% (gap up to 59.7%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2636 kPa (range 40.6), level 44.3 % (range 0.09); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.53, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2821 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2766 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Product valve is commanded to 47.1% but sits at 60.6% (gap up to 13.5%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Product valve is commanded to 47.7% but sits at 60.5% (gap up to 12.8%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.53, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2822 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Purge valve is commanded to 44.0% but sits at 30.0% (gap up to 14.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2479 kPa (range 20.0), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 3.5 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2537 kPa (range 10.0), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2483 kPa (range 19.5), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.51, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2812 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2677 kPa (range 37.2), level 44.3 % (range 0.07); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2482 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2510 kPa (range 19.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 56.5% but sits at 60.3% (gap up to 3.8%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2561 kPa (range 12.6), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2657 kPa (range 41.3), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2655 kPa (range 41.3), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.63, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2924 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2506 kPa (range 19.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2764 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"F2 valve is commanded to 83.8% but sits at 49.9% (gap up to 34.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"Purge valve is commanded to 25.1% but sits at 25.1% (gap up to 0.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2525 kPa (range 18.3), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2541 kPa (range 47.3), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2546 kPa (range 14.0), level 44.3 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2505 kPa (range 19.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2544 kPa (range 18.0), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2477 kPa (range 19.4), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"F1 valve is commanded to 26.4% but sits at 37.8% (gap up to 11.4%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"Product valve is commanded to 47.2% but sits at 60.6% (gap up to 13.4%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2753 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2564 kPa (range 19.2), level 44.0 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2501 kPa (range 19.7), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2646 kPa (range 41.2), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2504 kPa (range 19.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.55, \"reason\": \"Product valve is commanded to 55.0% but sits at 60.3% (gap up to 9.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2867 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2882 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Purge valve is commanded to 62.3% but sits at 0.0% (gap up to 62.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Purge valve is commanded to 85.6% but sits at 0.0% (gap up to 85.6%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2546 kPa (range 16.1), level 44.0 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.38, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2789 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.42, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2877 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2488 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 3.4 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 56.3% but sits at 60.3% (gap up to 4.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2752 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2774 kPa, rising +4.2 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2489 kPa (range 20.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2763 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Purge valve is commanded to 17.0% but sits at 0.3% (gap up to 16.7%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2522 kPa (range 19.4), level 44.2 % (range 0.07); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2578 kPa (range 47.2), level 44.1 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"F1 valve is commanded to 41.9% but sits at 60.0% (gap up to 18.1%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 60.6% but sits at 60.6% (gap up to 0.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2902 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.63, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2928 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Purge valve is commanded to 11.2% but sits at 0.0% (gap up to 11.2%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 54.2% but sits at 60.3% (gap up to 16.1%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2566 kPa (range 28.2), level 44.0 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2526 kPa (range 17.9), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2612 kPa (range 25.1), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.61, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2851 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2578 kPa (range 43.0), level 44.4 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.46, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2806 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2865 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2784 kPa, rising +4.1 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.63, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2856 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2792 kPa, rising +4.1 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.75, \"reason\": \"F1 valve is commanded to 21.1% but sits at 5.5% (gap up to 18.6%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2881 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2612 kPa (range 22.1), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2538 kPa (range 19.1), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"Product valve is commanded to 44.2% but sits at 60.6% (gap up to 16.4%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2510 kPa (range 19.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2619 kPa (range 43.5), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 54.0% but sits at 60.3% (gap up to 9.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps up by 13.3 with no matching change in the valves or flows.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Product valve is commanded to 32.3% but sits at 20.0% (gap up to 12.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2886 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.53, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2827 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Purge valve is commanded to 47.6% but sits at 30.0% (gap up to 17.6%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2622 kPa (range 9.6), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2493 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2899 kPa, rising +3.7 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps up by 11.0 with no matching change in the valves or flows.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.53, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2828 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"F1 valve is commanded to 9.9% but sits at 0.0% (gap up to 9.9%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2560 kPa (range 54.5), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2895 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Purge valve is commanded to 19.8% but sits at 0.0% (gap up to 19.8%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2535 kPa (range 21.5), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2616 kPa (range 40.9), level 44.2 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2542 kPa (range 17.9), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2893 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2637 kPa (range 40.7), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"F1 valve is commanded to 37.7% but sits at 18.5% (gap up to 29.2%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.53, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2900 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2862 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"Purge valve is commanded to 60.8% but sits at 0.0% (gap up to 60.6%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2545 kPa (range 17.0), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 57.9% but sits at 60.3% (gap up to 2.4%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2556 kPa (range 43.6), level 44.4 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Product valve is commanded to 51.2% but sits at 60.6% (gap up to 15.4%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"F1 valve is commanded to 10.5% but sits at 0.0% (gap up to 17.5%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2643 kPa (range 41.1), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2891 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2617 kPa (range 12.3), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"F1 valve is commanded to 41.5% but sits at 60.0% (gap up to 18.5%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.63, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2922 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2482 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.6, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2890 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2512 kPa (range 20.0), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2767 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"F1 valve is commanded to 16.0% but sits at 9.8% (gap up to 11.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2823 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2617 kPa (range 43.5), level 44.4 % (range 0.11); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.4, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2993 kPa, rising +1.8 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2655 kPa (range 32.3), level 44.3 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2632 kPa (range 39.9), level 44.3 % (range 0.09); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2633 kPa (range 20.7), level 44.2 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2560 kPa (range 45.1), level 44.4 % (range 0.04); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.51, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2819 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps up by 11.0 with no matching change in the valves or flows.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2624 kPa (range 43.6), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2770 kPa, rising +2.0 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2576 kPa (range 60.5), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2800 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.36, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2775 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2503 kPa (range 19.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2503 kPa (range 19.7), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2535 kPa (range 21.8), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2510 kPa (range 19.9), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2612 kPa (range 36.5), level 44.2 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2576 kPa (range 45.3), level 44.1 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 3.4 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"Purge valve is commanded to 89.0% but sits at 0.0% (gap up to 89.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2542 kPa (range 27.3), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2634 kPa (range 40.2), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2493 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Purge valve is commanded to 39.0% but sits at 30.0% (gap up to 9.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.63, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2850 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Product valve is commanded to 51.0% but sits at 60.6% (gap up to 13.6%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2894 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.7, \"reason\": \"Product valve is commanded to 79.2% but sits at 60.3% (gap up to 18.9%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2531 kPa (range 14.8), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2645 kPa (range 30.3), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.55, \"reason\": \"Product valve is commanded to 54.4% but sits at 60.3% (gap up to 15.9%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2563 kPa (range 39.5), level 44.0 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2557 kPa (range 8.4), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Purge valve is commanded to 56.3% but sits at 0.0% (gap up to 56.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.51, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2831 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2478 kPa (range 19.5), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2484 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2546 kPa (range 11.3), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2878 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts down by 0.0 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps down by 8.9 with no matching change in the valves or flows.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2612 kPa (range 32.8), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2487 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2604 kPa (range 43.0), level 44.4 % (range 0.11); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2546 kPa (range 13.1), level 44.3 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Purge valve is commanded to 35.8% but sits at 30.0% (gap up to 5.8%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2694 kPa (range 30.9), level 44.4 % (range 0.07); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.53, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2912 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.55, \"reason\": \"F1 valve is commanded to 43.5% but sits at 50.9% (gap up to 17.4%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts down by 0.0 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2608 kPa (range 43.2), level 44.4 % (range 0.09); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 4.1 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.55, \"reason\": \"Product valve is commanded to 50.1% but sits at 60.5% (gap up to 10.4%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2691 kPa (range 32.6), level 44.4 % (range 0.08 ); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.46, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2838 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.45, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2890 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2596 kPa (range 43.3), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2547 kPa (range 16.8), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2581 kPa (range 42.6), level 44.4 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2647 kPa (range 31.2), level 44.3 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2520 kPa (range 10.2), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2484 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2533 kPa (range 13.4), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2636 kPa (range 40.6), level 44.3 % (range 0.09); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2864 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"Purge valve is commanded to 48.2% but sits at 30.0% (gap up to 21.8%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2558 kPa (range 18.2), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2775 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2516 kPa (range 21.0), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 4.1 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2543 kPa (range 17.5), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Product valve is commanded to 50.9% but sits at 60.5% (gap up to 14.6%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2626 kPa (range 10.0), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2529 kPa (range 16.1), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"F2 valve is commanded to 61.1% but sits at 49.9% (gap up to 16.2%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2765 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2516 kPa (range 21.0), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2547 kPa (range 20.1), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2628 kPa (range 15.2), level 44.2 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2772 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2492 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Purge flow drops to 0 in 1 of 16 s while the process keeps moving.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Purge valve is commanded to 22.1% but sits at 11.2% (gap up to 9.1%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps up by 16.9 with no matching change in the valves or flows.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 3.4 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2541 kPa (range 19.8), level 44.0 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"F1 valve is commanded to 19.8% but sits at 0.0% (gap up to 19.8%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2630 kPa (range 40.0), level 44.3 % (range 0.09); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2510 kPa (range 19.9), level 44.2 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 4.1 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.46, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2804 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.6, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2929 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2552 kPa (range 39.0), level 44.4 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.62, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2840 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2751 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2545 kPa (range 10.3), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2542 kPa (range 37.2), level 44.3 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.63, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2861 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Level drifts up by 3.4 over the window with no matching change in the related readings.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2650 kPa (range 41.2), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2637 kPa (range 25.3), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2633 kPa (range 39.9), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2752 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Product valve is commanded to 27.6% but sits at 20.0% (gap up to 7.6%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2483 kPa (range 19.5), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2593 kPa (range 55.9), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2760 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2690 kPa (range 33.3), level 44.4 % (range 0.07); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2604 kPa (range 43.0), level 44.4 % (range 0.11); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.63, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2926 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Purge valve is commanded to 7.3% but sits at 0.0% (gap up to 7.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2492 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2675 kPa (range 37.8), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2803 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2635 kPa (range 23.3), level 44.2 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2653 kPa (range 31.4), level 44.3 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 57.1% but sits at 60.3% (gap up to 3.2%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2829 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2522 kPa (range 18.9), level 56.8 % (range 3.4); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.61, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2857 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2866 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.65, \"reason\": \"F1 valve is commanded to 17.5% but sits at 0.0% (gap up to 17.5%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2548 kPa (range 30.1), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.53, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2895 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2546 kPa (range 14.8), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.33, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2771 kPa, rising +4.0 kPa/s.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Purge valve is commanded to 0.0% but sits at 0.0% (gap up to 0.0%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.93, \"reason\": \"Purge valve is commanded to 25.1% but sits at 25.1% (gap up to 4.6%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2833 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2575 kPa (range 43.2), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2673 kPa (range 38.1), level 44.3 % (range 0.07); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"A-in-purge analyzer reading is stuck at 0.0 for 10 s while the process keeps moving.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2534 kPa (range 21.6), level 43.9 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Purge valve is commanded to 11.4% but sits at 0.0% (gap up to 11.4%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.6, \"reason\": \"Product valve is commanded to 43.3% but sits at 60.6% (gap up to 17.3%); it is not following the controller.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.46, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2827 kPa, rising +3.9 kPa/s.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2547 kPa (range 18.9), level 44.3 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2552 kPa (range 39.0), level 44.4 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2556 kPa (range 43.6), level 44.4 % (range 0.05); valves follow their commands.\"}"
+  },
+  {
+   "gold": "excursion",
+   "pred": "excursion",
+   "raw": "{\"label\": \"excursion\", \"score\": 0.5, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2830 kPa, rising +3.8 kPa/s.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "sensor_fault",
+   "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps up by 11.0 with no matching change in the valves or flows.\"}"
+  },
+  {
+   "gold": "sensor_fault",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2602 kPa (range 43.0), level 44.4 % (range 0.10); valves follow their commands.\"}"
+  },
+  {
+   "gold": "normal",
+   "pred": "normal",
+   "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2490 kPa (range 19.6), level 44.1 % (range 0.06); valves follow their commands.\"}"
+  },
+  {
+   "gold": "actuator_fault",
+   "pred": "actuator_fault",
+   "raw": "{\"label\": \"actuator_fault\", \"score\": 0.63, \"reason\": \"Purge valve is commanded to 41.6% but sits at 30.0% (gap up to 11.6%); it is not following the controller.\"}"
+  }
+ ]
+}

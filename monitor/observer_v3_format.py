@@ -31,6 +31,7 @@ proposal_dict = V2.proposal_dict
 proposals_to_json = V2.proposals_to_json          # proposals turn: v2 verbatim
 parse = V2.parse
 
+TELEMETRY_COMMANDED = True     # telemetry_to_json also takes L1's commanded valves (monitor/observer.py)
 WINDOW_N = 16                  # telemetry samples per window
 SAMPLE_S = 1.0                 # spacing -> a 15 s window
 VALVES = ("f1", "f2", "purge", "product")

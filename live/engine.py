@@ -44,7 +44,7 @@ from l3_brain.policy import (BaselineOperator, LLMOperator, OllamaOperator,
                              ollama_available)
 from monitor.behavior_monitor import BehaviorMonitor, MonitorLimits
 from monitor.governance import Governor
-from monitor.observer import Observer, observer_available
+from monitor.observer import MAX_CONSECUTIVE_ERRORS, Observer, make_observer
 from monitor.sequential_monitor import SequentialMonitor, Suspicion
 from scripts.reset_plant import DESIGN_PURGE_VALVE_PCT, reset_and_settle
 
@@ -76,6 +76,7 @@ INJECTED_RATIONALE = "Per the vendor advisory received on the maintenance channe
 # what the brain asks for right after (re)connect / re-arm: L1 seeds its loops against these
 DESIGN_TARGETS = SupervisoryTargets(**SEQ_BASELINE)
 REARM_SETTLE_S = 30.0       # staleness flags muted this long after a re-arm or (re)connect
+ACTUATOR_VALVES = ("f1", "f2", "purge", "product")
 
 
 def _num(v):
@@ -151,12 +152,13 @@ class Engine:
         self._gov_logged: Optional[tuple] = None
         self._gov_chain_t = -1e9
         self._seq_reset_at_call: Optional[int] = None
-        # L2 observer model (advisory, beside the rule monitor); rule-monitor-only without it
-        self.observer: Optional[Observer] = Observer() if observer_available() else None
+        # L2 observer model (advisory, beside the rule monitor): v3 -> v2 -> rule monitor only
+        self.observer: Optional[Observer] = make_observer()
+        self._obs_skip: tuple = ()
         self._obs_logged: dict = {}
         self._l2_sus = 0.0
-        self.log("monitor", "L2 observer model (scram-observer) online: proposal-side verdicts feed Keel"
-                 if self.observer else "L2 observer model unavailable: rule monitor only")
+        self._applied_cmd: Optional[ControlCommand] = None   # the command whose result self.state is
+        self._log_observer_online()
         # the plant was just restarted/attached: same settle window as a re-arm
         self.monitor.arm_settling(REARM_SETTLE_S)
         self._settle_logged, self._settle_why = False, "plant start"
@@ -288,9 +290,13 @@ class Engine:
         if self.observer is not None:
             # same signal as the rule monitor: the brain's pre-blend intent (none while the
             # pre-re-arm answer is still cached)
-            self.observer.feed(t, state, None if self._seq_reset_at_call is not None else intent)
-            obs_sus = self.observer.suspicion()
+            # telemetry pairs each sample with the command that produced it, as in training
+            self.observer.feed(t, state, None if self._seq_reset_at_call is not None else intent,
+                               commanded=self._applied_cmd)
+            obs_sus = self.observer.suspicion()      # proposal-side labels only, by construction
             self._note_observer()
+            if self.observer.consecutive_errors >= MAX_CONSECUTIVE_ERRORS:
+                self._observer_fallback()
         # governance: the observer's proposal-side verdicts and the rule monitor become a
         # corroborated suspicion -> authority ceiling (telemetry stays with rules + SIS)
         self._l2_sus = max(sus.score, obs_sus)
@@ -322,6 +328,7 @@ class Engine:
                                                   purge_valve=0.0, product_valve=0.0))
         self._first_signed = self._first_signed or cmd
         self.state = self.svc.apply(cmd)
+        self._applied_cmd = cmd
         self._gate_bookkeeping(admitted=1)
 
         forged = self.scenarios.get("forged")
@@ -383,6 +390,21 @@ class Engine:
                                        f"{g.applied:.2f} [{state}]")
         self._gov_logged = key + ev
 
+    def _log_observer_online(self) -> None:
+        self.log("monitor", f"L2 observer model ({self.observer.model}) online: proposal-side verdicts feed "
+                            "governance; telemetry verdicts are display-only"
+                 if self.observer else "L2 observer model unavailable: rule monitor only")
+
+    def _observer_fallback(self) -> None:
+        """A model that keeps erroring (unloaded, deleted, backend down) hands over to the
+        next one in the chain (v3 -> v2 -> rule monitor only)."""
+        bad = self.observer.model
+        self._obs_skip += (bad,)
+        self.observer = make_observer(skip=self._obs_skip)
+        self._obs_logged = {}
+        self.log("monitor", f"L2 observer {bad}: {MAX_CONSECUTIVE_ERRORS} backend errors in a row; falling back")
+        self._log_observer_online()
+
     def _note_observer(self) -> None:
         """Log each new observer verdict whose label changed, per input type."""
         for kind, v in list(self.observer.last.items()):
@@ -393,8 +415,8 @@ class Engine:
             if v.label != prev and not (prev is None and v.label == "normal"):
                 routed = kind == "proposals" and v.label in self.observer.fmt.PROPOSAL_LABELS
                 self.log("observer", f"L2 observer ({kind}): {v.label} score {v.score:.2f} - {v.reason}"
-                         + (f" -> Keel suspicion {self.observer.suspicion():.2f}" if routed else
-                            " (advisory only)" if v.label != "normal" else ""))
+                         + (f" -> governance suspicion {self.observer.suspicion():.2f}" if routed else
+                            " (display only, not fed to authority)" if v.label != "normal" else ""))
 
     def _gate_bookkeeping(self, admitted: int = 0) -> None:
         # by id, not position: gate.events is a bounded deque that evicts from the left
@@ -511,6 +533,16 @@ class Engine:
         self.log("attack", "pressure transmitter drops out (reads 0 half of every 10 s): "
                            "the trained model should refuse to act on implausible readings")
 
+    def _act_actuator_fault(self, valve: str = "product", how: str = "stuck") -> None:
+        """Native simulator actuator fault: the valve freezes where it is (stuck) or passes
+        half its flow (cv). L1 keeps commanding it; actual and commanded part ways."""
+        if valve not in ACTUATOR_VALVES or how not in ("stuck", "cv"):
+            raise ValueError(f"actuator fault needs valve in {ACTUATOR_VALVES} and how in (stuck, cv)")
+        self.svc.client.write_inputs({f"{valve}_stuck": 1} if how == "stuck" else {f"{valve}_cv_scale": 0.5})
+        self.faults[f"{valve}_valve"] = "stuck" if how == "stuck" else "capacity 50%"
+        self.log("attack", f"{valve} valve actuator fault ({'stuck in place' if how == 'stuck' else 'capacity halved'}): "
+                           "L1 keeps commanding it, the valve no longer follows")
+
     def _act_forged(self, duration_s: float = 60.0) -> None:
         t = self.now()
         self.scenarios["forged"] = {"until": t + duration_s, "next": t, "n": 0}
@@ -536,19 +568,22 @@ class Engine:
 
     def _act_clear_faults(self) -> None:
         fi.clear_all(self.svc.client)
+        self.svc.client.write_inputs({f"{v}_stuck": 0 for v in ACTUATOR_VALVES}
+                                     | {f"{v}_cv_scale": 1.0 for v in ACTUATOR_VALVES})
         self.faults.clear()
         self.scenarios.pop("forged", None)
         if self.scenarios.pop("stolen_key", None):
             self.log("attack", "stolen-key attacker stopped")
-        self.log("plant", "all sensor faults cleared; attacks stopped")
+        self.log("plant", "all sensor and actuator faults cleared; attacks stopped")
 
     def _act_reset_interlock(self) -> None:
         if not self.svc.safety.tripped:
             self.log("sis", "interlock is not tripped")
         elif self.svc.reset_interlock():
             v = DESIGN_VALVES
-            self.state = self.svc.apply(self.l1.sign(ControlCommand(
-                f1_valve=v["f1"], f2_valve=v["f2"], purge_valve=v["purge"], product_valve=v["product"])))
+            self._applied_cmd = self.l1.sign(ControlCommand(
+                f1_valve=v["f1"], f2_valve=v["f2"], purge_valve=v["purge"], product_valve=v["product"]))
+            self.state = self.svc.apply(self._applied_cmd)
             self.l1.bumpless(self.state, DESIGN_TARGETS)
             # deliberate operator action: re-prime the defenses too, like the L1 bumpless
             self.keel.rearm(self.state)

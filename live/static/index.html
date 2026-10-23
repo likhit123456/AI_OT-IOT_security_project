@@ -176,6 +176,10 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--warn);outline-o
           <p>The pressure reading drops to 0 for half of every 10 s.</p>
           <p class="watch">Watch: the trained model refuses to act on an implausible reading and holds.</p>
           <button class="go" data-act="pressure_dropout">Start dropout</button></div>
+        <div class="card" id="c-actuator_fault"><h3>Stuck product valve</h3>
+          <p>The product valve freezes in place (a native simulator actuator fault). L1 keeps commanding it.</p>
+          <p class="watch">Watch: the observer's telemetry verdict reads actuator_fault in the event stream. It is display-only: authority does not move.</p>
+          <button class="go" data-act="actuator_fault">Stick valve</button></div>
         <div class="card" id="c-forged"><h3>Forged commands</h3>
           <p>A compromised agent sends valve commands that are unsigned, signed with the wrong key, or replayed, every 4 s for 60 s.</p>
           <p class="watch">Watch: "gate rejected" climbs; the plant never moves.</p>
@@ -310,7 +314,8 @@ function renderRest(s) {
   const act_ = s.scenarios || {};
   document.querySelectorAll(".card").forEach(c => c.classList.remove("active"));
   Object.keys(act_).forEach(k => { const c = $("c-" + k); if (c) c.classList.add("active"); });
-  Object.keys(s.faults || {}).forEach(k => { const c = $("c-" + (k === "tank_level" ? "level_drift" : "pressure_dropout")); if (c) c.classList.add("active"); });
+  const faultCard = { tank_level: "level_drift", tank_pressure: "pressure_dropout" };
+  Object.keys(s.faults || {}).forEach(k => { const c = $("c-" + (faultCard[k] || (k.endsWith("_valve") ? "actuator_fault" : ""))); if (c) c.classList.add("active"); });
   const fl = Object.entries(s.faults || {}).map(([k, v]) => `${k}: ${v}`).concat(Object.keys(act_).map(k => `attack: ${k}`));
   $("faults").textContent = fl.length ? "Active: " + fl.join(" · ") : "";
   $("roP").textContent = `meas ${fx(s.measured.pressure, 0)} · true ${fx(s.truth.pressure, 0)}`;
