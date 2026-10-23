@@ -3,6 +3,10 @@ Control-room HTTP server (stdlib only): serves live/static/ and a small JSON API
 
   GET  /api/state?h=<last history seq>&e=<last event id>   snapshot + new trend points + new events
   POST /api/action  {"action": "...", ...}                  queue a scenario / operator action
+  GET  /grfics/reactor.html                                 the GRFICS 3D reactor alone, full-bleed
+  GET  /grfics/<path> (and /Build /TemplateData /data)     proxied to the plant's web server (:80), so
+                                                           the Unity build loads same-origin, without
+                                                           the GRFICS lab dashboard around it
 
 Binds to 127.0.0.1 only: the actions drive a (simulated) plant.
 """
@@ -10,6 +14,8 @@ Binds to 127.0.0.1 only: the actions drive a (simulated) plant.
 from __future__ import annotations
 
 import json
+import urllib.error
+import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
@@ -19,7 +25,10 @@ from live.engine import Engine
 STATIC = Path(__file__).resolve().parent / "static"
 ACTIONS = {"authority", "brain", "level_drift", "pressure_dropout", "forged", "operator_injection", "stolen_key",
            "oob_write", "actuator_fault", "clear_faults", "reset_interlock", "reset_plant"}
-TYPES = {".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css"}
+TYPES = {".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css",
+         ".svg": "image/svg+xml"}
+PLANT_WEB = "http://127.0.0.1:80"
+PROXY_ROOTS = ("/Build/", "/TemplateData/", "/data/")   # what the Unity page asks for
 
 
 def make_handler(engine: Engine):
@@ -35,8 +44,31 @@ def make_handler(engine: Engine):
             self.end_headers()
             self.wfile.write(body)
 
+        def _proxy(self, path: str, query: str) -> None:
+            url = PLANT_WEB + path + (f"?{query}" if query else "")
+            try:
+                with urllib.request.urlopen(url, timeout=30) as r:
+                    body = r.read()
+                    ctype = r.headers.get("Content-Type", "application/octet-stream")
+                    self.send_response(r.status)
+            except urllib.error.HTTPError as e:
+                return self._send(e.code, b"", "text/plain")
+            except (urllib.error.URLError, OSError):
+                return self._send(502, b'{"error":"plant web server (:80) not reachable"}')
+            self.send_header("Content-Type", ctype)
+            self.send_header("Content-Length", str(len(body)))
+            self.send_header("Cache-Control", "max-age=3600" if "/Build/" in path else "no-store")
+            self.end_headers()
+            self.wfile.write(body)
+
         def do_GET(self):
             u = urlparse(self.path)
+            if u.path == "/grfics/reactor.html":
+                return self._send(200, (STATIC / "reactor.html").read_bytes(), TYPES[".html"])
+            if u.path.startswith("/grfics/"):
+                return self._proxy(u.path[len("/grfics"):], u.query)
+            if u.path.startswith(PROXY_ROOTS):
+                return self._proxy(u.path, u.query)
             if u.path == "/api/state":
                 q = parse_qs(u.query)
                 data = engine.read(int(q.get("h", ["0"])[0]), int(q.get("e", ["0"])[0]))

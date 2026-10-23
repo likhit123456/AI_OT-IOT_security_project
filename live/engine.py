@@ -125,9 +125,12 @@ class Engine:
         self._seen_calls = 0
         # the slider is a cap; Keel's authority budget is the live value
         self.brain = AIOperator(policy=policy,
-                                authority_fn=lambda: min(self.authority, self.keel.authority(),
-                                                         self.governor.applied))
+                                authority_fn=self.effective_authority)
         self.log("brain", f"brain is now {self.brain_label()}")
+
+    def effective_authority(self) -> float:
+        """What the brain actually gets: the operator slider, Keel and governance, lowest wins."""
+        return min(self.authority, self.keel.authority(), self.governor.applied)
 
     def brain_label(self) -> str:
         if isinstance(self.policy, OllamaOperator):
@@ -473,7 +476,9 @@ class Engine:
                                  _num(s.f1_valve_pos), _num(s.f2_valve_pos),
                                  _num(s.purge_valve_pos), _num(s.product_valve_pos),
                                  _num(tg.pressure_sp) if tg else None, _num(tg.level_sp) if tg else None,
-                                 int(self.svc.safety.tripped)])
+                                 int(self.svc.safety.tripped),
+                                 _num(self.effective_authority()), _num(self.keel.authority()),
+                                 _num(self.governor.applied)])
             self.snapshot_data = self._snapshot()
 
     def _snapshot(self) -> dict:
@@ -483,6 +488,7 @@ class Engine:
         return {
             "t": round(self.now(), 1), "status": self.status, "error": self.error, "cycles": self.cycles,
             "brain": {"kind": self.brain_kind, "label": self.brain_label(), "authority": self.authority,
+                      "effective": round(self.effective_authority(), 3),
                       "inflight": bool(getattr(self.policy, "_inflight", False)),
                       "calls": getattr(self.policy, "calls", None)},
             "measured": {"pressure": _num(s.pressure), "level": _num(s.level),

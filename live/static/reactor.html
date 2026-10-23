@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GRFICS reactor</title>
+<!-- Served at /grfics/reactor.html; the relative URLs below go through the control-room
+     proxy to the plant's web server, so the Unity build loads same-origin and only the
+     reactor is shown (no GRFICS lab dashboard around it). -->
+<script src="Build/UnityLoader.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; background: #070b0a; overflow: hidden; }
+  #unity { position: absolute; inset: 0; }
+  #unity canvas { width: 100% !important; height: 100% !important; display: block; }
+  #load { position: absolute; inset: 0; display: grid; place-items: center; color: #8fa29e;
+          font: 500 13px/1.4 "IBM Plex Mono", ui-monospace, Consolas, monospace; letter-spacing: .06em; }
+  #load b { display: block; width: 220px; height: 3px; margin-top: 10px; background: #1c2726; border-radius: 2px; overflow: hidden; }
+  #load i { display: block; height: 100%; width: 0; background: #3fbfb2; transition: width .2s; }
+  #load.err { color: #ef6a5f; }
+</style>
+</head>
+<body>
+<div id="unity"></div>
+<div id="load"><div>LOADING 3D PLANT<b><i id="bar"></i></b></div></div>
+<script>
+  const load = document.getElementById("load"), bar = document.getElementById("bar");
+  if (typeof UnityLoader === "undefined") {
+    load.className = "err";
+    load.textContent = "3D plant not reachable: is the GRFICS simulation container running?";
+  } else {
+    const done = () => { if (load.isConnected) load.remove(); };
+    window.unityInstance = UnityLoader.instantiate("unity", "Build/ChemicalPlant.json", {
+      onProgress: (inst, p) => { bar.style.width = Math.round(p * 100) + "%"; if (p >= 1) setTimeout(done, 400); },
+    });
+    // the progress callback does not always reach 1 inside an iframe: also clear the overlay
+    // once the Unity runtime is running, and never leave it up past 20 s
+    const t0 = Date.now(), chk = setInterval(() => {
+      const M = window.unityInstance && window.unityInstance.Module;
+      if ((M && (M.calledRun || M.asmLibraryArg)) || Date.now() - t0 > 20000) { clearInterval(chk); setTimeout(done, 600); }
+    }, 500);
+  }
+</script>
+</body>
+</html>
