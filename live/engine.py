@@ -40,6 +40,7 @@ from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
 from l0_plant.safety import SafeHold, TripLimits
 from l1_regulator import L1Regulator
 from l3_brain.operator import AIOperator
+from live import commands
 from l3_brain.prompt_format import DESIGN_POINT
 from l3_brain.policy import (BaselineOperator, LLMOperator, OllamaOperator,
                              ollama_available)
@@ -151,6 +152,8 @@ class Engine:
         self._chat_pending: Optional[int] = None
         self._chat_followup: Optional[float] = None
         self._auto_rearms: Deque[float] = deque()
+        self._chat_p0: Optional[float] = None    # true pressure when the last command was given
+        self.manual: dict = {}                   # valve -> % held in manual by the operator
 
     # ------------------------------------------------------------------ setup
     def _make_brain(self, kind: str):
@@ -386,6 +389,8 @@ class Engine:
         dt = 0.0 if self._l1_t is None else now - self._l1_t
         self._l1_t = now
         raw = self.l1.regulate(targets, state, dt=dt)
+        if self.manual:
+            raw = replace(raw, **{f"{v}_valve": pct for v, pct in self.manual.items()})
         # L2 now acts only through the governance ceiling, not Keel's own authority
         # (which stays physics / gate driven, so an L2 verdict alone can never divert)
         dec = self.keel.step(raw, state, SisFrame.from_state(state), t, 0.0)
@@ -434,6 +439,8 @@ class Engine:
             if stolen:
                 del self.scenarios["stolen_key"]
                 self.log("attack", "stolen-key attacker's commands are now overridden by the interlock")
+            if self.manual:
+                self._release_manual("the SIS trip took the valves")
         if tripped and saf.escalated and not self._escalation_logged:
             self._escalation_logged = True
             self.log("sis", f"safe-hold could not hold the pressure (>= {saf.safe_hold.runaway_kpa:.0f} kPa): "
@@ -643,6 +650,7 @@ class Engine:
             "faults": dict(self.faults),
             "decision": self.decisions[-1] if self.decisions else None,
             "chat": list(self.chat),
+            "manual": dict(self.manual),
             "note": getattr(self.policy, "note", None),
         }
 
@@ -768,17 +776,51 @@ class Engine:
             raise ValueError("message is empty")
 
     def _act_chat(self, text: str) -> None:
+        """Route an operator command: valve positions become a manual override (the AI never
+        chooses valves), setpoints go to the AI with explicit targets, the rest goes verbatim."""
         self._check_chat(text)
         text = text.strip()[:500]
+        self._chat_p0 = (self.state.truth or {}).get("pressure")
+        intent = self.brain.last_intent
+        cur = {k: getattr(intent, k, None) for k in ("pressure_sp", "level_sp", "production_rate_sp", "a_comp_sp")} \
+            if intent is not None else {}
+        cmd = commands.parse(text, cur)
+        if cmd["kind"] == "release":
+            self._chat_add("you", text)
+            if self.manual:
+                self._release_manual("operator")
+            else:
+                self._chat_add("system", "No valves are in manual.")
+            return
+        if cmd["kind"] == "valves":
+            self._chat_add("you", text)
+            self.manual.update(cmd["valves"])
+            names = {"f1": "Feed 1", "f2": "Feed 2", "purge": "Purge", "product": "Product"}
+            what = ", ".join(f"{names[v]} {p:g}%" for v, p in cmd["valves"].items())
+            self._chat_add("operator", f"Manual override: {what}. L1 and the AI stop moving "
+                                       + ("these valves" if len(cmd["valves"]) > 1 else "this valve")
+                                       + "; Keel and the SIS still guard them. Say \"release\" to hand back.")
+            self.log("plant", f"operator put valves in manual: {what}")
+            self._chat_followup = self.now() + CHAT_FOLLOWUP_S
+            return
         if not isinstance(self.policy, LLMOperator):
             self._chat_add("you", text)
             self._chat_add("system", "The baseline rule brain does not take instructions. "
-                                     "Switch to the trained model to talk to it.")
+                                     "Switch to the trained model, or give a valve command (e.g. \"feed 1 to 40%\").")
             return
-        nid = self.policy.set_note(text)
+        note = cmd.get("note", text)
+        nid = self.policy.set_note(note)
         self._chat_pending, self._chat_followup = nid, None
-        self._chat_add("you", text, note_id=nid)
-        self.log("brain", f'operator instruction to the AI: "{text[:140]}"')
+        self._chat_add("you", text, note_id=nid, asked=cmd.get("sp"))
+        self.log("brain", f'operator instruction to the AI: "{note[:160]}"')
+
+    def _release_manual(self, why: str) -> None:
+        names = ", ".join(self.manual)
+        self.manual.clear()
+        # restart L1's loops from where the plant is now, so the hand-back is bumpless
+        self.l1.bumpless(self.state, self._last_targets or DESIGN_TARGETS)
+        self._chat_add("system", f"Manual valves ({names}) handed back to L1 ({why}).")
+        self.log("plant", f"manual valves released ({why}): {names}")
 
     def _act_clear_note(self) -> None:
         if isinstance(self.policy, LLMOperator) and self.policy.note:
@@ -797,7 +839,16 @@ class Engine:
         eff = self.effective_authority()
         verdict = ("Defenses cut the AI back" if eff < 0.5 else
                    "Defenses are limiting the AI" if eff < 0.999 else "Defenses let it through")
-        self._chat_add("defense", f"{verdict}: effective authority {eff:.2f} · " + " · ".join(parts), eff=round(eff, 3))
+        p = (self.state.truth or {}).get("pressure")
+        moved = f"pressure {self._chat_p0:.0f} → {p:.0f} kPa · " if p is not None and self._chat_p0 is not None else ""
+        if self.svc.safety.tripped:
+            verdict = "The SIS took over"
+        elif self.manual and self.keel.authority() < 0.999:
+            verdict = "Keel is pushing back on the manual valves"
+        elif self.manual:
+            verdict = "Manual valves applied"
+        self._chat_add("defense", f"{verdict}: {moved}effective authority {eff:.2f} · " + " · ".join(parts),
+                       eff=round(eff, 3))
 
     def _act_clear_faults(self) -> None:
         fi.clear_all(self.svc.client)
@@ -810,6 +861,8 @@ class Engine:
         if self.scenarios.pop("operator_injection", None):
             self.log("attack", "operator injection stopped; the brain is back on its own reading")
         self._act_clear_note()
+        if self.manual:
+            self._release_manual("clear faults")
         self.log("plant", "all sensor and actuator faults cleared; attacks stopped")
 
     def _act_reset_interlock(self) -> None:
@@ -861,6 +914,7 @@ class Engine:
         except Exception:                            # noqa: BLE001
             pass
         self.scenarios.clear()
+        self.manual.clear()
         try:
             self._connect(reset=True)
         except Exception as e:                       # noqa: BLE001

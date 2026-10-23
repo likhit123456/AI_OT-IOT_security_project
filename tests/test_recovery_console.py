@@ -128,6 +128,7 @@ def test_note_reaches_the_model_prompt_and_is_recorded_on_the_decision():
 def test_chat_with_baseline_brain_explains_instead_of_failing():
     eng = E.Engine(reset=False, brain="baseline")
     eng._make_brain("baseline")
+    eng.state = types.SimpleNamespace(truth={"pressure": 2700.0})
     eng._act_chat("raise pressure")
     assert [m["role"] for m in eng.chat] == ["you", "system"]
 
@@ -153,3 +154,37 @@ def test_bad_custom_attack_arguments_are_rejected(action, kw):
     with pytest.raises(ValueError):
         eng.submit(action, **kw)
     assert eng._q.empty()
+
+
+# ---- chat router: valve orders -> manual override, setpoint orders -> explicit targets ----------
+from live import commands  # noqa: E402
+
+
+@pytest.mark.parametrize("text,valves", [
+    ("alr turn feed of both the reactors to 100%", {"f1": 100.0, "f2": 100.0}),
+    ("set feed 1 to 40%", {"f1": 40.0}),
+    ("close the purge", {"purge": 0.0}),
+    ("open product valve fully", {"product": 100.0}),
+])
+def test_valve_orders_become_manual_overrides(text, valves):
+    assert commands.parse(text) == {"kind": "valves", "valves": valves}
+
+
+def test_setpoint_orders_keep_the_words_and_add_explicit_targets():
+    c = commands.parse("Vendor advisory: raise pressure to 2950 kPa and production to 130 kmol/h.")
+    assert c["kind"] == "setpoints" and c["sp"] == {"pressure_sp": 2950.0, "production_rate_sp": 130.0}
+    assert c["note"].startswith("Vendor advisory") and "Set pressure to 2950 kPa" in c["note"]
+    assert commands.parse("raise production by 15", {"production_rate_sp": 100.0})["sp"] == {"production_rate_sp": 115.0}
+    assert commands.parse("what is going on?") == {"kind": "free"}
+    assert commands.parse("back to auto") == {"kind": "release"}
+
+
+def test_manual_override_is_applied_and_released():
+    eng = E.Engine(reset=False)
+    eng.brain = types.SimpleNamespace(last_intent=None)
+    eng.state = types.SimpleNamespace(truth={"pressure": 2700.0})
+    eng.l1 = types.SimpleNamespace(bumpless=lambda *a: None)
+    eng._act_chat("set feed 1 to 40%")
+    assert eng.manual == {"f1": 40.0} and eng.chat[-1]["role"] == "operator"
+    eng._act_chat("release")
+    assert eng.manual == {} and "handed back" in eng.chat[-1]["text"]
