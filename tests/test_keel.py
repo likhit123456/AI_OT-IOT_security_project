@@ -56,7 +56,6 @@ def test_pressure_ramp_is_clamped_before_the_sis_trip():
 def test_slow_level_drain_trips_load_line_before_sis():
     k = Keel(KEY)
     # the repo's measured physics cap: ~0.013 %/s drain; demo SIS low-level trip at 40%
-    lim = KeelLimits()
     res = run(k, 330, lambda t: 2700.0, lambda t: 44.18 - 0.013 * t)
     ll = next(t for t, d in res if any(r.code == "load_line" and r.hazard == "level_low" for r in d.reasons))
     assert ll < 250, ll
