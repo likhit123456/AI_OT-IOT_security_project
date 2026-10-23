@@ -202,6 +202,11 @@ class LLMOperator:
         self._inflight = False
         self.calls = 0
         self.log: Deque[dict] = deque(maxlen=100)     # bounded decision log
+        # standing operator instruction (control-room chat), appended to the state prompt
+        # until replaced or cleared; each decision records which note it was made under
+        self.note: Optional[str] = None
+        self.note_id = 0
+        self._call_note: Optional[str] = None
 
     # ---- Policy interface ----------------------------------------------------
     def decide(self, state: PlantState) -> SupervisoryTargets:
@@ -234,13 +239,26 @@ class LLMOperator:
     def _call_model(self, state: PlantState, last: SupervisoryTargets) -> str:
         resp = self._get_client().messages.create(
             model=self.model, max_tokens=self.max_tokens, system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": build_state_prompt(state)}])
+            messages=[{"role": "user", "content": self._user_prompt(state)}])
         if resp.stop_reason in ("refusal", "max_tokens"):
             raise RuntimeError(f"model stopped with {resp.stop_reason}")
         return next((b.text for b in resp.content if b.type == "text"), "")
 
+    def set_note(self, text: Optional[str]) -> int:
+        """Set (or clear, with None/empty) the standing operator instruction. Returns its id."""
+        with self._lock:
+            self.note = (text or "").strip()[:500] or None
+            self.note_id += 1
+            return self.note_id
+
+    def _user_prompt(self, state: PlantState) -> str:
+        note = self._call_note
+        return build_state_prompt(state) + (f"\nOperator instruction: {note}" if note else "")
+
     def _refresh(self, state: PlantState, last: SupervisoryTargets) -> None:
         t0 = self._clock()
+        with self._lock:
+            self._call_note, note_id = self.note, self.note_id
         try:
             text = self._call_model(state, last)
             targets, note = parse_llm_targets(text, self.envelope)
@@ -260,6 +278,7 @@ class LLMOperator:
                              # what the model was shown (measured only) and how it answered
                              "saw": {"pressure": round(state.pressure, 1), "level": round(state.level, 2)},
                              "rationale": targets.rationale,
+                             "note_id": note_id if self._call_note else None,
                              "latency_s": round(self._clock() - t0, 2)})
 
 
@@ -297,7 +316,7 @@ class OllamaOperator(LLMOperator):
         resp = self._http_post(f"{self.base_url}/api/chat", {
             "model": self.model, "stream": False, "keep_alive": "30m",   # stay resident beside the observers
             "messages": [{"role": "system", "content": SYSTEM_PROMPT},
-                         {"role": "user", "content": build_state_prompt(state)}],
+                         {"role": "user", "content": self._user_prompt(state)}],
             "options": {"temperature": 0, "num_predict": 160}}, self.timeout_s)
         if not isinstance(resp, dict) or resp.get("error"):
             raise RuntimeError(f"ollama error: {resp.get('error') if isinstance(resp, dict) else resp!r}")

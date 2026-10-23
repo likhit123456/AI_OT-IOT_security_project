@@ -22,6 +22,7 @@ from __future__ import annotations
 import json
 import math
 import queue
+import inspect
 import re
 import threading
 import time
@@ -36,7 +37,7 @@ from l0_plant import fault_injection as fi
 from l0_plant.grfics_client import GrficsClient
 from l0_plant.plant_service import PlantService
 from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
-from l0_plant.safety import TripLimits
+from l0_plant.safety import SafeHold, TripLimits
 from l1_regulator import L1Regulator
 from l3_brain.operator import AIOperator
 from l3_brain.prompt_format import DESIGN_POINT
@@ -79,6 +80,36 @@ REARM_SETTLE_S = 30.0       # staleness flags muted this long after a re-arm or 
 ACTUATOR_VALVES = ("f1", "f2", "purge", "product")
 OOB_LOG_EVERY_S = 10.0      # out-of-band audit lines per audited field (all are counted)
 VALVE_STICK_AFTER_S = 20.0  # "demo" actuator fault: capacity loss first, then the valve sticks
+# SIS recovery: the closed-loop safe-hold keeps the reactor running; once the safety channel
+# has been inside the re-arm band this long the SIS re-arms itself, at most AUTO_REARM_MAX
+# times per AUTO_REARM_WINDOW_S (then it locks out and a human must re-arm)
+AUTO_REARM_S = 10.0
+AUTO_REARM_MAX = 3
+AUTO_REARM_WINDOW_S = 600.0
+POST_REARM_AUTHORITY = 0.5  # the AI comes back on half authority and earns the rest on a clean window
+CHAT_FOLLOWUP_S = 12.0      # after the AI answers an instruction, report what the defenses made of it
+FAULT_MODES = {"frozen": fi.FaultMode.FROZEN, "drift": fi.FaultMode.DRIFT,
+               "noise": fi.FaultMode.NOISE, "dropout": fi.FaultMode.DROPOUT}
+
+
+def _pct(v, name: str) -> float:
+    try:
+        x = float(v)
+    except (TypeError, ValueError):
+        raise ValueError(f"{name} must be a number") from None
+    if not (0.0 <= x <= 100.0):
+        raise ValueError(f"{name} must be within 0-100 %")
+    return x
+
+
+def _duration(v) -> float:
+    try:
+        x = float(v)
+    except (TypeError, ValueError):
+        raise ValueError("duration_s must be a number") from None
+    if not (5.0 <= x <= 600.0):
+        raise ValueError("duration_s must be within 5-600 s")
+    return x
 
 
 def _num(v):
@@ -113,6 +144,13 @@ class Engine:
         self._seen_calls = 0
         self._last_baseline_log = -1e9
         self._last_targets: Optional[SupervisoryTargets] = None
+        # operator <-> AI chat: an instruction becomes the policy's standing note; the
+        # first decision made under it is the AI's reply, then a defense follow-up
+        self.chat: Deque[dict] = deque(maxlen=60)
+        self._chat_seq = 0
+        self._chat_pending: Optional[int] = None
+        self._chat_followup: Optional[float] = None
+        self._auto_rearms: Deque[float] = deque()
 
     # ------------------------------------------------------------------ setup
     def _make_brain(self, kind: str):
@@ -123,6 +161,7 @@ class Engine:
         self.brain_kind = kind
         self.policy = policy
         self._seen_calls = 0
+        self._chat_pending = None           # a new policy has no standing instruction
         # the slider is a cap; Keel's authority budget is the live value
         self.brain = AIOperator(policy=policy,
                                 authority_fn=self.effective_authority)
@@ -144,7 +183,8 @@ class Engine:
             p = reset_and_settle()
             self.log("plant", f"settled at P={p.pressure:.1f} kPa, L={p.level:.2f}%")
         self.gate = ProvenanceGate(L1_KEY)
-        self.svc = PlantService(self.host, self.port, limits=self.limits, gate=self.gate).start()
+        self.svc = PlantService(self.host, self.port, limits=self.limits, gate=self.gate,
+                                safe_hold=SafeHold()).start()
         fi.clear_all(self.svc.client)
         self._clear_actuator_faults()       # attaching without a reset: drop a previous run's valve faults
         self.faults.clear()
@@ -176,6 +216,9 @@ class Engine:
         self.l1.bumpless(self.state, DESIGN_TARGETS)
         self._first_signed: Optional[ControlCommand] = None
         self._was_tripped = False
+        self._band_since: Optional[float] = None    # safety channel inside the re-arm band since
+        self._escalation_logged = False
+        self._lockout_logged = False
         self.status = "running"
 
     # ------------------------------------------------------------- public API
@@ -190,6 +233,13 @@ class Engine:
         fn = getattr(self, f"_act_{action}", None)
         if fn is None:
             raise ValueError(f"unknown action {action!r}")
+        try:
+            inspect.signature(fn).bind(**kw)
+        except TypeError as e:
+            raise ValueError(f"{action}: {e}") from None
+        check = getattr(self, f"_check_{action}", None)
+        if check is not None:
+            check(**kw)
         if action == "authority":           # cheap, thread-safe
             return fn(**kw)
         self._q.put(lambda: fn(**kw))
@@ -352,10 +402,15 @@ class Engine:
         elif dec.verdict == "allow":
             self._keel_logged = None
         stolen = self.scenarios.get("stolen_key")
+        if stolen and stolen.get("until") is not None and t >= stolen["until"]:
+            del self.scenarios["stolen_key"]
+            stolen = None
+            self.log("attack", "stolen-key attacker stopped (duration over)")
         if stolen and not self.svc.safety.tripped:
             # attacker holds the L1 key: its commands are validly signed
-            cmd = self.l1.sign(ControlCommand(f1_valve=100.0, f2_valve=100.0,
-                                                  purge_valve=0.0, product_valve=0.0))
+            v = stolen["valves"]
+            cmd = self.l1.sign(ControlCommand(f1_valve=v["f1"], f2_valve=v["f2"],
+                                              purge_valve=v["purge"], product_valve=v["product"]))
         self._first_signed = self._first_signed or cmd
         self.state = self.svc.apply(cmd)
         self._applied_cmd = cmd
@@ -370,15 +425,54 @@ class Engine:
                 del self.scenarios["forged"]
                 self.log("attack", f"compromised agent stopped after {forged['n']} forged commands")
 
-        tripped = self.svc.safety.tripped
+        saf = self.svc.safety
+        tripped = saf.tripped
         if tripped and not self._was_tripped:
-            self.log("sis", f"SIS TRIP: {self.svc.safety.reason} (true values) | measured view: "
+            self.log("sis", f"SIS TRIP: {saf.reason} (true values) | measured view: "
                             f"P={self.state.pressure:.0f} kPa, L={self.state.level:.1f}% | "
-                            f"safe state: {'product valve closed, feeds held' if self.svc.safety.cause == 'level_low' else 'e_stop (feeds shut, purge + product open)'}")
+                            f"safe state: {self._safe_state_label()}")
             if stolen:
                 del self.scenarios["stolen_key"]
                 self.log("attack", "stolen-key attacker's commands are now overridden by the interlock")
+        if tripped and saf.escalated and not self._escalation_logged:
+            self._escalation_logged = True
+            self.log("sis", f"safe-hold could not hold the pressure (>= {saf.safe_hold.runaway_kpa:.0f} kPa): "
+                            "escalated to e_stop until re-arm")
         self._was_tripped = tripped
+        if tripped:
+            self._auto_rearm(t)
+        if self._chat_followup is not None and t >= self._chat_followup:
+            self._chat_followup = None
+            self._chat_defense_report()
+
+    def _safe_state_label(self) -> str:
+        saf = self.svc.safety
+        if saf.cause == "level_low":
+            return "product valve closed, feeds held"
+        if saf.safe_hold is not None and saf.cause in ("pressure_high", "level_high") and not saf.escalated:
+            return "closed-loop safe-hold (feeds cut back, purge and product on the safety channel)"
+        return "e_stop (feeds shut, purge + product open)"
+
+    def _auto_rearm(self, t: float) -> None:
+        """Re-arm once the safety channel has held inside the re-arm band for AUTO_REARM_S,
+        unless it has already done so AUTO_REARM_MAX times in AUTO_REARM_WINDOW_S."""
+        tr = self.state.truth or {}
+        if not self.svc.safety.can_reset(tr.get("pressure"), tr.get("liquid_level")):
+            self._band_since = None
+            return
+        self._band_since = t if self._band_since is None else self._band_since
+        if t - self._band_since < AUTO_REARM_S:
+            return
+        while self._auto_rearms and t - self._auto_rearms[0] > AUTO_REARM_WINDOW_S:
+            self._auto_rearms.popleft()
+        if len(self._auto_rearms) >= AUTO_REARM_MAX:
+            if not self._lockout_logged:
+                self._lockout_logged = True
+                self.log("sis", f"auto re-arm LOCKED OUT: {AUTO_REARM_MAX} trips in "
+                                f"{AUTO_REARM_WINDOW_S / 60:.0f} min; an operator must re-arm")
+            return
+        self._auto_rearms.append(t)
+        self._rearm(auto=True)
 
     def _note_decision(self, state: PlantState, targets: SupervisoryTargets, t: float) -> None:
         p = self.policy
@@ -390,6 +484,10 @@ class Engine:
                 self.decisions.append({**e, "t": round(t, 1), "brain": "scram-operator",
                                        "true": {"pressure": _num(truth.get("pressure")),
                                                 "level": _num(truth.get("liquid_level"))}})
+                if self._chat_pending is not None and e.get("note_id") == self._chat_pending:
+                    self._chat_pending = None
+                    self._chat_add("brain", e.get("rationale") or "", sp=e["sp"], outcome=e["outcome"])
+                    self._chat_followup = t + CHAT_FOLLOWUP_S
         elif t - self._last_baseline_log >= 5.0:
             self._last_baseline_log = t
             truth = state.truth or {}
@@ -515,11 +613,20 @@ class Engine:
                       "product_flow": _num(tr.get("product_flow"))},
             "valves": {"f1": _num(s.f1_valve_pos), "f2": _num(s.f2_valve_pos),
                        "purge": _num(s.purge_valve_pos), "product": _num(s.product_valve_pos)},
+            # what L1 last commanded (signed, after Keel): the dashboard shows actual vs commanded
+            "commanded": None if self._applied_cmd is None else {
+                "f1": _num(self._applied_cmd.f1_valve), "f2": _num(self._applied_cmd.f2_valve),
+                "purge": _num(self._applied_cmd.purge_valve), "product": _num(self._applied_cmd.product_valve)},
             "targets": None if tg is None else {
                 "pressure_sp": _num(tg.pressure_sp), "level_sp": _num(tg.level_sp),
                 "production_rate_sp": _num(tg.production_rate_sp), "a_comp_sp": _num(tg.a_comp_sp),
                 "authority": tg.authority, "rationale": tg.rationale},
             "sis": {"tripped": saf.tripped, "reason": saf.reason, "cause": saf.cause,
+                    "safe_state": self._safe_state_label() if saf.tripped else None,
+                    "escalated": saf.escalated,
+                    "auto_rearm_in": None if not saf.tripped or self._band_since is None
+                    else round(max(0.0, AUTO_REARM_S - (self.now() - self._band_since)), 1),
+                    "lockout": self._lockout_logged,
                     "can_reset": saf.tripped and saf.can_reset(tr.get("pressure", 0.0), tr.get("liquid_level", 0.0)),
                     "limits": {"pressure_high": lim.pressure_high, "pressure_rearm": lim.pressure_rearm,
                                "level_low": lim.level_low, "level_low_rearm": lim.level_low_rearm,
@@ -535,6 +642,8 @@ class Engine:
                           for k, v in self.scenarios.items()},
             "faults": dict(self.faults),
             "decision": self.decisions[-1] if self.decisions else None,
+            "chat": list(self.chat),
+            "note": getattr(self.policy, "note", None),
         }
 
     def read(self, since_hist: int = 0, since_event: int = 0, n_decisions: int = 12) -> dict:
@@ -595,16 +704,100 @@ class Engine:
         self.log("attack", f"injected 'advisory' reaches the AI operator for {duration_s:.0f}s: it starts raising "
                            "pressure and production setpoints in small steps (proposal-side attack)")
 
-    def _act_stolen_key(self) -> None:
-        self.scenarios["stolen_key"] = {"since": self.now()}
-        self.log("attack", "attacker with the STOLEN L1 key takes over: feeds 100%, purge and product shut. "
-                           "Its commands pass the provenance gate; only physics can stop it")
+    def _check_stolen_key(self, f1=100.0, f2=100.0, purge=0.0, product=0.0, duration_s=None) -> None:
+        for name, v in (("f1", f1), ("f2", f2), ("purge", purge), ("product", product)):
+            _pct(v, name)
+        if duration_s is not None:
+            _duration(duration_s)
 
-    def _act_oob_write(self) -> None:
+    def _act_stolen_key(self, f1=100.0, f2=100.0, purge=0.0, product=0.0, duration_s=None) -> None:
+        self._check_stolen_key(f1, f2, purge, product, duration_s)
+        v = {"f1": float(f1), "f2": float(f2), "purge": float(purge), "product": float(product)}
+        t = self.now()
+        self.scenarios["stolen_key"] = {"since": t, "valves": v,
+                                        "until": None if duration_s is None else t + float(duration_s)}
+        self.log("attack", f"attacker with the STOLEN L1 key takes over: F1 {v['f1']:.0f}%, F2 {v['f2']:.0f}%, "
+                           f"purge {v['purge']:.0f}%, product {v['product']:.0f}%"
+                           + (f" for {float(duration_s):.0f}s" if duration_s is not None else "")
+                           + ". Its commands pass the provenance gate; only physics can stop it")
+
+    def _check_oob_write(self, purge=100.0, product=100.0, f1=None, f2=None) -> None:
+        for name, v in (("purge", purge), ("product", product), ("f1", f1), ("f2", f2)):
+            if v is not None:
+                _pct(v, name)
+
+    def _act_oob_write(self, purge=100.0, product=100.0, f1=None, f2=None) -> None:
+        self._check_oob_write(purge, product, f1, f2)
+        vals = {k: float(v) for k, v in (("f1", f1), ("f2", f2), ("purge", purge), ("product", product))
+                if v is not None}
         with GrficsClient(self.host, self.port) as c:
-            c.write_inputs({"product_valve_sp": 100.0, "purge_valve_sp": 100.0})
+            c.write_inputs({f"{k}_valve_sp": v for k, v in vals.items()})
         self.log("attack", "attacker writes valves straight to the plant (:55555), bypassing the enforcer: "
-                           "product and purge 100%")
+                           + ", ".join(f"{k} {v:.0f}%" for k, v in vals.items()))
+
+    def _check_sensor_fault(self, channel: str, mode: str, severity=0.0) -> None:
+        if channel not in fi.CHANNELS:
+            raise ValueError(f"channel must be one of {', '.join(fi.CHANNELS)}")
+        if mode not in FAULT_MODES:
+            raise ValueError(f"mode must be one of {', '.join(FAULT_MODES)}")
+        try:
+            sev = float(severity)
+        except (TypeError, ValueError):
+            raise ValueError("severity must be a number") from None
+        if not math.isfinite(sev) or sev < 0 or (mode == "dropout" and sev > 1.0):
+            raise ValueError("severity must be >= 0 (a 0-1 fraction for dropout)")
+
+    def _act_sensor_fault(self, channel: str, mode: str, severity=0.0) -> None:
+        """Any of the simulator's native sensor faults on any channel (custom attack builder)."""
+        self._check_sensor_fault(channel, mode, severity)
+        sev = float(severity)
+        fi.set_fault(self.svc.client, channel, FAULT_MODES[mode], sev)
+        unit = {"drift": " /h", "dropout": " duty"}.get(mode, "")
+        self.faults[channel] = mode if mode == "frozen" else f"{mode} {sev:g}{unit}"
+        self.log("attack", f"{channel.replace('_', ' ')} sensor: {self.faults[channel]} "
+                           "(the measured view only; the SIS channel is untouched)")
+
+    # ---- operator <-> AI chat
+    def _chat_add(self, role: str, text: str, **kw) -> None:
+        with self._lock:
+            self._chat_seq += 1
+            self.chat.append({"id": self._chat_seq, "t": round(self.now(), 1), "role": role, "text": text, **kw})
+
+    def _check_chat(self, text: str) -> None:
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError("message is empty")
+
+    def _act_chat(self, text: str) -> None:
+        self._check_chat(text)
+        text = text.strip()[:500]
+        if not isinstance(self.policy, LLMOperator):
+            self._chat_add("you", text)
+            self._chat_add("system", "The baseline rule brain does not take instructions. "
+                                     "Switch to the trained model to talk to it.")
+            return
+        nid = self.policy.set_note(text)
+        self._chat_pending, self._chat_followup = nid, None
+        self._chat_add("you", text, note_id=nid)
+        self.log("brain", f'operator instruction to the AI: "{text[:140]}"')
+
+    def _act_clear_note(self) -> None:
+        if isinstance(self.policy, LLMOperator) and self.policy.note:
+            self.policy.set_note(None)
+            self._chat_add("system", "Standing instruction cleared; the AI is back on its own judgement.")
+            self.log("brain", "operator instruction cleared")
+        self._chat_pending = None
+
+    def _chat_defense_report(self) -> None:
+        o = self.observer.last.get("proposals") if self.observer else None
+        g = self.governor.last
+        parts = [f"proposals observer: {o.label}" if o is not None and o.label else "proposals observer: no verdict yet"]
+        if g is not None:
+            parts.append(f"governance ceiling {g.applied:.2f}" + (f" ({g.label})" if g.label else ""))
+        parts.append(f"Keel {self.keel.authority():.2f}")
+        eff = self.effective_authority()
+        verdict = ("Defenses cut the AI back" if eff < 0.5 else
+                   "Defenses are limiting the AI" if eff < 0.999 else "Defenses let it through")
+        self._chat_add("defense", f"{verdict}: effective authority {eff:.2f} · " + " · ".join(parts), eff=round(eff, 3))
 
     def _act_clear_faults(self) -> None:
         fi.clear_all(self.svc.client)
@@ -616,12 +809,18 @@ class Engine:
             self.log("attack", "stolen-key attacker stopped")
         if self.scenarios.pop("operator_injection", None):
             self.log("attack", "operator injection stopped; the brain is back on its own reading")
+        self._act_clear_note()
         self.log("plant", "all sensor and actuator faults cleared; attacks stopped")
 
     def _act_reset_interlock(self) -> None:
         if not self.svc.safety.tripped:
             self.log("sis", "interlock is not tripped")
-        elif self.svc.reset_interlock():
+        else:
+            self._auto_rearms.clear()       # a human re-arm also clears the auto re-arm lockout
+            self._rearm(auto=False)
+
+    def _rearm(self, auto: bool) -> None:
+        if self.svc.reset_interlock():
             v = DESIGN_VALVES
             self._applied_cmd = self.l1.sign(ControlCommand(
                 f1_valve=v["f1"], f2_valve=v["f2"], purge_valve=v["purge"], product_valve=v["product"]))
@@ -641,9 +840,16 @@ class Engine:
             if self.observer is not None:
                 self.observer.reset()
             self.governor.reset()
+            # the AI comes back on reduced authority and earns the rest on a clean window
+            self.governor.applied = min(self.governor.applied, POST_REARM_AUTHORITY)
             self._keel_logged = None
-            self.log("sis", "interlock RE-ARMED by operator (safety channel back inside the re-arm band); "
-                            "restarting from the design valve lineup, then the AI and L1 take over")
+            self._band_since = None
+            self._escalation_logged = self._lockout_logged = False
+            self.log("sis", ("interlock AUTO RE-ARMED after "
+                             f"{AUTO_REARM_S:.0f} s stable inside the re-arm band" if auto else
+                             "interlock RE-ARMED by operator (safety channel back inside the re-arm band)")
+                            + f"; restarting from the design valve lineup, the AI back on "
+                              f"{POST_REARM_AUTHORITY:.2f} authority")
         else:
             tr = self.state.truth or {}
             self.log("sis", f"reset REFUSED: safety channel not in the re-arm band yet "

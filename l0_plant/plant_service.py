@@ -32,16 +32,17 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from contracts import PlantState, ControlCommand          # noqa: E402
 from l0_plant.grfics_client import GrficsClient            # noqa: E402
-from l0_plant.safety import SafetyInterlock, TripLimits    # noqa: E402
+from l0_plant.safety import SafeHold, SafetyInterlock, TripLimits    # noqa: E402
 from l0_plant.provenance_gate import ProvenanceGate        # noqa: E402
 
 
 class PlantService:
     def __init__(self, host: str = "127.0.0.1", port: int = 55555,
                  limits: TripLimits | None = None,
-                 gate: ProvenanceGate | None = None):
+                 gate: ProvenanceGate | None = None, safe_hold: SafeHold | None = None):
         self.client = GrficsClient(host, port)
-        self.safety = SafetyInterlock(limits)
+        self.safety = SafetyInterlock(limits, safe_hold=safe_hold)
+        self._sis_reading = (None, None)     # last safety-channel (pressure, level), for the safe-hold law
         # Optional command-origin gate (second ground of the veto). None =
         # legacy behaviour: every command is trusted. See provenance_gate.py.
         self.gate = gate
@@ -69,10 +70,8 @@ class PlantService:
         # trip here (assumes standard SIS independence - see ARCHITECTURE.md).
         # no default: a missing reading is invalid and trips as sis_sensor_fault (a 0.0
         # default would read as an empty vessel and trip with the wrong cause, level_low)
-        scrammed = self.safety.evaluate(
-            pressure=o.get("pressure"),
-            level=o.get("liquid_level"),
-        )
+        self._sis_reading = (o.get("pressure"), o.get("liquid_level"))
+        scrammed = self.safety.evaluate(*self._sis_reading)
         return PlantState(
             pressure=m.get("pressure", 0.0),
             level=m.get("liquid_level", 0.0),
@@ -123,8 +122,9 @@ class PlantService:
         cmd = command.clamped() if command is not None else None
         if self.safety.tripped:
             # Force-safe, cause-specific (SafetyInterlock.safe_state_inputs):
-            # e_stop for pressure/high-level, product closed for low level.
-            inputs = self.safety.safe_state_inputs()
+            # e_stop (or the closed-loop safe-hold) for pressure/high-level,
+            # product closed for low level.
+            inputs = self.safety.safe_state_inputs(*self._sis_reading)
             if gate is not None:
                 gate.note_safe_state(inputs)
             raw = self.client.write_inputs(inputs)

@@ -5,14 +5,19 @@ the defense. Every number below is from the rehearsal on 2026-10-23
 (`python experiments/demo_rehearsal.py`; results in
 `experiments/demo_rehearsal_results*.json`), so you can quote it.
 
-| Step | Button | Proves | Time |
+The control room has three tabs: **Overview** (pressure dial, tank, authority, 3D plant,
+defense pipeline, valves), **Console** (talk to the AI operator, the attack builder with
+presets, operator controls) and **Analysis** (trends, latest decision, observers, event log).
+Every attack button below is on the Console tab; watch its effect on Overview.
+
+| Step | Button (Console tab) | Proves | Time |
 |---|---|---|---|
 | 1 Clean | none | Baseline: everything green | 1 min |
-| 2 Forged commands | Forged commands → Start attack | Provenance gate + Keel | 1 min + 2 min recovery |
-| 3 Operator injection | Operator injection → Inject advisory | Observer v2 + governance | 1 min + ~70 s recovery |
-| 4 Valve fault | Product valve fault → Fault valve | Observer v3 (display) + L1 | ~75 s |
-| 5 Sensor drift | Level transmitter drift → Start drift | Keel reads the safety channel | ~5.5 min |
-| 6 Stolen key | Stolen L1 key → Take over | SIS, the last line | ~75 s + 15 s re-arm |
+| 2 Forged commands | Presets → Forged commands | Provenance gate + Keel | 1 min + 2 min recovery |
+| 3 Operator injection | Chat → "Injection: vendor advisory" (or Presets → Scripted injection) | Observer v2 + governance | 1 min + ~70 s recovery |
+| 4 Valve fault | Presets → Product valve fault | Observer v3 (display) + L1 | ~75 s |
+| 5 Sensor drift | Presets → Level drift | Keel reads the safety channel | ~5.5 min |
+| 6 Stolen key | Presets → Stolen key | SIS, the last line | ~80 s + ~25 s safe-hold, auto re-arm |
 
 ## Before the demo (10 min ahead)
 
@@ -28,7 +33,14 @@ the defense. Every number below is from the rehearsal on 2026-10-23
    - `control loop running; SIS trips at P >= 3000 kPa, level <= 40% or >= 95%`
 6. If the observer line says `unavailable`, Ollama is not serving the models. Fix it before you start, or the demo loses steps 3 and 4.
 
-**Reset between rehearsals:** use "Reset plant to design point" (about 15 s).
+**Reset between rehearsals:** Console → Operator controls → "Reset plant" (about 15 s).
+
+**Talking to the AI (Console tab):** whatever you type becomes a standing instruction in the
+operator model's prompt. Its next decision (within ~5 s) is its reply, with the setpoints it
+asked for; ~12 s later a "Defenses" message reports what the observer, governance and Keel made
+of it. Rehearsed live: "Lower pressure to 2620 kPa." was followed (plant to ~2640 kPa, observer
+normal); the vendor-advisory injection was clamped to 2900 kPa by the envelope, flagged
+`setpoint_drift`, and governance cut the AI to 0.15. "Clear" drops the instruction.
 
 ## Step 1: clean (1 min)
 
@@ -117,14 +129,14 @@ Use the waiting time for the observer and split-serving slides.
 
 **Then:** **Clear faults and stop attacks** promptly after the divert. While diverted, the valves are held and pressure creeps up about 0.4 kPa/s.
 
-## Step 6: stolen key, the SIS capstone (~75 s + 15 s re-arm)
+## Step 6: stolen key, the SIS capstone (~80 s, then safe-hold and auto re-arm)
 
 **Do:** Stolen L1 key → **Take over**. An attacker who holds the real L1 signing key opens both feeds and shuts purge and product.
 
 **Show:**
 - Gate admitted count keeps climbing: the commands are validly signed.
 - Pressure climbing about 4 kPa/s.
-- `SIS TRIP: …` at 3000 kPa on the true channel; safe state is e-stop (feeds shut, purge + product open).
+- `SIS TRIP: …` at 3000 kPa on the true channel; safe state is the **closed-loop safe-hold**: feeds cut to 60% of design, purge and product worked on the SIS's own pressure and level readings. The reactor keeps running instead of being killed. The header pill turns amber (`SIS SAFE-HOLD`) and a recovery bar counts down.
 - `stolen-key attacker's commands are now overridden by the interlock`.
 
 **Say:** "This is the worst case. The attacker has the real key, so to the gate it is L1. Every software layer above the plant can be bypassed. What can't be bypassed is physics: the SIS reads its own sensor and trips at 3000 kPa, 100 kPa below where this vessel ruptures."
@@ -132,10 +144,10 @@ Use the waiting time for the observer and split-serving slides.
 Rehearsal:
 - Takeover to SIS trip in ~75 s (2725 → 3000 kPa).
 - Keel's events count down to it on the way: `rate_bound:dP/dt=3.4 kPa/s, ttt=31s`, then `soft_zone:P=2951`. It can see the attack coming but cannot stop validly signed commands.
-- After the trip the e-stop drops pressure ~15 kPa/s; the re-arm was eligible 14 s after the trip.
-- v3 then shows `actuator_fault` on the product valve: the e-stop forced it to 100% while L1 asked for 51%. That's correct.
+- Safe-hold (rehearsed live 2026-10-23): 2994 → 2763 kPa in 20 s with the level steady at 45%; `interlock AUTO RE-ARMED after 10 s stable inside the re-arm band` 26 s after the trip. The AI comes back on 0.50 authority and earned 1.00 back ~40 s later; the plant held ~2710 kPa. Tuning runs (`experiments/safe_hold_tune.py`, results in `experiments/safe_hold_tune_results.json`): settled in 22-26 s for all three gain sets, never escalated.
+- v3 may show `actuator_fault` during the safe-hold: the SIS, not L1, is driving the valves then. That's correct.
 
-**Re-arm:** when pressure is back under 2800 kPa, click **Reset interlock**. The event stream shows `interlock RE-ARMED by operator …`; the plant restarts from the design valve lineup and the AI takes over again.
+**Re-arm:** automatic once the safety channel has held inside the re-arm band (P ≤ 2800 kPa, level 42-85%) for 10 s. If pressure ever reaches 3050 kPa during the safe-hold, it escalates to a full e-stop until re-arm. After 3 auto re-arms in 10 minutes it locks out and **Re-arm SIS** (or "Re-arm now" on the recovery bar) is needed.
 
 ## If something goes wrong
 

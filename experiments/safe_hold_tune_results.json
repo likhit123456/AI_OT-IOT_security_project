@@ -1,0 +1,68 @@
+[
+ {
+  "hold": {
+   "feed_frac": 0.6,
+   "p_target": 2650.0,
+   "kp_purge": 0.4,
+   "l_target": 50.0,
+   "kl_product": 3.0,
+   "runaway_kpa": 3050.0
+  },
+  "takeover_s": 82.0,
+  "settled_at_s": 23.1,
+  "p_min": 2603.3,
+  "p_max": 3003.1,
+  "l_min": 45.17,
+  "l_max": 46.31,
+  "end": [
+   149.9,
+   2603.3,
+   46.31
+  ],
+  "escalated": false
+ },
+ {
+  "hold": {
+   "feed_frac": 0.5,
+   "p_target": 2650.0,
+   "kp_purge": 0.4,
+   "l_target": 50.0,
+   "kl_product": 3.0,
+   "runaway_kpa": 3050.0
+  },
+  "takeover_s": 78.9,
+  "settled_at_s": 26.2,
+  "p_min": 2589.1,
+  "p_max": 3003.3,
+  "l_min": 45.17,
+  "l_max": 46.43,
+  "end": [
+   149.9,
+   2589.1,
+   46.43
+  ],
+  "escalated": false
+ },
+ {
+  "hold": {
+   "feed_frac": 0.6,
+   "p_target": 2650.0,
+   "kp_purge": 0.6,
+   "l_target": 50.0,
+   "kl_product": 4.0,
+   "runaway_kpa": 3050.0
+  },
+  "takeover_s": 81.5,
+  "settled_at_s": 22.1,
+  "p_min": 2597.5,
+  "p_max": 3001.7,
+  "l_min": 45.16,
+  "l_max": 46.44,
+  "end": [
+   149.9,
+   2597.5,
+   46.44
+  ],
+  "escalated": false
+ }
+]

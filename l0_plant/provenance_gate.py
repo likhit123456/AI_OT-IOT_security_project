@@ -130,8 +130,13 @@ class ProvenanceGate:
         the other valves held for low level).
         """
         self.expect_e_stop = bool(inputs.get("e_stop", 0))
-        if not self.expect_e_stop and self.last_good is not None and "product_valve_sp" in inputs:
-            self.last_good = replace(self.last_good, product_valve=float(inputs["product_valve_sp"]))
+        if not self.expect_e_stop and self.last_good is not None:
+            # every valve the safe state wrote (product only for low level; the whole
+            # lineup for the closed-loop safe-hold) is now what the plant should show
+            held = {f"{v}_valve": float(inputs[f"{v}_valve_sp"])
+                    for v in ("f1", "f2", "purge", "product") if f"{v}_valve_sp" in inputs}
+            if held:
+                self.last_good = replace(self.last_good, **held)
 
     def audit(self, plant_state: dict) -> List[str]:
         """

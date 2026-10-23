@@ -26,6 +26,11 @@ Design rules:
   * A safety-channel reading that is missing or not a finite number trips the
     interlock (cause "sis_sensor_fault", safe state e_stop): an SIS that cannot
     read its own sensor fails safe rather than assuming all is well.
+  * Optional closed-loop safe-hold (SafeHold): instead of an e_stop that kills
+    the reaction, a pressure / high-level trip cuts the feeds back and works
+    purge and product on the safety channel until the plant is back inside the
+    re-arm band, still running. It escalates to e_stop on a runaway
+    (pressure >= SafeHold.runaway_kpa) and stays there until reset.
 """
 
 from __future__ import annotations
@@ -36,6 +41,30 @@ from dataclasses import dataclass
 
 def _valid(x) -> bool:
     return isinstance(x, (int, float)) and not isinstance(x, bool) and math.isfinite(x)
+
+
+# Valve lineup of the settled design point (training/design_point.json)
+DESIGN_VALVES = {"f1": 31.45, "f2": 13.24, "purge": 0.39, "product": 47.03}
+
+
+@dataclass(frozen=True)
+class SafeHold:
+    """Closed-loop safe-hold law, run by the SIS on its own (safety-channel) readings."""
+    feed_frac: float = 0.6        # feeds cut to this fraction of the design lineup
+    p_target: float = 2650.0      # kPa: purge opens in proportion to pressure above this
+    kp_purge: float = 0.4         # % purge per kPa
+    l_target: float = 50.0        # %: product opens in proportion to level above this
+    kl_product: float = 3.0       # % product per % level
+    runaway_kpa: float = 3050.0   # still climbing past the trip: give up and e_stop
+
+    def lineup(self, pressure: float, level: float) -> dict:
+        clamp = lambda v: round(max(0.0, min(100.0, v)), 2)
+        d = DESIGN_VALVES
+        return {"e_stop": 0,
+                "f1_valve_sp": clamp(d["f1"] * self.feed_frac),
+                "f2_valve_sp": clamp(d["f2"] * self.feed_frac),
+                "purge_valve_sp": clamp(d["purge"] + self.kp_purge * (pressure - self.p_target)),
+                "product_valve_sp": clamp(d["product"] * self.feed_frac + self.kl_product * (level - self.l_target))}
 
 
 @dataclass(frozen=True)
@@ -55,11 +84,13 @@ class TripLimits:
 
 
 class SafetyInterlock:
-    def __init__(self, limits: TripLimits | None = None):
+    def __init__(self, limits: TripLimits | None = None, safe_hold: SafeHold | None = None):
         self.limits = limits or TripLimits()
+        self.safe_hold = safe_hold          # None = classic e_stop safe state
         self.tripped = False
         self.reason = ""
         self.cause = ""     # "pressure_high" | "level_low" | "level_high" while latched
+        self.escalated = False              # safe-hold gave up on a runaway: e_stop until reset
 
     def evaluate(self, pressure: float, level: float) -> bool:
         """
@@ -96,10 +127,11 @@ class SafetyInterlock:
             self.tripped = False
             self.reason = ""
             self.cause = ""
+            self.escalated = False
             return True
         return False
 
-    def safe_state_inputs(self) -> dict:
+    def safe_state_inputs(self, pressure: float | None = None, level: float | None = None) -> dict:
         """
         Simulator write-inputs that put the plant in the safe state for the
         latched trip cause. The right safe state depends on the hazard:
@@ -111,9 +143,20 @@ class SafetyInterlock:
             drain and leave the feed/purge valves where they are (they are
             simply not written, so the simulator holds them) so inflow and
             reaction make the level recover toward the re-arm band.
+
+        With a SafeHold configured and valid safety-channel readings passed in,
+        pressure_high / level_high run the closed-loop safe-hold lineup instead
+        of e_stop, escalating (latched) to e_stop on a runaway.
         """
         if self.cause == "level_low":
             return {"e_stop": 0, "product_valve_sp": 0.0}
+        hold = self.safe_hold
+        if (hold is not None and self.cause in ("pressure_high", "level_high")
+                and _valid(pressure) and _valid(level)):
+            if pressure >= hold.runaway_kpa:
+                self.escalated = True
+            if not self.escalated:
+                return hold.lineup(pressure, level)
         return {"e_stop": 1}
 
     def _trip(self, reason: str, cause: str) -> None:
