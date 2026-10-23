@@ -44,3 +44,10 @@ training/collect_observer.log
 /training/_observer_v3_outputs/
 training/scram_observer_finetune.run.ipynb
 training/_observer_v3_train.log
+model/**/hf-merged/
+model/**/_convert.log
+observer_merged_v2/
+training/_observer_*.log
+training/_observer_*_outputs/
+training/*.run.ipynb
+scram_l1_l2_contrib.zip
