@@ -4,203 +4,279 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SCRAM Control Room</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b1110'/%3E%3Cpath d='M8 22 L16 8 L24 22 Z' fill='none' stroke='%233fbfb2' stroke-width='2.6' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='18' r='2.2' fill='%23e89a45'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='%230b1220'/%3E%3Cpath d='M16 6 L25 11 V21 L16 26 L7 21 V11 Z' fill='none' stroke='url(%23g)' stroke-width='2.4' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='16' r='3.2' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
-/* SCRAM control room. One dark console, laid out in the order the demo tells it:
-   status bar -> plant + defense stack -> trends -> AI + observers -> scenarios + log. */
+/* SCRAM control room: a mission-control console. Hero (authority gauge + live KPIs) ->
+   plant + defense pipeline -> trends -> AI + observers -> playbook + event timeline. */
 :root{
   color-scheme:dark;
-  --bg:#0a100f; --panel:#101817; --panel2:#152120; --panel3:#1a2827; --line:#213130; --line2:#2b3e3c;
-  --ink:#e6eeec; --muted:#8a9a97; --faint:#5f6f6c; --grid:#1b2827;
-  --truth:#3fbfb2; --meas:#e89a45; --sp:#9aa8ff; --auth:#e6eeec;
-  --ok:#6cc27a; --warn:#e8c45a; --alert:#ef6a5f; --info:#6ca6e0;
-  --okbg:rgba(108,194,122,.10); --warnbg:rgba(232,196,90,.10); --alertbg:rgba(239,106,95,.12); --infobg:rgba(108,166,224,.10);
-  --tripbg:rgba(239,106,95,.10);
-  --f-display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
-  --f-body:"IBM Plex Sans",system-ui,"Segoe UI",sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
-  --r:8px;
+  --bg:#060a12; --bg2:#0a1120;
+  --glass:rgba(148,178,222,.045); --glass2:rgba(148,178,222,.075); --glass3:rgba(148,178,222,.11);
+  --edge:rgba(160,190,235,.10); --edge2:rgba(160,190,235,.18);
+  --ink:#e8eef8; --muted:#8b99b3; --faint:#56627a; --grid:rgba(160,190,235,.07);
+  --cyan:#22d3ee; --truth:#2dd4bf; --meas:#f59e0b; --sp:#a78bfa; --auth:#e8eef8;
+  --ok:#34d399; --warn:#fbbf24; --alert:#f43f5e; --info:#60a5fa;
+  --okbg:rgba(52,211,153,.10); --warnbg:rgba(251,191,36,.10); --alertbg:rgba(244,63,94,.12); --infobg:rgba(96,165,250,.10);
+  --tripbg:rgba(244,63,94,.10);
+  --f-display:"Space Grotesk",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --r:16px; --r2:12px;
+  --shadow:0 1px 0 rgba(255,255,255,.04) inset,0 20px 40px -24px rgba(0,0,0,.6);
 }
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--f-body);-webkit-font-smoothing:antialiased}
-body{background:radial-gradient(1200px 600px at 70% -10%,rgba(63,191,178,.06),transparent 60%),var(--bg);min-height:100vh}
-.wrap{max-width:1680px;margin:0 auto;padding:0 20px 48px;display:grid;gap:16px}
-h2{font:600 17px var(--f-display);letter-spacing:.03em;margin:0;text-transform:uppercase}
+html,body{margin:0;color:var(--ink);font:14px/1.5 var(--f-body);-webkit-font-smoothing:antialiased}
+body{min-height:100vh;background:
+  radial-gradient(900px 500px at 12% -8%,rgba(34,211,238,.10),transparent 60%),
+  radial-gradient(900px 600px at 95% 0%,rgba(167,139,250,.10),transparent 60%),
+  linear-gradient(var(--grid) 1px,transparent 1px) 0 0/48px 48px,
+  linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/48px 48px,
+  linear-gradient(180deg,var(--bg2),var(--bg) 40%);background-attachment:fixed}
+.wrap{max-width:1720px;margin:0 auto;padding:0 24px 56px;display:grid;gap:20px}
+h2{font:600 15px var(--f-display);letter-spacing:.01em;margin:0;color:var(--ink)}
 .sub{font-size:12.5px;color:var(--muted)}
 .mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
-a{color:var(--truth)}
+a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
 button{font:inherit;color:inherit}
-button:focus-visible,input:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+button:focus-visible,input:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
-/* ---------- status bar ---------- */
-.bar{position:sticky;top:0;z-index:5;margin:0 -20px;padding:12px 20px;background:rgba(10,16,15,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.bar-in{max-width:1640px;margin:0 auto;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
-.mark{display:flex;align-items:center;gap:12px}
-.mark svg{width:30px;height:30px}
-.mark b{font:700 24px var(--f-display);letter-spacing:.08em}
-.mark span{display:block;font:500 11px var(--f-mono);letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-top:-3px}
-.kpis{display:flex;gap:26px;flex-wrap:wrap;align-items:center}
-.kpi{display:grid;gap:1px;min-width:92px}
-.kpi .l{font:500 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.kpi .v{font:600 19px var(--f-mono);font-variant-numeric:tabular-nums;line-height:1.2}
-.kpi .d{font:12px var(--f-mono);color:var(--muted)}
-.kpi.auth{min-width:150px}
-.meter{height:4px;background:var(--panel3);border-radius:3px;overflow:hidden;margin-top:4px}
-.meter i{display:block;height:100%;background:var(--ok);border-radius:3px;transition:width .4s,background .4s}
+/* ---------- top bar ---------- */
+.top{position:sticky;top:0;z-index:10;margin:0 0 20px;padding:14px 24px;background:rgba(6,10,18,.72);backdrop-filter:blur(16px) saturate(1.3);border-bottom:1px solid var(--edge)}
+.top-in{max-width:1672px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{width:34px;height:34px;filter:drop-shadow(0 0 12px rgba(34,211,238,.35))}
+.brand b{display:block;font:700 20px/1 var(--f-display);letter-spacing:.14em}
+.brand span{display:block;font:500 11px var(--f-mono);color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-left:12px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);font:500 12px var(--f-mono);color:var(--muted)}
+.chip b{color:var(--ink);font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(52,211,153,.15)}
+.dot.off{background:var(--alert);box-shadow:0 0 0 4px rgba(244,63,94,.15)}
+.dot.pulse{animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(52,211,153,0)}}
 .sis{margin-left:auto;display:flex;align-items:center;gap:14px}
-.sisreason{font:12.5px var(--f-mono);color:var(--muted);max-width:40ch;text-align:right}
-.pill{font:700 13px var(--f-mono);letter-spacing:.1em;padding:8px 16px;border-radius:6px;border:1.5px solid currentColor;white-space:nowrap}
+.sisreason{font:12px var(--f-mono);color:var(--muted);max-width:42ch;text-align:right}
+.pill{display:inline-flex;align-items:center;gap:8px;font:700 12.5px var(--f-mono);letter-spacing:.12em;padding:9px 16px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
 .pill.armed{color:var(--ok);background:var(--okbg)}
-.pill.tripped{color:var(--alert);background:var(--alertbg);animation:blink 1.1s steps(2,start) infinite}
-@keyframes blink{50%{background:transparent}}
-@media (prefers-reduced-motion:reduce){.pill.tripped{animation:none}}
-.banner{padding:10px 14px;border-radius:var(--r);border:1px solid var(--warn);background:var(--warnbg);color:var(--warn);font:13px var(--f-mono)}
+.pill.tripped{color:var(--alert);background:var(--alertbg);box-shadow:0 0 24px rgba(244,63,94,.35);animation:blink 1s steps(2,start) infinite}
+@keyframes blink{50%{background:transparent;box-shadow:none}}
+@media (prefers-reduced-motion:reduce){.pill.tripped,.dot.pulse,.card.active,.node.alert .ico{animation:none!important}}
+.banner{padding:12px 16px;border-radius:var(--r2);border:1px solid rgba(251,191,36,.4);background:var(--warnbg);color:var(--warn);font:13px var(--f-mono)}
 
-/* ---------- panels ---------- */
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px;min-width:0}
-.ph{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
-.row-a{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(380px,1fr);gap:16px}
-.row-b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.row-c{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px}
-.row-d{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px}
-@media (max-width:1280px){.row-b{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:1100px){.row-a,.row-c,.row-d{grid-template-columns:1fr}}
-@media (max-width:640px){.row-b{grid-template-columns:1fr}.sis{margin-left:0}.sisreason{text-align:left}}
+/* ---------- glass panels ---------- */
+.panel{background:linear-gradient(180deg,var(--glass2),var(--glass));border:1px solid var(--edge);border-radius:var(--r);padding:18px;min-width:0;box-shadow:var(--shadow);backdrop-filter:blur(6px)}
+.ph{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.ph h2{display:flex;align-items:center;gap:10px}
+.ph h2 i{display:inline-block;width:6px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--cyan),var(--sp))}
+.hero{display:grid;grid-template-columns:minmax(360px,.9fr) minmax(0,2fr);gap:20px}
+.row-a{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(400px,1fr);gap:20px}
+.row-b{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.row-c{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px}
+.row-d{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:20px}
+@media (max-width:1320px){.row-b{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1120px){.hero,.row-a,.row-c,.row-d{grid-template-columns:1fr}}
+@media (max-width:640px){.row-b,.kpis{grid-template-columns:1fr!important}.sis{margin-left:0}.sisreason{text-align:left}.chips{margin-left:0}}
+
+/* hero: authority gauge */
+.gauge{display:grid;grid-template-columns:170px minmax(0,1fr);gap:22px;align-items:center}
+.ring{position:relative;width:170px;height:170px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .track{stroke:rgba(160,190,235,.09)}
+.ring .val{transition:stroke-dashoffset .6s cubic-bezier(.2,.8,.2,1),stroke .4s;filter:drop-shadow(0 0 10px currentColor)}
+.ring .ctr{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring .ctr b{font:700 40px/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.ring .ctr span{font:500 10.5px var(--f-mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-top:6px}
+.inputs{display:grid;gap:12px}
+.inputs h3{margin:0 0 2px;font:600 13px var(--f-display);color:var(--muted);letter-spacing:.02em}
+.bar{display:grid;grid-template-columns:110px minmax(0,1fr) 44px;gap:10px;align-items:center;font-size:12.5px;color:var(--muted)}
+.bar .tr{height:7px;border-radius:99px;background:rgba(160,190,235,.09);overflow:hidden}
+.bar .tr i{display:block;height:100%;border-radius:99px;background:var(--ok);transition:width .5s cubic-bezier(.2,.8,.2,1),background .4s}
+.bar b{font:600 12.5px var(--f-mono);color:var(--ink);text-align:right}
+.verdict{font-size:13px;color:var(--muted);padding:10px 12px;border-radius:var(--r2);background:var(--glass);border:1px solid var(--edge)}
+.verdict b{color:var(--ink)}
+
+/* hero: KPI tiles */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;height:100%}
+.kpi{position:relative;overflow:hidden;padding:16px 16px 12px;border-radius:var(--r2);background:var(--glass);border:1px solid var(--edge);display:flex;flex-direction:column;gap:4px;min-height:150px}
+.kpi .l{font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font:700 30px/1.1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.kpi .v small{font:500 14px var(--f-body);color:var(--muted);margin-left:4px;letter-spacing:0}
+.kpi .d{font:12px var(--f-mono);color:var(--muted)}
+.kpi canvas{position:absolute;left:0;right:0;bottom:0;width:100%;height:56px;opacity:.95}
+.kpi.alert{border-color:rgba(244,63,94,.45);box-shadow:0 0 0 1px rgba(244,63,94,.15) inset,0 0 30px -10px rgba(244,63,94,.5)}
 
 /* reactor */
 .plant{padding:0;overflow:hidden;display:flex;flex-direction:column}
-.plant .ph{padding:14px 16px 0;margin-bottom:10px}
-.viewport{flex:1;min-height:520px;position:relative;background:#070b0a;border-top:1px solid var(--line)}
+.plant .ph{padding:16px 18px 0;margin-bottom:14px}
+.viewport{flex:1;min-height:540px;position:relative;background:#04070c;border-top:1px solid var(--edge)}
 .viewport iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
-.vtag{position:absolute;right:12px;top:12px;font:500 11px var(--f-mono);letter-spacing:.08em;color:var(--muted);background:rgba(7,11,10,.75);padding:5px 9px;border-radius:5px;border:1px solid var(--line);pointer-events:none}
+.vtag{position:absolute;right:14px;top:14px;font:500 11px var(--f-mono);letter-spacing:.08em;color:var(--muted);background:rgba(6,10,18,.72);backdrop-filter:blur(8px);padding:7px 11px;border-radius:999px;border:1px solid var(--edge);pointer-events:none}
 .vtag b{color:var(--truth);font-weight:600}
 
-/* defense stack */
-.stack{display:grid;gap:8px}
-.layer{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 12px;background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--ok);border-radius:6px;transition:border-color .3s,background .3s}
-.layer .tag{font:600 11px var(--f-mono);color:var(--muted);letter-spacing:.06em}
-.layer .nm{font:600 15px var(--f-display);letter-spacing:.03em}
-.layer .dt{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.layer .val{font:600 15px var(--f-mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.layer .val small{display:block;font:500 10.5px var(--f-mono);color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
-.layer.warn{border-left-color:var(--warn);background:linear-gradient(90deg,var(--warnbg),var(--panel2) 40%)}
-.layer.alert{border-left-color:var(--alert);background:linear-gradient(90deg,var(--alertbg),var(--panel2) 40%)}
-.layer.info{border-left-color:var(--info);background:linear-gradient(90deg,var(--infobg),var(--panel2) 40%)}
-.layer.off{border-left-color:var(--faint);opacity:.75}
-.stack-foot{font-size:12px;color:var(--muted);margin-top:10px}
+/* defense pipeline */
+.pipe{position:relative;display:grid;gap:10px}
+.pipe::before{content:"";position:absolute;left:21px;top:22px;bottom:22px;width:2px;background:linear-gradient(180deg,rgba(34,211,238,.5),rgba(167,139,250,.5));opacity:.35}
+.node{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:center;padding:10px 14px 10px 0;border-radius:var(--r2);transition:background .3s}
+.node .ico{position:relative;z-index:1;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#0b1424;border:1px solid var(--edge2);color:var(--ok);transition:all .3s}
+.node .ico svg{width:20px;height:20px}
+.node .tag{font:600 10px var(--f-mono);letter-spacing:.12em;color:var(--faint)}
+.node .nm{font:600 14.5px var(--f-display);letter-spacing:.01em}
+.node .dt{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.node .val{font:600 16px var(--f-mono);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.node .val small{display:block;font:500 10px var(--f-mono);color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.node.warn{background:linear-gradient(90deg,var(--warnbg),transparent 70%)} .node.warn .ico{color:var(--warn);border-color:rgba(251,191,36,.5);box-shadow:0 0 18px -4px rgba(251,191,36,.6)}
+.node.alert{background:linear-gradient(90deg,var(--alertbg),transparent 70%)} .node.alert .ico{color:var(--alert);border-color:rgba(244,63,94,.6);box-shadow:0 0 22px -2px rgba(244,63,94,.7);animation:glow 1.4s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 6px -2px rgba(244,63,94,.4)}}
+.node.info{background:linear-gradient(90deg,var(--infobg),transparent 70%)} .node.info .ico{color:var(--info);border-color:rgba(96,165,250,.5)}
+.node.off{opacity:.6} .node.off .ico{color:var(--faint)}
+.pipe-foot{font-size:12px;color:var(--muted);margin-top:12px;padding-top:12px;border-top:1px solid var(--edge)}
 
 /* charts */
-.chart canvas{width:100%;height:190px;display:block}
-.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted);margin-top:8px}
+.chart canvas{width:100%;height:200px;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);margin-top:10px}
 .legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
 .legend i.dash{background:repeating-linear-gradient(90deg,currentColor 0 4px,transparent 4px 7px)!important}
-.ro{font:12.5px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
-.trendbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:-4px}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--panel)}
-.seg button{background:transparent;color:var(--muted);border:0;padding:6px 12px;font:600 12.5px var(--f-body);cursor:pointer}
-.seg button.on{background:var(--panel3);color:var(--ink);box-shadow:inset 0 -2px 0 var(--truth)}
+.ro{font:12px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.sectionbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:4px 2px -6px}
+.sectionbar h2{font-size:18px}
+.seg{display:inline-flex;padding:3px;border-radius:999px;background:var(--glass);border:1px solid var(--edge)}
+.seg button{background:transparent;color:var(--muted);border:0;padding:6px 14px;border-radius:999px;font:600 12.5px var(--f-body);cursor:pointer;transition:all .2s}
+.seg button.on{background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(167,139,250,.18));color:var(--ink);box-shadow:0 0 0 1px var(--edge2) inset}
 
 /* AI operator */
-.brainhead{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
-.think{font:12px var(--f-mono);color:var(--muted)}
-.think.on{color:var(--warn)}
-.cmp{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:6px 14px;font-variant-numeric:tabular-nums;padding:12px;background:var(--panel2);border:1px solid var(--line);border-radius:6px}
-.cmp .hd{font:500 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:right}
+.brainhead{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.think{font:12px var(--f-mono);color:var(--muted);display:inline-flex;align-items:center;gap:8px}
+.think.on{color:var(--warn)} .think.on::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--warn);animation:pulse 1s infinite}
+.cmp{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:8px 16px;font-variant-numeric:tabular-nums;padding:14px 16px;background:var(--glass);border:1px solid var(--edge);border-radius:var(--r2)}
+.cmp .hd{font:500 10.5px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:right}
 .cmp .k{color:var(--muted);font-size:13px}
-.cmp .n{font:500 15px var(--f-mono);text-align:right}
+.cmp .n{font:600 16px var(--f-mono);text-align:right}
 .n.meas{color:var(--meas)} .n.truth{color:var(--truth)} .n.sp{color:var(--sp)}
-.gap{font:600 12.5px var(--f-mono);color:var(--alert);min-height:18px;margin-top:8px}
-.why{margin:6px 0 0;padding:11px 14px;background:var(--panel2);border-left:3px solid var(--sp);border-radius:0 6px 6px 0;font-size:14px;min-height:44px}
-.meta{font:12px var(--f-mono);color:var(--muted);margin-top:6px}
-.declist{list-style:none;margin:12px 0 0;padding:0;font:12px var(--f-mono);color:var(--muted);max-height:140px;overflow:auto}
-.declist li{padding:4px 0;border-top:1px solid var(--grid);display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px}
+.gap{font:600 12.5px var(--f-mono);color:var(--alert);min-height:18px;margin-top:10px}
+.why{margin:6px 0 0;padding:12px 16px;background:linear-gradient(90deg,rgba(167,139,250,.10),transparent);border-left:3px solid var(--sp);border-radius:0 var(--r2) var(--r2) 0;font-size:14.5px;min-height:46px}
+.meta{font:12px var(--f-mono);color:var(--muted);margin-top:8px}
+.declist{list-style:none;margin:14px 0 0;padding:0;font:12px var(--f-mono);color:var(--muted);max-height:150px;overflow:auto}
+.declist li{padding:5px 0;border-top:1px solid var(--edge);display:grid;grid-template-columns:58px minmax(0,1fr);gap:8px}
 .declist li span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
-.auth{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:grid;gap:6px}
-.auth .row{display:flex;align-items:center;gap:12px}
+.auth{margin-top:16px;padding-top:14px;border-top:1px solid var(--edge);display:grid;gap:8px}
+.auth .row{display:flex;align-items:center;gap:14px}
 .auth label{font-size:13px;color:var(--muted)}
-input[type=range]{flex:1;accent-color:var(--truth)}
+input[type=range]{flex:1;accent-color:var(--cyan)}
 
 /* observers */
-.obs{display:grid;gap:12px}
-.ocard{padding:14px;background:var(--panel2);border:1px solid var(--line);border-radius:6px;border-top:3px solid var(--ok);display:grid;gap:8px}
-.ocard.alert{border-top-color:var(--alert)} .ocard.warn{border-top-color:var(--warn)} .ocard.off{border-top-color:var(--faint)}
-.ohead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
-.ohead h3{margin:0;font:600 15px var(--f-display);letter-spacing:.03em}
-.route{font:600 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;border:1px solid var(--line2);color:var(--muted)}
-.route.feeds{color:var(--info);border-color:rgba(108,166,224,.4)}
-.olabel{font:600 22px var(--f-mono);letter-spacing:.01em}
+.obs{display:grid;gap:14px}
+.ocard{position:relative;padding:16px;background:var(--glass);border:1px solid var(--edge);border-radius:var(--r2);display:grid;gap:8px;overflow:hidden}
+.ocard::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--ok)}
+.ocard.alert::before{background:var(--alert);box-shadow:0 0 16px var(--alert)} .ocard.warn::before{background:var(--warn)} .ocard.off::before{background:var(--faint)}
+.ohead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.ohead h3{margin:0;font:600 14.5px var(--f-display)}
+.route{font:600 10px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid var(--edge2);color:var(--muted)}
+.route.feeds{color:var(--cyan);border-color:rgba(34,211,238,.45);background:rgba(34,211,238,.08)}
+.olabel{font:700 24px var(--f-display);letter-spacing:-.01em}
 .olabel.alert{color:var(--alert)} .olabel.warn{color:var(--warn)} .olabel.ok{color:var(--ok)} .olabel.off{color:var(--faint)}
-.oreason{font-size:13px;color:var(--ink);min-height:38px}
+.oreason{font-size:13px;color:var(--ink);min-height:38px;opacity:.9}
 .ometa{font:11.5px var(--f-mono);color:var(--muted)}
+.ohist-h{font:600 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:6px 0 2px}
 .ohist{list-style:none;margin:0;padding:0;font:12px var(--f-mono);max-height:220px;overflow:auto}
-.ohist li{display:grid;grid-template-columns:50px 84px minmax(0,1fr);gap:8px;padding:5px 0;border-top:1px solid var(--grid);color:var(--muted)}
+.ohist li{display:grid;grid-template-columns:50px 84px minmax(0,1fr);gap:8px;padding:6px 0;border-top:1px solid var(--edge);color:var(--muted)}
 .ohist li b{font-weight:600}
 .ohist li span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
-.ohist-h{font:600 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:4px 0 2px}
 
-/* scenarios */
-.scen{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.card{position:relative;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:14px;display:grid;gap:7px;align-content:start;transition:border-color .3s,box-shadow .3s}
-.card .num{font:700 12px var(--f-mono);color:var(--muted);letter-spacing:.08em}
-.card h3{margin:0;font:600 16px var(--f-display);letter-spacing:.03em}
+/* playbook */
+.scen{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.card{position:relative;background:var(--glass);border:1px solid var(--edge);border-radius:var(--r2);padding:16px;display:grid;gap:8px;align-content:start;transition:transform .2s,border-color .3s,box-shadow .3s}
+.card:hover{transform:translateY(-2px);border-color:var(--edge2)}
+.card .head{display:flex;align-items:center;gap:10px}
+.card .num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:700 12px var(--f-mono);background:linear-gradient(135deg,rgba(34,211,238,.22),rgba(167,139,250,.22));border:1px solid var(--edge2)}
+.card h3{margin:0;font:600 15.5px var(--f-display)}
 .card p{margin:0;font-size:13px;color:var(--muted)}
-.card .watch{font-size:12.5px;color:var(--ink)}
-.card .layerchip{justify-self:start;font:600 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--info)}
-.card.active{border-color:var(--warn);box-shadow:0 0 0 1px var(--warn) inset}
-.card .live{position:absolute;top:12px;right:12px;font:600 11px var(--f-mono);color:var(--warn);display:none}
+.card .watch{font-size:12.5px;color:var(--ink);opacity:.92}
+.card .layerchip{justify-self:start;font:600 10px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);padding:3px 8px;border-radius:999px;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.25)}
+.card.active{border-color:rgba(251,191,36,.6);box-shadow:0 0 0 1px rgba(251,191,36,.3) inset,0 0 34px -12px rgba(251,191,36,.7);animation:breathe 2.2s ease-in-out infinite}
+@keyframes breathe{50%{box-shadow:0 0 0 1px rgba(251,191,36,.15) inset,0 0 18px -12px rgba(251,191,36,.4)}}
+.card .live{position:absolute;top:14px;right:14px;font:600 10.5px var(--f-mono);letter-spacing:.06em;color:var(--warn);display:none;padding:3px 8px;border-radius:999px;background:var(--warnbg)}
 .card.active .live{display:block}
-button.go{justify-self:start;background:var(--ink);color:var(--bg);border:0;border-radius:5px;padding:7px 14px;font:600 13px var(--f-body);cursor:pointer;margin-top:4px}
-button.go:hover{background:#fff}
-button.go.danger{background:var(--alert);color:#1a0d0b}
-.extras{margin-top:14px}
-.extras>h3{font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
-.ops{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
-.ops button{background:transparent;color:var(--ink);border:1px solid var(--line2);border-radius:5px;padding:8px 13px;font:600 13px var(--f-body);cursor:pointer}
-.ops button:hover:not(:disabled){border-color:var(--muted)}
-.ops button.hot{border-color:var(--ok);color:var(--ok);background:var(--okbg)}
+button.go{justify-self:start;margin-top:6px;border:0;border-radius:999px;padding:8px 16px;font:600 13px var(--f-body);cursor:pointer;color:#061018;background:linear-gradient(135deg,#67e8f9,#a5b4fc);box-shadow:0 6px 18px -8px rgba(34,211,238,.8);transition:transform .15s,box-shadow .2s}
+button.go:hover{transform:translateY(-1px);box-shadow:0 10px 24px -8px rgba(34,211,238,.9)}
+button.go:active{transform:translateY(0)}
+button.go.danger{color:#fff;background:linear-gradient(135deg,#fb7185,#e11d48);box-shadow:0 6px 18px -8px rgba(244,63,94,.9)}
+.extras{margin-top:18px}
+.extras>h3{font:600 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.ops{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--edge)}
+.ops button{background:var(--glass);color:var(--ink);border:1px solid var(--edge2);border-radius:999px;padding:9px 16px;font:600 13px var(--f-body);cursor:pointer;transition:all .2s}
+.ops button:hover:not(:disabled){background:var(--glass3);border-color:var(--muted)}
+.ops button.hot{border-color:var(--ok);color:var(--ok);background:var(--okbg);box-shadow:0 0 20px -8px var(--ok)}
 .ops button:disabled{opacity:.35;cursor:not-allowed}
-.faults{font:12.5px var(--f-mono);color:var(--warn);margin-top:10px;min-height:18px}
+.faults{font:12.5px var(--f-mono);color:var(--warn);margin-top:12px;min-height:18px}
 
-/* log */
+/* event timeline */
 .logpanel{display:flex;flex-direction:column}
-.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.filters button{background:transparent;border:1px solid var(--line2);color:var(--muted);border-radius:20px;padding:3px 11px;font:600 12px var(--f-body);cursor:pointer}
-.filters button.on{color:var(--ink);border-color:var(--truth);background:rgba(63,191,178,.08)}
-.log{list-style:none;margin:0;padding:0;max-height:620px;overflow:auto;font-size:13px;flex:1}
-.log li{display:grid;grid-template-columns:54px 92px minmax(0,1fr);gap:10px;padding:6px 2px;border-bottom:1px solid var(--grid);animation:in .35s ease-out}
-@keyframes in{from{background:rgba(63,191,178,.08)}to{background:transparent}}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.filters button{background:var(--glass);border:1px solid var(--edge);color:var(--muted);border-radius:999px;padding:5px 13px;font:600 12px var(--f-body);cursor:pointer;transition:all .2s}
+.filters button.on{color:var(--ink);border-color:rgba(34,211,238,.5);background:rgba(34,211,238,.10)}
+.log{list-style:none;margin:0;padding:0 0 0 4px;max-height:660px;overflow:auto;font-size:13px;flex:1}
+.log li{position:relative;display:grid;grid-template-columns:50px 96px minmax(0,1fr);gap:10px;padding:8px 4px 8px 18px;border-left:1px solid var(--edge2);animation:in .4s ease-out}
+.log li::before{content:"";position:absolute;left:-5px;top:13px;width:9px;height:9px;border-radius:50%;background:var(--kc,var(--muted));box-shadow:0 0 10px var(--kc,transparent)}
+@keyframes in{from{background:rgba(34,211,238,.08);transform:translateX(-4px)}to{background:transparent;transform:none}}
 .log .t{font-family:var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
-.log .k{font:600 10.5px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;padding-top:2px}
-.k.sis,.k.error{color:var(--alert)} .k.attack{color:var(--warn)} .k.gate{color:var(--ok)} .k.monitor{color:var(--sp)}
-.k.observer{color:#c5a3ff} .k.keel{color:var(--info)} .k.governance{color:var(--truth)} .k.brain,.k.plant{color:var(--muted)}
-.empty{color:var(--faint);font-size:13px;padding:10px 2px}
+.log .k{font:600 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding-top:2px;color:var(--kc,var(--muted))}
+.log li.sis,.log li.error{--kc:var(--alert)} .log li.attack{--kc:var(--warn)} .log li.gate{--kc:var(--ok)} .log li.monitor{--kc:var(--sp)}
+.log li.observer{--kc:#c084fc} .log li.keel{--kc:var(--info)} .log li.governance{--kc:var(--truth)} .log li.brain,.log li.plant{--kc:var(--muted)}
+.empty{color:var(--faint);font-size:13px;padding:10px 2px;border:0!important}
+.empty::before{display:none}
+::-webkit-scrollbar{width:8px;height:8px} ::-webkit-scrollbar-thumb{background:rgba(160,190,235,.15);border-radius:8px} ::-webkit-scrollbar-track{background:transparent}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="bar">
-    <div class="bar-in">
-      <div class="mark">
-        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#152120"/><path d="M8 22 L16 8 L24 22 Z" fill="none" stroke="#3fbfb2" stroke-width="2.6" stroke-linejoin="round"/><circle cx="16" cy="18" r="2.2" fill="#e89a45"/></svg>
-        <div><b>SCRAM</b><span>live control room</span></div>
+  <header class="top">
+    <div class="top-in">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="#0b1220"/><path d="M16 6 L25 11 V21 L16 26 L7 21 V11 Z" fill="none" stroke="url(#bg1)" stroke-width="2.4" stroke-linejoin="round"/><circle cx="16" cy="16" r="3.2" fill="url(#bg1)"/></svg>
+        <div><b>SCRAM</b><span>Live control room</span></div>
       </div>
-      <div class="kpis">
-        <div class="kpi auth"><span class="l">AI authority</span><span class="v" id="kAuth">–</span><div class="meter"><i id="kAuthBar" style="width:100%"></i></div></div>
-        <div class="kpi"><span class="l">Pressure · true</span><span class="v" id="kP">–</span><span class="d" id="kPd"></span></div>
-        <div class="kpi"><span class="l">Level · true</span><span class="v" id="kL">–</span><span class="d" id="kLd"></span></div>
-        <div class="kpi"><span class="l">Gate rejected</span><span class="v" id="kRej">0</span><span class="d" id="kAdm"></span></div>
-        <div class="kpi"><span class="l">Run time</span><span class="v" id="kT">–</span><span class="d" id="kBrain"></span></div>
+      <div class="chips">
+        <span class="chip"><span class="dot pulse" id="connDot"></span><span id="connTxt">connecting…</span></span>
+        <span class="chip">brain <b id="kBrain">–</b></span>
+        <span class="chip">run <b id="kT">–</b></span>
       </div>
       <div class="sis"><span class="sisreason" id="sisReason"></span><span class="pill armed" id="sisPill">SIS ARMED</span></div>
     </div>
-  </div>
+  </header>
+<div class="wrap">
   <div class="banner" id="banner" hidden></div>
+
+  <section class="hero">
+    <div class="panel">
+      <div class="ph"><h2><i></i>AI authority</h2><span class="sub">lowest of three wins</span></div>
+      <div class="gauge">
+        <div class="ring">
+          <svg viewBox="0 0 140 140" aria-hidden="true"><circle class="track" cx="70" cy="70" r="58" fill="none" stroke-width="11"/>
+            <circle class="val" id="ringVal" cx="70" cy="70" r="58" fill="none" stroke-width="11" stroke-linecap="round" stroke="#34d399" stroke-dasharray="364.42" stroke-dashoffset="0" style="color:#34d399"/></svg>
+          <div class="ctr"><b id="kAuth">–</b><span>authority</span></div>
+        </div>
+        <div class="inputs">
+          <h3>What sets it</h3>
+          <div class="bar"><span>Operator slider</span><span class="tr"><i id="bSlider"></i></span><b id="vSlider">–</b></div>
+          <div class="bar"><span>Keel enforcer</span><span class="tr"><i id="bKeel"></i></span><b id="vKeelBar">–</b></div>
+          <div class="bar"><span>Governance</span><span class="tr"><i id="bGov"></i></span><b id="vGovBar">–</b></div>
+          <div class="verdict" id="authWhy">Full authority: every check is green.</div>
+        </div>
+      </div>
+    </div>
+    <div class="kpis">
+      <div class="kpi" id="tileP"><span class="l">Pressure · true</span><span class="v" id="kP">–</span><span class="d" id="kPd"></span><canvas id="sP"></canvas></div>
+      <div class="kpi" id="tileL"><span class="l">Tank level · true</span><span class="v" id="kL">–</span><span class="d" id="kLd"></span><canvas id="sL"></canvas></div>
+      <div class="kpi" id="tileG"><span class="l">Gate rejected</span><span class="v" id="kRej">0</span><span class="d" id="kAdm"></span><canvas id="sA"></canvas></div>
+      <div class="kpi" id="tileO"><span class="l">Observer suspicion</span><span class="v" id="kSus">–</span><span class="d" id="kSusd"></span><canvas id="sV"></canvas></div>
+    </div>
+  </section>
 
   <section class="row-a">
     <div class="panel plant">
-      <div class="ph"><h2>Reactor</h2><span class="sub">GRFICS 3D model, driven by the live simulator · <a href="/grfics/reactor.html" target="_blank" rel="noopener">open full screen</a></span></div>
+      <div class="ph"><h2><i></i>Reactor</h2><span class="sub">GRFICS 3D model, live from the simulator · <a href="/grfics/reactor.html" target="_blank" rel="noopener">full screen ↗</a></span></div>
       <div class="viewport">
         <iframe src="/grfics/reactor.html" title="GRFICS 3D reactor view" loading="eager"></iframe>
         <div class="vtag">VALVES <b id="vtag">–</b></div>
@@ -208,38 +284,44 @@ button.go.danger{background:var(--alert);color:#1a0d0b}
     </div>
 
     <div class="panel">
-      <div class="ph"><h2>Defense stack</h2><span class="sub">Every command passes each layer, top to bottom</span></div>
-      <div class="stack">
-        <div class="layer" id="lyBrain"><span class="tag">L3</span><div><div class="nm">AI operator</div><div class="dt" id="dBrain">–</div></div><div class="val" id="vBrain">–</div></div>
-        <div class="layer" id="lyGov"><span class="tag">L2</span><div><div class="nm">Governance</div><div class="dt" id="dGov">–</div></div><div class="val" id="vGov">–</div></div>
-        <div class="layer" id="lyObs"><span class="tag">L2</span><div><div class="nm">Observers</div><div class="dt" id="dObs">–</div></div><div class="val" id="vObs">–</div></div>
-        <div class="layer" id="lyKeel"><span class="tag">L1</span><div><div class="nm">Keel enforcer</div><div class="dt" id="dKeel">–</div></div><div class="val" id="vKeel">–</div></div>
-        <div class="layer" id="lyGate"><span class="tag">L0</span><div><div class="nm">Provenance gate</div><div class="dt" id="dGate">–</div></div><div class="val" id="vGate">–</div></div>
-        <div class="layer" id="lySis"><span class="tag">SIS</span><div><div class="nm">Safety interlock</div><div class="dt" id="dSis">–</div></div><div class="val" id="vSis">–</div></div>
+      <div class="ph"><h2><i></i>Defense pipeline</h2><span class="sub">every command, top to bottom</span></div>
+      <div class="pipe">
+        <div class="node" id="lyBrain"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3a3 3 0 0 0-3 3v1a3 3 0 0 0-2 5 3 3 0 0 0 2 5v1a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M15 3a3 3 0 0 1 3 3v1a3 3 0 0 1 2 5 3 3 0 0 1-2 5v1a3 3 0 0 1-6 0"/></svg></span>
+          <div><div class="tag">L3</div><div class="nm">AI operator</div><div class="dt" id="dBrain">–</div></div><div class="val" id="vBrain">–</div></div>
+        <div class="node" id="lyGov"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7h14M7 7l-3 7a3 3 0 0 0 6 0zM17 7l-3 7a3 3 0 0 0 6 0z"/></svg></span>
+          <div><div class="tag">L2</div><div class="nm">Governance</div><div class="dt" id="dGov">–</div></div><div class="val" id="vGov">–</div></div>
+        <div class="node" id="lyObs"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <div><div class="tag">L2</div><div class="nm">Observers</div><div class="dt" id="dObs">–</div></div><div class="val" id="vObs">–</div></div>
+        <div class="node" id="lyKeel"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <div><div class="tag">L1</div><div class="nm">Keel enforcer</div><div class="dt" id="dKeel">–</div></div><div class="val" id="vKeel">–</div></div>
+        <div class="node" id="lyGate"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <div><div class="tag">L0</div><div class="nm">Provenance gate</div><div class="dt" id="dGate">–</div></div><div class="val" id="vGate">–</div></div>
+        <div class="node" id="lySis"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span>
+          <div><div class="tag">SIS</div><div class="nm">Safety interlock</div><div class="dt" id="dSis">–</div></div><div class="val" id="vSis">–</div></div>
       </div>
-      <div class="stack-foot">The AI gets the lowest of three: the operator slider, Keel and governance. The SIS reads its own sensor, never the AI's view.</div>
+      <div class="pipe-foot">The SIS reads its own sensor, never the AI’s view. Keel and governance can only lower the AI’s authority, never raise it.</div>
     </div>
   </section>
 
-  <div class="trendbar">
+  <div class="sectionbar">
     <h2>Trends</h2>
-    <span class="sub">Shaded = interlock tripped ·
+    <span class="sub">Shaded = interlock tripped &nbsp;
       <span class="seg" role="group" aria-label="Chart window"><button type="button" data-win="120">2 min</button><button type="button" data-win="600" class="on">10 min</button><button type="button" data-win="1800">30 min</button></span></span>
   </div>
   <section class="row-b">
-    <div class="panel chart"><div class="ph"><h2>Pressure kPa</h2><span class="ro" id="roP"></span></div><canvas id="cP"></canvas>
+    <div class="panel chart"><div class="ph"><h2>Pressure <span class="sub">kPa</span></h2><span class="ro" id="roP"></span></div><canvas id="cP"></canvas>
       <div class="legend"><span><i style="background:var(--meas)"></i>measured</span><span><i style="background:var(--truth)"></i>true (SIS)</span><span style="color:var(--sp)"><i class="dash"></i>setpoint</span><span style="color:var(--alert)"><i class="dash"></i>trip</span></div></div>
-    <div class="panel chart"><div class="ph"><h2>Tank level %</h2><span class="ro" id="roL"></span></div><canvas id="cL"></canvas>
+    <div class="panel chart"><div class="ph"><h2>Tank level <span class="sub">%</span></h2><span class="ro" id="roL"></span></div><canvas id="cL"></canvas>
       <div class="legend"><span><i style="background:var(--meas)"></i>measured (AI view)</span><span><i style="background:var(--truth)"></i>true (SIS)</span><span style="color:var(--sp)"><i class="dash"></i>setpoint</span><span style="color:var(--alert)"><i class="dash"></i>trip</span></div></div>
     <div class="panel chart"><div class="ph"><h2>AI authority</h2><span class="ro" id="roA"></span></div><canvas id="cA"></canvas>
       <div class="legend"><span><i style="background:var(--auth)"></i>effective</span><span style="color:var(--info)"><i class="dash"></i>Keel</span><span style="color:var(--truth)"><i class="dash"></i>governance</span><span style="color:var(--alert)"><i class="dash"></i>0.10 floor</span></div></div>
-    <div class="panel chart"><div class="ph"><h2>Valves %</h2><span class="ro" id="roV"></span></div><canvas id="cV"></canvas>
-      <div class="legend"><span><i style="background:#e6eeec"></i>feed 1</span><span><i style="background:#9aa8ff"></i>feed 2</span><span><i style="background:#e8c45a"></i>purge</span><span><i style="background:#3fbfb2"></i>product</span></div></div>
+    <div class="panel chart"><div class="ph"><h2>Valves <span class="sub">%</span></h2><span class="ro" id="roV"></span></div><canvas id="cV"></canvas>
+      <div class="legend"><span><i style="background:#e8eef8"></i>feed 1</span><span><i style="background:#a78bfa"></i>feed 2</span><span><i style="background:#fbbf24"></i>purge</span><span><i style="background:#2dd4bf"></i>product</span></div></div>
   </section>
 
   <section class="row-c">
     <div class="panel">
-      <div class="ph"><h2>AI operator</h2><span class="think" id="think">idle</span></div>
+      <div class="ph"><h2><i></i>AI operator</h2><span class="think" id="think">idle</span></div>
       <div class="brainhead">
         <div class="seg" role="group" aria-label="Brain">
           <button type="button" id="bOllama" data-brain="ollama">Trained model</button>
@@ -261,12 +343,12 @@ button.go.danger{background:var(--alert);color:#1a0d0b}
       <div class="auth">
         <div class="row"><label for="auth">Operator authority slider</label>
           <input id="auth" type="range" min="0" max="1" step="0.05" value="1"><span class="ro" id="authv">1.00</span></div>
-        <span class="sub">1 = setpoints pass unchanged; 0 = L1 freezes every valve; in between, requests blend toward the current reading. Keel and governance can only lower it further.</span>
+        <span class="sub">1 = setpoints pass unchanged; 0 = L1 freezes every valve; in between, requests blend toward the current reading.</span>
       </div>
     </div>
 
     <div class="panel">
-      <div class="ph"><h2>L2 observers</h2><span class="sub" id="obsModels"></span></div>
+      <div class="ph"><h2><i></i>L2 observers</h2><span class="sub" id="obsModels"></span></div>
       <div class="obs">
         <div class="ocard off" id="ocP">
           <div class="ohead"><h3>Proposals · <span id="mP">–</span></h3><span class="route feeds">feeds authority</span></div>
@@ -287,29 +369,29 @@ button.go.danger{background:var(--alert);color:#1a0d0b}
 
   <section class="row-d">
     <div class="panel">
-      <div class="ph"><h2>Demo scenarios</h2><span class="sub">Runbook order · step 1 is a minute of clean running · clear faults between steps</span></div>
+      <div class="ph"><h2><i></i>Demo playbook</h2><span class="sub">step 1 is a minute of clean running · clear faults between steps</span></div>
       <div class="scen">
-        <div class="card" id="c-forged"><span class="num">STEP 2</span><span class="live" id="t-forged"></span><h3>Forged commands</h3>
+        <div class="card" id="c-forged"><span class="live" id="t-forged"></span><div class="head"><span class="num">2</span><h3>Forged commands</h3></div>
           <span class="layerchip">gate + Keel</span>
           <p>A compromised agent sends unsigned, wrong-key and replayed valve commands every 4 s for 60 s.</p>
           <p class="watch">Watch: gate rejected climbs, Keel cuts the AI to zero, pressure does not move.</p>
           <button class="go" data-act="forged">Start attack</button></div>
-        <div class="card" id="c-operator_injection"><span class="num">STEP 3</span><span class="live" id="t-operator_injection"></span><h3>Operator injection</h3>
+        <div class="card" id="c-operator_injection"><span class="live" id="t-operator_injection"></span><div class="head"><span class="num">3</span><h3>Operator injection</h3></div>
           <span class="layerchip">observer + governance</span>
           <p>An injected “vendor advisory” makes the AI raise pressure and production in small steps for 60 s.</p>
           <p class="watch">Watch: provenance_violation in ~5 s, authority to the 0.10 floor by ~12 s.</p>
           <button class="go" data-act="operator_injection">Inject advisory</button></div>
-        <div class="card" id="c-actuator_fault"><span class="num">STEP 4</span><span class="live" id="t-actuator_fault"></span><h3>Product valve fault</h3>
+        <div class="card" id="c-actuator_fault"><span class="live" id="t-actuator_fault"></span><div class="head"><span class="num">4</span><h3>Product valve fault</h3></div>
           <span class="layerchip">observer v3 · display</span>
           <p>The valve loses half its capacity, then sticks 20 s later while L1 keeps commanding it.</p>
           <p class="watch">Watch: telemetry verdict reads actuator_fault (“commanded X%, sits at Y%”).</p>
           <button class="go" data-act="actuator_fault">Fault valve</button></div>
-        <div class="card" id="c-level_drift"><span class="num">STEP 5</span><span class="live" id="t-level_drift"></span><h3>Level sensor drift</h3>
+        <div class="card" id="c-level_drift"><span class="live" id="t-level_drift"></span><div class="head"><span class="num">5</span><h3>Level sensor drift</h3></div>
           <span class="layerchip">Keel vs safety channel</span>
           <p>The level transmitter reads high; L1 drains the tank to hold the fake reading.</p>
-          <p class="watch">Watch: orange and teal level lines split; Keel cuts the AI at ~5.5 min, before the true level trips.</p>
+          <p class="watch">Watch: amber and teal level lines split; Keel cuts the AI at ~5.5 min, before the true level trips.</p>
           <button class="go" data-act="level_drift">Start drift</button></div>
-        <div class="card" id="c-stolen_key"><span class="num">STEP 6</span><span class="live" id="t-stolen_key"></span><h3>Stolen L1 key</h3>
+        <div class="card" id="c-stolen_key"><span class="live" id="t-stolen_key"></span><div class="head"><span class="num">6</span><h3>Stolen L1 key</h3></div>
           <span class="layerchip">SIS</span>
           <p>An attacker with the real signing key opens both feeds and shuts purge and product.</p>
           <p class="watch">Watch: the gate admits it; pressure climbs ~4 kPa/s; the SIS trips at 3000 kPa in ~75 s.</p>
@@ -337,7 +419,7 @@ button.go.danger{background:var(--alert);color:#1a0d0b}
     </div>
 
     <div class="panel logpanel">
-      <div class="ph"><h2>Event log</h2><span class="sub" id="evcount"></span></div>
+      <div class="ph"><h2><i></i>Event timeline</h2><span class="sub" id="evcount"></span></div>
       <div class="filters" role="group" aria-label="Event filter">
         <button type="button" class="on" data-f="all">All</button>
         <button type="button" data-f="attack">Attacks</button>
@@ -356,12 +438,16 @@ const $ = id => /** @type {HTMLElement} */ (document.getElementById(id));
 /** trend rows: [seq,t,Pm,Pt,Lm,Lt,f1,f2,purge,prod,spP,spL,tripped,authEff,keelA,govApplied] */
 const H = [];
 const EV = [];
-let lastH = 0, lastE = 0, WIN = 600, FILTER = "all", S = null, lastDec = null;
+const SUS = [];          // [t, observer suspicion] for the KPI sparkline
+const REJ = [];          // [t, gate rejections so far] for the KPI sparkline
+let lastH = 0, lastE = 0, WIN = 600, FILTER = "all", S = null, lastDec = null, lastObsEv = null;
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const fx = (v, d = 1) => v === null || v === undefined || Number.isNaN(+v) ? "–" : Number(v).toFixed(d);
 const GROUP = {attack: ["attack"], defense: ["gate", "keel", "governance", "sis", "monitor"], observer: ["observer"],
                plant: ["plant", "brain", "error"]};
 const PROPOSAL_ATTACK = ["provenance_violation", "rationale_mismatch", "setpoint_drift"];
+const RING_C = 2 * Math.PI * 58;
+const stateColor = v => v <= 0.15 ? css("--alert") : v < 0.999 ? css("--warn") : css("--ok");
 
 async function act(action, extra = {}) {
   try {
@@ -388,6 +474,11 @@ $("auth").addEventListener("input", e => {
   clearTimeout(authTimer); authTimer = setTimeout(() => act("authority", {value: v}), 150);
 });
 
+function setConn(ok, txt) {
+  $("connDot").className = "dot" + (ok ? " pulse" : " off");
+  $("connTxt").textContent = txt;
+}
+
 async function poll() {
   try {
     const r = await fetch(`/api/state?h=${lastH}&e=${lastE}`, {cache: "no-store"});
@@ -400,17 +491,21 @@ async function poll() {
     if (EV.length > 400) EV.splice(0, EV.length - 400);
     if (ev.length) renderLog(ev);
     render(s);
-    if (s.status === "error") showBanner("Engine error: " + s.error);
-    else if (s.status && s.status !== "running") showBanner(s.status + " …");
-    else showBanner("");
-  } catch (e) { showBanner("Control room server not reachable (is `python -m live` running?)"); }
+    if (s.status === "error") { showBanner("Engine error: " + s.error); setConn(false, "engine error"); }
+    else if (s.status && s.status !== "running") { showBanner(s.status + " …"); setConn(true, s.status); }
+    else { showBanner(""); setConn(true, "live · plant connected"); }
+  } catch (e) {
+    showBanner("Control room server not reachable (is `python -m live` running?)");
+    setConn(false, "server unreachable");
+  }
   setTimeout(poll, 500);
 }
 
 const inFilter = e => FILTER === "all" || (GROUP[FILTER] || []).includes(e.kind);
 function logItem(e) {
   const li = document.createElement("li");
-  li.innerHTML = `<span class="t">${e.t.toFixed(0)} s</span><span class="k ${e.kind}">${e.kind}</span><span></span>`;
+  li.className = e.kind;
+  li.innerHTML = `<span class="t">${e.t.toFixed(0)} s</span><span class="k">${e.kind}</span><span></span>`;
   /** @type {HTMLElement} */ (li.lastChild).textContent = e.msg;
   return li;
 }
@@ -430,27 +525,51 @@ function renderLog(newEvents) {
 }
 
 const level = (el, cls) => { el.classList.remove("ok", "warn", "alert", "info", "off"); if (cls) el.classList.add(cls); };
+function setBar(id, v) { const b = $(id); b.style.width = `${Math.max(1.5, Math.min(1, v) * 100)}%`; b.style.background = stateColor(v); }
+
 function render(s) {
   if (!s.brain) return;
   const eff = s.brain.effective ?? s.brain.authority;
-  // ---- status bar
-  $("kAuth").textContent = fx(eff, 2);
-  const bar = $("kAuthBar"); bar.style.width = `${Math.max(2, eff * 100)}%`;
-  bar.style.background = eff <= 0.15 ? css("--alert") : eff < 0.999 ? css("--warn") : css("--ok");
-  $("kAuth").style.color = eff <= 0.15 ? css("--alert") : eff < 0.999 ? css("--warn") : "";
-  $("kP").textContent = fx(s.truth.pressure, 0);
+  const keelA = s.keel ? s.keel.authority : 1, govA = s.governance ? s.governance.applied : 1;
+  // ---- hero: gauge
+  const col = stateColor(eff), ring = $("ringVal");
+  ring.setAttribute("stroke-dashoffset", String(RING_C * (1 - Math.max(0, Math.min(1, eff)))));
+  ring.setAttribute("stroke", col); ring.style.color = col;
+  $("kAuth").textContent = fx(eff, 2); $("kAuth").style.color = eff < 0.999 ? col : "";
+  setBar("bSlider", s.brain.authority); $("vSlider").textContent = fx(s.brain.authority, 2);
+  setBar("bKeel", keelA); $("vKeelBar").textContent = fx(keelA, 2);
+  setBar("bGov", govA); $("vGovBar").textContent = fx(govA, 2);
+  const low = Math.min(s.brain.authority, keelA, govA);
+  const who = low >= 0.999 ? null : low === keelA ? "Keel" : low === govA ? "governance" : "the operator slider";
+  $("authWhy").innerHTML = s.sis.tripped ? "<b>SIS tripped:</b> the AI is not consulted until re-arm." :
+    who ? `<b>Limited by ${who}</b>${who === "Keel" && s.keel.reasons && s.keel.reasons.length ? " · " + s.keel.reasons.join(", ") :
+      who === "governance" && s.governance && s.governance.label ? " · " + s.governance.label : ""}` :
+    "<b>Full authority</b> · every check is green.";
+  // ---- hero: KPI tiles
   const dP = s.measured.pressure - s.truth.pressure, dL = s.measured.level - s.truth.level;
-  $("kPd").textContent = Math.abs(dP) >= 1 ? `AI sees ${fx(s.measured.pressure, 0)}` : "kPa · AI view agrees";
-  $("kL").textContent = fx(s.truth.level, 2);
-  $("kLd").textContent = Math.abs(dL) >= 0.5 ? `AI sees ${fx(s.measured.level, 2)}` : "% · AI view agrees";
-  $("kLd").style.color = Math.abs(dL) >= 0.5 ? css("--alert") : "";
+  $("kP").innerHTML = `${fx(s.truth.pressure, 0)}<small>kPa</small>`;
+  $("kPd").textContent = Math.abs(dP) >= 1 ? `AI sees ${fx(s.measured.pressure, 0)}` : `trip at ${s.sis.limits.pressure_high}`;
   $("kPd").style.color = Math.abs(dP) >= 1 ? css("--alert") : "";
-  $("kRej").textContent = s.gate.rejected;
-  $("kRej").style.color = s.gate.rejected ? css("--alert") : "";
-  $("kAdm").textContent = `${s.gate.admitted} admitted`;
+  $("kL").innerHTML = `${fx(s.truth.level, 2)}<small>%</small>`;
+  $("kLd").textContent = Math.abs(dL) >= 0.5 ? `AI sees ${fx(s.measured.level, 2)}` : `trips ${s.sis.limits.level_low}% / ${s.sis.limits.level_high}%`;
+  $("kLd").style.color = Math.abs(dL) >= 0.5 ? css("--alert") : "";
+  $("tileL").classList.toggle("alert", Math.abs(dL) >= 0.5);
+  $("tileP").classList.toggle("alert", Math.abs(dP) >= 1 || s.truth.pressure >= s.sis.limits.pressure_high - 150);
+  $("kRej").textContent = s.gate.rejected; $("kRej").style.color = s.gate.rejected ? css("--alert") : "";
+  $("kAdm").textContent = `${s.gate.admitted} admitted · ${s.gate.out_of_band} out-of-band`;
+  const recentGate = EV.slice(-60).some(e => e.kind === "gate" && s.t - e.t < 12);
+  $("tileG").classList.toggle("alert", recentGate);
+  const o = s.observer, sus = o && o.available !== false ? o.suspicion : null;
+  $("kSus").textContent = sus === null ? "off" : fx(sus, 2);
+  $("kSus").style.color = sus ? css("--alert") : "";
+  $("kSusd").textContent = sus === null ? "rule monitor only" : `proposals: ${(o.proposals && o.proposals.label) || "–"}`;
+  $("tileO").classList.toggle("alert", !!sus);
+  if (sus !== null && (!SUS.length || s.t - SUS[SUS.length - 1][0] >= 1)) { SUS.push([s.t, sus]); if (SUS.length > 600) SUS.shift(); }
+  if (!REJ.length || s.t - REJ[REJ.length - 1][0] >= 1) { REJ.push([s.t, s.gate.rejected]); if (REJ.length > 600) REJ.shift(); }
+  // ---- top bar
   const m = Math.floor(s.t / 60), sec = Math.floor(s.t % 60);
   $("kT").textContent = `${m}:${String(sec).padStart(2, "0")}`;
-  $("kBrain").textContent = s.brain.kind === "ollama" ? "scram-operator" : "baseline rules";
+  $("kBrain").textContent = s.brain.kind === "ollama" ? "scram-operator" : "baseline";
   const pill = $("sisPill");
   pill.className = "pill " + (s.sis.tripped ? "tripped" : "armed");
   pill.textContent = s.sis.tripped ? "SIS TRIPPED" : "SIS ARMED";
@@ -471,13 +590,11 @@ function render(s) {
 }
 
 function renderStack(s, eff) {
-  // L3 AI operator
   const d = s.decision;
   $("vBrain").innerHTML = `${fx(eff, 2)}<small>authority</small>`;
   $("dBrain").textContent = s.sis.tripped ? "not consulted while the SIS is tripped" :
     d ? `${s.brain.kind === "ollama" ? "scram-operator" : "baseline"} · ${d.rationale || "–"}` : s.brain.label;
   level($("lyBrain"), s.sis.tripped ? "off" : eff <= 0.15 ? "alert" : eff < 0.999 ? "warn" : null);
-  // L2 governance
   const g = s.governance;
   if (g) {
     $("vGov").innerHTML = `${fx(g.applied, 2)}<small>ceiling ${fx(g.ceiling, 2)}</small>`;
@@ -485,28 +602,22 @@ function renderStack(s, eff) {
       g.recovering ? "clean window passed · recovering" : g.applied < 0.999 ? "holding until a clean window" : "no corroborated suspicion";
     level($("lyGov"), g.applied <= 0.15 ? "alert" : g.label ? "warn" : g.recovering || g.applied < 0.999 ? "info" : null);
   }
-  // L2 observers
   const o = s.observer;
   if (!o || o.available === false) {
     $("vObs").innerHTML = `off<small>rule monitor only</small>`; $("dObs").textContent = "observer models unavailable"; level($("lyObs"), "off");
   } else {
-    const p = o.proposals, t = o.telemetry;
-    const pl = p && p.label, tl = t && t.label;
+    const pl = o.proposals && o.proposals.label, tl = o.telemetry && o.telemetry.label;
     $("vObs").innerHTML = `${fx(o.suspicion, 2)}<small>suspicion</small>`;
     $("dObs").textContent = `proposals: ${pl || "–"} · telemetry: ${tl || "–"}`;
     level($("lyObs"), PROPOSAL_ATTACK.includes(pl) ? "alert" : tl && tl !== "normal" ? "info" : null);
   }
-  // L1 Keel
   const k = s.keel;
   $("vKeel").innerHTML = `${fx(k.authority, 2)}<small>${k.divert ? "divert" : k.verdict || "allow"}</small>`;
   $("dKeel").textContent = k.reasons && k.reasons.length ? k.reasons.join(" · ") : k.authority < 0.999 ? "recovering on a clean window" : "physics and rate checks pass";
   level($("lyKeel"), k.divert || k.authority <= 0.0 ? "alert" : k.authority < 0.999 || (k.verdict && k.verdict !== "allow") ? "warn" : null);
-  // L0 gate
   $("vGate").innerHTML = `${s.gate.rejected}<small>rejected</small>`;
   $("dGate").textContent = `${s.gate.admitted} signed commands admitted · ${s.gate.out_of_band} out-of-band readbacks`;
-  const recentGate = EV.slice(-60).some(e => e.kind === "gate" && s.t - e.t < 12);
-  level($("lyGate"), recentGate ? "alert" : null);
-  // SIS
+  level($("lyGate"), EV.slice(-60).some(e => e.kind === "gate" && s.t - e.t < 12) ? "alert" : null);
   $("vSis").innerHTML = s.sis.tripped ? `TRIP<small>${s.sis.cause || ""}</small>` : `armed<small>${fx(s.truth.pressure, 0)} / ${s.sis.limits.pressure_high}</small>`;
   $("dSis").textContent = s.sis.tripped ? s.sis.reason : `reads the true channel · P ${fx(s.truth.pressure, 0)} kPa · L ${fx(s.truth.level, 1)}%`;
   level($("lySis"), s.sis.tripped ? "alert" : s.truth.pressure >= s.sis.limits.pressure_high - 150 ? "warn" : null);
@@ -572,18 +683,17 @@ function renderObservers(s) {
     lastObsEv = hist[0].id;
     const ul = $("ohist"); ul.innerHTML = "";
     hist.forEach(e => {
-      const m = /L2 observer \((\w+)\): (\w+)/.exec(e.msg) || [];
-      const bad = m[2] && m[2] !== "normal", feeds = m[1] === "proposals";
+      const mm = /L2 observer \((\w+)\): (\w+)/.exec(e.msg) || [];
+      const bad = mm[2] && mm[2] !== "normal", feeds = mm[1] === "proposals";
       const li = document.createElement("li");
-      li.innerHTML = `<span>${e.t.toFixed(0)} s</span><span>${m[1] || ""}</span><span><b></b> </span>`;
+      li.innerHTML = `<span>${e.t.toFixed(0)} s</span><span>${mm[1] || ""}</span><span><b></b> </span>`;
       const b = /** @type {HTMLElement} */ (li.querySelector("b"));
-      b.textContent = m[2] || ""; b.style.color = !bad ? css("--ok") : feeds ? css("--alert") : css("--warn");
+      b.textContent = mm[2] || ""; b.style.color = !bad ? css("--ok") : feeds ? css("--alert") : css("--warn");
       /** @type {HTMLElement} */ (li.lastChild).append(e.msg.replace(/^L2 observer \(\w+\): \w+ score [\d.]+ - /, ""));
       ul.appendChild(li);
     });
   }
 }
-let lastObsEv = null;
 
 function renderScenarios(s) {
   const sc = s.scenarios || {}, faults = s.faults || {};
@@ -602,10 +712,20 @@ function renderScenarios(s) {
 }
 
 // ---------- charts ----------
-function chart(id, series, lines, fixed, minSpan = 0, digits = null) {
+function hexA(col, a) {     // "#rrggbb" + alpha -> rgba()
+  const m = /^#([0-9a-f]{6})$/i.exec(col.trim());
+  if (!m) return col;
+  const n = parseInt(m[1], 16);
+  return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`;
+}
+function canvasCtx(id) {
   const c = /** @type {HTMLCanvasElement} */ ($(id)), dpr = window.devicePixelRatio || 1, w = c.clientWidth, h = c.clientHeight;
   if (c.width !== Math.round(w * dpr) || c.height !== Math.round(h * dpr)) { c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); }
   const g = /** @type {CanvasRenderingContext2D} */ (c.getContext("2d")); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+  return {g, w, h};
+}
+function chart(id, series, lines, fixed, minSpan = 0, digits = null) {
+  const {g, w, h} = canvasCtx(id);
   if (!H.length) return;
   const tEnd = H[H.length - 1][1], tStart = Math.max(H[0][1], tEnd - WIN);
   const pts = H.filter(p => p[1] >= tStart);
@@ -617,47 +737,69 @@ function chart(id, series, lines, fixed, minSpan = 0, digits = null) {
     if (hi - lo < minSpan) { const mid = (hi + lo) / 2; lo = mid - minSpan / 2; hi = mid + minSpan / 2; }
     const pad = Math.max((hi - lo) * 0.12, 0.5); lo -= pad; hi += pad;
   }
-  const L = 46, R = 8, T = 8, B = 20;
+  const L = 46, R = 8, T = 8, B = 22;
   const X = t => L + (t - tStart) / Math.max(1, tEnd - tStart) * (w - L - R);
   const Y = v => T + (1 - (v - lo) / (hi - lo)) * (h - T - B);
-  g.font = "11px 'IBM Plex Mono', monospace"; g.fillStyle = css("--muted");
-  g.strokeStyle = css("--grid"); g.lineWidth = 1;
+  g.font = "11px 'JetBrains Mono', monospace"; g.fillStyle = css("--muted");
+  g.strokeStyle = "rgba(160,190,235,.07)"; g.lineWidth = 1;
   for (let k = 0; k <= 4; k++) {
     const v = lo + (hi - lo) * k / 4, y = Y(v);
     g.beginPath(); g.moveTo(L, y); g.lineTo(w - R, y); g.stroke();
-    g.textAlign = "right"; g.fillText(v.toFixed(digits ?? (hi - lo < 10 ? 1 : 0)), L - 6, y + 4);
+    g.textAlign = "right"; g.fillText(v.toFixed(digits ?? (hi - lo < 10 ? 1 : 0)), L - 8, y + 4);
   }
   g.textAlign = "center";
   const span = tEnd - tStart, step = span > 900 ? 300 : span > 300 ? 120 : 30;
   const mmss = t => `${Math.floor(t / 60)}:${String(Math.round(t % 60)).padStart(2, "0")}`;
   for (let t = Math.ceil(tStart / step) * step; t <= tEnd; t += step) {
-    const x = X(t); if (x < L + 14 || x > w - R - 16) continue;      // keep labels inside the plot
-    g.fillText(mmss(t), x, h - 5);
+    const x = X(t); if (x < L + 14 || x > w - R - 16) continue;
+    g.fillText(mmss(t), x, h - 6);
   }
   g.fillStyle = css("--tripbg"); let s0 = null;
   pts.forEach((p, i) => { if (p[12] && s0 === null) s0 = p[1]; if ((!p[12] || i === pts.length - 1) && s0 !== null) { g.fillRect(X(s0), T, X(p[1]) - X(s0), h - T - B); s0 = null; } });
-  lines.forEach(l => { if (l.v < lo || l.v > hi) return; g.strokeStyle = css("--alert"); g.globalAlpha = .8; g.setLineDash([5, 4]); g.beginPath(); g.moveTo(L, Y(l.v)); g.lineTo(w - R, Y(l.v)); g.stroke(); g.setLineDash([]); g.globalAlpha = 1; });
+  lines.forEach(l => { if (l.v < lo || l.v > hi) return; g.strokeStyle = hexA(css("--alert"), .75); g.setLineDash([5, 4]); g.beginPath(); g.moveTo(L, Y(l.v)); g.lineTo(w - R, Y(l.v)); g.stroke(); g.setLineDash([]); });
   series.forEach(s => {
     const col = s.c.startsWith("--") ? css(s.c) : s.c;
     const path = () => { g.beginPath(); let started = false, x0 = 0, xl = 0;
       pts.forEach(p => { const v = p[s.i]; if (v === null || v === undefined) { started = false; return; }
         const x = X(p[1]), y = Y(Math.max(lo, Math.min(hi, v))); if (!started) { g.moveTo(x, y); x0 = x; } else g.lineTo(x, y); xl = x; started = true; });
       return [x0, xl]; };
-    if (s.fill) {   // soft area under the main line
+    if (s.fill) {
       const [x0, xl] = path(); g.lineTo(xl, h - B); g.lineTo(x0, h - B); g.closePath();
-      const grd = g.createLinearGradient(0, T, 0, h - B); grd.addColorStop(0, col + "33"); grd.addColorStop(1, col + "00");
+      const grd = g.createLinearGradient(0, T, 0, h - B); grd.addColorStop(0, hexA(col, .28)); grd.addColorStop(1, hexA(col, 0));
       g.fillStyle = grd; g.fill();
     }
-    g.strokeStyle = col; g.lineWidth = s.w || 1.8; g.setLineDash(s.dash || []); path(); g.stroke(); g.setLineDash([]);
+    g.lineJoin = "round"; g.strokeStyle = col; g.lineWidth = s.w || 2; g.setLineDash(s.dash || []);
+    if (!s.dash) { g.shadowColor = hexA(col, .5); g.shadowBlur = 6; }
+    path(); g.stroke(); g.setLineDash([]); g.shadowBlur = 0;
   });
+}
+/** tiny sparkline at the bottom of a KPI tile: last 2 min */
+function spark(id, pts, col, minSpan = 1, fixed = null) {
+  const {g, w, h} = canvasCtx(id);
+  if (pts.length < 2) return;
+  let lo = Math.min(...pts.map(p => p[1])), hi = Math.max(...pts.map(p => p[1]));
+  if (fixed) [lo, hi] = fixed;
+  else if (hi - lo < minSpan) { const mid = (hi + lo) / 2; lo = mid - minSpan / 2; hi = mid + minSpan / 2; }
+  const t0 = pts[0][0], t1 = pts[pts.length - 1][0];
+  const X = t => (t - t0) / Math.max(1, t1 - t0) * w, Y = v => h - 6 - (v - lo) / (hi - lo) * (h - 14);
+  const line = new Path2D(); pts.forEach((p, i) => i ? line.lineTo(X(p[0]), Y(p[1])) : line.moveTo(X(p[0]), Y(p[1])));
+  const area = new Path2D(line); area.lineTo(X(t1), h); area.lineTo(0, h); area.closePath();
+  const grd = g.createLinearGradient(0, 0, 0, h); grd.addColorStop(0, hexA(col, .25)); grd.addColorStop(1, hexA(col, 0));
+  g.fillStyle = grd; g.fill(area);
+  g.strokeStyle = col; g.lineWidth = 1.6; g.stroke(line);
 }
 function draw() {
   if (!S || !S.sis) return;
   const lim = S.sis.limits;
   chart("cP", [{i: 10, c: "--sp", dash: [4, 3], w: 1.3}, {i: 2, c: "--meas"}, {i: 3, c: "--truth", fill: true}], [{v: lim.pressure_high, near: 150}], null, 60);
   chart("cL", [{i: 11, c: "--sp", dash: [4, 3], w: 1.3}, {i: 4, c: "--meas"}, {i: 5, c: "--truth", fill: true}], [{v: lim.level_low, near: 6}, {v: lim.level_high, near: 6}], null, 3);
-  chart("cA", [{i: 14, c: "--info", dash: [5, 3], w: 1.3}, {i: 15, c: "--truth", dash: [2, 3], w: 1.5}, {i: 13, c: "#e6eeec", w: 2.2, fill: true}], [{v: 0.1, near: 1}], [0, 1.05], 0, 2);
-  chart("cV", [{i: 6, c: "#e6eeec"}, {i: 7, c: "#9aa8ff"}, {i: 8, c: "#e8c45a"}, {i: 9, c: "#3fbfb2"}], [], [0, 100]);
+  chart("cA", [{i: 14, c: "--info", dash: [5, 3], w: 1.3}, {i: 15, c: "--truth", dash: [2, 3], w: 1.5}, {i: 13, c: "#e8eef8", w: 2.2, fill: true}], [{v: 0.1, near: 1}], [0, 1.05], 0, 2);
+  chart("cV", [{i: 6, c: "#e8eef8"}, {i: 7, c: "#a78bfa"}, {i: 8, c: "#fbbf24"}, {i: 9, c: "#2dd4bf"}], [], [0, 100]);
+  const tEnd = H.length ? H[H.length - 1][1] : 0, recent = H.filter(p => p[1] >= tEnd - 120);
+  spark("sP", recent.map(p => [p[1], p[3]]), css("--truth"), 10);
+  spark("sL", recent.map(p => [p[1], p[5]]), css("--truth"), 1);
+  spark("sA", REJ.filter(p => p[0] >= tEnd - 120), S.gate.rejected ? css("--alert") : css("--ok"), 4);
+  spark("sV", SUS.filter(p => p[0] >= tEnd - 120), css("--sp"), 1, [0, 1.08]);
 }
 window.addEventListener("resize", draw);
 renderLog();

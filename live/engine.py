@@ -343,7 +343,9 @@ class Engine:
         # log only when the verdict or (rounded) severity changes, at most ~1/s:
         # every cycle would flood the 300-entry event stream
         key = (dec.verdict, round(dec.severity, 1))
-        if dec.verdict != "allow" and key != self._keel_logged and t - self._keel_log_t >= 1.0:
+        # a reason-less clamp is just the slew limiter smoothing a setpoint change: not an event
+        notable = dec.verdict != "allow" and (dec.reasons or dec.verdict == "divert")
+        if notable and key != self._keel_logged and t - self._keel_log_t >= 1.0:
             self._keel_logged, self._keel_log_t = key, t
             self.log("keel", f"{dec.verdict} A={dec.authority:.2f} sev={dec.severity:.2f} "
                              + "; ".join(f"{r.code}:{r.detail}" for r in dec.reasons))
