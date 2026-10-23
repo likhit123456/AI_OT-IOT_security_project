@@ -37,7 +37,7 @@ def tick(phase, rec):
     wrap_gov()
     o = eng.observer
     if o is not None:
-        u = o.last_user.get("telemetry")
+        u = (o.paths["telemetry"].last_user if o.paths["telemetry"] else {}).get("telemetry")
         if u and u not in seen_tel_user:
             seen_tel_user.add(u)
             audit["telemetry_inputs"] += 1
@@ -101,7 +101,7 @@ def save():
     }
     res["audit"] = {**audit, "window_s_range": [min(audit["window_s"]), max(audit["window_s"])] if audit["window_s"] else None}
     res["audit"].pop("window_s")
-    res["observer_model"] = eng.observer.model if eng.observer else None
+    res["observer_model"] = eng.observer.snapshot()["models"] if eng.observer else None
     with open(OUT, "w") as f:
         json.dump(res, f, indent=1, default=lambda x: dict(x) if isinstance(x, Counter) else str(x))
 
@@ -111,7 +111,7 @@ while eng.status != "running" or eng.cycles < 5:
     if eng.status == "error":
         p("ENGINE ERROR", eng.error); sys.exit(1)
     time.sleep(0.5)
-p("engine running; observer =", eng.observer.model if eng.observer else None, "brain =", eng.brain_label())
+p("engine running; observer =", eng.observer.snapshot()["models"] if eng.observer else None, "brain =", eng.brain_label())
 
 phase("clean", 240)
 eng.submit("operator_injection", duration_s=90.0)

@@ -168,15 +168,89 @@ def test_v3_proposal_side_feeds_authority_exactly_as_v2():
     assert obs2.suspicion() == O.SCORE_FLOOR
 
 
-def test_chain_prefers_v3_then_v2_then_rule_monitor_only():
-    pick = lambda installed, skip=(): O.make_observer(skip=skip, available=lambda m: m in installed)
-    o = pick({"scram-observer-v3", "scram-observer"})
-    assert o.model == "scram-observer-v3" and o.fmt is V3 and o.num_ctx == 3072
-    o = pick({"scram-observer"})
-    assert o.model == "scram-observer" and o.fmt is V2 and o.num_ctx is None
-    assert pick({"scram-observer-v3", "scram-observer"}, skip=("scram-observer-v3",)).model == "scram-observer"
-    assert pick(set()) is None
-    assert pick({"scram-observer"}, skip=("scram-observer-v3", "scram-observer")) is None
+# ---- split serving: proposals on v2 (authority), telemetry on v3 (display only) ---------
+BOTH = {"scram-observer-v3", "scram-observer"}
+
+
+def make_split(installed=BOTH, replies=lambda model, kind: verdict("normal", 0)):
+    bodies = []
+
+    def post(url, body, timeout):
+        bodies.append(body)
+        r = replies(body["model"], json.loads(body["messages"][1]["content"])["input"])
+        if isinstance(r, Exception):
+            raise r
+        return {"message": {"content": r}} if isinstance(r, str) else r
+
+    return O.make_split_observer(available=lambda m: m in installed, background=False, http_post=post), bodies
+
+
+def run_split(obs, seconds=60.0, start=0.0):
+    t = start
+    while t < start + seconds:
+        obs.feed(t, STATE, INTENT, commanded=CMD)
+        t += 0.1
+
+
+def test_split_routes_proposals_to_v2_and_telemetry_to_v3():
+    obs, bodies = make_split()
+    run_split(obs)
+    by = {}
+    for b in bodies:
+        by.setdefault(json.loads(b["messages"][1]["content"])["input"], set()).add(
+            (b["model"], b["messages"][0]["content"] == (V3.SYSTEM_PROMPT if b["model"].endswith("v3") else V2.SYSTEM_PROMPT),
+             b["options"].get("num_ctx"), b["keep_alive"]))
+    assert by == {"proposals": {("scram-observer", True, None, O.KEEP_ALIVE)},
+                  "telemetry": {("scram-observer-v3", True, 3072, O.KEEP_ALIVE)}}
+
+
+def test_split_live_telemetry_still_passes_the_v3_parity_gate():
+    obs, bodies = make_split()
+    run_split(obs)
+    tel = [b["messages"][1]["content"] for b in bodies if b["model"] == "scram-observer-v3"]
+    assert tel and all(rebuild(u) == u for u in tel)
+
+
+def test_split_authority_comes_from_the_v2_proposal_path_only():
+    obs, _ = make_split(replies=lambda m, k: verdict("actuator_fault", 0.9) if k == "telemetry" else verdict("normal", 0))
+    run_split(obs)
+    assert obs.last["telemetry"].label == "actuator_fault" and obs.suspicion() == 0.0
+    obs, _ = make_split(replies=lambda m, k: verdict("provenance_violation", 0.9) if k == "proposals" else verdict("normal", 0))
+    run_split(obs)
+    assert obs.suspicion() == 0.9 and obs.snapshot()["models"] == {"proposals": "scram-observer",
+                                                                  "telemetry": "scram-observer-v3"}
+
+
+def test_split_paths_share_one_in_flight_call_and_keep_the_validated_rate():
+    obs, bodies = make_split()
+    run_split(obs, seconds=100.0)
+    # each path at most once per SPLIT_CHECK_EVERY_S: ~0.4 calls/s combined, as in the co-residency check
+    for model in ("scram-observer", "scram-observer-v3"):
+        n = sum(b["model"] == model for b in bodies)
+        assert 0 < n <= 100.0 / O.SPLIT_CHECK_EVERY_S + 1
+    assert obs.paths["proposals"]._gate is obs.paths["telemetry"]._gate
+
+
+def test_split_fallback_chains_per_path():
+    # telemetry: v3 -> v2 -> nothing; proposals: v2 -> rule monitor only (never v3)
+    o, _ = make_split(installed={"scram-observer"})
+    assert o.model("proposals") == "scram-observer" and o.model("telemetry") == "scram-observer"
+    o, _ = make_split(installed={"scram-observer-v3"})
+    assert o.model("proposals") is None and o.model("telemetry") == "scram-observer-v3" and o.suspicion() == 0.0
+    assert make_split(installed=set())[0] is None
+
+
+def test_split_runtime_fallback_when_a_model_keeps_failing():
+    down = {"scram-observer-v3"}
+    obs, bodies = make_split(replies=lambda m, k: RuntimeError("model unloaded") if m in down else verdict("normal", 0))
+    run_split(obs)
+    assert obs.fallback() == [("telemetry", "scram-observer-v3", "scram-observer")]
+    run_split(obs, seconds=30.0, start=60.0)
+    assert obs.last["telemetry"].label == "normal" and obs.model("proposals") == "scram-observer"
+    down.add("scram-observer")                              # now v2 fails too: both paths give up
+    run_split(obs, seconds=60.0, start=90.0)
+    assert sorted(obs.fallback()) == [("proposals", "scram-observer", None), ("telemetry", "scram-observer", None)]
+    assert not obs.available and obs.suspicion() == 0.0
 
 
 def test_backend_errors_count_up_and_a_reply_resets_them():

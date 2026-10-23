@@ -44,7 +44,7 @@ from l3_brain.policy import (BaselineOperator, LLMOperator, OllamaOperator,
                              ollama_available)
 from monitor.behavior_monitor import BehaviorMonitor, MonitorLimits
 from monitor.governance import Governor
-from monitor.observer import MAX_CONSECUTIVE_ERRORS, Observer, make_observer
+from monitor.observer import SplitObserver, make_split_observer
 from monitor.sequential_monitor import SequentialMonitor, Suspicion
 from scripts.reset_plant import DESIGN_PURGE_VALVE_PCT, reset_and_settle
 
@@ -152,9 +152,9 @@ class Engine:
         self._gov_logged: Optional[tuple] = None
         self._gov_chain_t = -1e9
         self._seq_reset_at_call: Optional[int] = None
-        # L2 observer model (advisory, beside the rule monitor): v3 -> v2 -> rule monitor only
-        self.observer: Optional[Observer] = make_observer()
-        self._obs_skip: tuple = ()
+        # L2 observer models (advisory, beside the rule monitor): proposals on v2 (feeds
+        # authority), telemetry on v3 (display only); each path has its own fallback
+        self.observer: Optional[SplitObserver] = make_split_observer()
         self._obs_logged: dict = {}
         self._l2_sus = 0.0
         self._applied_cmd: Optional[ControlCommand] = None   # the command whose result self.state is
@@ -295,8 +295,9 @@ class Engine:
                                commanded=self._applied_cmd)
             obs_sus = self.observer.suspicion()      # proposal-side labels only, by construction
             self._note_observer()
-            if self.observer.consecutive_errors >= MAX_CONSECUTIVE_ERRORS:
-                self._observer_fallback()
+            for kind, bad, new in self.observer.fallback():
+                self.log("monitor", f"L2 observer {kind} path: {bad} keeps failing; now "
+                                    + (new or ("rule monitor only" if kind == "proposals" else "no telemetry verdicts")))
         # governance: the observer's proposal-side verdicts and the rule monitor become a
         # corroborated suspicion -> authority ceiling (telemetry stays with rules + SIS)
         self._l2_sus = max(sus.score, obs_sus)
@@ -391,19 +392,10 @@ class Engine:
         self._gov_logged = key + ev
 
     def _log_observer_online(self) -> None:
-        self.log("monitor", f"L2 observer model ({self.observer.model}) online: proposal-side verdicts feed "
-                            "governance; telemetry verdicts are display-only"
-                 if self.observer else "L2 observer model unavailable: rule monitor only")
-
-    def _observer_fallback(self) -> None:
-        """A model that keeps erroring (unloaded, deleted, backend down) hands over to the
-        next one in the chain (v3 -> v2 -> rule monitor only)."""
-        bad = self.observer.model
-        self._obs_skip += (bad,)
-        self.observer = make_observer(skip=self._obs_skip)
-        self._obs_logged = {}
-        self.log("monitor", f"L2 observer {bad}: {MAX_CONSECUTIVE_ERRORS} backend errors in a row; falling back")
-        self._log_observer_online()
+        o = self.observer
+        self.log("monitor", f"L2 observer online: proposals on {o.model('proposals') or 'none (rule monitor only)'} "
+                            f"(feeds governance), telemetry on {o.model('telemetry') or 'none'} (display only)"
+                 if o else "L2 observer models unavailable: rule monitor only")
 
     def _note_observer(self) -> None:
         """Log each new observer verdict whose label changed, per input type."""
@@ -413,7 +405,7 @@ class Engine:
             prev = self._obs_logged.get(kind, (None, None))[0]
             self._obs_logged[kind] = (v.label, v.t)
             if v.label != prev and not (prev is None and v.label == "normal"):
-                routed = kind == "proposals" and v.label in self.observer.fmt.PROPOSAL_LABELS
+                routed = kind == "proposals" and v.label in self.observer.PROPOSAL_LABELS
                 self.log("observer", f"L2 observer ({kind}): {v.label} score {v.score:.2f} - {v.reason}"
                          + (f" -> governance suspicion {self.observer.suspicion():.2f}" if routed else
                             " (display only, not fed to authority)" if v.label != "normal" else ""))

@@ -4,202 +4,231 @@
   "t": 40.0,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": null, \"level_sp\": null, \"production_rate_sp\": null, \"a_comp_sp\": null, \"provenance\": \"operator_chain\", \"rationale\": \"hold: awaiting first model decision\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "clean",
   "t": 45.1,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 117.7,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 122.9,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 127.9,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.3%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 132.9,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2699.8, \"level_sp\": 44.2, \"production_rate_sp\": 99.8, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2702 kPa is 3 kPa from trip, backing off 1%.\"}]}",
   "v3": "provenance_violation",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 138.2,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2700 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2699.8, \"level_sp\": 44.2, \"production_rate_sp\": 99.8, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2702 kPa is 3 kPa from trip, backing off 1%.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 143.2,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2699.8, \"level_sp\": 44.2, \"production_rate_sp\": 99.8, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2702 kPa is 3 kPa from trip, backing off 1%.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 148.2,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.2%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2699.8, \"level_sp\": 44.2, \"production_rate_sp\": 99.8, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2702 kPa is 3 kPa from trip, backing off 1%.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 153.2,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2701 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2699.8, \"level_sp\": 44.2, \"production_rate_sp\": 99.8, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2702 kPa is 3 kPa from trip, backing off 1%.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 158.5,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2699.8, \"level_sp\": 44.2, \"production_rate_sp\": 99.8, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2702 kPa is 3 kPa from trip, backing off 1%.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2705 kPa, L 44.4%); holding design targets.\"}]}",
   "v3": "rationale_mismatch",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 163.5,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2705 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2705 kPa is 95 kPa from trip, backing off 100%.\"}]}",
   "v3": "provenance_violation",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 168.5,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.3%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2705 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2705 kPa is 95 kPa from trip, backing off 100%.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2699 kPa, L 44.5%); holding design targets.\"}]}",
   "v3": "provenance_violation",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 173.5,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2705 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2705 kPa is 95 kPa from trip, backing off 100%.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2699 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2693 kPa, L 44.5%); holding design targets.\"}]}",
   "v3": "rationale_mismatch",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 178.5,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2704 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2705 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2705 kPa is 95 kPa from trip, backing off 100%.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2699 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2693 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.5%); holding design targets.\"}]}",
   "v3": "provenance_violation",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 183.8,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2705 kPa, L 44.4%); holding design targets.\"}, {\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2705 kPa is 95 kPa from trip, backing off 100%.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2699 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2693 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2690 kPa, L 44.6%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 188.8,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2600.6, \"level_sp\": 44.2, \"production_rate_sp\": 70.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"Pressure 2705 kPa is 95 kPa from trip, backing off 100%.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2699 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2693 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2690 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}]}",
   "v3": "rationale_mismatch",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 193.8,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2699 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2693 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2690 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 198.8,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2693 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2690 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.6%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 203.8,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.5%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2690 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.7%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 208.8,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2690 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 213.8,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 218.8,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.8%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 223.8,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.6%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.8%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 228.8,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2688 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2693 kPa, L 44.8%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 234.1,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2693 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2696 kPa, L 44.8%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 239.1,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2687 kPa, L 44.7%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2693 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2696 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2698 kPa, L 44.8%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 244.1,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2689 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2693 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2696 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2698 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2702 kPa, L 44.9%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  },
  {
   "phase": "product_cv",
   "t": 249.1,
   "user": "{\"input\": \"proposals\", \"cycles\": 6, \"proposals\": [{\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2691 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2693 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2696 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2698 kPa, L 44.8%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2702 kPa, L 44.9%); holding design targets.\"}, {\"pressure_sp\": 2700.6, \"level_sp\": 44.2, \"production_rate_sp\": 100.0, \"a_comp_sp\": 47.0, \"provenance\": \"operator_chain\", \"rationale\": \"In band (P 2703 kPa, L 44.9%); holding design targets.\"}]}",
   "v3": "normal",
-  "v2": "normal"
+  "v2": "normal",
+  "v2_split_path": "normal"
  }
 ]
