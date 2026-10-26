@@ -1,0 +1,3 @@
+# CPU telemetry-specialist training; the exported JSON model needs neither dependency at runtime.
+numpy==2.2.6
+scikit-learn==1.7.1

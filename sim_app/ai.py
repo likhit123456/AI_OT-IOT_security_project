@@ -25,6 +25,7 @@ and fights the level loop; that is the feed-cut bug it avoids).
 from __future__ import annotations
 
 import json
+import math
 import re
 import threading
 import time
@@ -153,6 +154,7 @@ def parse_command(text: str, post: Callable[[str, dict, float], dict] = _post) -
     except ValueError:
         return {**out, "corrections": [], "action": "unknown", "valve": None, "amount": None}
     action, valve, amount, fixes = _check(text, obj.get("action"), obj.get("valve"), obj.get("amount"))
+    action, valve, amount, fixes = _ground_action(text, action, valve, amount, fixes)
     return {**out, "corrections": fixes, "action": action, "valve": valve, "amount": amount}
 
 
@@ -204,6 +206,18 @@ _VALVE_WORDS = {"f1": r"\b(feed ?1|feed one|f1)\b", "f2": r"\b(feed ?2|feed two|
                 "purge": r"\bpurge\b", "product": r"\bproduct\b"}
 
 
+def _ground_action(text, action, valve, amount, fixes):
+    """An actuator must be explicitly named by the user, never supplied by the model."""
+    if action not in ("set", "adjust"):
+        return action, valve, amount, fixes
+    grounded = {v for v, pattern in _VALVE_WORDS.items() if re.search(pattern, text, re.I)}
+    if re.search(r"\b(?:both|all)\s+(?:the\s+)?feeds\b", text, re.I):
+        grounded.update(("f1", "f2"))
+    if valve not in grounded or not isinstance(amount, (int, float)) or not math.isfinite(amount):
+        return "unknown", None, None, [*fixes, "Refused: actuator or amount is not grounded in the original command."]
+    return action, valve, amount, fixes
+
+
 def _clause_for(text: str, clause, valve, n_actions: int) -> str:
     """The words to grammar-check an action against: the model's clause if it is really
     part of the command, else the command segment that names this valve; with a single
@@ -235,6 +249,7 @@ def parse_commands(text: str, post: Callable[[str, dict, float], dict] = _post) 
         it = it if isinstance(it, dict) else {}
         words = _clause_for(text, it.get("clause"), it.get("valve"), len(items))
         action, valve, amount, fixes = _check(words, it.get("action"), it.get("valve"), it.get("amount"))
+        action, valve, amount, fixes = _ground_action(words, action, valve, amount, fixes)
         out["actions"].append({"clause": it.get("clause") if isinstance(it.get("clause"), str) else "",
                                "action": action, "valve": valve, "amount": amount, "corrections": fixes,
                                "_words": words})
@@ -339,9 +354,10 @@ class Rescue:
         self._lock = threading.Lock()
         self._run_id = 0
         self._stop_evt: Optional[threading.Event] = None
+        self._write_lock = getattr(plant, "_control", threading.RLock())
 
     def start(self) -> None:
-        with self._lock:
+        with self._write_lock, self._lock:
             if self.active:
                 return
             self._run_id += 1
@@ -351,12 +367,20 @@ class Rescue:
                          daemon=True).start()
 
     def stop(self, why: str = "operator took manual control") -> None:
-        with self._lock:
+        with self._write_lock, self._lock:
             if not self.active:
                 return
-            self._stop_evt.set()
+            if self._stop_evt is not None:
+                self._stop_evt.set()
             self.active = False
         self.activity.add("info", f"AI disengaged: {why}. Manual control.")
+
+    def _apply(self, run_id: int, stop: threading.Event, valves: dict) -> bool:
+        with self._write_lock:
+            if stop.is_set() or not self.active or run_id != self._run_id:
+                return False
+            self.plant.apply_valves(valves, source="ai")
+            return True
 
     def _finish(self, run_id: int, kind: str, text: str) -> None:
         """End this run, unless it was already stopped or superseded by a newer run."""
@@ -371,7 +395,7 @@ class Rescue:
         self.activity.add("info", f"AI engaged: trained {op.model} is flying the plant "
                                   f"(decision every {TICK_S:g}s). Goal: back to "
                                   f"{DESIGN_POINT['pressure']:g} kPa / {DESIGN_POINT['level']:g}%.")
-        t0, near, io_fails, model_fails, first = time.monotonic(), 0, 0, 0, True
+        t0, near, io_fails, model_fails = time.monotonic(), 0, 0, 0
         write_fails = 0     # separate: a successful read resets io_fails every tick
         end = ("info", "AI disengaged. Manual control.")
         try:
@@ -384,10 +408,11 @@ class Rescue:
                     end = ("info", "Simulation is resetting. AI disengaged.")
                     break
                 try:
-                    if first or self.plant.raw.get("state", {}).get("e_stop"):
-                        self.plant.write({"e_stop": 0})        # the AI cannot fly an e-stopped plant
-                        first = False
-                    state = plant_state(self.plant.read())
+                    raw = self.plant.read()
+                    if raw.get("state", {}).get("e_stop"):
+                        end = ("error", "Emergency stop is engaged. Release it explicitly before restarting AI.")
+                        break
+                    state = plant_state(raw)
                 except (OSError, ValueError, RuntimeError) as e:
                     io_fails += 1
                     if io_fails >= MAX_IO_FAILS:
@@ -413,7 +438,8 @@ class Rescue:
                 before = {v: round(getattr(state, f"{v}_valve_pos"), 1) for v in VALVES}
                 if valves is not None:
                     try:
-                        self.plant.apply_valves(valves, source="ai")
+                        if not self._apply(run_id, stop, valves):
+                            break
                     except Exception as e:                  # noqa: BLE001 - ruptured / resetting / socket
                         if not (self.plant.ruptured or self.plant.resetting):
                             write_fails += 1
@@ -440,7 +466,8 @@ class Rescue:
                 if near >= NEAR_TICKS:
                     if stop.is_set():
                         break
-                    self.plant.apply_valves(dict(DESIGN_VALVES), source="ai")
+                    if not self._apply(run_id, stop, dict(DESIGN_VALVES)):
+                        break
                     end = ("done", f"Reactor stabilised: {state.pressure:.0f} kPa, "
                                    f"{state.level:.1f}% (design {DESIGN_POINT['pressure']:g} kPa / "
                                    f"{DESIGN_POINT['level']:g}%) after {time.monotonic() - t0:.0f}s. "

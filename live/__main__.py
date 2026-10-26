@@ -7,9 +7,9 @@ SCRAM live: run the whole stack against the live plant and open the control room
     python -m live --no-reset           # attach to the plant as it is (no container restart)
     python -m live --no-ollama-fix      # leave Ollama's configuration alone
 
-Starts the GRFICS simulation container if it is not running, makes sure Ollama runs
-with LLAMA_ARG_CACHE_RAM=0 (see ensure_ollama_cache_cap), then serves
+Starts the GRFICS simulation container if it is not running, then serves
 http://127.0.0.1:8765 (control room, embeds the 3D plant at http://localhost/).
+Persistent Ollama configuration is opt-in through --configure-ollama.
 """
 
 from __future__ import annotations
@@ -124,7 +124,8 @@ def main() -> int:
     ap.add_argument("--production-limits", action="store_true")
     ap.add_argument("--no-reset", action="store_true")
     ap.add_argument("--no-browser", action="store_true")
-    ap.add_argument("--no-ollama-fix", action="store_true", help="do not set LLAMA_ARG_CACHE_RAM / restart Ollama")
+    ap.add_argument("--no-ollama-fix", action="store_true", help="compatibility flag: configuration is now opt-in")
+    ap.add_argument("--configure-ollama", action="store_true", help="explicitly set the cache cap and restart Ollama if necessary")
     a = ap.parse_args()
     try:
         sys.stdout.reconfigure(line_buffering=True)
@@ -144,7 +145,7 @@ def main() -> int:
         else:
             print("[live] plant still not reachable on :55555")
             return 1
-    if not a.no_ollama_fix:
+    if a.configure_ollama and not a.no_ollama_fix:
         ensure_ollama_cache_cap()
     if a.brain == "ollama" and not ollama_available():
         print("[live] Ollama is not serving 'scram-operator' - start Ollama, or the brain falls back to baseline")

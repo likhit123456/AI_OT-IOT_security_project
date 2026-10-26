@@ -1,0 +1,37 @@
+{
+  "tracked_files": 216,
+  "by_directory": {
+    "(root)": 19,
+    ".github": 3,
+    "docker": 1,
+    "enforcer": 3,
+    "experiments": 33,
+    "images": 10,
+    "l0_plant": 6,
+    "l3_brain": 4,
+    "live": 8,
+    "model": 20,
+    "monitor": 7,
+    "packaging": 10,
+    "reference": 5,
+    "scripts": 3,
+    "sim_app": 9,
+    "simulation": 40,
+    "tests": 16,
+    "training": 19
+  },
+  "python_files_parsed": 74,
+  "syntax_errors": [],
+  "dataset_overlap": {
+    "operator": {
+      "train_unique": 2190,
+      "val_unique": 235,
+      "shared_user_turns": 0
+    },
+    "observer_v3_": {
+      "train_unique": 3429,
+      "val_unique": 1195,
+      "shared_user_turns": 6
+    }
+  }
+}

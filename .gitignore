@@ -33,6 +33,9 @@ __pycache__/
 .pytest_cache/
 unsloth_compiled_cache/
 .playwright-mcp/
+.ruff_cache/
+artifacts/pytest-*/
+artifacts/simulator/
 
 # GRFICS Unity build: only Git LFS pointers locally (objects unavailable), so GitHub
 # rejects them. The working 3D build ships in the fortiphyd/grfics-simulation image.
@@ -51,3 +54,27 @@ training/_observer_*.log
 training/_observer_*_outputs/
 training/*.run.ipynb
 scram_l1_l2_contrib.zip
+
+# Local archives, environments, credentials, and generated runtime output.
+.local-only/
+.venv/
+venv/
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+*.log.*
+.coverage
+htmlcov/
+.DS_Store
+Thumbs.db
+
+# Design research and intermediate UI exports are not release assets.
+artifacts/design-references/
+artifacts/frontend-before-*/
+artifacts/frontend/
+artifacts/mobbin-public-web.html
+artifacts/accuracy-v2/simulator/plant
+simulation-test
+simulation-test.exe

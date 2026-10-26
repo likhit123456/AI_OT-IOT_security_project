@@ -47,7 +47,8 @@ AUDIT_TOLERANCE_PCT = 0.5
 
 
 def _tag(key: bytes, seq: int, c: ControlCommand) -> str:
-    msg = f"{seq}|{c.f1_valve:.4f}|{c.f2_valve:.4f}|{c.purge_valve:.4f}|{c.product_valve:.4f}"
+    values = (c.f1_valve, c.f2_valve, c.purge_valve, c.product_valve)
+    msg = "|".join([str(seq), *(float(v).hex() for v in values)])
     return hmac.new(key, msg.encode(), hashlib.sha256).hexdigest()
 
 

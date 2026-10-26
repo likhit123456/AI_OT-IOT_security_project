@@ -1,0 +1,193 @@
+{
+  "operator": {
+    "source": "model/eval_ollama.json",
+    "evidence": "historical validation",
+    "n": 235,
+    "hold_act_accuracy": 1.0,
+    "exact_all_four_targets": 0.5361702127659574,
+    "exact_target_cases": 126,
+    "valid_output_rate": 1.0,
+    "target_mae": {
+      "pressure_sp": 5.5,
+      "level_sp": 0.47,
+      "production_rate_sp": 3.51,
+      "a_comp_sp": 0.0
+    },
+    "note": "Continuous target errors are not plant-control success rates."
+  },
+  "proposal_observer_v2": {
+    "source": "observer_merged_v2/eval_observer_test_unseen.json",
+    "evidence": "historical unseen proposal evaluation",
+    "n": 948,
+    "accuracy": 0.9778481012658228,
+    "detection_rate": 1.0,
+    "false_alarm_rate": 0.044854881266490766,
+    "per_class_recall": {
+      "actuator_fault": null,
+      "excursion": null,
+      "normal": 0.9551451187335093,
+      "provenance_violation": 0.9824561403508771,
+      "rationale_mismatch": 1.0,
+      "sensor_fault": null,
+      "setpoint_drift": 1.0
+    }
+  },
+  "telemetry_observer_v3": {
+    "source": "artifacts/fresh-observer-benchmark.json",
+    "evidence": "fresh small clean held-out sample",
+    "n": 48,
+    "valid_output_rate": 1.0,
+    "accuracy": 0.625,
+    "per_class_recall": {
+      "normal": 0.08333333333333333,
+      "excursion": 1.0,
+      "sensor_fault": 0.5,
+      "actuator_fault": 0.9166666666666666
+    },
+    "false_alarm_rate": 0.9166666666666666,
+    "detection_rate": 0.8333333333333334,
+    "confusion": {
+      "normal": {
+        "sensor_fault": 11,
+        "normal": 1
+      },
+      "excursion": {
+        "excursion": 12
+      },
+      "sensor_fault": {
+        "normal": 6,
+        "sensor_fault": 6
+      },
+      "actuator_fault": {
+        "actuator_fault": 11,
+        "sensor_fault": 1
+      }
+    }
+  },
+  "deployed_telemetry_with_specialist": {
+    "source": "artifacts/fresh-observer-benchmark.json",
+    "evidence": "fresh small clean held-out sample",
+    "n": 48,
+    "valid_output_rate": 1.0,
+    "accuracy": 0.7291666666666666,
+    "per_class_recall": {
+      "normal": 0.08333333333333333,
+      "excursion": 1.0,
+      "sensor_fault": 0.9166666666666666,
+      "actuator_fault": 0.9166666666666666
+    },
+    "false_alarm_rate": 0.9166666666666666,
+    "detection_rate": 0.9722222222222222,
+    "confusion": {
+      "normal": {
+        "sensor_fault": 11,
+        "normal": 1
+      },
+      "excursion": {
+        "excursion": 12
+      },
+      "sensor_fault": {
+        "sensor_fault": 11,
+        "normal": 1
+      },
+      "actuator_fault": {
+        "actuator_fault": 11,
+        "sensor_fault": 1
+      }
+    }
+  },
+  "standalone_telemetry_specialist": {
+    "source": "model/telemetry-classifier/evaluation.json",
+    "evidence": "clean held-out telemetry, not used as a standalone replacement",
+    "n": 471,
+    "accuracy": 0.7770700636942676,
+    "per_class_recall": {
+      "normal": 0.7027027027027027,
+      "excursion": 0.9916666666666667,
+      "sensor_fault": 0.7166666666666667,
+      "actuator_fault": 0.6916666666666667
+    },
+    "false_alarm_rate": 0.29729729729729726,
+    "detection_rate": 0.875,
+    "mean_inference_ms": 0.862320594479626,
+    "confusion": {
+      "normal": {
+        "sensor_fault": 33,
+        "normal": 78
+      },
+      "excursion": {
+        "excursion": 119,
+        "normal": 1
+      },
+      "sensor_fault": {
+        "sensor_fault": 86,
+        "normal": 32,
+        "excursion": 1,
+        "actuator_fault": 1
+      },
+      "actuator_fault": {
+        "actuator_fault": 83,
+        "sensor_fault": 25,
+        "normal": 12
+      }
+    }
+  },
+  "command_parser": {
+    "source": "artifacts/command-parser-accuracy.json",
+    "evidence": "fresh authored development set",
+    "n": 30,
+    "raw_accuracy": 0.8666666666666667,
+    "application_accuracy": 0.9666666666666667,
+    "failures": [
+      {
+        "category": "unsupported",
+        "text": "Open the coolant valve to 30%",
+        "gold": [
+          [
+            "unknown",
+            null,
+            null
+          ]
+        ],
+        "prediction": [
+          [
+            "set",
+            "f1",
+            30.0
+          ]
+        ],
+        "correct": false,
+        "raw_correct": false,
+        "model_output": "{\"actions\": [{\"clause\": \"Open the coolant valve to 30%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 30}]}",
+        "latency_s": 0.55,
+        "corrections": [
+          "model said adjust +30; text says 'to 30%' -> set 30"
+        ]
+      }
+    ]
+  },
+  "deterministic_systems": {
+    "evidence": "last successful offline run; no new plant run in this evaluation",
+    "offline_passed": 271,
+    "offline_total": 271,
+    "layer_check_counts": {
+      "safety_interlock": 25,
+      "provenance_gate": 21,
+      "keel": 11,
+      "l1_controller": 6,
+      "governance": 9,
+      "sequential_monitor": 7
+    },
+    "historical_forged_command_rejection": {
+      "rejected": 47,
+      "attempts": 47
+    },
+    "operational_accuracy": "not established; passing tests does not imply 100% real-world safety"
+  },
+  "limits": [
+    "No overall project accuracy percentage can be derived by averaging unrelated tasks.",
+    "Fresh telemetry sample has only 12 normal windows; 11 were falsely flagged.",
+    "Parser test is a small authored set, not broad natural-language validation.",
+    "No fresh full Docker/Unity closed-loop or hardware validation was performed."
+  ]
+}

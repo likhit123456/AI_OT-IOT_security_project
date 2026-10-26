@@ -9,3 +9,12 @@ Dockerfile text eol=lf
 # Keep Windows-style endings only if absolutely required for Windows tools
 *.bat text eol=crlf
 *.ps1 text eol=crlf
+
+# Dataset manifests and release policies hash the original file bytes.
+# Preserve those bytes across Windows/Linux checkout; do not rewrite evidence
+# or regenerate approval hashes merely to accommodate newline conversion.
+model/**/*.json -text
+training/**/*.json -text
+training/**/*.jsonl -text
+artifacts/**/*.json -text
+artifacts/**/*.jsonl -text

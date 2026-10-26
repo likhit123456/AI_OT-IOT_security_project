@@ -1,0 +1,614 @@
+[
+  {
+    "kind": "set",
+    "text": "Move feed one to 16 percent",
+    "gold": [
+      [
+        "set",
+        "f1",
+        16
+      ]
+    ]
+  },
+  {
+    "kind": "set",
+    "text": "Put feed one at 26%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        26
+      ]
+    ]
+  },
+  {
+    "kind": "set",
+    "text": "Set feed one to 65%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        65
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Increase feed one by 18%",
+    "gold": [
+      [
+        "adjust",
+        "f1",
+        18
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Reduce feed one by 15%",
+    "gold": [
+      [
+        "adjust",
+        "f1",
+        -15
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Open feed one by 5%",
+    "gold": [
+      [
+        "adjust",
+        "f1",
+        5
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Close feed one by 9%",
+    "gold": [
+      [
+        "adjust",
+        "f1",
+        -9
+      ]
+    ]
+  },
+  {
+    "kind": "set",
+    "text": "Move F2 to 22 percent",
+    "gold": [
+      [
+        "set",
+        "f2",
+        22
+      ]
+    ]
+  },
+  {
+    "kind": "set",
+    "text": "Put F2 at 33%",
+    "gold": [
+      [
+        "set",
+        "f2",
+        33
+      ]
+    ]
+  },
+  {
+    "kind": "set",
+    "text": "Set F2 to 32%",
+    "gold": [
+      [
+        "set",
+        "f2",
+        32
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Increase F2 by 6%",
+    "gold": [
+      [
+        "adjust",
+        "f2",
+        6
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Reduce F2 by 19%",
+    "gold": [
+      [
+        "adjust",
+        "f2",
+        -19
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Open F2 by 2%",
+    "gold": [
+      [
+        "adjust",
+        "f2",
+        2
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Close F2 by 3%",
+    "gold": [
+      [
+        "adjust",
+        "f2",
+        -3
+      ]
+    ]
+  },
+  {
+    "kind": "set",
+    "text": "Move purge valve to 22 percent",
+    "gold": [
+      [
+        "set",
+        "purge",
+        22
+      ]
+    ]
+  },
+  {
+    "kind": "set",
+    "text": "Put purge valve at 67%",
+    "gold": [
+      [
+        "set",
+        "purge",
+        67
+      ]
+    ]
+  },
+  {
+    "kind": "set",
+    "text": "Set purge valve to 21%",
+    "gold": [
+      [
+        "set",
+        "purge",
+        21
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Increase purge valve by 13%",
+    "gold": [
+      [
+        "adjust",
+        "purge",
+        13
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Reduce purge valve by 2%",
+    "gold": [
+      [
+        "adjust",
+        "purge",
+        -2
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Open purge valve by 2%",
+    "gold": [
+      [
+        "adjust",
+        "purge",
+        2
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Close purge valve by 14%",
+    "gold": [
+      [
+        "adjust",
+        "purge",
+        -14
+      ]
+    ]
+  },
+  {
+    "kind": "set",
+    "text": "Move product valve to 77 percent",
+    "gold": [
+      [
+        "set",
+        "product",
+        77
+      ]
+    ]
+  },
+  {
+    "kind": "set",
+    "text": "Put product valve at 28%",
+    "gold": [
+      [
+        "set",
+        "product",
+        28
+      ]
+    ]
+  },
+  {
+    "kind": "set",
+    "text": "Set product valve to 51%",
+    "gold": [
+      [
+        "set",
+        "product",
+        51
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Increase product valve by 16%",
+    "gold": [
+      [
+        "adjust",
+        "product",
+        16
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Reduce product valve by 12%",
+    "gold": [
+      [
+        "adjust",
+        "product",
+        -12
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Open product valve by 16%",
+    "gold": [
+      [
+        "adjust",
+        "product",
+        16
+      ]
+    ]
+  },
+  {
+    "kind": "relative",
+    "text": "Close product valve by 16%",
+    "gold": [
+      [
+        "adjust",
+        "product",
+        -16
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the coolant valve to 35%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the heater to 47%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the feed 3 to 62%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the feed 12 to 24%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the steam valve to 43%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the cooling pump to 10%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the drain valve to 48%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the oxygen valve to 69%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the temperature valve to 10%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the feed pressure valve to 18%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the emergency bypass valve to 61%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the coolant to 60%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 58% then set purge to 31%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        58
+      ],
+      [
+        "set",
+        "purge",
+        31
+      ]
+    ]
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 41% then set purge to 8%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        41
+      ],
+      [
+        "set",
+        "purge",
+        8
+      ]
+    ]
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 18% then set purge to 21%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        18
+      ],
+      [
+        "set",
+        "purge",
+        21
+      ]
+    ]
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 55% then set purge to 73%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        55
+      ],
+      [
+        "set",
+        "purge",
+        73
+      ]
+    ]
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 78% then set purge to 53%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        78
+      ],
+      [
+        "set",
+        "purge",
+        53
+      ]
+    ]
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 44% then set purge to 59%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        44
+      ],
+      [
+        "set",
+        "purge",
+        59
+      ]
+    ]
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 17% then set purge to 35%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        17
+      ],
+      [
+        "set",
+        "purge",
+        35
+      ]
+    ]
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 75% then set purge to 21%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        75
+      ],
+      [
+        "set",
+        "purge",
+        21
+      ]
+    ]
+  },
+  {
+    "kind": "mode",
+    "text": "Stabilize the process please",
+    "gold": [
+      [
+        "rescue",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "mode",
+    "text": "Save my reactor",
+    "gold": [
+      [
+        "rescue",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "mode",
+    "text": "Stop controlling the reactor",
+    "gold": [
+      [
+        "stop",
+        null,
+        null
+      ]
+    ]
+  },
+  {
+    "kind": "mode",
+    "text": "Switch to manual control",
+    "gold": [
+      [
+        "stop",
+        null,
+        null
+      ]
+    ]
+  }
+]

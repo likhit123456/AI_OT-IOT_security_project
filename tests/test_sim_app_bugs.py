@@ -95,6 +95,7 @@ def test_second_concurrent_reset_is_refused(monkeypatch):
 
     monkeypatch.setattr(server, "reset_and_settle", slow_reset)
     p = make_plant()
+    monkeypatch.setattr(p, "read", FakeSim().read)
     t = threading.Thread(target=p.reset)
     t.start()
     time.sleep(0.1)
@@ -119,7 +120,8 @@ def fake_llm(reply):
     ("cut feed 2 to raise the level", -4, -4),                 # mixed words: trust the model
 ])
 def test_direction_check_only_when_unambiguous(text, model, want):
-    r = ai.parse_command(text, post=fake_llm({"action": "adjust", "valve": "purge", "amount": model}))
+    valve = next(v for v, pattern in ai._VALVE_WORDS.items() if ai.re.search(pattern, text, ai.re.I))
+    r = ai.parse_command(text, post=fake_llm({"action": "adjust", "valve": valve, "amount": model}))
     assert r["amount"] == want
 
 
@@ -409,7 +411,8 @@ def test_command_endpoint_refused_actions_are_409(monkeypatch):
 def test_shut_without_number_is_set_zero_and_fully_open_is_100():
     for text, model, want in [("shut the product valve", 0, 0.0), ("close feed 2", -100, 0.0),
                               ("fully open the purge", 10, 100.0)]:
-        r = ai.parse_command(text, post=fake_llm({"action": "adjust", "valve": "purge", "amount": model}))
+        valve = next(v for v, pattern in ai._VALVE_WORDS.items() if ai.re.search(pattern, text, ai.re.I))
+        r = ai.parse_command(text, post=fake_llm({"action": "adjust", "valve": valve, "amount": model}))
         assert (r["action"], r["amount"]) == ("set", want), text
 
 

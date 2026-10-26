@@ -1,0 +1,126 @@
+{
+  "algorithm": "ExtraTrees",
+  "seed": 19,
+  "train_n": 1796,
+  "model_bytes": 534552,
+  "extra_gpu_bytes": 0,
+  "benchmark_fit_overlap": 0,
+  "validation": {
+    "n": 409,
+    "accuracy": 0.6234718826405868,
+    "per_class_recall": {
+      "normal": 0.35333333333333333,
+      "excursion": 0.0,
+      "sensor_fault": 0.7083333333333334,
+      "actuator_fault": 0.975
+    },
+    "false_alarm_rate": 0.6466666666666667,
+    "detection_rate": 0.9189189189189189,
+    "mean_inference_ms": 0.8843621026900357,
+    "confusion": {
+      "normal": {
+        "normal": 53,
+        "sensor_fault": 38,
+        "actuator_fault": 37,
+        "excursion": 22
+      },
+      "excursion": {
+        "actuator_fault": 16,
+        "sensor_fault": 3
+      },
+      "sensor_fault": {
+        "sensor_fault": 85,
+        "excursion": 8,
+        "normal": 21,
+        "actuator_fault": 6
+      },
+      "actuator_fault": {
+        "actuator_fault": 117,
+        "excursion": 3
+      }
+    }
+  },
+  "clean_unseen": {
+    "n": 471,
+    "accuracy": 0.7770700636942676,
+    "per_class_recall": {
+      "normal": 0.7027027027027027,
+      "excursion": 0.9916666666666667,
+      "sensor_fault": 0.7166666666666667,
+      "actuator_fault": 0.6916666666666667
+    },
+    "false_alarm_rate": 0.29729729729729726,
+    "detection_rate": 0.875,
+    "mean_inference_ms": 0.862320594479626,
+    "confusion": {
+      "normal": {
+        "sensor_fault": 33,
+        "normal": 78
+      },
+      "excursion": {
+        "excursion": 119,
+        "normal": 1
+      },
+      "sensor_fault": {
+        "sensor_fault": 86,
+        "normal": 32,
+        "excursion": 1,
+        "actuator_fault": 1
+      },
+      "actuator_fault": {
+        "actuator_fault": 83,
+        "sensor_fault": 25,
+        "normal": 12
+      }
+    }
+  },
+  "historical_unseen": {
+    "n": 480,
+    "accuracy": 0.75,
+    "per_class_recall": {
+      "normal": 0.875,
+      "excursion": 1.0,
+      "sensor_fault": 0.4666666666666667,
+      "actuator_fault": 0.6583333333333333
+    },
+    "false_alarm_rate": 0.125,
+    "detection_rate": 0.7611111111111111,
+    "mean_inference_ms": 0.8859685416666707,
+    "confusion": {
+      "normal": {
+        "normal": 105,
+        "sensor_fault": 15
+      },
+      "excursion": {
+        "excursion": 120
+      },
+      "sensor_fault": {
+        "normal": 62,
+        "sensor_fault": 56,
+        "actuator_fault": 1,
+        "excursion": 1
+      },
+      "actuator_fault": {
+        "normal": 24,
+        "actuator_fault": 79,
+        "sensor_fault": 17
+      }
+    }
+  },
+  "historical_llm_baseline": {
+    "n": 480,
+    "accuracy": 0.7145833333333333,
+    "per_class_recall": {
+      "normal": 0.925,
+      "excursion": 0.9916666666666667,
+      "sensor_fault": 0.21666666666666667,
+      "actuator_fault": 0.725,
+      "provenance_violation": null,
+      "rationale_mismatch": null,
+      "setpoint_drift": null
+    },
+    "false_alarm_rate": 0.075,
+    "detection_rate": 0.6472222222222223
+  },
+  "comparison_note": "Same unchanged 480-example benchmark; historical LLM results, not a new LLM run. No model selection on this benchmark."
+}

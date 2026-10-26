@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "confidence_threshold": 0.7,
+  "validation_corrections": 99,
+  "sensor_noise_calibration": false,
+  "noise_candidate_passed": false,
+  "noise_validation_sensor_examples": 120,
+  "noise_validation_missed_faults": 3,
+  "validation_correction_errors": 0,
+  "validation_false_alarms": 0,
+  "model_sha256": "998a3403c253ab98b71ee0341e1f3e9dba4c128be590eb232181213a008f73c5",
+  "scope": "telemetry only; correct normal LLM verdicts; never feeds authority"
+}

@@ -35,7 +35,6 @@ TE::TE() {
 
 void TE::steady_state() {
     lapack_int n, nrhs, lda, ldb, info;
-    int i, j;
     double *A, *b;
     lapack_int *ipiv;
     
@@ -89,7 +88,7 @@ void TE::steady_state() {
     
     f1_valve_pos = b[0]/cv[0];
     f2_valve_pos = b[1]/cv[1];
-    purge_valve_pos = b[3]/(cv[2]*sqrt(pressure-100));
+    purge_valve_pos = b[2]/(cv[2]*sqrt(pressure-100));
     product_valve_pos = product_flow/(cv[3]*sqrt(pressure-100));
     
     molar_D = 110;
@@ -99,6 +98,9 @@ void TE::steady_state() {
     molar_A = NV*A_in_purge;
     molar_B = NV*B_in_purge;
     molar_C = NV*C_in_purge;
+    free(A);
+    free(b);
+    free(ipiv);
 } 
 
 
@@ -182,10 +184,10 @@ void TE::update(Json::Value inputs) {
     C_in_purge = molar_C / NV;
     
     // check for  delayed sampling
-    if (current.tv_sec*1000000 +current.tv_usec > tpurge) {
+    if (static_cast<uint64_t>(current.tv_sec*1000000 +current.tv_usec) > tpurge) {
         tpurge = tpurge + int(sampling_delay*60*60*1000000);
         printf("********************************************\n");
-        for (int i=0; i++; i<3) {
+        for (int i=0; i<3; i++) {
             ymeas[i] = ylast[i];
         }
         ylast[0] = A_in_purge;

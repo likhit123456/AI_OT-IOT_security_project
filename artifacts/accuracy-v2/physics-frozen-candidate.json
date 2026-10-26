@@ -1,0 +1,16 @@
+{
+  "model_sha256": "9a35e9b70e81a25924b9f95a9eb287d54eec4aa78ccc4a18ff3a29f07158d7e2",
+  "features_sha256": "dda29935dffd9bf137a9a4ceb9a6c8c0a4acb75ecf1e55d5a829aae5eb01b6b6",
+  "validation_sha256": "c7e2e4caad88bf6a2fe3e6772486a033fabbe0a6a09abfa4507248cb6402bc59",
+  "criteria": {
+    "accuracy_min": 0.9,
+    "false_alarm_rate_max": 0.05,
+    "recall_min": {
+      "normal": 0.95,
+      "excursion": 0.9,
+      "sensor_fault": 0.8,
+      "actuator_fault": 0.8
+    }
+  },
+  "selection_used_holdout": false
+}

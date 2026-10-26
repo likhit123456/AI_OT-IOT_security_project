@@ -58,9 +58,9 @@ class PlantState:
     f2_flow: float             # kmol/h
     purge_flow: float          # kmol/h
     product_flow: float        # kmol/h
-    a_in_purge: float          # mol %
-    b_in_purge: float          # mol %
-    c_in_purge: float          # mol %
+    a_in_purge: float          # mole fraction 0..1; a_comp_sp is mol %
+    b_in_purge: float          # mole fraction 0..1
+    c_in_purge: float          # mole fraction 0..1
     # actuator feedback (commanded position the plant currently holds)
     f1_valve_pos: float        # %
     f2_valve_pos: float        # %

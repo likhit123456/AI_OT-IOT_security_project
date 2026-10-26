@@ -63,6 +63,7 @@ CHECK_EVERY_S = 2.5           # a model call at most this often, alternating inp
 SPLIT_CHECK_EVERY_S = 5.0     # per path in the split (combined rate = the single-observer rate)
 KINDS = ("proposals", "telemetry")
 SCORE_FLOOR = 0.3             # an attack label never maps below this
+VERDICT_MAX_AGE_S = 30.0
 
 
 @dataclass
@@ -74,10 +75,13 @@ class Verdict:
     reason: str
     note: str = "ok"
     latency_s: float = 0.0
+    source: str = "llm"
+    llm_label: Optional[str] = None
 
     def as_dict(self) -> dict:
         return {"t": round(self.t, 1), "kind": self.kind, "label": self.label, "score": round(self.score, 2),
-                "reason": self.reason, "note": self.note, "latency_s": round(self.latency_s, 2)}
+                "reason": self.reason, "note": self.note, "latency_s": round(self.latency_s, 2),
+                "source": self.source, "llm_label": self.llm_label}
 
 
 def _http_post_json(url: str, body: dict, timeout_s: float) -> dict:
@@ -102,6 +106,7 @@ class Observer:
                  timeout_s: float = 20.0, background: bool = True, num_ctx: Optional[int] = None,
                  kinds: tuple = KINDS, check_every_s: float = CHECK_EVERY_S,
                  gate: Optional[threading.Semaphore] = None,
+                 telemetry_specialist=None,
                  http_post: Callable[[str, dict, float], dict] = _http_post_json):
         self.fmt, self.model, self.base_url = fmt, model, base_url.rstrip("/")
         self.timeout_s, self._background, self._http_post = timeout_s, background, http_post
@@ -120,20 +125,30 @@ class Observer:
         self.consecutive_errors = 0             # backend errors (not bad outputs) in a row
         self.last_user: dict = {}               # kind -> last user turn sent (for audits)
         self.log: Deque[dict] = deque(maxlen=100)
+        self._generation = 0
+        self._last_feed_t = None
+        self.telemetry_specialist = telemetry_specialist
 
     # ---- inputs -------------------------------------------------------------
     def reset(self) -> None:
         """Forget history (e.g. after an operator re-arm) and drop old verdicts."""
         with self._lock:
+            self._generation += 1
             self._samples.clear()
             self._proposals.clear()
             self.last = {}
-            self._last_sample_t = self._last_prop_t = -1e9
+            self._last_sample_t = self._last_prop_t = self._last_check_t = -1e9
+            self._proposals_dirty = False
+            self._next_kind = "proposals"
+            self._last_feed_t = None
+            self.last_user.clear()
+            self.consecutive_errors = 0
 
     def feed(self, t: float, state, intent=None, commanded=None) -> None:
         """Call once per control cycle; never blocks on the model. commanded: the
         ControlCommand whose result `state` is (L1's last signed command); a
         TELEMETRY_COMMANDED format takes no sample until there is one."""
+        self._last_feed_t = t
         if "telemetry" in self.kinds and t - self._last_sample_t >= self.sample_s \
                 and (commanded is not None or not self.commanded):
             self._last_sample_t = t
@@ -175,17 +190,19 @@ class Observer:
                     user = (self.fmt.telemetry_to_json(meas, [s[2] for s in self._samples], ts[-1] - ts[0])
                             if self.commanded else self.fmt.telemetry_to_json(meas, ts[-1] - ts[0]))
                 self.last_user[kind] = user
+                generation = self._generation
                 if self._background:
-                    threading.Thread(target=self._run, args=(t, kind, user), daemon=True).start()
+                    threading.Thread(target=self._run, args=(t, kind, user, generation), daemon=True).start()
                     return
             except Exception:                       # noqa: BLE001 - never hold the shared gate
                 self._gate.release()
                 raise
-            self._run(t, kind, user)
+            self._run(t, kind, user, generation)
             return
 
     # ---- model call (any failure -> no verdict, suspicion 0) -----------------
-    def _run(self, t: float, kind: str, user: str) -> None:
+    def _run(self, t: float, kind: str, user: str, generation=None) -> None:
+        generation = self._generation if generation is None else generation
         t0 = time.monotonic()
         options = {"temperature": 0, "num_predict": 120}
         if self.num_ctx:
@@ -200,23 +217,33 @@ class Observer:
             v, note = self.fmt.parse((resp.get("message") or {}).get("content", ""))
             verdict = (Verdict(t, kind, v["label"], v["score"], v["reason"], "ok") if v
                        else Verdict(t, kind, None, 0.0, "", f"invalid output: {note}"))
+            if v and kind == "telemetry" and self.telemetry_specialist is not None:
+                try:
+                    corrected = self.telemetry_specialist.correct(json.loads(user), v)
+                    if corrected.get("source") in ("llm+telemetry-specialist", "calibrated-telemetry", "llm+physics-detector"):
+                        verdict = Verdict(t, kind, corrected["label"], corrected["score"], corrected["reason"], "ok",
+                                          source=corrected["source"], llm_label=corrected.get("llm_label", v["label"]))
+                except (ValueError, TypeError, KeyError):
+                    pass  # malformed/older telemetry retains the validated LLM verdict
         except Exception as e:                      # noqa: BLE001 - never crash the control loop
             backend_error = True
             verdict = Verdict(t, kind, None, 0.0, "", f"error: {type(e).__name__}: {str(e)[:100]}")
         verdict.latency_s = time.monotonic() - t0
         with self._lock:
-            self.consecutive_errors = self.consecutive_errors + 1 if backend_error else 0
-            self.calls += 1
-            self.failures += verdict.label is None
-            self.last[kind] = verdict
-            self.log.append(verdict.as_dict())
+            if generation == self._generation:
+                self.consecutive_errors = self.consecutive_errors + 1 if backend_error else 0
+                self.calls += 1
+                self.failures += verdict.label is None
+                self.last[kind] = verdict
+                self.log.append(verdict.as_dict())
         self._gate.release()
 
     # ---- output -------------------------------------------------------------
     def suspicion(self) -> float:
         """Advisory suspicion for Keel: proposal-side labels only (see module docstring)."""
         v = self.last.get("proposals")
-        if v is None or v.label is None or v.label not in self.fmt.PROPOSAL_LABELS:
+        if (v is None or v.label is None or v.label not in self.fmt.PROPOSAL_LABELS
+                or (self._last_feed_t is not None and self._last_feed_t - v.t > VERDICT_MAX_AGE_S)):
             return 0.0
         return max(SCORE_FLOOR, min(1.0, v.score))
 
@@ -239,8 +266,9 @@ class SplitObserver:
     CHAINS = {"proposals": PROPOSAL_CHAIN, "telemetry": TELEMETRY_CHAIN}
     PROPOSAL_LABELS = V2.PROPOSAL_LABELS
 
-    def __init__(self, available: Callable[[str], bool] = observer_available, **kw):
+    def __init__(self, available: Callable[[str], bool] = observer_available, telemetry_specialist=None, **kw):
         self._available, self._kw = available, kw
+        self.telemetry_specialist = telemetry_specialist
         self._gate = threading.Semaphore(1)
         self.skip = {k: () for k in KINDS}               # models that failed on that path
         self.paths = {k: self._build(k) for k in KINDS}
@@ -251,6 +279,7 @@ class SplitObserver:
             return None
         fmt, model, num_ctx = pick
         return Observer(fmt=fmt, model=model, num_ctx=num_ctx, kinds=(kind,),
+                        telemetry_specialist=self.telemetry_specialist if kind == "telemetry" and fmt is V3 else None,
                         check_every_s=SPLIT_CHECK_EVERY_S, gate=self._gate, **self._kw)
 
     @property
@@ -293,6 +322,7 @@ class SplitObserver:
     def snapshot(self) -> dict:
         v = self.last
         return {"models": {k: self.model(k) for k in KINDS},
+                "telemetry_specialist": self.telemetry_specialist is not None,
                 "calls": sum(o.calls for o in self.paths.values() if o),
                 "failures": sum(o.failures for o in self.paths.values() if o),
                 "suspicion": round(self.suspicion(), 2),

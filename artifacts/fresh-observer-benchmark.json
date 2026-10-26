@@ -1,0 +1,549 @@
+{
+  "dataset_sha256": "26efebacf1de2a753d0633c131b28645b22a121d88ae4d96a7c702818bc44a1d",
+  "seed": 29,
+  "kind": "fresh paired inference; telemetry only; no fitting",
+  "rows": [
+    {
+      "gold": "normal",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow reading is noisy: it spans 83.4 in the window with no matching reading.\"}",
+      "input_sha256": "c563f82316b6352fdb3d997970af5d23be46c9f76fbb9ebce2c8149d670ecf19",
+      "latency_s": 1.184
+    },
+    {
+      "gold": "normal",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps up by 100.9 with no matching change in the valves or flows.\"}",
+      "input_sha256": "9b757712da4854bcab4b2e7a2c5be3f401da063fceaa219fc85068dbb289a164",
+      "latency_s": 0.918
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2893 kPa, rising +3.8 kPa/s.\"}",
+      "input_sha256": "e74276cacd2af4e3cd365abf3764c2dc6fa941e7a8ef984433e6baa78ce93f09",
+      "latency_s": 1.02
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "normal",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2566 kPa (range 209.6), level 45.3 % (range 0.06); valves follow their commands.\"}",
+      "input_sha256": "46b2f3fd03d765c9f60c6dda006ff8ce3911cee1e0f0bf12e053ccd47f99dbfb",
+      "latency_s": 1.18
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Purge flow reading is stuck at 279.4 for 16 s while the process keeps moving.\"}",
+      "input_sha256": "12d8eaccc4fb7e46d8870694bf45db022fe219ae1ea0f4eceae558403fa33728",
+      "latency_s": 0.932
+    },
+    {
+      "gold": "normal",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Pressure is noisy: it spans 41.0 with no consistent trend.\"}",
+      "input_sha256": "2bd879805c6300825e6871a149758ca92b6cabbf49753eddf805fa9cb092499b",
+      "latency_s": 0.845
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps up by 124.2 with no matching change in the valves or flows.\"}",
+      "input_sha256": "caff3df9a2edd852f8204385faf2bb03d6ce0cc8ae56bdf6b6b930bb752ebcfd",
+      "latency_s": 0.894
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "actuator_fault",
+      "hybrid": "actuator_fault",
+      "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 45.5% but sits at 60.6% (gap up to 15.1%); it is not following the controller.\"}",
+      "input_sha256": "8995094575d6d43840588c3e62d9fc181041241ba06d8437b01c0ee49daf1dfd",
+      "latency_s": 1.071
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "actuator_fault",
+      "hybrid": "actuator_fault",
+      "raw": "{\"label\": \"actuator_fault\", \"score\": 0.58, \"reason\": \"Product valve is commanded to 41.1% but sits at 60.6% (gap up to 19.5%); it is not following the controller.\"}",
+      "input_sha256": "8d91fa49ad39bbed0533ee0c041103983dee1dee93679a6c0a819f4db49b63f2",
+      "latency_s": 1.108
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "actuator_fault",
+      "hybrid": "actuator_fault",
+      "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"F1 valve is commanded to 18.0% but sits at 0.0% (gap up to 18.0%); it is not following the controller.\"}",
+      "input_sha256": "828ebb829f66a26834108c6ad99a71e8be19297e937c2d1acf5fabe610d17afd",
+      "latency_s": 1.11
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2816 kPa, rising +3.5 kPa/s.\"}",
+      "input_sha256": "6287c798894ff135410b71270f772ba46bf8655091e11502a39121718f8a290e",
+      "latency_s": 1.004
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "normal",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2560 kPa (range 208.1), level 45.3 % (range 0.06); valves follow their commands.\"}",
+      "input_sha256": "9b7fc0f52b1eae97d7aaea034857d4f054151bece028119df85db6373629e915",
+      "latency_s": 1.173
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "normal",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2566 kPa (range 209.6), level 45.3 % (range 0.06); valves follow their commands.\"}",
+      "input_sha256": "5e203dfaec8cb3604bfe6f6cd6ddd273543ab6e859a60dda89a925d71731eb9e",
+      "latency_s": 1.181
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "actuator_fault",
+      "hybrid": "actuator_fault",
+      "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 49.9% but sits at 65.1% (gap up to 15.8%); it is not following the controller.\"}",
+      "input_sha256": "77b7ffdb2cd538b27acd815ff9cd5b492c121a4c43ee82e5304ae8b4eef6d4c1",
+      "latency_s": 1.014
+    },
+    {
+      "gold": "normal",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Pressure is noisy: it spans 21.2 with a standard deviation of 10.4, wider than the process supports.\"}",
+      "input_sha256": "2b9920bc9066f7ffe077cb2b8a1d5bc2cdc6d463897ee4262f87ac0b7a5f92b5",
+      "latency_s": 0.987
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "normal",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2572 kPa (range 211.1), level 45.3 % (range 0.06); valves follow their commands.\"}",
+      "input_sha256": "001079a043e522513155bae890b4345057cbec0df30d7d002c4dc7d31be35b8b",
+      "latency_s": 1.143
+    },
+    {
+      "gold": "normal",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps up by 100.2 with no matching change in the valves or flows.\"}",
+      "input_sha256": "eb40f495efddf89e89274010e3a544b1dcba5d13c46f59c5f77e52c6a69627b8",
+      "latency_s": 0.898
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "actuator_fault",
+      "hybrid": "actuator_fault",
+      "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Purge valve is commanded to 64.9% but sits at 75.7% (gap up to 10.8%); it is not following the controller.\"}",
+      "input_sha256": "afdf826f331b4d3471b38bc7d178c0eb1cba076fa49cd4335893038ea715bd1c",
+      "latency_s": 1.104
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Feed 2 flow jumps down by 0.0 with no matching change in the valves or flows.\"}",
+      "input_sha256": "56a7557401cb9707575c8102a387fa0c7ddce000a9261897289bdbb6f02df787",
+      "latency_s": 0.888
+    },
+    {
+      "gold": "normal",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow drops to 125.4 with no matching change in the valves or flows.\"}",
+      "input_sha256": "f1957bac93af9c1456d093d5ae3ef70b3a4e25b758d5edc36050fe1e356d6572",
+      "latency_s": 0.881
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Pressure is noisy: it spans 41.3 with no consistent trend.\"}",
+      "input_sha256": "9c3eace02e452e1d900e76c8468bdcb2b9c19622fc7acbe5b06e0d77eb871fb6",
+      "latency_s": 0.821
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Feed 2 flow jumps down by 0.0 with no matching change in the valves or flows.\"}",
+      "input_sha256": "bae91ed9b2ada56c349bca84b1e5f4d8ae44052717effaa9ea70806a896668aa",
+      "latency_s": 0.879
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2882 kPa, rising +3.7 kPa/s.\"}",
+      "input_sha256": "1d2f242b6b6359b53976b9754d89a1710c45576dd1ec4c061739f26d7b77f628",
+      "latency_s": 1.005
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "actuator_fault",
+      "hybrid": "actuator_fault",
+      "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Purge valve is commanded to 75.7 % but sits at 75.7 % (gap up to 4.5 %); it is not following the controller.\"}",
+      "input_sha256": "dbb941d3bea2fb148f0ad435b4e4c72742e68a993df348ed14793cb6876bd765",
+      "latency_s": 1.104
+    },
+    {
+      "gold": "normal",
+      "baseline": "normal",
+      "hybrid": "normal",
+      "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2647 kPa (range 41.2), level 44.3 % (range 0.09); valves follow their commands.\"}",
+      "input_sha256": "cc0f986232a918a64200e5cb3d0955ed87828a77ac7146beaf6ffdc01bea9dd9",
+      "latency_s": 1.118
+    },
+    {
+      "gold": "normal",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow jumps up by 100.1 with no matching change in the valves or flows.\"}",
+      "input_sha256": "4ae54514655a01d55743b20a10bfcde70435390f36e4ecd5116abb580abea595",
+      "latency_s": 0.915
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "actuator_fault",
+      "hybrid": "actuator_fault",
+      "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"F1 valve is commanded to 46.7% but sits at 60.0% (gap up to 13.3%); it is not following the controller.\"}",
+      "input_sha256": "cb5a58c446c9ef8475b1cdf83daa157776f1168821659477bfab3753cc62168a",
+      "latency_s": 1.09
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "actuator_fault",
+      "hybrid": "actuator_fault",
+      "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 52.4% but sits at 60.5% (gap up to 8.1%); it is not following the controller.\"}",
+      "input_sha256": "9db07c1c1b6eb50fedaaee2ded41ccf1d16482933275811d93fc327e32d26a42",
+      "latency_s": 1.117
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2783 kPa, rising +3.8 kPa/s.\"}",
+      "input_sha256": "e57cbeffec04e1be31e448b0fcfed6f8dbc221b8ca0022bd367a89830028fe24",
+      "latency_s": 0.992
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2751 kPa, rising +1.8 kPa/s.\"}",
+      "input_sha256": "21f8f4909309710b1d76fce58ffa347b3e472f7aa1423368eb7c90d17b9a60c2",
+      "latency_s": 1.007
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "normal",
+      "hybrid": "normal",
+      "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2541 kPa (range 10.2), level 44.3 % (range 0.05); valves follow their commands.\"}",
+      "input_sha256": "43becefedc11efc861433d371c68a5691932fd515ed9442232f21555cc975c40",
+      "latency_s": 1.137
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "actuator_fault",
+      "hybrid": "actuator_fault",
+      "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Purge valve is commanded to 13.2% but sits at 0.0% (gap up to 13.2%); it is not following the controller.\"}",
+      "input_sha256": "b199d805eccc5169ee920a34b2f2961c2283a6c5be16e1c0de45abc87da72d3c",
+      "latency_s": 1.113
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2806 kPa, rising +3.5 kPa/s.\"}",
+      "input_sha256": "0fe6d500b4e1125afe96f697f0de275665d74fe913a1d88fb8ee709c61664beb",
+      "latency_s": 0.997
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2770 kPa, rising +1.8 kPa/s.\"}",
+      "input_sha256": "13e4ed3ecf1dc6cde6e611fa54314e730c6b435e4e5058bb5cd1898f4f24f325",
+      "latency_s": 1.007
+    },
+    {
+      "gold": "normal",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Pressure is noisy: it spans 39.0 with no consistent trend.\"}",
+      "input_sha256": "e3d703abfd7321a1583c713125ef6b975dcb6579687ba3fd8310f68db77deca1",
+      "latency_s": 0.871
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Purge flow reading is noisy: it spans 154.5 with no matching reading.\"}",
+      "input_sha256": "93cd81c4d9d4d5c7ca6b8d46591595568a3b52c565756cf7bd23a3e2921fc2b3",
+      "latency_s": 0.882
+    },
+    {
+      "gold": "normal",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Pressure is noisy: it spans 39.4 with no consistent trend.\"}",
+      "input_sha256": "b57ae392ae6c2bc3753314b1b96b7c03572c10ceb64754be1ce378bfadfe0c08",
+      "latency_s": 0.824
+    },
+    {
+      "gold": "sensor_fault",
+      "baseline": "normal",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"normal\", \"score\": 0.0, \"reason\": \"Readings are consistent with normal operation: pressure 2566 kPa (range 209.6), level 45.3 % (range 0.06); valves follow their commands.\"}",
+      "input_sha256": "665aed3bc2863c1a6504988a30c0e58032fef0c678f80ea701ec973d48288850",
+      "latency_s": 1.152
+    },
+    {
+      "gold": "normal",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Product flow reading is noisy: it spans 84.3 in the window with no matching reading.\"}",
+      "input_sha256": "65ae02075a1b85757265e4325cd8eb4b4c88cac8947d296a6c854a5352db1299",
+      "latency_s": 0.943
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2891 kPa, rising +3.9 kPa/s.\"}",
+      "input_sha256": "429b090cc215dcca2aa39a09bfbe7a150a77db2bd557d348ace824bf6bc6c925",
+      "latency_s": 1.035
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2877 kPa, rising +3.5 kPa/s.\"}",
+      "input_sha256": "2390ed61c91f0a3c46aab2157b92e3ed003560f8951114db479181ae1cb7fc02",
+      "latency_s": 1.0
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2764 kPa, rising +1.9 kPa/s.\"}",
+      "input_sha256": "68616d3dc5c61a25a650395758a116b5aa073846357743f5c54f34a5e321e24f",
+      "latency_s": 1.005
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "actuator_fault",
+      "hybrid": "actuator_fault",
+      "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Product valve is commanded to 48.8% but sits at 65.1% (gap up to 16.9%); it is not following the controller.\"}",
+      "input_sha256": "01bed75ef555482c103d5b7aa35c100c87c66bb9fbf454fd938bb5899c374f9d",
+      "latency_s": 1.118
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Feed 2 flow is noisy: it spans 0.1 in the window, wider than the process supports.\"}",
+      "input_sha256": "eceeb6d5b8d0070b55539c63d19fa68c32152701cfad0c853e1c435abd992576",
+      "latency_s": 0.923
+    },
+    {
+      "gold": "normal",
+      "baseline": "sensor_fault",
+      "hybrid": "sensor_fault",
+      "raw": "{\"label\": \"sensor_fault\", \"score\": 0.6, \"reason\": \"Feed 2 flow jumps down by 0.0 with no matching change in the valves or flows.\"}",
+      "input_sha256": "99ce641eb874ca57045f20234ce7ae7abeef38b62edbbbfd020beed108452d6c",
+      "latency_s": 0.908
+    },
+    {
+      "gold": "actuator_fault",
+      "baseline": "actuator_fault",
+      "hybrid": "actuator_fault",
+      "raw": "{\"label\": \"actuator_fault\", \"score\": 0.5, \"reason\": \"Purge valve is commanded to 57.6% but sits at 73.8% (gap up to 16.2%); it is not following the controller.\"}",
+      "input_sha256": "c1973a3d395a7d3ac0a5364549c8452ea9aac3b2eba27b004873ad7784547ff4",
+      "latency_s": 1.14
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2833 kPa, rising +1.8 kPa/s.\"}",
+      "input_sha256": "516ab7d39a15ecfdd0adf614be3b99110bcdb51d493bdaa5e6640dc9ab940389",
+      "latency_s": 1.003
+    },
+    {
+      "gold": "excursion",
+      "baseline": "excursion",
+      "hybrid": "excursion",
+      "raw": "{\"label\": \"excursion\", \"score\": 0.43, \"reason\": \"Pressure is being driven toward the 3000 kPa trip: 2840 kPa, rising +1.8 kPa/s.\"}",
+      "input_sha256": "de1eb8200079c7c7e7f862f96264726ae0ca298b232c9051e98bb48e6a90ccbb",
+      "latency_s": 1.022
+    }
+  ],
+  "installed_models": [
+    {
+      "name": "scram-observer-v3:latest",
+      "model": "scram-observer-v3:latest",
+      "modified_at": "2026-10-23T12:13:20.0003185+05:30",
+      "size": 986050107,
+      "digest": "b8d359c53b60429b706b8b2bbdb3910ebf41eb31d4f8070255d57118167df862",
+      "details": {
+        "parent_model": "scram-observer-v3-q4_k_m.gguf",
+        "format": "gguf",
+        "family": "qwen2",
+        "families": [
+          "qwen2"
+        ],
+        "parameter_size": "1.5B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 32768,
+        "embedding_length": 1536,
+        "runner": "llamacpp"
+      },
+      "capabilities": [
+        "tools",
+        "completion"
+      ]
+    },
+    {
+      "name": "scram-observer:latest",
+      "model": "scram-observer:latest",
+      "modified_at": "2026-10-22T14:43:16.7225089+05:30",
+      "size": 986049776,
+      "digest": "f44daf9c16efabe11350511f2a82e15c9ee7f23b16b8163bef405b5308a988e1",
+      "details": {
+        "parent_model": "scram-observer-v2-q4_k_m.gguf",
+        "format": "gguf",
+        "family": "qwen2",
+        "families": [
+          "qwen2"
+        ],
+        "parameter_size": "1.5B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 32768,
+        "embedding_length": 1536,
+        "runner": "llamacpp"
+      },
+      "capabilities": [
+        "tools",
+        "completion"
+      ]
+    },
+    {
+      "name": "scram-operator:latest",
+      "model": "scram-operator:latest",
+      "modified_at": "2026-10-14T23:29:08.3309892+05:30",
+      "size": 986049050,
+      "digest": "dcb3ca63138092f89fc9855a73e1b2b6a6eae54d5111bfb121cfdcb99bf6cc34",
+      "details": {
+        "parent_model": "scram-operator-q4_k_m.gguf",
+        "format": "gguf",
+        "family": "qwen2",
+        "families": [
+          "qwen2"
+        ],
+        "parameter_size": "1.5B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 32768,
+        "embedding_length": 1536,
+        "runner": "llamacpp"
+      },
+      "capabilities": [
+        "tools",
+        "completion"
+      ]
+    },
+    {
+      "name": "qwen2.5:1.5b",
+      "model": "qwen2.5:1.5b",
+      "modified_at": "2026-10-14T22:21:12.7384744+05:30",
+      "size": 986061892,
+      "digest": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen2",
+        "families": [
+          "qwen2"
+        ],
+        "parameter_size": "1.5B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 32768,
+        "embedding_length": 1536,
+        "runner": "ggml"
+      },
+      "capabilities": [
+        "completion",
+        "tools"
+      ]
+    }
+  ],
+  "baseline": {
+    "n": 48,
+    "valid_output_rate": 1.0,
+    "accuracy": 0.625,
+    "per_class_recall": {
+      "normal": 0.08333333333333333,
+      "excursion": 1.0,
+      "sensor_fault": 0.5,
+      "actuator_fault": 0.9166666666666666
+    },
+    "false_alarm_rate": 0.9166666666666666,
+    "detection_rate": 0.8333333333333334,
+    "confusion": {
+      "normal": {
+        "sensor_fault": 11,
+        "normal": 1
+      },
+      "excursion": {
+        "excursion": 12
+      },
+      "sensor_fault": {
+        "normal": 6,
+        "sensor_fault": 6
+      },
+      "actuator_fault": {
+        "actuator_fault": 11,
+        "sensor_fault": 1
+      }
+    }
+  },
+  "hybrid": {
+    "n": 48,
+    "valid_output_rate": 1.0,
+    "accuracy": 0.7291666666666666,
+    "per_class_recall": {
+      "normal": 0.08333333333333333,
+      "excursion": 1.0,
+      "sensor_fault": 0.9166666666666666,
+      "actuator_fault": 0.9166666666666666
+    },
+    "false_alarm_rate": 0.9166666666666666,
+    "detection_rate": 0.9722222222222222,
+    "confusion": {
+      "normal": {
+        "sensor_fault": 11,
+        "normal": 1
+      },
+      "excursion": {
+        "excursion": 12
+      },
+      "sensor_fault": {
+        "sensor_fault": 11,
+        "normal": 1
+      },
+      "actuator_fault": {
+        "actuator_fault": 11,
+        "sensor_fault": 1
+      }
+    }
+  }
+}

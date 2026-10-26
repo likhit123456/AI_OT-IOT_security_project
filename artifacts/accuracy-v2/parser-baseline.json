@@ -1,0 +1,1122 @@
+[
+  {
+    "kind": "set",
+    "text": "Move feed one to 16 percent",
+    "gold": [
+      [
+        "set",
+        "f1",
+        16
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        16.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Move feed one to 16 percent\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 16}]}"
+  },
+  {
+    "kind": "set",
+    "text": "Put feed one at 26%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        26
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        26.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Put feed one at 26%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 26}]}"
+  },
+  {
+    "kind": "set",
+    "text": "Set feed one to 65%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        65
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        65.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set feed one to 65%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 65}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Increase feed one by 18%",
+    "gold": [
+      [
+        "adjust",
+        "f1",
+        18
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "f1",
+        18.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Increase feed one by 18%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 18}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Reduce feed one by 15%",
+    "gold": [
+      [
+        "adjust",
+        "f1",
+        -15
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "f1",
+        -15.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Reduce feed one by 15%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": -15}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Open feed one by 5%",
+    "gold": [
+      [
+        "adjust",
+        "f1",
+        5
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "f1",
+        5.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Open feed one by 5%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 5}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Close feed one by 9%",
+    "gold": [
+      [
+        "adjust",
+        "f1",
+        -9
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "f1",
+        -9.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Close feed one by 9%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": -9}]}"
+  },
+  {
+    "kind": "set",
+    "text": "Move F2 to 22 percent",
+    "gold": [
+      [
+        "set",
+        "f2",
+        22
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f2",
+        22.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Move F2 to 22 percent\", \"action\": \"adjust\", \"valve\": \"f2\", \"amount\": 22}]}"
+  },
+  {
+    "kind": "set",
+    "text": "Put F2 at 33%",
+    "gold": [
+      [
+        "set",
+        "f2",
+        33
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f2",
+        33.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Put F2 at 33%\", \"action\": \"set\", \"valve\": \"f2\", \"amount\": 33}]}"
+  },
+  {
+    "kind": "set",
+    "text": "Set F2 to 32%",
+    "gold": [
+      [
+        "set",
+        "f2",
+        32
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f2",
+        32.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set F2 to 32%\", \"action\": \"set\", \"valve\": \"f2\", \"amount\": 32}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Increase F2 by 6%",
+    "gold": [
+      [
+        "adjust",
+        "f2",
+        6
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "f2",
+        6.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Increase F2 by 6%\", \"action\": \"adjust\", \"valve\": \"f2\", \"amount\": 6}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Reduce F2 by 19%",
+    "gold": [
+      [
+        "adjust",
+        "f2",
+        -19
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "f2",
+        -19.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Reduce F2 by 19%\", \"action\": \"adjust\", \"valve\": \"f2\", \"amount\": -19}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Open F2 by 2%",
+    "gold": [
+      [
+        "adjust",
+        "f2",
+        2
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "f2",
+        2.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Open F2 by 2%\", \"action\": \"adjust\", \"valve\": \"f2\", \"amount\": 2}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Close F2 by 3%",
+    "gold": [
+      [
+        "adjust",
+        "f2",
+        -3
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "f2",
+        -3.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Close F2 by 3%\", \"action\": \"adjust\", \"valve\": \"f2\", \"amount\": -3}]}"
+  },
+  {
+    "kind": "set",
+    "text": "Move purge valve to 22 percent",
+    "gold": [
+      [
+        "set",
+        "purge",
+        22
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "purge",
+        22.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Move purge valve to 22 percent\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 22}]}"
+  },
+  {
+    "kind": "set",
+    "text": "Put purge valve at 67%",
+    "gold": [
+      [
+        "set",
+        "purge",
+        67
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "purge",
+        67.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Put purge valve at 67%\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 67}]}"
+  },
+  {
+    "kind": "set",
+    "text": "Set purge valve to 21%",
+    "gold": [
+      [
+        "set",
+        "purge",
+        21
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "purge",
+        21.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set purge valve to 21%\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 21}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Increase purge valve by 13%",
+    "gold": [
+      [
+        "adjust",
+        "purge",
+        13
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "purge",
+        13.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Increase purge valve by 13%\", \"action\": \"adjust\", \"valve\": \"purge\", \"amount\": 13}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Reduce purge valve by 2%",
+    "gold": [
+      [
+        "adjust",
+        "purge",
+        -2
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "purge",
+        -2.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Reduce purge valve by 2%\", \"action\": \"adjust\", \"valve\": \"purge\", \"amount\": -2}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Open purge valve by 2%",
+    "gold": [
+      [
+        "adjust",
+        "purge",
+        2
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "purge",
+        2.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Open purge valve by 2%\", \"action\": \"adjust\", \"valve\": \"purge\", \"amount\": 2}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Close purge valve by 14%",
+    "gold": [
+      [
+        "adjust",
+        "purge",
+        -14
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "purge",
+        -14.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Close purge valve by 14%\", \"action\": \"adjust\", \"valve\": \"purge\", \"amount\": -14}]}"
+  },
+  {
+    "kind": "set",
+    "text": "Move product valve to 77 percent",
+    "gold": [
+      [
+        "set",
+        "product",
+        77
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "product",
+        77.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Move product valve to 77 percent\", \"action\": \"set\", \"valve\": \"product\", \"amount\": 77}]}"
+  },
+  {
+    "kind": "set",
+    "text": "Put product valve at 28%",
+    "gold": [
+      [
+        "set",
+        "product",
+        28
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "product",
+        28.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Put product valve at 28%\", \"action\": \"set\", \"valve\": \"product\", \"amount\": 28}]}"
+  },
+  {
+    "kind": "set",
+    "text": "Set product valve to 51%",
+    "gold": [
+      [
+        "set",
+        "product",
+        51
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "product",
+        51.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set product valve to 51%\", \"action\": \"set\", \"valve\": \"product\", \"amount\": 51}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Increase product valve by 16%",
+    "gold": [
+      [
+        "adjust",
+        "product",
+        16
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "product",
+        16.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Increase product valve by 16%\", \"action\": \"adjust\", \"valve\": \"product\", \"amount\": 16}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Reduce product valve by 12%",
+    "gold": [
+      [
+        "adjust",
+        "product",
+        -12
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "product",
+        -12.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Reduce product valve by 12%\", \"action\": \"adjust\", \"valve\": \"product\", \"amount\": -12}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Open product valve by 16%",
+    "gold": [
+      [
+        "adjust",
+        "product",
+        16
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "product",
+        16.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Open product valve by 16%\", \"action\": \"adjust\", \"valve\": \"product\", \"amount\": 16}]}"
+  },
+  {
+    "kind": "relative",
+    "text": "Close product valve by 16%",
+    "gold": [
+      [
+        "adjust",
+        "product",
+        -16
+      ]
+    ],
+    "prediction": [
+      [
+        "adjust",
+        "product",
+        -16.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Close product valve by 16%\", \"action\": \"adjust\", \"valve\": \"product\", \"amount\": -16}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the coolant valve to 35%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        35.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the coolant valve to 35%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 35}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the heater to 47%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        47.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the heater to 47%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 47}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the feed 3 to 62%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f2",
+        62.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the feed 3 to 62%\", \"action\": \"adjust\", \"valve\": \"f2\", \"amount\": 62}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the feed 12 to 24%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        24.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the feed 12 to 24%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 24}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the steam valve to 43%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        43.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the steam valve to 43%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 43}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the cooling pump to 10%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        10.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the cooling pump to 10%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 10}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the drain valve to 48%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        48.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the drain valve to 48%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 48}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the oxygen valve to 69%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        69.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the oxygen valve to 69%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 69}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the temperature valve to 10%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        10.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the temperature valve to 10%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 10}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the feed pressure valve to 18%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        18.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the feed pressure valve to 18%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 18}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the emergency bypass valve to 61%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        61.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the emergency bypass valve to 61%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 61}]}"
+  },
+  {
+    "kind": "unsupported",
+    "text": "Open the coolant to 60%",
+    "gold": [
+      [
+        "unknown",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        60.0
+      ]
+    ],
+    "correct": false,
+    "raw": "{\"actions\": [{\"clause\": \"Open the coolant to 60%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 60}]}"
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 58% then set purge to 31%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        58
+      ],
+      [
+        "set",
+        "purge",
+        31
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        58.0
+      ],
+      [
+        "set",
+        "purge",
+        31.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set feed 1 to 58%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 58}, {\"clause\": \"Set purge to 31%\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 31}]}"
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 41% then set purge to 8%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        41
+      ],
+      [
+        "set",
+        "purge",
+        8
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        41.0
+      ],
+      [
+        "set",
+        "purge",
+        8.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set feed 1 to 41%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 41}, {\"clause\": \"Set purge to 8%\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 8}]}"
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 18% then set purge to 21%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        18
+      ],
+      [
+        "set",
+        "purge",
+        21
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        18.0
+      ],
+      [
+        "set",
+        "purge",
+        21.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set feed 1 to 18%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 18}, {\"clause\": \"Set purge to 21%\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 21}]}"
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 55% then set purge to 73%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        55
+      ],
+      [
+        "set",
+        "purge",
+        73
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        55.0
+      ],
+      [
+        "set",
+        "purge",
+        73.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set feed 1 to 55%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 55}, {\"clause\": \"Set purge to 73%\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 73}]}"
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 78% then set purge to 53%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        78
+      ],
+      [
+        "set",
+        "purge",
+        53
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        78.0
+      ],
+      [
+        "set",
+        "purge",
+        53.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set feed 1 to 78%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 78}, {\"clause\": \"Set purge to 53%\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 53}]}"
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 44% then set purge to 59%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        44
+      ],
+      [
+        "set",
+        "purge",
+        59
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        44.0
+      ],
+      [
+        "set",
+        "purge",
+        59.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set feed 1 to 44%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 44}, {\"clause\": \"Set purge to 59%\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 59}]}"
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 17% then set purge to 35%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        17
+      ],
+      [
+        "set",
+        "purge",
+        35
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        17.0
+      ],
+      [
+        "set",
+        "purge",
+        35.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set feed 1 to 17%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 17}, {\"clause\": \"Set purge to 35%\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 35}]}"
+  },
+  {
+    "kind": "multiple",
+    "text": "Set feed 1 to 75% then set purge to 21%",
+    "gold": [
+      [
+        "set",
+        "f1",
+        75
+      ],
+      [
+        "set",
+        "purge",
+        21
+      ]
+    ],
+    "prediction": [
+      [
+        "set",
+        "f1",
+        75.0
+      ],
+      [
+        "set",
+        "purge",
+        21.0
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Set feed 1 to 75%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 75}, {\"clause\": \"Set purge to 21%\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 21}]}"
+  },
+  {
+    "kind": "mode",
+    "text": "Stabilize the process please",
+    "gold": [
+      [
+        "rescue",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "rescue",
+        null,
+        null
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Stabilize the process please\", \"action\": \"rescue\", \"valve\": null, \"amount\": null}]}"
+  },
+  {
+    "kind": "mode",
+    "text": "Save my reactor",
+    "gold": [
+      [
+        "rescue",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "rescue",
+        null,
+        null
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Save my reactor\", \"action\": \"rescue\", \"valve\": null, \"amount\": null}]}"
+  },
+  {
+    "kind": "mode",
+    "text": "Stop controlling the reactor",
+    "gold": [
+      [
+        "stop",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "stop",
+        null,
+        null
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Stop controlling the reactor\", \"action\": \"stop\", \"valve\": null, \"amount\": null}]}"
+  },
+  {
+    "kind": "mode",
+    "text": "Switch to manual control",
+    "gold": [
+      [
+        "stop",
+        null,
+        null
+      ]
+    ],
+    "prediction": [
+      [
+        "stop",
+        null,
+        null
+      ]
+    ],
+    "correct": true,
+    "raw": "{\"actions\": [{\"clause\": \"Switch to manual control\", \"action\": \"stop\", \"valve\": null, \"amount\": null}]}"
+  }
+]

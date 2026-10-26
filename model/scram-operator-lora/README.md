@@ -3,208 +3,45 @@ base_model: unsloth/Qwen2.5-1.5B-Instruct-bnb-4bit
 library_name: peft
 pipeline_tag: text-generation
 tags:
-- base_model:adapter:unsloth/Qwen2.5-1.5B-Instruct-bnb-4bit
 - lora
 - sft
-- transformers
-- trl
 - unsloth
 ---
 
-# Model Card for Model ID
-
-<!-- Provide a quick summary of what the model is/does. -->
-
-
-
-## Model Details
-
-### Model Description
-
-<!-- Provide a longer summary of what this model is. -->
-
-
-
-- **Developed by:** [More Information Needed]
-- **Funded by [optional]:** [More Information Needed]
-- **Shared by [optional]:** [More Information Needed]
-- **Model type:** [More Information Needed]
-- **Language(s) (NLP):** [More Information Needed]
-- **License:** [More Information Needed]
-- **Finetuned from model [optional]:** [More Information Needed]
-
-### Model Sources [optional]
-
-<!-- Provide the basic links for the model. -->
-
-- **Repository:** [More Information Needed]
-- **Paper [optional]:** [More Information Needed]
-- **Demo [optional]:** [More Information Needed]
-
-## Uses
-
-<!-- Address questions around how the model is intended to be used, including the foreseeable users of the model and those affected by the model. -->
-
-### Direct Use
-
-<!-- This section is for the model use without fine-tuning or plugging into a larger ecosystem/app. -->
-
-[More Information Needed]
-
-### Downstream Use [optional]
-
-<!-- This section is for the model use when fine-tuned for a task, or when plugged into a larger ecosystem/app -->
-
-[More Information Needed]
-
-### Out-of-Scope Use
-
-<!-- This section addresses misuse, malicious use, and uses that the model will not work well for. -->
-
-[More Information Needed]
-
-## Bias, Risks, and Limitations
-
-<!-- This section is meant to convey both technical and sociotechnical limitations. -->
-
-[More Information Needed]
-
-### Recommendations
-
-<!-- This section is meant to convey recommendations with respect to the bias, risk, and technical limitations. -->
-
-Users (both direct and downstream) should be made aware of the risks, biases and limitations of the model. More information needed for further recommendations.
-
-## How to Get Started with the Model
-
-Use the code below to get started with the model.
-
-[More Information Needed]
-
-## Training Details
-
-### Training Data
-
-<!-- This should link to a Dataset Card, perhaps with a short stub of information on what the training data is all about as well as documentation related to data pre-processing or additional filtering. -->
-
-[More Information Needed]
-
-### Training Procedure
-
-<!-- This relates heavily to the Technical Specifications. Content here should link to that section when it is relevant to the training procedure. -->
-
-#### Preprocessing [optional]
-
-[More Information Needed]
-
-
-#### Training Hyperparameters
-
-- **Training regime:** [More Information Needed] <!--fp32, fp16 mixed precision, bf16 mixed precision, bf16 non-mixed precision, fp16 non-mixed precision, fp8 mixed precision -->
-
-#### Speeds, Sizes, Times [optional]
-
-<!-- This section provides information about throughput, start/end time, checkpoint size if relevant, etc. -->
-
-[More Information Needed]
-
-## Evaluation
-
-<!-- This section describes the evaluation protocols and provides the results. -->
-
-### Testing Data, Factors & Metrics
-
-#### Testing Data
-
-<!-- This should link to a Dataset Card if possible. -->
-
-[More Information Needed]
-
-#### Factors
-
-<!-- These are the things the evaluation is disaggregating by, e.g., subpopulations or domains. -->
-
-[More Information Needed]
-
-#### Metrics
-
-<!-- These are the evaluation metrics being used, ideally with a description of why. -->
-
-[More Information Needed]
-
-### Results
-
-[More Information Needed]
-
-#### Summary
-
-
-
-## Model Examination [optional]
-
-<!-- Relevant interpretability work for the model goes here -->
-
-[More Information Needed]
-
-## Environmental Impact
-
-<!-- Total emissions (in grams of CO2eq) and additional considerations, such as electricity usage, go here. Edit the suggested text below accordingly -->
-
-Carbon emissions can be estimated using the [Machine Learning Impact calculator](https://mlco2.github.io/impact#compute) presented in [Lacoste et al. (2019)](https://arxiv.org/abs/1910.09700).
-
-- **Hardware Type:** [More Information Needed]
-- **Hours used:** [More Information Needed]
-- **Cloud Provider:** [More Information Needed]
-- **Compute Region:** [More Information Needed]
-- **Carbon Emitted:** [More Information Needed]
-
-## Technical Specifications [optional]
-
-### Model Architecture and Objective
-
-[More Information Needed]
-
-### Compute Infrastructure
-
-[More Information Needed]
-
-#### Hardware
-
-[More Information Needed]
-
-#### Software
-
-[More Information Needed]
-
-## Citation [optional]
-
-<!-- If there is a paper or blog post introducing the model, the APA and Bibtex information for that should go in this section. -->
-
-**BibTeX:**
-
-[More Information Needed]
-
-**APA:**
-
-[More Information Needed]
-
-## Glossary [optional]
-
-<!-- If relevant, include terms and calculations in this section that can help readers understand the model or model card. -->
-
-[More Information Needed]
-
-## More Information [optional]
-
-[More Information Needed]
-
-## Model Card Authors [optional]
-
-[More Information Needed]
-
-## Model Card Contact
-
-[More Information Needed]
-### Framework versions
-
-- PEFT 0.21.2
+# SCRAM operator LoRA
+
+This adapter fine-tunes Qwen2.5-1.5B-Instruct for supervisory control of the
+GRFICS chemical-plant simulation. It consumes measured plant state and emits
+JSON supervisory targets for pressure, level, production and composition, or a
+hold decision. It does not directly write valves in the SCRAM control room.
+
+The [adapter configuration](adapter_config.json) records LoRA rank 16, alpha 16,
+zero dropout and attention/MLP projection targets. Tokenizer metadata is
+included; adapter weights and the exported GGUF are excluded from Git.
+See [model setup](../README.md) for required files and Ollama registration.
+
+## Training and evaluation
+
+[`training/train_local.py`](../../training/train_local.py) trains on
+[`training/train.jsonl`](../../training/train.jsonl), with
+[`training/val.jsonl`](../../training/val.jsonl) for validation. The targets are
+expert-policy labels for simulated GRFICS states. The training/serving format is
+shared through [`l3_brain/prompt_format.py`](../../l3_brain/prompt_format.py).
+
+The saved [training log](../train_log.json) records 2,190 training examples,
+235 validation examples, one epoch, learning rate 0.0002, batch size 1,
+gradient accumulation 8 and maximum sequence length 1,024.
+The saved [validation report](../eval_val.json) records 235/235 valid parsed
+outputs and 33/33 hold decisions recalled. These historical results measure
+agreement with the validation labels, not physical safety or generalization
+to arbitrary plants. [Ollama evaluation](../eval_ollama.json) is recorded separately.
+
+## Intended use and limitations
+
+Use for simulation research and demonstrations with the project's deterministic
+control and protection layers. The separate manual studio uses this model in
+its own rescue loop and does not provide SCRAM's full protection path.
+The adapter inherits dependence on its base model, prompt format and dataset.
+Model output alone is not a safety controller. The repository's
+[license](../../LICENSE) covers its code; base-model and tooling terms must also
+be respected when obtaining or redistributing model weights.

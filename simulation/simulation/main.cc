@@ -12,40 +12,47 @@
 #include <errno.h> 
 #include <pthread.h>
 #include <jsoncpp/json/json.h>
+#include <array>
+#include <cmath>
+#include <memory>
 #include "TE_process.h"
 #define PORT 55555
 #define TRUE 1
+
+static bool send_frame(int fd, const std::string &frame) {
+    size_t sent = 0;
+    while (sent < frame.size()) {
+        ssize_t n = send(fd, frame.data() + sent, frame.size() - sent, MSG_NOSIGNAL);
+        if (n < 0 && errno == EINTR) continue;
+        if (n <= 0) return false;
+        sent += static_cast<size_t>(n);
+    }
+    return true;
+}
+
+static bool valid_inputs(const Json::Value &data) {
+    if (!data.isObject() || !data["inputs"].isObject()) return false;
+    const auto &in = data["inputs"];
+    for (const char *key : {"f1_valve_sp", "f2_valve_sp", "purge_valve_sp", "product_valve_sp"}) {
+        if (in.isMember(key) && (!in[key].isNumeric() || !std::isfinite(in[key].asDouble())
+                || in[key].asDouble() < 0 || in[key].asDouble() > 100)) return false;
+    }
+    if (in.isMember("e_stop") && !(in["e_stop"].isBool() ||
+            (in["e_stop"].isInt() && (in["e_stop"].asInt() == 0 || in["e_stop"].asInt() == 1)))) return false;
+    return true;
+}
 
 
 // compile with g++ example.cc TE_process.cc -ljsoncpp -llapacke -lpthread -o simulation
 TE *my_te;
 Json::Value inputs;
-Json::Value outputs;
-pthread_mutex_t simulation_lock;           // single lock used for any access to TE process, inputs, or outputs to ensure atomic operation
-unsigned int process_rate = 100000;      // max of 1000000
-
-void* simulation(void *ptr) {
-    while (1) {
-       
-        /************** UPDATE PROCESS SIMULATION ***************/
-        pthread_mutex_lock(&simulation_lock);
-        my_te->update(inputs);
-        outputs = my_te->get_state_json();
-        my_te->print_outputs();
-        pthread_mutex_unlock(&simulation_lock);       
-        
-        usleep(process_rate);
-        
-    }
-
-
-}
-
 int main(void) {
-    Json::Reader reader;
+    Json::CharReaderBuilder builder;
+    builder["failIfExtra"] = true;
+    std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
     Json::FastWriter writer;
     Json::Value command;
-    pthread_t process_thread;
+
     struct timeval timeout;
     timeout.tv_sec = 1;      // seconds
     timeout.tv_usec = 0;     // microseconds
@@ -56,6 +63,7 @@ int main(void) {
     int master_socket , addrlen , new_socket , client_socket[30] , 
           max_clients = 30 , activity, i , valread , sd;  
     int max_sd;  
+    std::array<std::string, 30> pending;
     struct sockaddr_in address;  
         
     char buffer[1025];  //data buffer of 1K 
@@ -94,7 +102,10 @@ int main(void) {
     //type of socket created 
     address.sin_family = AF_INET;  
     address.sin_addr.s_addr = INADDR_ANY;  
-    address.sin_port = htons( PORT );  
+    const char *port_env = getenv("SCRAM_SIM_PORT");
+    int port = port_env ? atoi(port_env) : PORT;
+    if (port < 1 || port > 65535) return 2;
+    address.sin_port = htons(port);
         
     //bind the socket to localhost port 55555 
     if (bind(master_socket, (struct sockaddr *)&address, sizeof(address))<0)  
@@ -141,7 +152,8 @@ int main(void) {
         }  
 
         timeout.tv_sec = 1;
-        timeout.tv_usec = 0;
+        timeout.tv_usec = 100000;
+        timeout.tv_sec = 0;
     
         //wait for an activity on one of the sockets
         activity = select( max_sd + 1 , &readfds , NULL , NULL , &timeout);  
@@ -168,29 +180,36 @@ int main(void) {
           
                 
             //add new socket to array of sockets 
+            timeval send_timeout = {2, 0};
+            setsockopt(new_socket, SOL_SOCKET, SO_SNDTIMEO, &send_timeout, sizeof(send_timeout));
+            bool accepted = false;
             for (i = 0; i < max_clients; i++)  
             {  
                 //if position is empty 
                 if( client_socket[i] == 0 )  
                 {  
                     client_socket[i] = new_socket;  
+                    pending[i].clear();
+                    accepted = true;
                     printf("Adding to list of sockets as %d\n" , i);  
                         
                     break;  
                 }  
             }  
+            if (!accepted) close(new_socket);
         }  
             
         //else its some IO operation on some other socket
         for (i = 0; i < max_clients; i++)  
         {  
             sd = client_socket[i];  
+            if (sd <= 0) continue;
                 
             if (FD_ISSET( sd , &readfds))  
             {  
                 //Check if it was for closing , and also read the 
                 //incoming message 
-                if ((valread = read( sd , buffer, 1024)) == 0)  
+                if ((valread = read( sd , buffer, 1024)) <= 0)
                 {  
                     //Somebody disconnected , get his details and print 
                     getpeername(sd , (struct sockaddr*)&address , \
@@ -200,33 +219,38 @@ int main(void) {
                     //Close the socket and mark as 0 in list for reuse 
                     close( sd );  
                     client_socket[i] = 0;  
+                    pending[i].clear();
                 }   
                     
                     // PROCESS INPUTS OR OUTPUTS
                 else
                 {  
-                    bool reader_stat = reader.parse(buffer,command);
-                    if (reader_stat) {
-                        if (command.isMember("request")) {
-                            if (command["request"] == "read") {
-                                outputs = my_te->get_state_json();
-                                std::string response = writer.write(outputs);
-                                send(sd,response.c_str(),response.length(),0);
-                            } else if (command["request"] == "write") {
-                                if (command.isMember("data")) {
-                                    inputs = command["data"];
-                                    my_te->update(inputs);
-                                    outputs = my_te->get_state_json();
-                                    std::string response = writer.write(outputs);
-                                    send(sd, response.c_str(), response.length(),0);
-                                }
-                            } else {
-                                //invalid json message
-                               
-                            }
+                    pending[i].append(buffer, static_cast<size_t>(valread));
+                    if (pending[i].size() > 65536) {
+                        close(sd); client_socket[i] = 0; pending[i].clear(); continue;
+                    }
+                    size_t newline;
+                    while ((newline = pending[i].find('\n')) != std::string::npos) {
+                        std::string frame = pending[i].substr(0, newline);
+                        pending[i].erase(0, newline + 1);
+                        Json::Value response;
+                        command.clear();
+                        std::string parse_error;
+                        if (!reader->parse(frame.data(), frame.data() + frame.size(), &command, &parse_error)
+                                || !command.isObject() || !command["request"].isString()) {
+                            response["error"] = "invalid JSON request";
+                        } else if (command["request"] == "read") {
+                            response = my_te->get_state_json();
+                        } else if (command["request"] == "write" && valid_inputs(command["data"])) {
+                            inputs = command["data"];
+                            my_te->update(inputs);
+                            response = my_te->get_state_json();
+                        } else {
+                            response["error"] = "unknown request or invalid inputs";
                         }
-                    } else {
-                        //invalid json format
+                        if (!send_frame(sd, writer.write(response))) {
+                            close(sd); client_socket[i] = 0; pending[i].clear(); break;
+                        }
                     }
                 }  
             }  

@@ -1,0 +1,128 @@
+{
+  "initial_cleanup_bytes": 6202172602,
+  "offline_tests_passed": 271,
+  "warnings": [
+    "Starlette multipart import deprecation"
+  ],
+  "browser_smoke": "passed",
+  "cpp_compile": "passed: C++17 -Wall -Wextra -Werror in WSL",
+  "isolated_cpp_protocol_checks": "passed",
+  "historical_replay": {
+    "baseline": {
+      "accuracy": 0.7145833333333333,
+      "per_class_recall": {
+        "normal": 0.925,
+        "excursion": 0.9916666666666667,
+        "sensor_fault": 0.21666666666666667,
+        "actuator_fault": 0.725,
+        "provenance_violation": null,
+        "rationale_mismatch": null,
+        "setpoint_drift": null
+      },
+      "false_alarm_rate": 0.075,
+      "detection_rate": 0.6472222222222223
+    },
+    "corrected": {
+      "n": 480,
+      "accuracy": 0.7416666666666667,
+      "per_class_recall": {
+        "normal": 0.925,
+        "excursion": 0.9916666666666667,
+        "sensor_fault": 0.325,
+        "actuator_fault": 0.725
+      },
+      "false_alarm_rate": 0.07499999999999996,
+      "detection_rate": 0.6916666666666667,
+      "confusion": {
+        "normal": {
+          "sensor_fault": 7,
+          "normal": 111,
+          "actuator_fault": 2
+        },
+        "excursion": {
+          "excursion": 119,
+          "normal": 1
+        },
+        "sensor_fault": {
+          "normal": 80,
+          "sensor_fault": 39,
+          "actuator_fault": 1
+        },
+        "actuator_fault": {
+          "normal": 30,
+          "actuator_fault": 87,
+          "sensor_fault": 3
+        }
+      }
+    }
+  },
+  "fresh_48_window_benchmark": {
+    "baseline": {
+      "n": 48,
+      "valid_output_rate": 1.0,
+      "accuracy": 0.625,
+      "per_class_recall": {
+        "normal": 0.08333333333333333,
+        "excursion": 1.0,
+        "sensor_fault": 0.5,
+        "actuator_fault": 0.9166666666666666
+      },
+      "false_alarm_rate": 0.9166666666666666,
+      "detection_rate": 0.8333333333333334,
+      "confusion": {
+        "normal": {
+          "sensor_fault": 11,
+          "normal": 1
+        },
+        "excursion": {
+          "excursion": 12
+        },
+        "sensor_fault": {
+          "normal": 6,
+          "sensor_fault": 6
+        },
+        "actuator_fault": {
+          "actuator_fault": 11,
+          "sensor_fault": 1
+        }
+      }
+    },
+    "hybrid": {
+      "n": 48,
+      "valid_output_rate": 1.0,
+      "accuracy": 0.7291666666666666,
+      "per_class_recall": {
+        "normal": 0.08333333333333333,
+        "excursion": 1.0,
+        "sensor_fault": 0.9166666666666666,
+        "actuator_fault": 0.9166666666666666
+      },
+      "false_alarm_rate": 0.9166666666666666,
+      "detection_rate": 0.9722222222222222,
+      "confusion": {
+        "normal": {
+          "sensor_fault": 11,
+          "normal": 1
+        },
+        "excursion": {
+          "excursion": 12
+        },
+        "sensor_fault": {
+          "sensor_fault": 11,
+          "normal": 1
+        },
+        "actuator_fault": {
+          "actuator_fault": 11,
+          "sensor_fault": 1
+        }
+      }
+    }
+  },
+  "original_llm_weights_retrained": false,
+  "telemetry_specialist_bytes": 534552,
+  "limits": [
+    "Docker/Unity full integration not exercised",
+    "telemetry LLM false alarms remain high on clean held-out recordings",
+    "sensor-noise suppression candidate rejected by validation"
+  ]
+}

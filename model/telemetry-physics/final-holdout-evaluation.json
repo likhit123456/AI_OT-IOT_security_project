@@ -1,0 +1,2541 @@
+{
+  "freeze": {
+    "model_sha256": "79511431c50edc490982f1c89a927ac820115d273099e9b98c747b62f6964ec6",
+    "features_sha256": "0e5b7190b87365ed2fba08ab8e32fbdc38015b135a1f9c2db16b66d9f43a8e2e",
+    "validation_sha256": "e735490ebb4a85a36980a246d9cfc646a38fe85818675211c4ee688976a53b8b",
+    "criteria": {
+      "accuracy_min": 0.9,
+      "false_alarm_rate_max": 0.05,
+      "recall_min": {
+        "normal": 0.95,
+        "excursion": 0.9,
+        "sensor_fault": 0.8,
+        "actuator_fault": 0.8
+      }
+    },
+    "selection_used_holdout": false
+  },
+  "holdout_sha256": "2f00412a1ce6c5d37ca73efe138d70bdeb2d48dc3fe819a747b798824033002b",
+  "score": {
+    "n": 215,
+    "accuracy": 0.9302325581395349,
+    "per_class_recall": {
+      "normal": 1.0,
+      "excursion": 1.0,
+      "sensor_fault": 0.8974358974358975,
+      "actuator_fault": 0.9361702127659575
+    },
+    "balanced_accuracy": 0.9584015275504637,
+    "false_alarm_rate": 0.0
+  },
+  "passed_release_gate": true,
+  "by_kind": {
+    "new simulated capacity fault": {
+      "n": 8,
+      "correct": 5
+    },
+    "new simulated pressure excursion": {
+      "n": 20,
+      "correct": 20
+    },
+    "new simulated stuck actuator": {
+      "n": 8,
+      "correct": 8
+    },
+    "new simulated trajectory": {
+      "n": 31,
+      "correct": 31
+    },
+    "synthetic a_in_purge/drift": {
+      "n": 6,
+      "correct": 6
+    },
+    "synthetic a_in_purge/dropout": {
+      "n": 4,
+      "correct": 2
+    },
+    "synthetic a_in_purge/noise": {
+      "n": 3,
+      "correct": 3
+    },
+    "synthetic f1/command-offset": {
+      "n": 10,
+      "correct": 10
+    },
+    "synthetic f1_flow/drift": {
+      "n": 4,
+      "correct": 4
+    },
+    "synthetic f1_flow/dropout": {
+      "n": 4,
+      "correct": 4
+    },
+    "synthetic f1_flow/frozen": {
+      "n": 2,
+      "correct": 2
+    },
+    "synthetic f1_flow/noise": {
+      "n": 7,
+      "correct": 7
+    },
+    "synthetic f2/command-offset": {
+      "n": 11,
+      "correct": 11
+    },
+    "synthetic f2_flow/drift": {
+      "n": 6,
+      "correct": 6
+    },
+    "synthetic f2_flow/dropout": {
+      "n": 4,
+      "correct": 4
+    },
+    "synthetic f2_flow/frozen": {
+      "n": 5,
+      "correct": 5
+    },
+    "synthetic f2_flow/noise": {
+      "n": 2,
+      "correct": 2
+    },
+    "synthetic level/drift": {
+      "n": 9,
+      "correct": 9
+    },
+    "synthetic level/dropout": {
+      "n": 4,
+      "correct": 4
+    },
+    "synthetic level/frozen": {
+      "n": 6,
+      "correct": 0
+    },
+    "synthetic level/noise": {
+      "n": 8,
+      "correct": 8
+    },
+    "synthetic pressure/drift": {
+      "n": 1,
+      "correct": 1
+    },
+    "synthetic pressure/dropout": {
+      "n": 9,
+      "correct": 9
+    },
+    "synthetic pressure/frozen": {
+      "n": 5,
+      "correct": 5
+    },
+    "synthetic pressure/noise": {
+      "n": 3,
+      "correct": 3
+    },
+    "synthetic product/command-offset": {
+      "n": 4,
+      "correct": 4
+    },
+    "synthetic product_flow/drift": {
+      "n": 3,
+      "correct": 3
+    },
+    "synthetic product_flow/dropout": {
+      "n": 3,
+      "correct": 3
+    },
+    "synthetic product_flow/frozen": {
+      "n": 5,
+      "correct": 5
+    },
+    "synthetic product_flow/noise": {
+      "n": 6,
+      "correct": 6
+    },
+    "synthetic purge/command-offset": {
+      "n": 6,
+      "correct": 6
+    },
+    "synthetic purge_flow/drift": {
+      "n": 2,
+      "correct": 2
+    },
+    "synthetic purge_flow/dropout": {
+      "n": 3,
+      "correct": 0
+    },
+    "synthetic purge_flow/frozen": {
+      "n": 1,
+      "correct": 0
+    },
+    "synthetic purge_flow/noise": {
+      "n": 2,
+      "correct": 2
+    }
+  },
+  "predictions": [
+    {
+      "id": "b52c9fee99474df3653747808c9517fd2e25f12e243f141f7310a4d950bd866b",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "dd4b2b45c7259cc1dac41706deed4989439c39bbea2da0ae62558db293b59600",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "d4b23810c155cd7335217e76aa4338942632dda1934c53c9ff9e80055065092f",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "a512f929afc30c816f884130a6562930f8c7666a0f0b595514dcc075ba689ff3",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "71772e14f5a462bfe39e5edc1423e01cc4cce9051e060cb9f5d81a2309fb04d2",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "73eb4b5927e01497e8de8c45e2a751c59390708579201fc4079888355363de57",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "2296968a28c7aba61a3e073ad11d3e78c3b096c4d709eb90a3f4bc255e8669c4",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "64e9e0c914bbbac07817716544c7b678af71d73dd20a22cb62db6f98241e936a",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.8444,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "686697e6372a9f485875c1de979199df086e6935673af518ec25edafde7e2c07",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "9b2066c6d9815ef8570db5f452fce63f81a5a2e9954bfb2107b032d02b30fcbc",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "265305ef157f6e3d8fb482939034dbe1f1ae82c01624ba7cef19f23cd1abcb85",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "23ae087c238b62b26a0066766938d97584f24d73d0d937e8739e176daf1069bf",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "f0ab09459964535661b1f728d9cb2764b665efe7c6bcc199c2822d23f5ee3e1b",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.862,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "fdc33daf76eb1867595299c440cca1ba6140643be222c718c23be513425ea5a9",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "e56a32688633819d8c17abdbab514971409a31a7d509abf675f68c558c73d5bb",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "8a76ab4b5c75773a55dec4c9478c0ba5822502c8c91bbeffcbcb119ba8331c58",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "7fbf4c7f60f7fef68d63a6d14017cd64d163abddd7f7ffda66c3bc439729bff0",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "2d5dbfb657b282f4d1e4549049f4729d9c9e8ac5656f9079e855c81cd98b0199",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "a6f38e0b18d753a3711b5c25fbcf4ec2ad7edd333aacfff37258d38571050c9e",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "ca2d164743133b14280558cde61414ffed2ea74bf1502d56684d9cd4ec12243d",
+      "source": "telemetry-classifier",
+      "kind": "new simulated capacity fault",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 0.9332,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "bd947b64b4a5281e605db26c41cee3f1a190ac387f0827d5fdda52fbb02f347e",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "4f74e3f44cb06c0ec09a1422c80fc2a4364172611dd026eb7d0bfe52c1f9f69e",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.5008,
+      "score": 0.5008,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "cac4fb8171390b90cacf1dcdc4d09421b9107d868fa27432274c42a2ec6bbdae",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "786367f8766d9b8844f0a6cb49ec42e07d24902babe3e531e61aa28d23ba4f64",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.9961,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "8c9de17d0c637846acfbbf6db26d00d17d6eeb1b0e4130b6d87fb9413615826b",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/frozen",
+      "gold": "sensor_fault",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "1249fd9989b9e2deb539fa6cf980e1cda866669c62ed5259efac194d7d84ef16",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "ee47dedfa75798531b3bf0200ffe7811309f3a632483b28afd07e1a875b29137",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "9898b95a6d9251a2ba952c2e02bcfb73d0c3365a39d1f8447f9400b409c68b71",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "48a5460a7fef7fd8037ecd2e41f7372f81f18461091bb3364bdf58197c3987d9",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "52432f7cd176e7f812c5d8e0daf33a756db1dca5e0c2dcb91eb2e4a547347d35",
+      "source": "telemetry-classifier",
+      "kind": "new simulated stuck actuator",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "351f445cac9924c81095f0ae589d7188e7f637605eb59e417283eebdb3f8d494",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/dropout",
+      "gold": "sensor_fault",
+      "label": "normal",
+      "confidence": 0.5156,
+      "score": 0.4844,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "076a6f45b59e1ee7fe25b5ecfe83a99d32b6226ba51164def84621f77c3540b0",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.9961,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "1def3cbe4e255399a55c23382aa95127b5fe77138c3c76a6d805cd87687d25bc",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "b2fe1c0a07feffc296c2579c2e387bf7117be9994f155beae2f17da4bc701b90",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "a9c1bfa7a0e8ce999ef0f3efd37a558c9b6d25c6725bd0245b1cd8c0293fa0aa",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "73db059d8b344d1d90baba931ad9a22c6f1aa7e1b9fa5f2c717a510c197fb7dc",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "da04d086f85e108efc515289e1398f454e28c94f4e646fd95f33ffc0cb52d638",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.5008,
+      "score": 0.5008,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "e1d4001d28ce124e1201ddd6c3fc2c9051a112bf9c60c113dc7f8ffd9c55184b",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "d4cdf168ed49fab49bf775febbc8fdff7ab6c660ab41ec355d11bda0e8ddf401",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "142dca23935bbcd22f7a754df7ed950fef62b2967e5f706bb3f0a3bae8af7f78",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "2dfe7e6a777b20d08e2e6f71090ea28bdd286f076d5ce837d809f443e16cd391",
+      "source": "telemetry-classifier",
+      "kind": "new simulated stuck actuator",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "b0711b25c27a698c6aa48ed7eca4bffe1a5590dcce5a4c9b7683dcb72d7b77b9",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "e24a74a2f45bbdda1d5064938cfbbcb432784f22fea34996d57d6f94a345677c",
+      "source": "telemetry-classifier",
+      "kind": "new simulated capacity fault",
+      "gold": "actuator_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "bebfa4a7c656e4356b42715856aeb8ca553ee5cb50f1f2b55696b86fe474d54e",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.9961,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "1c690d27e05f898f306b2e90c1ac4cbca76dca1c6c794941c027e74b11ff0893",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "cd9a9ba7ddfc613a2e41a81154e262580e035f8646f0bca9cc8e5337b5b30750",
+      "source": "telemetry-classifier",
+      "kind": "new simulated capacity fault",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 0.5426,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "526b6097ab8727a7c2ff4beaad87bbd3e96834d32d0538eea1ebc088f824381a",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.5008,
+      "score": 0.5008,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "db28d641c9c3d08e10e40153e24b0f9c77118f9c16075062dfbd6ea45126b7a1",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "45e0decb2170f544f7e25f2f4b31add5a0ac8585abe1959e8335ae3cb255245d",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "84cb780972c02179ebd356857ab54025ec152d2d5bc8414a39b57ba98eb42cfc",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "21f1a91120b0f7a02c1f3dcdddf484dfe1dff569f50185ad79d95152879aaa33",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "304ebe63c8e63abe55623391534f1e17a4adadd7e4d614b3b51112510e450e1b",
+      "source": "telemetry-classifier",
+      "kind": "new simulated stuck actuator",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "800541d83469991be6565ef393bdcecb737c7a544314265640092ff3adeaefeb",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.5008,
+      "score": 0.5008,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "37a70daae967e48ebfcddee0d529c56ee7998561f59881d96bbfb015267ae522",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "9dce6ae0948a98acc252c5803d13a11cfcd5a843df7ec5fa65ee9faf2eb94b99",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "d6c4044f11cc7fc095fe5709150f968f8b38917a57bf71e7735a38a9bb165b20",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "e184465ec608f87d568f610b2cf317184f32b69e50fbd4d7e580b39550b4a836",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "3ed7397f18e529c366e0c99e21566522a4705355bb8ff305291301594a52dc44",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "d7861f0f33e6f30355144605cd6a87dafe6f8faaf5548bceb050f0d11a6c1660",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.8983,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "880c9a9a215b2f75b9f22af345001b7d1bf2baf84cf2b58753deafb7edadbf5f",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "2c1c5d5bf5b0000b8ce15aa8132e6097a71d51ffe29908cb012255fed89dace6",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "bf5fbaf6e4c47c62d01c28863d84970c92b3d2de908612a17ac49030b40b4e50",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "967c22e888b0cef8e480a34a432098d57acdf1c396bcb3fb086c916e30434c16",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "d8be34f3b65f3190e27c4c83e3e6422aab12e894c6839b3c4de7f746a2de6753",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.8655,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "7b0cf687cc961d7890390ce79d5b97e5b16247de42dfd72af821e9c9497751d0",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "5b86411fcfd2b0df8bbc93fc6527a4d474dbe22b7dba7dddbbccd2e7ebefc201",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "90553cd52d653eff8f08344a77a8f1fa4f943a5bbc6cbec89b09f00f8cd9409c",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "27d8bb2150a17d104c2ee85e833409d6f058f1a7fad5764d821217f07500045c",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "e3345029e1f3b83248e1b1d3e43481dd7827293a80858ccb943ba782b4477e4c",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/frozen",
+      "gold": "sensor_fault",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "1a09884544e345188bd12d09f9bf5a98418483a1097d36c636b6f70622579449",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "1093603e4aad5441e29cd04e71cc4ae952d53b660447786fd8c6167b31b617bb",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.9514,
+      "score": 0.9514,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "564c332b705ded7762bfa05ee7d5f8ea642a6f893f64474f95b7b6bd31076788",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "1ffdec98f26718a3b667d67593141c2582a6069f5e29219cf8208153fb083e3e",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "2ee138c6943efde623af52d595cd8cf0d814f80724b07fc793cdde70da7a9412",
+      "source": "telemetry-classifier",
+      "kind": "new simulated capacity fault",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 0.9604,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "37aac7dce81c2538258c5334df737226ae1e4f24132aab2f9353e8a67c10c135",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "22358e4c501e22837a75318863167c2f6058bb1623fa0d1a4c811eebb4509ed6",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "ca3bd736fe9ba5bb3d4ea15dbe5a6d7727b713bfc32733cd04267a309226c0ba",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "e04b43c350c7dd3920f988dd2abdf4ef6f1b76597124a07031959b30478a9ea0",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "a21ca9188dd15a15116cbff8003e90cced91314b0581042cbd4ea9f5c3dc606a",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "82d62875247912bb3568f65e84038b997485282e82a9f7ec309268e6f43d0488",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "7802924de97fe7ae20ad6298fbf7b4a9d113ebed9223424c2a6f55ab47127e93",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/frozen",
+      "gold": "sensor_fault",
+      "label": "normal",
+      "confidence": 0.8572,
+      "score": 0.1428,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "daaad3088e9759b17e2e97f40174204cb14dc80691918e7cf883f6f8ed85c843",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "974ee0092b338ad28b40285152529e6e7e9bc562e6243c6be11884ac5b4b2030",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "03907809f7fc353beab4ae98007e924237f8669f3f5e1950d7a44bfcd1755f2b",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "34f91bd8d577b96aa27828e8e0bfa95a82e3e89dfe44e5ef5fa3fcdbf7d399b1",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/frozen",
+      "gold": "sensor_fault",
+      "label": "normal",
+      "confidence": 0.9769,
+      "score": 0.0231,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "70df3556bf2dc55f6bdddd7b79171c571d465423f3477f3cac1e833ff7d675df",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "actuator_fault",
+      "confidence": 0.7259,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "fc387847ad8dc958300bfd18cf6dd130182081890e404d790aafe00d4cca3b74",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "fa6a25f194e25fa04e936312c0170c3ae3c1f8fbabc5139353697e6743aa92fc",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "618303f484236eb375e23cc49daa7fe95b72e1920a2cd069c3ec7203555de069",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "5ab8ba912615611402b5ef63d8656ea9303c14b81c213979d266e687ab073841",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/frozen",
+      "gold": "sensor_fault",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "47dc5e2c0221c23b13ebdfc115872dabd17278f81d0f42417f72b418c8dd3b66",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "f2aa088fb3f544eb742960c23a77996dda826985b25a86c2238558ace7e3db58",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "ce166e278b7c7aa87e292a2237bf2ba03b629814824072ec34b8256dcc117329",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "ac47154d823b61c20c3d115c78f8f0d6d4c7ee9c55f3ef7209f3ef9e11b9b9f6",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "98afe4de85ccf56b0e62848f768455e2d5065697b4ccdd2af9c3adb6aaf75bc9",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "49700c1fc89d37feb516e160d6fca014f24aca895ddb3742ce85b821ae3053f1",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "b5a96dc126646ccb5eb3d7cd36760dbdad2969e704b929546cb008cf79132d07",
+      "source": "telemetry-classifier",
+      "kind": "new simulated stuck actuator",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "82be4c5c7bcf813e0ef62c8948f89abbba7c4c12494d7179258948e6925a3b14",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.6793,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "b3edde34feb9a85bb349180c8db4c6190121394e89cc63e4805b11155160ce69",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "8cbe9376b623798a86acde4f569471e284d7bf4eb0c20cf0a8fd0e283ed755d2",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.5008,
+      "score": 0.5008,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "21b64194adc349237ed429d00eddae18b4b0ca3056b389217594c8062c9cd1b7",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "3d811e641c14aca32f30c345a7e4c31075a02a682b13be5136decf92f081f150",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "55185fa7cc62d7a10297d35be45878826534dd8531c784e9e2d7b92fb818bbf9",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "e94d0bedc483c9c9714d98646f16430f0be391e07c1f04f00fa3395645d20556",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.5008,
+      "score": 0.5008,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "73996451af6e7fa76880b3347b0ba0f620fca16bd448f6f1d35cf73024b0504e",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "actuator_fault",
+      "confidence": 0.7259,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "302d4442fc733a63a91e4eb68a70d71e921fd5396108b115ce35c3af0332ee9f",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "a163436674e723ec216f4bf1f4dab18e933451509f8922f0989f85feef56e437",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "efac60d1b15d57e503db00b3ac22635f6e5d9fa5eae276b862d7cf3a5e626468",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.5008,
+      "score": 0.5008,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "01a9d527e995bbd20de65befa43ab8da05eedc7ca1e9913374e91032af273b17",
+      "source": "telemetry-classifier",
+      "kind": "new simulated stuck actuator",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "9508d1e52435fdad55b5978b165bd516b4ab5347ee03992e6c38e0820a47778b",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "7b94c7915660948bf6677be4105b83c3d1959526d8be4205d82c20e79e7016ea",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "0af8771ccbdf7aecb1a52908900e152678ca8987e37fa07857c5b981253538ca",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "c46f31993a0390d35d3964f8bdf340d783b46ae0f6ae3087199e3b4d745733e0",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.6875,
+      "score": 0.6875,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "33b69d8b0693d352cea51c8552c30c602b4ea41bc186fc7b3bce2a692416f09f",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "7a6f03d008d42cee334897f115cff748dd86dcb13abf22c56e29fb2eb1d47df3",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "16f61907fc6b75fadcd85eda69b386f4aaab961b6e16895d8b60040397939746",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "31b5f89ea0d4e0a4004335268b8c29a3ff656e2db0f48ad98ab484c6228548a9",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "8586b7523c3b217513834c363009973d34f9bda4b6366ec5113f856ecf89ee67",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "3af10416bda2a3467eeca8a810b846b1d526b905b8c752358f96208f93dc9b54",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "374ce78a55086fa546fed97ffca1799034220b354bef031cbdd538c2e750d60d",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "550043e110bfbcee7d9c4744a842a55afde9e916a839b22f84682750536b3150",
+      "source": "telemetry-classifier",
+      "kind": "new simulated capacity fault",
+      "gold": "actuator_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "0156d4529465121cee36d06e1b6f7c3bc28d212728745bdfc11b67273fba29e3",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "1b4f88b0558e3c078e062fbcba33b0715b8c71985608849206868516c68cdf5a",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "887f718102f45de9f41fa1341d792e284352c5cdb64e89e0d8fa9a847fb275ae",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "5a83772d7144989b92964b5a17267dd18f76a8d87e8eecdf144d341d3dd40728",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "62df97c0db17f40200ea437b53545a0fd40f0946b150caaa5ee3ce2185ac4290",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "bde940bff4523d0d55b0095e09ee6eca9fc5dae71ee6a5f494cdaade275ac06f",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "dc3eaaf90f9f513bd2387d86083c80450b546c4569b6e039bb840cc4acb9b81d",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "d77babdb5bb0b55a7225f60c8321fd92e6739f7f67f56ec6497be63c816214ac",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "58e72c038c8a254556907caae5a899031ce6dd1b82cfe461daa4de98b45b2dcd",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "0a93730c194d983f0adc37d77a79d033dd42f4bae9bcbf0903515f671be7f1f9",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.9961,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "ae597c8bc17e49bf5b6c9dd936813f5c4c6cd05707cc67012e67a7fcbaefcae6",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "b9613a04e0a0f4c1e1a6508e5222b730a978761d235aba88ab983da325504fe8",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "b2887573b45da8725032d36a4cbb917509324c234a1731a9bdd8becdd2916b7e",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "40a765af2560a8ca5421a0f4979537d807f51123c3641e8e54c1252c57cbc74d",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "eb45dabcd6a8ede33def12940db06a6b5eda853b761308154e39e8346003a467",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "36744f319ef7c4ebca6fd7d8a0030b4f431ba46018e0f0d2e63e1b2af801f238",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.945,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "e852570624eb6f941a64088968eb69232ea06cf44ca35c83a436c74fff90ab94",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "95d0a17a008fbb808d2cc9a02042455937846c1f8239629fbfcfebca211adefd",
+      "source": "telemetry-classifier",
+      "kind": "new simulated capacity fault",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 0.9959,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "53246c1fa24015f120432e00967eb029648fc2cba9d0afdeb2286ad75ef88f69",
+      "source": "telemetry-classifier",
+      "kind": "new simulated capacity fault",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 0.8082,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "9c53ebc1fa3766139460ecc44ba1ff902a058b76a83e7506b2ab4f359b6abc76",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "49a05289a5a0cff6796e85fd54a1c8aa3ad04206d3c52de9d7d58fdd5edbec5f",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "471f489b09d991b7158816d7e905e2a037ef22cd4072033225e4f2ba271cfaaa",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "3c36ae7a95bf1cf3409abfd410a17b99bc1677e54db8e93e724f5a5d6fe45ede",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "36ddff8c4f4d3093dfcfc37bb2ea811201214a03d95b5d75de49b341d46a448b",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "652bce7955c8672e43136f8247caf9a13d31e9a4d3c9312097f084479b409a70",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "c09ab4112e4b31ee7acd97da5a9e84fc9f8c66385284ba259e6480a8874f9746",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "8ed5140e99416922a0e929d8028cc2b570b6a1e90c775fe5d49354ad13798acc",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "24e636f3fbc7f2490df367df00179824746f4024a42bbd658415685bb3e1930a",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "b89de9fc29a1f7a5640383c7d7adcd3d9535c92d52295447e9555b8b27ebedcc",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "a0f1d547c7e0e9df254807f435386fa54ced15e36ac73e4d1811ba5ee7a1448a",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "e0e6f9580a09228d0030d5392b192e06c72e89bb7e3b36f68014c7d3405f4cb3",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "a9652f9cf7d3d139d9e49c8d3a13b38cfe8cfa45676c37324332ce4635216cbf",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.9385,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "ac11412e3416edd97df14193ece811aa59a3215e59fba1d10a899af19de79b1a",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "c2b487e1eb1b883e5f0e0fb680a043f9d07e715d7000fc8e51cf79d4d903577c",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "e658e5547db3d3e25acfdc32ded276bbbc1539b3b4912eff2139ad5b90e477bb",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "65d11cab8b390a250d3bc1193f01c46db26b34158e21a90aa6e2297da9a8ec2e",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "actuator_fault",
+      "confidence": 0.7259,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "dbc263b27be88af9c4a075fd3a4a6a323df93b7fe0219ef4301c51cccee15d65",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "c72fbbcc6596b48980b08320def95a6948f8604cae5b2dd6651e36ee80348492",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "f03679db3436a8014692ffee59940a8f0f26658e8bd5b0f8ed00c60397283f95",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "64a0eeb121bbc1a1ee318d6ca39a83782b85da122465f9cc68f40d79a2ac170f",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.5008,
+      "score": 0.5008,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "af5e4b79067a99e79fb7f21ef4011719652e5edc226b63a6befb208cbfcf0712",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "342e92c116da4050e91430659f48ffd602dd37c6c0393e517487023eb3ec0550",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/frozen",
+      "gold": "sensor_fault",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "c6f7d1ee1cf42c7d1283a3abe6462b9b3a26637892440dd662e86b6ccd500177",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "4396b09d732249463c5fbf81705cce8a7111ba391b48cbc9f9700879dd86c9d4",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "8ee4b21464c2cd5cb8cc52886ffff828b4321f9432bd7ac4107238fb02bfecc7",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "cf330c8490b72b03c173caa67b0636c06f82319ed1e5c7cdbadfedc904e618e4",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "fbff7b59cfe9bfe535b6c99ed97b5535915b59a096da906879f886d34a69677c",
+      "source": "telemetry-classifier",
+      "kind": "synthetic purge_flow/frozen",
+      "gold": "sensor_fault",
+      "label": "actuator_fault",
+      "confidence": 0.7906,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "5effe8bd38dc108d345171eca6321dc8e29b9821dac2826c8ce7e4a7f846b58f",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "d9af5c5472bf97077b54a1165c88b2d1f424f7f0a2184606054ac803c4bc248c",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "3a2b9bc11f56635e8ec7cecd0aafcd84046a91bb3803e80d9d21d372a97f90db",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "828aac6c4d0381de223e3196a005988027d5c87139ad743c4121b06a389d2c8b",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "90fa5e0baec5c85b035996ff2645d3ab72db7213e4600650f5c2c95ba92912ce",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "7daf62c2cbad9984e013dc189862713142926221b1d10c1c66bef582b40ac5ef",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "681901c6cd8a1f94936942336db381a7b596c9870b57b41ad14d4baa41350801",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/dropout",
+      "gold": "sensor_fault",
+      "label": "normal",
+      "confidence": 0.5156,
+      "score": 0.4844,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "0b73e3e38b031bc9b59f1387b94c56ae378d60edc112d5ef45d47f8e37161807",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.9294,
+      "score": 0.975,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "90fb41f128a29fad47fa7202a98750dee53724e3debb07813f2c7c351034abb8",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "5d2ae10356f62f4faef28415b26d27305cacf7b65fe412f37abae3d64b3ae2ec",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "4d27b78919dd225aebfdc5283066c4e3db9adb0b1f61842dff61bd16afa07eca",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.5008,
+      "score": 0.5008,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "3e87ff9eb8a44fd350733dbc873b103ad54d576b4bbc89e49293b227ea3abca0",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "121155a9f36797c5d8cf45307b968e31104030718852735391d15793517f9744",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "f67cd328893e8849ac1f39b8a35a9c59723b099fec9445afec13e55d832fe628",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "9147500e7ad83693cc6859fb33abddc19cabcbdcc08626ccb36fef7e12896035",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "3429f6317f197d96fae09dd68191059b2db3753923881d1e7f8f0d20c6ee1d4a",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "ec6d99504adcd57726df2cfd42fe3c817edd624e42ebe2c48f1c2e5996060e29",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "8ad87f7f801dbdcbe11b6ad03fc1b2b50107f1564dbfeff9596578b64681b5de",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "7902d12a923c4cc1086c2f430e900027f500fc93e80a7f6277ef0f85b2dae167",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/noise",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "39cd27e7b54046b82bdda26e20ce8ec0f8bd4182fd8c37d690a422e2a828c428",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "20d1db3a4a7083f7e9a59bdb45d697fed1381ce09ba7bda47e0c925b50860d7e",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "16aab6678402449f2798c8c91d5674fd1cd12b41c0c8b2c4720c43415bfb69d9",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "ba404936531e528d457883bf3497c008eeba38443f51698fdc51858ba5e469e5",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "622165d3f26dcec5799eaf5839ff5ea956f97a4355565510d8af0389103ca2d5",
+      "source": "telemetry-classifier",
+      "kind": "new simulated stuck actuator",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "e90faad91c0b037681d9553338470bbc3d2973285b51b7123b8232cff347c33e",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "0ee049cb15954ab1447ed1280ff322cae19fe4565190222c4f4c68a014146434",
+      "source": "telemetry-classifier",
+      "kind": "new simulated stuck actuator",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "5ac5e0771bf48cfc3bb50d0273a715352dceff784003d26cd99206f5e3d78a63",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "66c5cb50f8e72c4178fc2580bb187d3e76433e167586e2faec8c475d4622eb82",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "75b6a86c8ebdf9c4576bd01a202382066a867aeaeda6e37327f3954a4a5eafe5",
+      "source": "telemetry-classifier",
+      "kind": "new simulated capacity fault",
+      "gold": "actuator_fault",
+      "label": "sensor_fault",
+      "confidence": 0.9898,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "52ecfa611bdf3cd084de9ff4f8613cc6aba90033aba3e798763f333685e20bcd",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "de532eb5eeb290ed56128267c91b4af215fe69f2a4d683d7dc15a5c6d1c3f469",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.5008,
+      "score": 0.5008,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "dbb58cf77d311ccba826c34b7a1b2f7d1f56784f5abbf5a0a55c52f5a036cb50",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "13f9bc74b93c927578f84664775b88ce0e4aba244af6f9dfa73bcc217780df0b",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1_flow/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "ecc8a629c4d66cb8c3755a0e12594136b3b1909a6a0a4e67fafe1914d8b2b763",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f1/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "fed57228dec5598c0536de6e21ecb4d334720783236ed5c2c549aab6f482df5a",
+      "source": "telemetry-classifier",
+      "kind": "synthetic product_flow/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "48392c2a45e06a65049772db61bc26b34a2affaf10c9a7d6cc7f48a94a689db7",
+      "source": "telemetry-classifier",
+      "kind": "synthetic a_in_purge/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.5008,
+      "score": 0.5008,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "28258a1edfa6a250deeb83c4154e00321ba2b68e950d4ebf0a3e9c9c007e303e",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "954cbe674e58ce9a02814b07eeff86c1348727bdf8aba61acb0903f61be334cc",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "fe347896bfc7683cc9c5afe5254e18376b4f4fd6970abdb1cd047ab84ff88b15",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "bc8a79f4c01742b591938528387b629aa177bfdb1af1d3d0e0182aad3bbddbbd",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "b66eb21a5afc2aa185c36d335f9f9832676386c01afc743f529cb4867f89c7ed",
+      "source": "telemetry-classifier",
+      "kind": "new simulated trajectory",
+      "gold": "normal",
+      "label": "normal",
+      "confidence": 1.0,
+      "score": 0.0,
+      "reason": "Measured telemetry classifier: normal.",
+      "advisory_only": true
+    },
+    {
+      "id": "50cd308da0024be5d0db86cedcf0a75e6f2166c77edbcef80f58f0229be5f17e",
+      "source": "telemetry-classifier",
+      "kind": "synthetic f2/command-offset",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "171144c89e1603fa8c22209622cd51b9b09722eeeb52b0382db63d3dfde9687a",
+      "source": "telemetry-classifier",
+      "kind": "new simulated stuck actuator",
+      "gold": "actuator_fault",
+      "label": "actuator_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "ac65fe87be340fe8a303922159bd36b583fe12ed71ffd411af08b56303b4a55e",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/drift",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "0f2a8b55b5735ffaf0011b15740245b1234a59f446b0aacf733f817fcf7c3b2a",
+      "source": "telemetry-classifier",
+      "kind": "synthetic pressure/frozen",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    },
+    {
+      "id": "1300362c6ed1c110b706e166c8abcbe2126a10ba78d6cc94525ffe298afeeebe",
+      "source": "telemetry-classifier",
+      "kind": "new simulated pressure excursion",
+      "gold": "excursion",
+      "label": "excursion",
+      "confidence": 1.0,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: excursion.",
+      "advisory_only": true
+    },
+    {
+      "id": "17e15f9aae8f8695007540dece7907cc7a90a6901aab897f3628a42cc4e22f72",
+      "source": "telemetry-classifier",
+      "kind": "synthetic level/dropout",
+      "gold": "sensor_fault",
+      "label": "sensor_fault",
+      "confidence": 0.945,
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: sensor fault.",
+      "advisory_only": true
+    }
+  ]
+}

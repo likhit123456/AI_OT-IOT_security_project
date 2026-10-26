@@ -1,0 +1,92 @@
+﻿[
+    {
+        "path":  ".pytest_cache",
+        "files":  4,
+        "bytes":  22847
+    },
+    {
+        "path":  ".ruff_cache",
+        "files":  7,
+        "bytes":  1274
+    },
+    {
+        "path":  "__pycache__",
+        "files":  2,
+        "bytes":  17244
+    },
+    {
+        "path":  "artifacts\\simulator",
+        "files":  1,
+        "bytes":  57392
+    },
+    {
+        "path":  "artifacts\\pytest-final",
+        "files":  0,
+        "bytes":  null
+    },
+    {
+        "path":  "artifacts\\pytest-quality",
+        "files":  0,
+        "bytes":  null
+    },
+    {
+        "path":  "artifacts\\pytest-release",
+        "files":  3,
+        "bytes":  8736788
+    },
+    {
+        "path":  "artifacts\\pytest-verified",
+        "files":  3,
+        "bytes":  8736788
+    },
+    {
+        "path":  "artifacts\\pytest-work",
+        "files":  3,
+        "bytes":  8736788
+    },
+    {
+        "path":  "enforcer\\__pycache__",
+        "files":  2,
+        "bytes":  26345
+    },
+    {
+        "path":  "l0_plant\\__pycache__",
+        "files":  6,
+        "bytes":  39740
+    },
+    {
+        "path":  "l3_brain\\__pycache__",
+        "files":  4,
+        "bytes":  31911
+    },
+    {
+        "path":  "live\\__pycache__",
+        "files":  4,
+        "bytes":  93125
+    },
+    {
+        "path":  "monitor\\__pycache__",
+        "files":  8,
+        "bytes":  81499
+    },
+    {
+        "path":  "scripts\\__pycache__",
+        "files":  2,
+        "bytes":  12849
+    },
+    {
+        "path":  "sim_app\\__pycache__",
+        "files":  3,
+        "bytes":  62803
+    },
+    {
+        "path":  "tests\\__pycache__",
+        "files":  18,
+        "bytes":  607612
+    },
+    {
+        "path":  "training\\__pycache__",
+        "files":  6,
+        "bytes":  67109
+    }
+]

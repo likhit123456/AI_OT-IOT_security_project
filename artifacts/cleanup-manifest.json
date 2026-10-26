@@ -1,0 +1,82 @@
+﻿[
+    {
+        "path":  "model\\scram-observer-gguf\\hf-merged",
+        "files":  6,
+        "bytes":  3098893509
+    },
+    {
+        "path":  "model\\scram-observer-v3-gguf\\hf-merged",
+        "files":  6,
+        "bytes":  3098897500
+    },
+    {
+        "path":  ".pytest_cache",
+        "files":  6,
+        "bytes":  22763
+    },
+    {
+        "path":  ".ruff_cache",
+        "files":  25,
+        "bytes":  10106
+    },
+    {
+        "path":  "unsloth_compiled_cache",
+        "files":  29,
+        "bytes":  2441715
+    },
+    {
+        "path":  "__pycache__",
+        "files":  7,
+        "bytes":  40281
+    },
+    {
+        "path":  "enforcer\\__pycache__",
+        "files":  2,
+        "bytes":  26345
+    },
+    {
+        "path":  "experiments\\__pycache__",
+        "files":  19,
+        "bytes":  168283
+    },
+    {
+        "path":  "l0_plant\\__pycache__",
+        "files":  12,
+        "bytes":  73356
+    },
+    {
+        "path":  "l3_brain\\__pycache__",
+        "files":  8,
+        "bytes":  65279
+    },
+    {
+        "path":  "live\\__pycache__",
+        "files":  9,
+        "bytes":  154205
+    },
+    {
+        "path":  "monitor\\__pycache__",
+        "files":  12,
+        "bytes":  108362
+    },
+    {
+        "path":  "scripts\\__pycache__",
+        "files":  7,
+        "bytes":  36181
+    },
+    {
+        "path":  "sim_app\\__pycache__",
+        "files":  8,
+        "bytes":  126972
+    },
+    {
+        "path":  "tests\\__pycache__",
+        "files":  31,
+        "bytes":  941629
+    },
+    {
+        "path":  "training\\__pycache__",
+        "files":  13,
+        "bytes":  166116
+    }
+]

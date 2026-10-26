@@ -1,0 +1,385 @@
+{
+  "selection": "whole-recording validation only",
+  "fit_n": 1796,
+  "feature_count": 115,
+  "validation_gate_passed": true,
+  "selected": {
+    "n": 409,
+    "accuracy": 0.9828850855745721,
+    "per_class_recall": {
+      "normal": 0.9933333333333333,
+      "excursion": 0.9473684210526315,
+      "sensor_fault": 0.9583333333333334,
+      "actuator_fault": 1.0
+    },
+    "balanced_accuracy": 0.9747587719298245,
+    "false_alarm_rate": 0.00666666666666671,
+    "family": "random",
+    "leaf": 3,
+    "confidence_threshold": 0.0
+  },
+  "trials": [
+    {
+      "n": 409,
+      "accuracy": 0.980440097799511,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9666666666666667,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9390350877192982,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 1,
+      "confidence_threshold": 0.0
+    },
+    {
+      "n": 409,
+      "accuracy": 0.980440097799511,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9666666666666667,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9390350877192982,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 1,
+      "confidence_threshold": 0.45
+    },
+    {
+      "n": 409,
+      "accuracy": 0.980440097799511,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9666666666666667,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9390350877192982,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 1,
+      "confidence_threshold": 0.55
+    },
+    {
+      "n": 409,
+      "accuracy": 0.980440097799511,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9666666666666667,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9390350877192982,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 1,
+      "confidence_threshold": 0.65
+    },
+    {
+      "n": 409,
+      "accuracy": 0.980440097799511,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9666666666666667,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9390350877192982,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 3,
+      "confidence_threshold": 0.0
+    },
+    {
+      "n": 409,
+      "accuracy": 0.980440097799511,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9666666666666667,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9390350877192982,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 3,
+      "confidence_threshold": 0.45
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9779951100244498,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9583333333333334,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9369517543859649,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 3,
+      "confidence_threshold": 0.55
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9779951100244498,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9583333333333334,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9369517543859649,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 3,
+      "confidence_threshold": 0.65
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9706601466992665,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9333333333333333,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9307017543859649,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 8,
+      "confidence_threshold": 0.0
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9706601466992665,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9333333333333333,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9307017543859649,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 8,
+      "confidence_threshold": 0.45
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9706601466992665,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9333333333333333,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9307017543859649,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 8,
+      "confidence_threshold": 0.55
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9706601466992665,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9333333333333333,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9307017543859649,
+      "false_alarm_rate": 0.0,
+      "family": "extra",
+      "leaf": 8,
+      "confidence_threshold": 0.65
+    },
+    {
+      "n": 409,
+      "accuracy": 0.980440097799511,
+      "per_class_recall": {
+        "normal": 0.9933333333333333,
+        "excursion": 0.9473684210526315,
+        "sensor_fault": 0.95,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9726754385964912,
+      "false_alarm_rate": 0.00666666666666671,
+      "family": "random",
+      "leaf": 1,
+      "confidence_threshold": 0.0
+    },
+    {
+      "n": 409,
+      "accuracy": 0.980440097799511,
+      "per_class_recall": {
+        "normal": 0.9933333333333333,
+        "excursion": 0.9473684210526315,
+        "sensor_fault": 0.95,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9726754385964912,
+      "false_alarm_rate": 0.00666666666666671,
+      "family": "random",
+      "leaf": 1,
+      "confidence_threshold": 0.45
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9779951100244498,
+      "per_class_recall": {
+        "normal": 0.9933333333333333,
+        "excursion": 0.8947368421052632,
+        "sensor_fault": 0.95,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.959517543859649,
+      "false_alarm_rate": 0.00666666666666671,
+      "family": "random",
+      "leaf": 1,
+      "confidence_threshold": 0.55
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9706601466992665,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9333333333333333,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9307017543859649,
+      "false_alarm_rate": 0.0,
+      "family": "random",
+      "leaf": 1,
+      "confidence_threshold": 0.65
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9828850855745721,
+      "per_class_recall": {
+        "normal": 0.9933333333333333,
+        "excursion": 0.9473684210526315,
+        "sensor_fault": 0.9583333333333334,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9747587719298245,
+      "false_alarm_rate": 0.00666666666666671,
+      "family": "random",
+      "leaf": 3,
+      "confidence_threshold": 0.0
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9828850855745721,
+      "per_class_recall": {
+        "normal": 0.9933333333333333,
+        "excursion": 0.9473684210526315,
+        "sensor_fault": 0.9583333333333334,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9747587719298245,
+      "false_alarm_rate": 0.00666666666666671,
+      "family": "random",
+      "leaf": 3,
+      "confidence_threshold": 0.45
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9755501222493888,
+      "per_class_recall": {
+        "normal": 0.9933333333333333,
+        "excursion": 0.8947368421052632,
+        "sensor_fault": 0.9416666666666667,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9574342105263158,
+      "false_alarm_rate": 0.00666666666666671,
+      "family": "random",
+      "leaf": 3,
+      "confidence_threshold": 0.55
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9706601466992665,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.9333333333333333,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9307017543859649,
+      "false_alarm_rate": 0.0,
+      "family": "random",
+      "leaf": 3,
+      "confidence_threshold": 0.65
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9755501222493888,
+      "per_class_recall": {
+        "normal": 0.9933333333333333,
+        "excursion": 0.9473684210526315,
+        "sensor_fault": 0.9333333333333333,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9685087719298245,
+      "false_alarm_rate": 0.00666666666666671,
+      "family": "random",
+      "leaf": 8,
+      "confidence_threshold": 0.0
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9731051344743277,
+      "per_class_recall": {
+        "normal": 0.9933333333333333,
+        "excursion": 0.9473684210526315,
+        "sensor_fault": 0.925,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9664254385964912,
+      "false_alarm_rate": 0.00666666666666671,
+      "family": "random",
+      "leaf": 8,
+      "confidence_threshold": 0.45
+    },
+    {
+      "n": 409,
+      "accuracy": 0.9462102689486552,
+      "per_class_recall": {
+        "normal": 0.9933333333333333,
+        "excursion": 0.9473684210526315,
+        "sensor_fault": 0.8333333333333334,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9435087719298245,
+      "false_alarm_rate": 0.00666666666666671,
+      "family": "random",
+      "leaf": 8,
+      "confidence_threshold": 0.55
+    },
+    {
+      "n": 409,
+      "accuracy": 0.941320293398533,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 0.7894736842105263,
+        "sensor_fault": 0.8333333333333334,
+        "actuator_fault": 1.0
+      },
+      "balanced_accuracy": 0.9057017543859649,
+      "false_alarm_rate": 0.0,
+      "family": "random",
+      "leaf": 8,
+      "confidence_threshold": 0.65
+    }
+  ],
+  "model_sha256": "9a35e9b70e81a25924b9f95a9eb287d54eec4aa78ccc4a18ff3a29f07158d7e2",
+  "model_bytes": 417063
+}

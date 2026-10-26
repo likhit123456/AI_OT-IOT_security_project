@@ -26,6 +26,9 @@ import inspect
 import re
 import threading
 import time
+import uuid
+import os
+import secrets
 from collections import deque
 from dataclasses import replace
 from pathlib import Path
@@ -48,11 +51,12 @@ from monitor.behavior_monitor import BehaviorMonitor, MonitorLimits
 from monitor.governance import Governor
 from monitor.observer import SplitObserver, make_split_observer
 from monitor.sequential_monitor import SequentialMonitor, Suspicion
+from monitor.telemetry_classifier import approved_specialist
 from scripts.reset_plant import DESIGN_PURGE_VALVE_PCT, reset_and_settle
 
-L1_KEY = b"scram-live-l1-key-not-a-real-secret"
+L1_KEY = os.environ.get("SCRAM_L1_KEY", "").encode() or secrets.token_bytes(32)
 ATTACKER_KEY = b"attacker-guess"
-KEEL_KEY = b"scram-keel-log-key-not-a-real-secret"
+KEEL_KEY = os.environ.get("SCRAM_KEEL_KEY", "").encode() or secrets.token_bytes(32)
 POLL_S = 0.05                 # same cadence as the validated experiments
 HISTORY_S = 0.5               # trend sample period
 HISTORY_N = 3600              # 30 min of trend at 2 Hz
@@ -124,12 +128,13 @@ class Engine:
         self.want_reset = reset
         self.brain_kind = brain
         self.authority = 1.0
-        self._q: "queue.Queue[Callable[[], None]]" = queue.Queue()
+        self._q: "queue.Queue[Callable[[], None]]" = queue.Queue(maxsize=64)
         self._lock = threading.Lock()
         self._stop = threading.Event()
         self.status = "starting"
         self.error = ""
         self.t0 = time.monotonic()
+        self.run_id = uuid.uuid4().hex
         self.cycles = 0
         self.events: Deque[dict] = deque(maxlen=300)
         self._ev_seq = 0
@@ -203,7 +208,12 @@ class Engine:
         self._seq_reset_at_call: Optional[int] = None
         # L2 observer models (advisory, beside the rule monitor): proposals on v2 (feeds
         # authority), telemetry on v3 (display only); each path has its own fallback
-        self.observer: Optional[SplitObserver] = make_split_observer()
+        try:
+            specialist = approved_specialist()
+        except (OSError, ValueError, KeyError) as err:
+            specialist = None
+            self.log("observer", f"telemetry specialist unavailable: {err}")
+        self.observer: Optional[SplitObserver] = make_split_observer(telemetry_specialist=specialist)
         self._obs_logged: dict = {}
         self._l2_sus = 0.0
         self._applied_cmd: Optional[ControlCommand] = None   # the command whose result self.state is
@@ -245,7 +255,10 @@ class Engine:
             check(**kw)
         if action == "authority":           # cheap, thread-safe
             return fn(**kw)
-        self._q.put(lambda: fn(**kw))
+        try:
+            self._q.put_nowait(lambda: fn(**kw))
+        except queue.Full:
+            raise ValueError("action queue is full; wait for pending actions to complete") from None
         return "queued"
 
     def now(self) -> float:
@@ -270,7 +283,7 @@ class Engine:
         last_hist = -1e9
         while not self._stop.is_set():
             try:
-                while not self._q.empty():
+                for _ in range(min(8, self._q.qsize())):
                     self._run_action(self._q.get_nowait())
                 self._cycle()
             except (ConnectionError, OSError, ValueError) as e:
@@ -454,7 +467,11 @@ class Engine:
 
     def _safe_state_label(self) -> str:
         saf = self.svc.safety
-        if saf.cause == "level_low":
+        if saf.protection_mode == "emergency_stop":
+            return "e_stop (feeds shut, purge + product open; latched)"
+        if saf.protection_mode == "combined_hold":
+            return "combined hazard: feeds shut, purge open, product closed"
+        if saf.protection_mode == "inventory_hold":
             return "product valve closed, feeds held"
         if saf.safe_hold is not None and saf.cause in ("pressure_high", "level_high") and not saf.escalated:
             return "closed-loop safe-hold (feeds cut back, purge and product on the safety channel)"
@@ -629,6 +646,7 @@ class Engine:
                 "production_rate_sp": _num(tg.production_rate_sp), "a_comp_sp": _num(tg.a_comp_sp),
                 "authority": tg.authority, "rationale": tg.rationale},
             "sis": {"tripped": saf.tripped, "reason": saf.reason, "cause": saf.cause,
+                    "protection_mode": saf.protection_mode,
                     "safe_state": self._safe_state_label() if saf.tripped else None,
                     "escalated": saf.escalated,
                     "auto_rearm_in": None if not saf.tripped or self._band_since is None
@@ -657,6 +675,12 @@ class Engine:
     def read(self, since_hist: int = 0, since_event: int = 0, n_decisions: int = 12) -> dict:
         with self._lock:
             snap = dict(self.snapshot_data) or {"status": self.status, "error": self.error, "t": round(self.now(), 1)}
+            snap["run_id"] = self.run_id
+            # Connection state changes even when the control loop cannot record telemetry.
+            snap.update(status=self.status, error=self.error)
+            age = None if not self.snapshot_data else max(0.0, self.now() - self.snapshot_data.get("t", self.now()))
+            snap["telemetry_age_s"] = None if age is None else round(age, 2)
+            snap["telemetry_stale"] = age is None or age > 3.0 or self.status != "running"
             snap["history"] = [h for h in self.history if h[0] > since_hist]
             snap["events"] = [e for e in self.events if e["id"] > since_event]
             snap["decisions"] = list(self.decisions)[-n_decisions:]
@@ -664,6 +688,8 @@ class Engine:
 
     # ---------------------------------------------------------------- actions
     def _act_authority(self, value: float) -> str:
+        if not math.isfinite(float(value)):
+            raise ValueError("authority must be finite")
         self.authority = max(0.0, min(1.0, float(value)))
         self.log("governance", f"authority set to {self.authority:.2f}")
         return "ok"

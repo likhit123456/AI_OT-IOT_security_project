@@ -1,0 +1,805 @@
+{
+  "model": "qwen2.5:1.5b",
+  "n": 30,
+  "method": "authored development corpus; actual Ollama inference; no simulator access",
+  "rows": [
+    {
+      "category": "absolute",
+      "text": "Set feed 1 to 37 percent",
+      "gold": [
+        [
+          "set",
+          "f1",
+          37
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "f1",
+          37.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Set feed 1 to 37 percent\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 37}]}",
+      "latency_s": 6.6,
+      "corrections": []
+    },
+    {
+      "category": "absolute",
+      "text": "Set feed 2 to 18 percent",
+      "gold": [
+        [
+          "set",
+          "f2",
+          18
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "f2",
+          18.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Set feed 2 to 18 percent\", \"action\": \"set\", \"valve\": \"f2\", \"amount\": 18}]}",
+      "latency_s": 0.48,
+      "corrections": []
+    },
+    {
+      "category": "absolute",
+      "text": "Put the purge at 12 percent",
+      "gold": [
+        [
+          "set",
+          "purge",
+          12
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "purge",
+          12.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Put the purge at 12 percent\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 12}]}",
+      "latency_s": 0.47,
+      "corrections": []
+    },
+    {
+      "category": "absolute",
+      "text": "Set the product valve to 56%",
+      "gold": [
+        [
+          "set",
+          "product",
+          56
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "product",
+          56.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Set the product valve to 56%\", \"action\": \"set\", \"valve\": \"product\", \"amount\": 56}]}",
+      "latency_s": 0.45,
+      "corrections": []
+    },
+    {
+      "category": "absolute",
+      "text": "Lower feed 1 to 22%",
+      "gold": [
+        [
+          "set",
+          "f1",
+          22
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "f1",
+          22.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": false,
+      "model_output": "{\"actions\": [{\"clause\": \"Lower feed 1 to 22%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": -22}]}",
+      "latency_s": 0.46,
+      "corrections": [
+        "model said adjust -22; text says 'to 22%' -> set 22"
+      ]
+    },
+    {
+      "category": "absolute",
+      "text": "Bring feed 2 to 9%",
+      "gold": [
+        [
+          "set",
+          "f2",
+          9
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "f2",
+          9.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": false,
+      "model_output": "{\"actions\": [{\"clause\": \"Bring feed 2 to 9%\", \"action\": \"adjust\", \"valve\": \"f2\", \"amount\": -1}]}",
+      "latency_s": 0.47,
+      "corrections": [
+        "model said adjust -1; text says 'to 9%' -> set 9"
+      ]
+    },
+    {
+      "category": "relative",
+      "text": "Increase feed 1 by 7 percent",
+      "gold": [
+        [
+          "adjust",
+          "f1",
+          7
+        ]
+      ],
+      "prediction": [
+        [
+          "adjust",
+          "f1",
+          7.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Increase feed 1 by 7 percent\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 7}]}",
+      "latency_s": 0.45,
+      "corrections": []
+    },
+    {
+      "category": "relative",
+      "text": "Reduce feed 2 by 6 percent",
+      "gold": [
+        [
+          "adjust",
+          "f2",
+          -6
+        ]
+      ],
+      "prediction": [
+        [
+          "adjust",
+          "f2",
+          -6.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Reduce feed 2 by 6 percent\", \"action\": \"adjust\", \"valve\": \"f2\", \"amount\": -6}]}",
+      "latency_s": 0.48,
+      "corrections": []
+    },
+    {
+      "category": "relative",
+      "text": "Open purge by 8%",
+      "gold": [
+        [
+          "adjust",
+          "purge",
+          8
+        ]
+      ],
+      "prediction": [
+        [
+          "adjust",
+          "purge",
+          8.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Open purge by 8%\", \"action\": \"adjust\", \"valve\": \"purge\", \"amount\": 8}]}",
+      "latency_s": 0.43,
+      "corrections": []
+    },
+    {
+      "category": "relative",
+      "text": "Close product by 4%",
+      "gold": [
+        [
+          "adjust",
+          "product",
+          -4
+        ]
+      ],
+      "prediction": [
+        [
+          "adjust",
+          "product",
+          -4.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Close product by 4%\", \"action\": \"adjust\", \"valve\": \"product\", \"amount\": -4}]}",
+      "latency_s": 0.4,
+      "corrections": []
+    },
+    {
+      "category": "relative",
+      "text": "Raise product by 2.5 percent",
+      "gold": [
+        [
+          "adjust",
+          "product",
+          2.5
+        ]
+      ],
+      "prediction": [
+        [
+          "adjust",
+          "product",
+          2.5
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Raise product by 2.5 percent\", \"action\": \"adjust\", \"valve\": \"product\", \"amount\": 2.5}]}",
+      "latency_s": 0.48,
+      "corrections": []
+    },
+    {
+      "category": "relative",
+      "text": "Cut feed 1 by 11%",
+      "gold": [
+        [
+          "adjust",
+          "f1",
+          -11
+        ]
+      ],
+      "prediction": [
+        [
+          "adjust",
+          "f1",
+          -11.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Cut feed 1 by 11%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": -11}]}",
+      "latency_s": 0.46,
+      "corrections": []
+    },
+    {
+      "category": "endpoints",
+      "text": "Shut the purge valve",
+      "gold": [
+        [
+          "set",
+          "purge",
+          0
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "purge",
+          0.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Shut the purge valve\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 0}]}",
+      "latency_s": 0.42,
+      "corrections": []
+    },
+    {
+      "category": "endpoints",
+      "text": "Fully open the product valve",
+      "gold": [
+        [
+          "set",
+          "product",
+          100
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "product",
+          100.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Fully open the product valve\", \"action\": \"set\", \"valve\": \"product\", \"amount\": 100}]}",
+      "latency_s": 0.42,
+      "corrections": []
+    },
+    {
+      "category": "endpoints",
+      "text": "Close feed 1 completely",
+      "gold": [
+        [
+          "set",
+          "f1",
+          0
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "f1",
+          0.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Close feed 1 completely\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 0}]}",
+      "latency_s": 0.42,
+      "corrections": []
+    },
+    {
+      "category": "endpoints",
+      "text": "Open feed 2 fully",
+      "gold": [
+        [
+          "set",
+          "f2",
+          100
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "f2",
+          100.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Open feed 2 fully\", \"action\": \"set\", \"valve\": \"f2\", \"amount\": 100}]}",
+      "latency_s": 0.43,
+      "corrections": []
+    },
+    {
+      "category": "mode",
+      "text": "Rescue the reactor",
+      "gold": [
+        [
+          "rescue",
+          null,
+          null
+        ]
+      ],
+      "prediction": [
+        [
+          "rescue",
+          null,
+          null
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Rescue the reactor\", \"action\": \"rescue\", \"valve\": null, \"amount\": null}]}",
+      "latency_s": 0.38,
+      "corrections": []
+    },
+    {
+      "category": "mode",
+      "text": "Please stabilise the reactor",
+      "gold": [
+        [
+          "rescue",
+          null,
+          null
+        ]
+      ],
+      "prediction": [
+        [
+          "rescue",
+          null,
+          null
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Please stabilise the reactor\", \"action\": \"rescue\", \"valve\": null, \"amount\": null}]}",
+      "latency_s": 0.4,
+      "corrections": []
+    },
+    {
+      "category": "mode",
+      "text": "Stop AI control",
+      "gold": [
+        [
+          "stop",
+          null,
+          null
+        ]
+      ],
+      "prediction": [
+        [
+          "stop",
+          null,
+          null
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Stop AI control\", \"action\": \"stop\", \"valve\": null, \"amount\": null}]}",
+      "latency_s": 0.38,
+      "corrections": []
+    },
+    {
+      "category": "mode",
+      "text": "Hand control back to me",
+      "gold": [
+        [
+          "stop",
+          null,
+          null
+        ]
+      ],
+      "prediction": [
+        [
+          "stop",
+          null,
+          null
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Hand control back to me\", \"action\": \"stop\", \"valve\": null, \"amount\": null}]}",
+      "latency_s": 0.38,
+      "corrections": []
+    },
+    {
+      "category": "unsupported",
+      "text": "Open the coolant valve to 30%",
+      "gold": [
+        [
+          "unknown",
+          null,
+          null
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "f1",
+          30.0
+        ]
+      ],
+      "correct": false,
+      "raw_correct": false,
+      "model_output": "{\"actions\": [{\"clause\": \"Open the coolant valve to 30%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 30}]}",
+      "latency_s": 0.55,
+      "corrections": [
+        "model said adjust +30; text says 'to 30%' -> set 30"
+      ]
+    },
+    {
+      "category": "unsupported",
+      "text": "What is the weather tomorrow?",
+      "gold": [
+        [
+          "unknown",
+          null,
+          null
+        ]
+      ],
+      "prediction": [
+        [
+          "unknown",
+          null,
+          null
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"What is the weather tomorrow?\", \"action\": \"unknown\", \"valve\": null, \"amount\": null}]}",
+      "latency_s": 0.4,
+      "corrections": []
+    },
+    {
+      "category": "multiple",
+      "text": "Set feed 1 to 33% then set feed 2 to 16%",
+      "gold": [
+        [
+          "set",
+          "f1",
+          33
+        ],
+        [
+          "set",
+          "f2",
+          16
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "f1",
+          33.0
+        ],
+        [
+          "set",
+          "f2",
+          16.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Set feed 1 to 33%\", \"action\": \"set\", \"valve\": \"f1\", \"amount\": 33}, {\"clause\": \"Set feed 2 to 16%\", \"action\": \"set\", \"valve\": \"f2\", \"amount\": 16}]}",
+      "latency_s": 0.82,
+      "corrections": []
+    },
+    {
+      "category": "multiple",
+      "text": "Increase purge by 9% then reduce product by 2%",
+      "gold": [
+        [
+          "adjust",
+          "purge",
+          9
+        ],
+        [
+          "adjust",
+          "product",
+          -2
+        ]
+      ],
+      "prediction": [
+        [
+          "adjust",
+          "purge",
+          9.0
+        ],
+        [
+          "adjust",
+          "product",
+          -2.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Increase purge by 9%\", \"action\": \"adjust\", \"valve\": \"purge\", \"amount\": 9}, {\"clause\": \"Reduce product by 2%\", \"action\": \"adjust\", \"valve\": \"product\", \"amount\": -2}]}",
+      "latency_s": 0.73,
+      "corrections": []
+    },
+    {
+      "category": "multiple",
+      "text": "Shut feed 2 then open purge to 70%",
+      "gold": [
+        [
+          "set",
+          "f2",
+          0
+        ],
+        [
+          "set",
+          "purge",
+          70
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "f2",
+          0.0
+        ],
+        [
+          "set",
+          "purge",
+          70.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": false,
+      "model_output": "{\"actions\": [{\"clause\": \"Shut feed 2\", \"action\": \"adjust\", \"valve\": \"f2\", \"amount\": -100}, {\"clause\": \"open purge to 70%\", \"action\": \"adjust\", \"valve\": \"purge\", \"amount\": 70}]}",
+      "latency_s": 0.8,
+      "corrections": [
+        "model said adjust -100; 'Shut feed 2' means set 0",
+        "model said adjust +70; text says 'to 70%' -> set 70"
+      ]
+    },
+    {
+      "category": "multiple",
+      "text": "Stop the AI then set product to 45%",
+      "gold": [
+        [
+          "stop",
+          null,
+          null
+        ],
+        [
+          "set",
+          "product",
+          45
+        ]
+      ],
+      "prediction": [
+        [
+          "stop",
+          null,
+          null
+        ],
+        [
+          "set",
+          "product",
+          45.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Stop the AI\", \"action\": \"stop\", \"valve\": null, \"amount\": null}, {\"clause\": \"set product to 45%\", \"action\": \"set\", \"valve\": \"product\", \"amount\": 45}]}",
+      "latency_s": 0.69,
+      "corrections": []
+    },
+    {
+      "category": "multiple",
+      "text": "Set purge to 14% then rescue the reactor",
+      "gold": [
+        [
+          "set",
+          "purge",
+          14
+        ],
+        [
+          "rescue",
+          null,
+          null
+        ]
+      ],
+      "prediction": [
+        [
+          "set",
+          "purge",
+          14.0
+        ],
+        [
+          "rescue",
+          null,
+          null
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Set purge to 14%\", \"action\": \"set\", \"valve\": \"purge\", \"amount\": 14}, {\"clause\": \"rescue the reactor\", \"action\": \"rescue\", \"valve\": null, \"amount\": null}]}",
+      "latency_s": 0.74,
+      "corrections": []
+    },
+    {
+      "category": "multiple",
+      "text": "Close product by 7% then increase feed 1 by 3%",
+      "gold": [
+        [
+          "adjust",
+          "product",
+          -7
+        ],
+        [
+          "adjust",
+          "f1",
+          3
+        ]
+      ],
+      "prediction": [
+        [
+          "adjust",
+          "product",
+          -7.0
+        ],
+        [
+          "adjust",
+          "f1",
+          3.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Close product by 7%\", \"action\": \"adjust\", \"valve\": \"product\", \"amount\": -7}, {\"clause\": \"Increase feed 1 by 3%\", \"action\": \"adjust\", \"valve\": \"f1\", \"amount\": 3}]}",
+      "latency_s": 0.75,
+      "corrections": []
+    },
+    {
+      "category": "context",
+      "text": "Open the purge by 13% to lower the pressure",
+      "gold": [
+        [
+          "adjust",
+          "purge",
+          13
+        ]
+      ],
+      "prediction": [
+        [
+          "adjust",
+          "purge",
+          13.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Open the purge by 13%\", \"action\": \"adjust\", \"valve\": \"purge\", \"amount\": 13}]}",
+      "latency_s": 0.44,
+      "corrections": []
+    },
+    {
+      "category": "context",
+      "text": "Close feed 2 by 8% because pressure is high",
+      "gold": [
+        [
+          "adjust",
+          "f2",
+          -8
+        ]
+      ],
+      "prediction": [
+        [
+          "adjust",
+          "f2",
+          -8.0
+        ]
+      ],
+      "correct": true,
+      "raw_correct": true,
+      "model_output": "{\"actions\": [{\"clause\": \"Close feed 2 by 8%\", \"action\": \"adjust\", \"valve\": \"f2\", \"amount\": -8}]}",
+      "latency_s": 0.45,
+      "corrections": []
+    }
+  ],
+  "exact_command_accuracy": 0.9666666666666667,
+  "raw_model_exact_accuracy": 0.8666666666666667,
+  "by_category": {
+    "absolute": {
+      "correct": 6,
+      "n": 6,
+      "accuracy": 1.0
+    },
+    "relative": {
+      "correct": 6,
+      "n": 6,
+      "accuracy": 1.0
+    },
+    "endpoints": {
+      "correct": 4,
+      "n": 4,
+      "accuracy": 1.0
+    },
+    "mode": {
+      "correct": 4,
+      "n": 4,
+      "accuracy": 1.0
+    },
+    "unsupported": {
+      "correct": 1,
+      "n": 2,
+      "accuracy": 0.5
+    },
+    "multiple": {
+      "correct": 6,
+      "n": 6,
+      "accuracy": 1.0
+    },
+    "context": {
+      "correct": 2,
+      "n": 2,
+      "accuracy": 1.0
+    }
+  }
+}

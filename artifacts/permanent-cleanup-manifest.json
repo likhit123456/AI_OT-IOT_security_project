@@ -1,0 +1,162 @@
+[
+  {
+    "path": "__pycache__",
+    "bytes": 17244,
+    "status": "deleted"
+  },
+  {
+    "path": ".local-only",
+    "bytes": 13576083,
+    "status": "deleted"
+  },
+  {
+    "path": ".pytest_cache",
+    "bytes": 24550,
+    "status": "deleted"
+  },
+  {
+    "path": ".ruff_cache",
+    "bytes": 1258,
+    "status": "deleted"
+  },
+  {
+    "path": "artifacts\\pytest-accuracy-complete",
+    "bytes": 0,
+    "status": "blocked"
+  },
+  {
+    "path": "artifacts\\pytest-accuracy-v2",
+    "bytes": 8924365,
+    "status": "deleted"
+  },
+  {
+    "path": "artifacts\\pytest-physics-final",
+    "bytes": 0,
+    "status": "blocked"
+  },
+  {
+    "path": "artifacts\\pytest-release-final",
+    "bytes": 0,
+    "status": "blocked"
+  },
+  {
+    "path": "enforcer\\__pycache__",
+    "bytes": 26345,
+    "status": "deleted"
+  },
+  {
+    "path": "l0_plant\\__pycache__",
+    "bytes": 39740,
+    "status": "deleted"
+  },
+  {
+    "path": "l3_brain\\__pycache__",
+    "bytes": 31911,
+    "status": "deleted"
+  },
+  {
+    "path": "live\\__pycache__",
+    "bytes": 104255,
+    "status": "deleted"
+  },
+  {
+    "path": "model\\_trainer",
+    "bytes": 86422028,
+    "status": "deleted"
+  },
+  {
+    "path": "model\\eval_ollama.log",
+    "bytes": 677,
+    "status": "deleted"
+  },
+  {
+    "path": "model\\scram-observer-v3-gguf\\_convert.log",
+    "bytes": 36096,
+    "status": "deleted"
+  },
+  {
+    "path": "model\\train_run.log",
+    "bytes": 307076,
+    "status": "deleted"
+  },
+  {
+    "path": "monitor\\__pycache__",
+    "bytes": 108755,
+    "status": "deleted"
+  },
+  {
+    "path": "observer_merged_v2\\_trainer",
+    "bytes": 123350991,
+    "status": "deleted"
+  },
+  {
+    "path": "scripts\\__pycache__",
+    "bytes": 30268,
+    "status": "deleted"
+  },
+  {
+    "path": "sim_app\\__pycache__",
+    "bytes": 66831,
+    "status": "deleted"
+  },
+  {
+    "path": "sim_app\\run.log",
+    "bytes": 83,
+    "status": "deleted"
+  },
+  {
+    "path": "tests\\__pycache__",
+    "bytes": 624500,
+    "status": "deleted"
+  },
+  {
+    "path": "training\\__pycache__",
+    "bytes": 108537,
+    "status": "deleted"
+  },
+  {
+    "path": "training\\_observer_v3_eval.log",
+    "bytes": 427940,
+    "status": "deleted"
+  },
+  {
+    "path": "training\\_observer_v3_outputs",
+    "bytes": 246706863,
+    "status": "deleted"
+  },
+  {
+    "path": "training\\_observer_v3_train.log",
+    "bytes": 4639,
+    "status": "deleted"
+  },
+  {
+    "path": "training\\collect_observer.log",
+    "bytes": 260,
+    "status": "deleted"
+  },
+  {
+    "path": "training\\collect.log",
+    "bytes": 2260,
+    "status": "deleted"
+  },
+  {
+    "path": "training\\unsloth_compiled_cache",
+    "bytes": 2441715,
+    "status": "deleted"
+  },
+  {
+    "path": "artifacts\\pytest-accuracy-complete",
+    "bytes": 0,
+    "status": "blocked"
+  },
+  {
+    "path": "artifacts\\pytest-physics-final",
+    "bytes": 0,
+    "status": "blocked"
+  },
+  {
+    "path": "artifacts\\pytest-release-final",
+    "bytes": 0,
+    "status": "blocked"
+  }
+]

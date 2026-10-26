@@ -88,7 +88,10 @@ def make_handler(engine: Engine):
             if urlparse(self.path).path != "/api/action":
                 return self._send(404, b'{"error":"not found"}')
             try:
-                body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))) or b"{}")
+                length = int(self.headers.get("Content-Length", 0))
+                if not 0 <= length <= 65536:
+                    raise ValueError("request body must be at most 65536 bytes")
+                body = json.loads(self.rfile.read(length) or b"{}")
                 if not isinstance(body, dict):
                     raise ValueError("request body must be a JSON object")
                 action = body.pop("action", None)

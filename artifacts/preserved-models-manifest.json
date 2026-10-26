@@ -1,0 +1,32 @@
+[
+  {
+    "path": "model/scram-observer-gguf/scram-observer-v2-q4_k_m.gguf",
+    "bytes": 986047872,
+    "sha256": "40ab4a6dc6e3667197de6f868a295f0d83d0bcdceb54e54455bb06a392484d68"
+  },
+  {
+    "path": "model/scram-observer-v3-gguf/scram-observer-v3-q4_k_m.gguf",
+    "bytes": 986047808,
+    "sha256": "23bfca92fd0c814c7c8495f0023f0345fc40c8f9210e70a1a8fa4b0065a1d7d5"
+  },
+  {
+    "path": "model/scram-operator-gguf/scram-operator-q4_k_m.gguf",
+    "bytes": 986048000,
+    "sha256": "903345d33d7849834b4bf51a75f96e4f847bc7416f5f843b44344266121948c7"
+  },
+  {
+    "path": "model/scram-operator-lora/adapter_model.safetensors",
+    "bytes": 36981856,
+    "sha256": "c9a081e0f78e4930d645f5c3f28480c8bd097dd22837d7ec000a62c288ca571d"
+  },
+  {
+    "path": "model/scram-observer-v3-gguf/lora/adapter_model.safetensors",
+    "bytes": 73911112,
+    "sha256": "bcb2cb713fcbfed0a688409a9acca71651ea07b3d0d9001c7a5624d7795c9e51"
+  },
+  {
+    "path": "observer_merged_v2/lora/adapter_model.safetensors",
+    "bytes": 73911112,
+    "sha256": "57f7f4c9f7f215b1bb87d6bc695f6a27b70884f2a52470b92a0a974bf92e8163"
+  }
+]

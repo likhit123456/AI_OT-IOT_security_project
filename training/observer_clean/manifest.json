@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "seed": 19,
+  "strategy": "whole-source-recording",
+  "conflicting_users_excluded": 477,
+  "duplicate_candidates_skipped": {
+    "unseen": 114,
+    "val": 43,
+    "train": 268
+  },
+  "unique_pool_shortfalls": {
+    "unseen/normal": 9,
+    "val/excursion": 101,
+    "train/normal": 154
+  },
+  "splits": {
+    "train": {
+      "n": 3273,
+      "by_label": {
+        "excursion": 450,
+        "sensor_fault": 450,
+        "normal": 1024,
+        "actuator_fault": 450,
+        "provenance_violation": 360,
+        "rationale_mismatch": 360,
+        "setpoint_drift": 179
+      },
+      "recordings": [
+        "native/analyzer_frozen",
+        "native/f1_cv",
+        "native/f1_flow_noise",
+        "native/f1_stuck",
+        "native/f2_cv",
+        "native/product_flow_drift",
+        "native/product_flow_frozen",
+        "native/purge_cv",
+        "native/purge_flow_frozen",
+        "native/purge_stuck",
+        "native/tank_level_noise",
+        "native/tank_pressure_drift",
+        "native/tank_pressure_dropout",
+        "plant/level_drift_high",
+        "plant/level_frozen_feed_moves",
+        "plant/pressure_excursion",
+        "plant/pressure_excursion_near_trip",
+        "plant/pressure_sensor_noise",
+        "plant/prod_high_130",
+        "plant/prod_low_70",
+        "plant/prod_steps",
+        "plant/sensor_dropouts",
+        "plant/sis_trip",
+        "plant/valve_degradation"
+      ],
+      "sha256": "eb656de4e2bf91bb932d4147ccad539a35404a3f762a7027f975402a9dd38529"
+    },
+    "val": {
+      "n": 1094,
+      "by_label": {
+        "actuator_fault": 120,
+        "setpoint_drift": 74,
+        "normal": 419,
+        "sensor_fault": 120,
+        "provenance_violation": 171,
+        "rationale_mismatch": 171,
+        "excursion": 19
+      },
+      "recordings": [
+        "plant/nominal_expert",
+        "plant/pressure_sp_steps"
+      ],
+      "sha256": "9936110bb3ec9182aa635d285466338e399ee0a2f2b661fddc412db9c9275083"
+    },
+    "unseen": {
+      "n": 471,
+      "by_label": {
+        "normal": 111,
+        "excursion": 120,
+        "sensor_fault": 120,
+        "actuator_fault": 120
+      },
+      "recordings": [
+        "plant/post_reset_kick",
+        "plant/pressure_excursion_partial_feed"
+      ],
+      "sha256": "72768338b8d21366e63d6385b3707c445e6ac6517cbe98d428bec53ad7fe96b9"
+    }
+  },
+  "cross_split_user_overlap": 0
+}

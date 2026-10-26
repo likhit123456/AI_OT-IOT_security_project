@@ -30,6 +30,7 @@ from __future__ import annotations
 import math
 import threading
 from contextlib import asynccontextmanager
+from functools import wraps
 import time
 from collections import deque
 from pathlib import Path
@@ -61,13 +62,25 @@ def _num(v) -> float:
 STATIC = Path(__file__).resolve().parent / "static"
 
 
+def _serialized(fn):
+    @wraps(fn)
+    def guarded(self, *args, **kwargs):
+        with self._control:
+            return fn(self, *args, **kwargs)
+    return guarded
+
+
 class Plant:
     """Owns the simulator connection, the trend history and the rupture latch."""
 
     def __init__(self, host: str = "127.0.0.1", port: int = 55555):
         self.host, self.port = host, port
         self._io = threading.Lock()          # one request at a time on the socket
+        self._control = threading.RLock()    # control ownership and E-stop precede valve writes
         self._data = threading.Lock()
+        self._estop_latched = False
+        self._stop_poll = threading.Event()
+        self._poll_thread = None
         self._client: Optional[GrficsClient] = None
         self.raw: dict = {}
         self.connected = False
@@ -104,19 +117,38 @@ class Plant:
     def _clear_rupture(self) -> None:
         self.ruptured, self.ruptured_t, self.rupture_pressure, self.peak_pressure = False, None, None, 0.0
 
+    @_serialized
     def start(self) -> "Plant":
-        threading.Thread(target=self._poll, name="plant-poll", daemon=True).start()
+        if self._poll_thread is not None and self._poll_thread.is_alive():
+            return self
+        self._stop_poll.clear()
+        self._poll_thread = threading.Thread(target=self._poll, name="plant-poll", daemon=True)
+        self._poll_thread.start()
         return self
 
+    def stop(self) -> None:
+        self._stop_poll.set()
+        self.rescue.stop("application shutdown")
+        if self._poll_thread is not None:
+            self._poll_thread.join(timeout=4.0)
+        with self._io:
+            if self._client is not None:
+                self._client.close()
+                self._client = None
+        self.connected = False
+
     def _poll(self) -> None:
-        while True:
+        while not self._stop_poll.is_set():
             if not self.resetting:
                 try:
-                    raw = self.read()
-                    self._ingest(raw)
+                    with self._control:
+                        raw = self.read()
+                        if self._estop_latched and not raw.get("state", {}).get("e_stop"):
+                            raw = self.write({"e_stop": 1})
+                        self._ingest(raw)
                 except (OSError, ValueError, TypeError):
                     self.connected = False
-            time.sleep(POLL_S)
+            self._stop_poll.wait(POLL_S)
 
     def _ingest(self, raw: dict) -> None:
         o, s = raw.get("outputs", {}), raw.get("state", {})
@@ -151,7 +183,8 @@ class Plant:
                 "cost": o.get("cost"),
                 "valves": {v: s.get(f"{v}_valve_pos") for v in VALVES},
                 "setpoints": dict(self.setpoints),
-                "e_stop": bool(s.get("e_stop", False)),
+                "e_stop": self._estop_latched or bool(s.get("e_stop", False)),
+                "e_stop_pending": self._estop_latched and not bool(s.get("e_stop", False)),
                 "ruptured": self.ruptured, "exploded": self.ruptured,
                 "ruptured_t": self.ruptured_t, "rupture_pressure": self.rupture_pressure,
                 "peak_pressure": round(self.peak_pressure, 1),
@@ -166,30 +199,46 @@ class Plant:
             raise HTTPException(409, "the reactor has ruptured; reset the simulation")
         if source == "manual" and self.rescue.active:
             raise HTTPException(409, "the AI is in control; press 'Stop AI' to take manual control")
-        if valves and source == "manual" and self.raw.get("state", {}).get("e_stop"):
+        if valves and (self._estop_latched or self.raw.get("state", {}).get("e_stop")):
             # the simulator ignores valve setpoints while e_stop is on
             raise HTTPException(409, "E-STOP is engaged; release it before moving valves")
 
+    @_serialized
     def apply_valves(self, valves: dict, source: str = "manual") -> None:
         """Write several valve setpoints at once (clamped to 0-100)."""
         self._check_writable(source)
+        if any(not math.isfinite(float(x)) for x in valves.values()):
+            raise HTTPException(422, "valve values must be finite")
         new = {v: max(0.0, min(100.0, float(x))) for v, x in valves.items() if v in VALVES}
         raw = self.write({f"{v}_valve_sp": x for v, x in new.items()})
         with self._data:
             self.setpoints.update(new)
         self._ingest(raw)
 
+    @_serialized
     def manipulate(self, variable: str, delta: Optional[float], value: Optional[float],
                    source: str = "manual") -> dict:
-        self._check_writable(source, valves=variable != "e_stop")
+        if variable not in (*VALVES, "e_stop"):
+            raise HTTPException(422, "unknown valve")
+        if any(x is not None and not math.isfinite(float(x)) for x in (delta, value)):
+            raise HTTPException(422, "delta and value must be finite")
         if variable == "e_stop":
-            on = bool(value) if value is not None else not bool(self.raw.get("state", {}).get("e_stop"))
+            on = bool(value) if value is not None else not (self._estop_latched or bool(self.raw.get("state", {}).get("e_stop")))
+            if on:
+                self._estop_latched = True
+                self.rescue.stop("emergency stop")
+            else:
+                self._check_writable(source, valves=False)
             try:
                 raw = self.write({"e_stop": int(on)})
             except (OSError, ValueError) as e:
                 raise HTTPException(503, f"plant not reachable: {e}") from e
             self._ingest(raw)
+            self._estop_latched = on
             return {"variable": "e_stop", "value": on}
+        self._check_writable(source)
+        if (delta is None) == (value is None):
+            raise HTTPException(422, "give exactly one of delta or value")
         with self._data:
             base = self.setpoints.get(variable, 0.0)
         new = max(0.0, min(100.0, float(value) if value is not None else base + float(delta)))
@@ -205,8 +254,10 @@ class Plant:
     def reset(self) -> dict:
         if not self._reset_lock.acquire(blocking=False):
             raise HTTPException(409, "already resetting")
-        self.rescue.stop("simulation reset")
-        self.resetting = True
+        with self._control:
+            self.resetting = True
+            self.rescue.stop("simulation reset")
+            self._estop_latched = False
         try:
             with self._io:
                 if self._client is not None:
@@ -218,7 +269,8 @@ class Plant:
                 self.history.clear()
                 self.setpoints = {}
                 self.t0 = time.monotonic()
-            self._ingest(self.read())
+            with self._control:
+                self._ingest(self.write({"e_stop": 1}) if self._estop_latched else self.read())
             return {"pressure": point.pressure, "level": point.level,
                     "cycles_to_settle": point.cycles_to_settle}
         except Exception as e:                  # noqa: BLE001
@@ -235,6 +287,8 @@ class Manipulation(BaseModel):
 
     @model_validator(mode="after")
     def one_of(self):
+        if any(x is not None and not math.isfinite(x) for x in (self.delta, self.value)):
+            raise ValueError("delta and value must be finite")
         if self.variable != "e_stop" and (self.delta is None) == (self.value is None):
             raise ValueError("give exactly one of 'delta' or 'value'")
         return self
@@ -246,7 +300,10 @@ plant = Plant()
 @asynccontextmanager
 async def lifespan(_app):
     plant.start()
-    yield
+    try:
+        yield
+    finally:
+        plant.stop()
 
 
 app = FastAPI(title="TE reactor operator sim", lifespan=lifespan)
@@ -317,11 +374,9 @@ def command(c: Command) -> dict:
 
 @app.post("/api/ai/rescue")
 def rescue() -> dict:
-    if plant.ruptured:
-        raise HTTPException(409, "the reactor has ruptured; reset the simulation")
-    if plant.resetting:
-        raise HTTPException(409, "simulation is resetting")
-    plant.rescue.start()
+    with plant._control:
+        plant._check_writable("ai")
+        plant.rescue.start()
     return {"active": True}
 
 

@@ -1,0 +1,32 @@
+[
+  {
+    "index": 0,
+    "gold": "normal",
+    "result": {
+      "t": 0,
+      "kind": "telemetry",
+      "label": "sensor_fault",
+      "score": 0.6,
+      "reason": "Feed 2 flow jumps down by 0.1 with no matching change in the valves or flows.",
+      "note": "ok",
+      "latency_s": 6.38,
+      "source": "llm",
+      "llm_label": null
+    }
+  },
+  {
+    "index": 2,
+    "gold": "sensor_fault",
+    "result": {
+      "t": 0,
+      "kind": "telemetry",
+      "label": "sensor_fault",
+      "score": 0.6,
+      "reason": "Feed 1 flow drops to 0 in 7 of 16 samples.",
+      "note": "ok",
+      "latency_s": 0.87,
+      "source": "llm",
+      "llm_label": null
+    }
+  }
+]

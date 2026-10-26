@@ -44,6 +44,7 @@
  * @property {ValveMap} valves
  * @property {ValveMap} setpoints
  * @property {boolean} e_stop
+ * @property {boolean} [e_stop_pending]   requested but not yet acknowledged by the simulator
  * @property {boolean} ruptured
  * @property {number | null} rupture_pressure
  * @property {HistoryRow[]} history
@@ -69,7 +70,7 @@ const VALVES = [
 /** @type {Record<Valve, string>} */
 const SHORT = {f1: "feed 1", f2: "feed 2", purge: "purge", product: "product"};
 /** @type {Record<Valve, string>} */
-const FLOW_COLORS = {f1: "#5aa9ff", f2: "#c6a1ff", purge: "#4fd1b0", product: "#e39a5c"};
+const FLOW_COLORS = {f1: "#b4a1ff", f2: "#69d6c7", purge: "#e7bc72", product: "#e58baa"};
 /** @type {Record<Valve, number>} */
 const FLOW_COL = {f1: 4, f2: 5, purge: 6, product: 7};
 
@@ -302,7 +303,7 @@ function render() {
   $("clock").textContent = fmtClock(s.t);
   $("clock").title = "time since the server started";
   $("chip").textContent = !serverUp ? "SERVER DOWN" : resetting ? "RESETTING" : !s.connected ? "NO PLANT"
-    : s.ruptured ? "RUPTURE" : ai ? "AI IN CONTROL" : s.e_stop ? "E-STOP" : "MANUAL";
+    : s.ruptured ? "RUPTURE" : s.e_stop_pending ? "E-STOP REQUESTED" : ai ? "AI IN CONTROL" : s.e_stop ? "E-STOP" : "MANUAL";
 
   // pressure instrument
   $("pVal").textContent = fmt(p, 0);
@@ -332,7 +333,7 @@ function render() {
     /** @type {HTMLButtonElement | HTMLInputElement} */ (el).disabled = locked || s.e_stop;
   });
   const es = button("btnEstop");
-  es.disabled = locked;
+  es.disabled = resetting || offline || s.ruptured;
   es.classList.toggle("on", s.e_stop);
   es.textContent = s.e_stop ? "RELEASE EMERGENCY STOP" : "EMERGENCY STOP";
   const lockMsg = s.ruptured ? "Reactor ruptured. Reset the plant to continue."
@@ -389,7 +390,7 @@ function drawGraphs() {
   const n = Math.max(2, rows.length);
   const P = rows.map(r => r[2]), L = rows.map(r => r[3]);
   const accent = cssVar("--accent"), dim = cssVar("--dim"), line = cssVar("--line"), crit = cssVar("--crit");
-  const mono = "10px " + cssVar("--font-mono");
+  const mono = "12px " + cssVar("--font-mono");
 
   // pressure, fixed 2200-3200 kPa so the bands are always in the same place
   {

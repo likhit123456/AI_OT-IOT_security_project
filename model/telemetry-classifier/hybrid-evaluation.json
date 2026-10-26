@@ -1,0 +1,163 @@
+{
+  "activation_policy": {
+    "enabled": true,
+    "confidence_threshold": 0.7,
+    "validation_corrections": 99,
+    "sensor_noise_calibration": false,
+    "noise_candidate_passed": false,
+    "noise_validation_sensor_examples": 120,
+    "noise_validation_missed_faults": 3,
+    "validation_correction_errors": 0,
+    "validation_false_alarms": 0,
+    "model_sha256": "998a3403c253ab98b71ee0341e1f3e9dba4c128be590eb232181213a008f73c5",
+    "scope": "telemetry only; correct normal LLM verdicts; never feeds authority"
+  },
+  "correction_ms_per_example": 0.46960020833353155,
+  "benchmark_sha256": "8d0e0b8fda5d72c8027c57864f23dda6b22710f9aa28fc067b3babe522d16038",
+  "comparison": "Historical 480-example benchmark replay; development evidence only; no LLM weight changes.",
+  "baseline": {
+    "accuracy": 0.7145833333333333,
+    "per_class_recall": {
+      "normal": 0.925,
+      "excursion": 0.9916666666666667,
+      "sensor_fault": 0.21666666666666667,
+      "actuator_fault": 0.725,
+      "provenance_violation": null,
+      "rationale_mismatch": null,
+      "setpoint_drift": null
+    },
+    "false_alarm_rate": 0.075,
+    "detection_rate": 0.6472222222222223
+  },
+  "corrected": {
+    "n": 480,
+    "accuracy": 0.7416666666666667,
+    "per_class_recall": {
+      "normal": 0.925,
+      "excursion": 0.9916666666666667,
+      "sensor_fault": 0.325,
+      "actuator_fault": 0.725
+    },
+    "false_alarm_rate": 0.07499999999999996,
+    "detection_rate": 0.6916666666666667,
+    "confusion": {
+      "normal": {
+        "sensor_fault": 7,
+        "normal": 111,
+        "actuator_fault": 2
+      },
+      "excursion": {
+        "excursion": 119,
+        "normal": 1
+      },
+      "sensor_fault": {
+        "normal": 80,
+        "sensor_fault": 39,
+        "actuator_fault": 1
+      },
+      "actuator_fault": {
+        "normal": 30,
+        "actuator_fault": 87,
+        "sensor_fault": 3
+      }
+    }
+  },
+  "changes": [
+    {
+      "index": 2,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 13,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 30,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 42,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 59,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 60,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 68,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 78,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 117,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 143,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 144,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 206,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 259,
+      "gold": "sensor_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 311,
+      "gold": "actuator_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 352,
+      "gold": "actuator_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    },
+    {
+      "index": 377,
+      "gold": "actuator_fault",
+      "before": "normal",
+      "after": "sensor_fault"
+    }
+  ]
+}

@@ -1,89 +1,140 @@
-# SCRAM — layered architecture & contracts
+# SCRAM
 
-SCRAM runs an **AI operator** on a simulated chemical plant, with a
-**governance layer** that dynamically reduces the agent's authority and an
-**independent hardware safety interlock** underneath that the AI cannot
-override. The plant is the open-source GRFICS v3 Tennessee-Eastman reactor
-(the model only — the OT-lab scaffolding is scrapped).
+An AI-supervised chemical-plant simulation with layered governance, deterministic
+control, command provenance, and an independent simulated safety channel.
 
-## Layers (Purdue / ISA-95 mapping)
+The main application is the SCRAM control room in `live/`. The separate reactor
+studio in `sim_app/` is a direct-control sandbox. See
+[QUALITY_IMPROVEMENTS.md](QUALITY_IMPROVEMENTS.md) for the reliability pass,
+[ACCURACY_IMPROVEMENTS.md](ACCURACY_IMPROVEMENTS.md) for later detector results, and
+[ARCHITECTURE.md](ARCHITECTURE.md) for the original design and trust assumptions.
 
-| Level | Role | Owner |
-|------|------|-------|
-| **L3 Brain** | AI operator. `decide(state) -> SupervisoryTargets`. Emits *intent* (setpoints), never valve positions. | **you** |
-| L2 Supervisory | Monitoring, Guardian (attack detection/isolation), HMI. | team |
-| L1 Control | Regulatory PI loops: `regulate(targets, state) -> ControlCommand` (valve %). | team |
-| **L0 Plant** | GRFICS TE model + socket service + **independent safety interlock (SCRAM)**. | **you** |
+## Run the control room
 
-Control flows top-down; state flows bottom-up:
+Requires Python 3.11+, Docker Desktop, and the GRFICS simulation image. Ollama
+and the trained models are optional; the operator falls back to deterministic
+baseline control when its model is unavailable.
 
-```
-  L3 decide(state) ──▶ SupervisoryTargets
-        │ governance clamps authority (L1/L2)
-        ▼
-  L1 regulate(targets,state) ──▶ ControlCommand (valves)
-        ▼
-  L0 apply(command) ──▶ PlantState (measured) ──▶ back up to L2/L3
-```
+Run the commands below from the repository root. Custom LLM weights are excluded
+from Git; see [model setup](model/README.md) for required files and registration.
+For an explicit model-free operator, use `python -m live --brain baseline`.
 
-The **only** thing L3 outputs is `SupervisoryTargets`. The **only** thing L0
-accepts is a `ControlCommand`. Those two contracts are the seams your teammates
-build against — see `contracts.py`.
-
-## The safety thesis (why it's called SCRAM)
-
-`l0_plant/safety.py` is an interlock that watches measured pressure/level and
-**latches a trip** on a hard-limit excursion, forcing feeds shut and relief
-paths open — regardless of what L3 intends or how much authority governance
-granted. A latched trip can only be cleared by a deliberate reset once
-variables are back inside the re-arm band. This is the last-resort physical
-containment layer; the AI has no code path to override it.
-
-## Repo layout
-
-```
-contracts.py          shared dataclasses: PlantState, SupervisoryTargets, ControlCommand
-l0_plant/
-  grfics_client.py    thin TCP/JSON client to the sim (port 55555)
-  safety.py           independent SCRAM interlock (hard limits, latch, re-arm)
-  plant_service.py    L0 boundary: raw JSON -> PlantState, enforces interlock
-l3_brain/
-  policy.py           swappable brain: BaselineOperator now; RL/LLM later
-  operator.py         L3 loop + governance authority handshake
-l1_stub.py            PLACEHOLDER for the teammate's L1 (PI loops) — replace
-run_demo.py           wires L0 + L1stub + L3 end-to-end
-docker-compose.yml     plant-only: runs the prebuilt GRFICS simulation image
-reference/sim_cpp_unused/   shelved custom C++ reactor - not built, see ARCHITECTURE.md
+```powershell
+python -m pip install -r requirements.txt
+docker compose up -d simulation
+python -m live
 ```
 
-See `ARCHITECTURE.md` for the full design (layers, contracts, the interlock thesis).
+Open http://127.0.0.1:8765. Normal startup resets the simulator to its design point.
+To attach without resetting, use `python -m live --no-reset --no-browser`.
+The plant's unauthenticated ports are published on loopback only.
 
-## Run it
+Ollama configuration is no longer changed on ordinary startup. Explicit setup
+is available with `python -m live --configure-ollama`. That option can persist
+`LLAMA_ARG_CACHE_RAM=0` and restart Ollama; see `model/README.md` for the reason.
 
-```bash
-docker compose pull simulation
-docker compose up -d simulation    # plant on :55555 (JSON) + helm on :80
-# in another shell, from repo root:
-python3 run_demo.py
+## Components
+
+| Layer | Implementation | Role |
+| --- | --- | --- |
+| L3 | `l3_brain/` | Local LLM or baseline emits supervisory setpoints |
+| L2 | `monitor/` | Rule monitors, proposal observer, telemetry observer, governance |
+| L1 | `l1_regulator.py`, `enforcer/keel.py` | PI regulation, deterministic command constraints, final signing |
+| L0 | `l0_plant/` | Plant adapter, provenance gate and latched protective actions |
+| UI | `live/`, `sim_app/` | Full control room and separate manual studio |
+| Data/evaluation | `training/`, `model/`, `experiments/` | Collection, training, artifacts and reproducible evaluations |
+
+Three local LLMs serve the full stack: `scram-operator`, `scram-observer` (proposal
+judgments), and `scram-observer-v3` (telemetry). A release-gated 236 kB CPU
+physics detector corrects advisory telemetry verdicts and preserves the original
+LLM label. It never contributes to authority or protective actuation. Its model,
+features and evaluation evidence are checked by hash before loading. See
+[accuracy improvements](ACCURACY_IMPROVEMENTS.md) for measured results and remaining gaps.
+
+Measured composition values are fractions; composition setpoints are percentages.
+The `truth` field carries the independent simulated safety channel for L0/Keel
+and evaluation. The AI and ordinary behavior monitor consume measured signals.
+
+Trips retain their first cause while continuing to evaluate secondary hazards.
+Combined pressure and low-inventory protection shuts feeds, opens purge, and
+closes product. Safety-sensor loss latches E-stop. The live demonstration may
+automatically rearm after ten clean seconds, with a repeated-trip lockout; this
+is separate from the base interlock's explicit reset API. These are simulation
+policies, not certified hardware safety guarantees.
+
+## Manual reactor studio
+
+```powershell
+python -m sim_app
 ```
 
-## Contracts your teammates need
+Open http://127.0.0.1:8770. This path writes directly to the simulator and has no
+SCRAM interlock or provenance gate. Its stock `qwen2.5:1.5b` model parses commands;
+the trained operator runs rescue. E-stop cancels rescue, blocks later AI valve
+writes, and requires deliberate release. Avoid running two plant writers at once.
 
-**L1 teammate** implements `regulate(targets: SupervisoryTargets, state:
-PlantState, dt: float) -> ControlCommand`. Consume the setpoint fields (any may
-be `None` = hold), output absolute valve % in `[0,100]`. `l1_stub.py` shows the
-actuator mapping and a working-but-crude PI baseline to replace.
+## Verify and reproduce
 
-**L2 / governance teammate** provides the `authority_fn: () -> float` that
-`AIOperator` takes (0..1). Drop authority to throttle the brain; L3 blends its
-setpoints toward "hold" as authority falls, and L1/governance enforces the hard
-clamp. Detection logic must read only the `measured` fields of `PlantState` —
-`PlantState.truth` is eval-only ground truth, not a production signal.
+```powershell
+python -m pip install -r requirements-dev.txt -r requirements-eval.txt
+python -m pytest -q --ignore=tests/test_interlock_truth.py
+```
 
-## Open items (for you / tuning)
+To reproduce the earlier restricted-classifier experiment, use a separate
+checkout: these commands regenerate datasets and overwrite model/evaluation
+outputs. The current runtime prefers the [physics detector](model/telemetry-physics/README.md).
 
-- **Composition units**: sim reports `A_in_purge` as a fraction (~0.47); the
-  baseline target is written as `47.0`. Reconcile units at the L1 seam.
-- Baseline policy is intentionally dumb — it's the floor an ML/LLM policy beats.
-- GRFICS v3 is **GPL-3.0**; reusing the TE model makes SCRAM GPL-3.0.
+```powershell
+python -m training.build_clean_observer_dataset
+python -m training.train_telemetry_classifier
+python -m training.evaluate_telemetry_specialist
+```
 
+For fresh local Ollama inference with whichever specialist is currently approved:
+
+```powershell
+python -m training.benchmark_observer --per-class 12 --output artifacts/observer-benchmark-new.json
+```
+
+This currently selects the physics detector, so it does not reproduce the older
+restricted-classifier comparison exactly. The separate output path preserves
+the saved historical benchmark. New clean data lives under `training/observer_clean/`;
+its whole-recording splits, duplicate exclusions and hashes are recorded in a
+manifest. The observer notebook defaults to these inputs and exports a separate
+candidate instead of overwriting the deployed LLM.
+
+For browser checks, install Node.js (CI uses version 22), then run:
+
+```sh
+npm install --no-save playwright
+npx playwright install chromium
+node tests/frontend_smoke.cjs
+```
+
+On Linux, CI uses `npx playwright install --with-deps chromium` to install browser
+system dependencies too. GitHub Actions defines offline, browser and Linux
+simulator checks. The two tests in `test_interlock_truth.py` reset and manipulate
+a real running simulator, so they are excluded from the ordinary offline run.
+
+The bundled C++ source can be compiled and checked on Linux/WSL:
+
+```sh
+g++ -std=c++17 -Wall -Wextra -Werror simulation/simulation/main.cc simulation/simulation/TE_process.cc -ljsoncpp -llapacke -lpthread -o simulation-test
+python3 scripts/check_simulator.py ./simulation-test
+```
+
+Install `libjsoncpp-dev` and `liblapacke-dev` first. This isolated test starts a
+separate process on a temporary port. Compose continues to use the prebuilt
+GRFICS image: local source fixes do not replace its binary automatically.
+
+`l1_stub.py`, `run_demo.py`, and `reference/` are historical/minimal paths. Use the
+full control room for the current integration. GRFICS is GPL-3.0; this project
+retains its license and attribution.
+
+## Repository contents
+
+Source, datasets, CPU models and evaluation reports are included. LLM weights,
+training environments, runtime logs and generated browser output are ignored.
+Obsolete local backups and caches were removed during upload cleanup. Use Git
+to publish the project so these ignore rules apply. JSON/JSONL model and dataset
+evidence retains its exact bytes across checkouts for hash verification.

@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-25",
+  "telemetry": {
+    "n": 215,
+    "baseline": {
+      "n": 215,
+      "accuracy": 0.641860465116279,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 1.0,
+        "sensor_fault": 0.41025641025641024,
+        "actuator_fault": 0.8297872340425532
+      },
+      "balanced_accuracy": 0.8100109110747409,
+      "false_alarm_rate": 0.0
+    },
+    "improved": {
+      "n": 215,
+      "accuracy": 0.9302325581395349,
+      "per_class_recall": {
+        "normal": 1.0,
+        "excursion": 1.0,
+        "sensor_fault": 0.8974358974358975,
+        "actuator_fault": 0.9361702127659575
+      },
+      "balanced_accuracy": 0.9584015275504637,
+      "false_alarm_rate": 0.0
+    },
+    "accuracy_gain_percentage_points": 28.837209302325583,
+    "release_gate_passed": true,
+    "evidence": "artifacts/accuracy-v2/paired-final.json"
+  },
+  "parser": {
+    "n": 52,
+    "baseline_correct": 40,
+    "improved_correct": 52,
+    "baseline_accuracy": 0.7692307692307693,
+    "improved_accuracy": 1.0,
+    "scope": "small authored command set"
+  },
+  "unchanged": [
+    "operator target model",
+    "proposal observer model",
+    "LLM weights"
+  ],
+  "limitations": [
+    "simulator and synthetic fault evaluation",
+    "correlated fault variants",
+    "no hardware validation",
+    "frozen-level faults missed 6/6"
+  ]
+}

@@ -91,6 +91,9 @@ class SafetyInterlock:
         self.reason = ""
         self.cause = ""     # "pressure_high" | "level_low" | "level_high" while latched
         self.escalated = False              # safe-hold gave up on a runaway: e_stop until reset
+        self._sensor_fault = False
+        self._combined_low_level = False
+        self._pressure_seen = False
 
     def evaluate(self, pressure: float, level: float) -> bool:
         """
@@ -98,8 +101,9 @@ class SafetyInterlock:
         Returns True if the plant should currently be forced safe (scrammed).
         """
         lim = self.limits
+        valid = _valid(pressure) and _valid(level)
         if not self.tripped:
-            if not (_valid(pressure) and _valid(level)):
+            if not valid:
                 self._trip(f"safety-channel reading invalid (pressure={pressure!r}, level={level!r})",
                            "sis_sensor_fault")
             elif pressure >= lim.pressure_high:
@@ -108,6 +112,18 @@ class SafetyInterlock:
                 self._trip(f"level {level:.1f}% <= {lim.level_low:.1f}%", "level_low")
             elif level >= lim.level_high:
                 self._trip(f"level {level:.1f}% >= {lim.level_high:.1f}%", "level_high")
+        if self.tripped:
+            # Preserve the first cause for diagnosis, but never freeze hazard detection.
+            self._sensor_fault |= not valid
+            if valid:
+                self._pressure_seen |= pressure >= lim.pressure_high
+                if level <= lim.level_low and self._pressure_seen:
+                    self._combined_low_level = True
+                if self.cause == "level_low" and pressure >= lim.pressure_high:
+                    self._combined_low_level = True
+                if self.cause == "level_low" and level >= lim.level_high:
+                    self.escalated = True
+            self.escalated |= self._sensor_fault or self._combined_low_level
         return self.tripped
 
     def can_reset(self, pressure: float, level: float) -> bool:
@@ -117,6 +133,20 @@ class SafetyInterlock:
             return False
         return (pressure <= lim.pressure_rearm
                 and lim.level_low_rearm <= level <= lim.level_high_rearm)
+
+    @property
+    def protection_mode(self) -> str:
+        if not self.tripped:
+            return "armed"
+        if self._sensor_fault:
+            return "emergency_stop"
+        if self._combined_low_level:
+            return "combined_hold"
+        if self.cause == "level_low" and not self.escalated:
+            return "inventory_hold"
+        if self.safe_hold is not None and not self.escalated:
+            return "safe_hold"
+        return "emergency_stop"
 
     def reset(self, pressure: float, level: float) -> bool:
         """
@@ -128,6 +158,7 @@ class SafetyInterlock:
             self.reason = ""
             self.cause = ""
             self.escalated = False
+            self._sensor_fault = self._combined_low_level = self._pressure_seen = False
             return True
         return False
 
@@ -148,7 +179,14 @@ class SafetyInterlock:
         pressure_high / level_high run the closed-loop safe-hold lineup instead
         of e_stop, escalating (latched) to e_stop on a runaway.
         """
-        if self.cause == "level_low":
+        if self._sensor_fault:
+            return {"e_stop": 1}
+        if self._combined_low_level:
+            # e_stop opens product in this simulator, aggravating the low inventory.
+            # Remove feed energy, vent vapour, and retain the remaining liquid.
+            return {"e_stop": 0, "f1_valve_sp": 0.0, "f2_valve_sp": 0.0,
+                    "purge_valve_sp": 100.0, "product_valve_sp": 0.0}
+        if self.cause == "level_low" and not self.escalated:
             return {"e_stop": 0, "product_valve_sp": 0.0}
         hold = self.safe_hold
         if (hold is not None and self.cause in ("pressure_high", "level_high")

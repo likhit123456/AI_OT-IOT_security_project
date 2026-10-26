@@ -17,8 +17,8 @@ services:
     cap_add:
       - NET_ADMIN               # entrypoint adds IP aliases and a route
     ports:
-      - "80:80"                 # 3D plant visualization (nginx)
-      - "55555:55555"           # TE simulator, line-delimited JSON over TCP
+      - "127.0.0.1:80:80"        # local visualization only
+      - "127.0.0.1:55555:55555"  # unauthenticated plant socket: local writers only
     volumes:
       # simulator only; the image's Modbus devices would overwrite L0's valve writes
       - ./docker/supervisord.sim-only.conf:/etc/supervisor/conf.d/supervisord.conf:ro
