@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-text: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, "Helvetica Neue", sans-serif;
+  --font-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, "Helvetica Neue", sans-serif;
+  --font-mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --system-blue: #007aff;
+  --system-green: #34c759;
+  --system-red: #ff3b30;
+  --system-orange: #ff9500;
+  --system-purple: #af52de;
+  --system-pink: #ff2d55;
+  --system-yellow: #ffcc00;
+
+  --bg: #ffffff;
+  --bg-elevated: #ffffff;
+  --surface-grouped: #f2f2f7;
+  --separator: rgba(60, 60, 67, 0.18);
+  --text: #1d1d1f;
+  --text-secondary: rgba(60, 60, 67, 0.78);
+  --text-tertiary: rgba(60, 60, 67, 0.55);
+
+  --material-thin: rgba(255, 255, 255, 0.6);
+  --material-regular: rgba(255, 255, 255, 0.78);
+  --material-thick: rgba(255, 255, 255, 0.92);
+  --material-fill: rgba(120, 120, 128, 0.12);
+  --highlight: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --focus-halo: rgba(0, 122, 255, 0.18);
+  --chart-grid: rgba(60, 60, 67, 0.1);
+
+  --bg-gradient:
+    radial-gradient(at 20% 0%, #ffe0f0 0%, transparent 50%),
+    radial-gradient(at 80% 30%, #d4e4ff 0%, transparent 50%),
+    radial-gradient(at 50% 100%, #e0d4ff 0%, transparent 50%);
+  --bg-base: #fafaff;
+
+  --blur-material: blur(30px) saturate(180%);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000000;
+    --bg-elevated: #1c1c1e;
+    --surface-grouped: #2c2c2e;
+    --separator: rgba(84, 84, 88, 0.65);
+    --text: #f5f5f7;
+    --text-secondary: rgba(235, 235, 245, 0.68);
+    --text-tertiary: rgba(235, 235, 245, 0.42);
+    --material-thin: rgba(44, 44, 46, 0.5);
+    --material-regular: rgba(44, 44, 46, 0.68);
+    --material-thick: rgba(44, 44, 46, 0.86);
+    --material-fill: rgba(120, 120, 128, 0.24);
+    --highlight: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    --focus-halo: rgba(10, 132, 255, 0.28);
+    --chart-grid: rgba(235, 235, 245, 0.08);
+    --system-blue: #0a84ff;
+    --system-green: #30d158;
+    --system-red: #ff453a;
+    --system-orange: #ff9f0a;
+    --system-purple: #bf5af2;
+    --system-yellow: #ffd60a;
+    --bg-gradient:
+      radial-gradient(at 18% 0%, rgba(175, 82, 222, 0.28) 0%, transparent 52%),
+      radial-gradient(at 85% 28%, rgba(0, 122, 255, 0.26) 0%, transparent 52%),
+      radial-gradient(at 50% 100%, rgba(94, 92, 230, 0.24) 0%, transparent 55%);
+    --bg-base: #000000;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #000000;
+  --bg-elevated: #1c1c1e;
+  --surface-grouped: #2c2c2e;
+  --separator: rgba(84, 84, 88, 0.65);
+  --text: #f5f5f7;
+  --text-secondary: rgba(235, 235, 245, 0.68);
+  --text-tertiary: rgba(235, 235, 245, 0.42);
+  --material-thin: rgba(44, 44, 46, 0.5);
+  --material-regular: rgba(44, 44, 46, 0.68);
+  --material-thick: rgba(44, 44, 46, 0.86);
+  --material-fill: rgba(120, 120, 128, 0.24);
+  --highlight: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  --focus-halo: rgba(10, 132, 255, 0.28);
+  --chart-grid: rgba(235, 235, 245, 0.08);
+  --system-blue: #0a84ff;
+  --system-green: #30d158;
+  --system-red: #ff453a;
+  --system-orange: #ff9f0a;
+  --system-purple: #bf5af2;
+  --system-yellow: #ffd60a;
+  --bg-gradient:
+    radial-gradient(at 18% 0%, rgba(175, 82, 222, 0.28) 0%, transparent 52%),
+    radial-gradient(at 85% 28%, rgba(0, 122, 255, 0.26) 0%, transparent 52%),
+    radial-gradient(at 50% 100%, rgba(94, 92, 230, 0.24) 0%, transparent 55%);
+  --bg-base: #000000;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --bg-gradient:
+      radial-gradient(at 20% 0%, #ffe0f0 0%, transparent 55%),
+      radial-gradient(at 80% 60%, #d4e4ff 0%, transparent 55%);
+  }
+  :root[data-theme="dark"] {
+    --bg-gradient:
+      radial-gradient(at 20% 0%, rgba(175, 82, 222, 0.3) 0%, transparent 55%),
+      radial-gradient(at 80% 60%, rgba(0, 122, 255, 0.28) 0%, transparent 55%);
+  }
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  html {
+    color-scheme: light dark;
+    font-optical-sizing: auto;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--bg-base);
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: var(--text);
+    font-family: var(--font-text);
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.08px;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-left: var(--safe-left);
+    padding-right: var(--safe-right);
+  }
+  @media (pointer: coarse) {
+    body {
+      font-size: 17px;
+      line-height: 22px;
+      letter-spacing: -0.41px;
+    }
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+  }
+  .text-t22, .text-t28, .text-t34, .text-t44, .text-t56 {
+    font-family: var(--font-display);
+  }
+  .text-t11, .text-t12, .text-t13, .text-t15, .text-t17 {
+    font-family: var(--font-text);
+  }
+  ::selection {
+    background: var(--focus-halo);
+  }
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--focus-halo);
+  }
+}
+
+@layer components {
+  .material-thin,
+  .material-regular,
+  .material-thick {
+    -webkit-backdrop-filter: var(--blur-material);
+    backdrop-filter: var(--blur-material);
+  }
+  .material-thin { background: var(--material-thin); }
+  .material-regular { background: var(--material-regular); }
+  .material-thick { background: var(--material-thick); }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .material-thin,
+    .material-regular,
+    .material-thick {
+      background: var(--bg-elevated);
+    }
+  }
+
+  .glass-card {
+    border-radius: 14px;
+    box-shadow: var(--highlight);
+  }
+
+  .grouped-row + .grouped-row {
+    box-shadow: 0 -0.5px 0 var(--separator);
+  }
+
+  .hairline-top {
+    box-shadow: 0 -0.5px 0 var(--separator);
+  }
+
+  .hairline-bottom {
+    box-shadow: 0 0.5px 0 var(--separator);
+  }
+
+  .field-input {
+    width: 100%;
+    background: var(--material-fill);
+    border: 0;
+    border-radius: 10px;
+    padding: 11px 14px;
+    color: var(--text);
+    font: inherit;
+    transition: box-shadow 0.18s ease;
+  }
+  .field-input::placeholder {
+    color: var(--text-tertiary);
+  }
+  .field-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--focus-halo);
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .pb-safe {
+    padding-bottom: calc(var(--safe-bottom) + 8px);
+  }
+  .pt-safe {
+    padding-top: var(--safe-top);
+  }
+  .scroll-clean {
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-tertiary) transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
