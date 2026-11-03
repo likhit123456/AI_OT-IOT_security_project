@@ -10,7 +10,7 @@ export interface PlantStatus {
 
 export function derivePlantStatus(snapshot: Snapshot | null, connected: boolean): PlantStatus {
   if (!connected || !snapshot) {
-    return { tone: "neutral", title: "Disconnected", detail: "Showing last known readings. Reconnecting to the control room." };
+    return { tone: "neutral", title: "Disconnected", detail: "Showing the last known readings while the control room reconnects." };
   }
   if (snapshot.status === "error") {
     return { tone: "bad", title: "Plant error", detail: snapshot.error ?? "The control loop reported an error." };
@@ -20,12 +20,9 @@ export function derivePlantStatus(snapshot: Snapshot | null, connected: boolean)
   }
   const sis = snapshot.sis;
   if (sis?.tripped) {
-    const mode = sis.protection_mode ? ` ${sis.protection_mode}` : "";
-    return {
-      tone: "bad",
-      title: "Safety trip",
-      detail: `${sis.cause ?? sis.reason ?? "Protective action latched"}.${mode} ${sis.safe_state ? `Safe state: ${sis.safe_state}.` : ""}`.trim()
-    };
+    const mode = sis.protection_mode ? ` ${sis.protection_mode}.` : "";
+    const safe = sis.safe_state ? ` Safe state: ${sis.safe_state}.` : "";
+    return { tone: "bad", title: "Safety trip", detail: `${sis.cause ?? sis.reason ?? "Protective action latched"}.${mode}${safe}` };
   }
   const faults = Object.keys(snapshot.faults ?? {}).length;
   const scenarios = Object.keys(snapshot.scenarios ?? {}).length;
@@ -33,24 +30,24 @@ export function derivePlantStatus(snapshot: Snapshot | null, connected: boolean)
     return {
       tone: "warn",
       title: "Disturbance active",
-      detail: `${faults} injected fault${faults === 1 ? "" : "s"} and ${scenarios} running scenario${scenarios === 1 ? "" : "s"}. The monitors and Keel are watching.`
+      detail: `${faults} injected fault${faults === 1 ? "" : "s"} and ${scenarios} running scenario${scenarios === 1 ? "" : "s"}. The monitors and the Keel are watching.`
     };
   }
-  return { tone: "good", title: "Normal operation", detail: "All protection layers are armed and the plant is holding its targets." };
+  return { tone: "good", title: "Normal operation", detail: "Every protection layer is armed and the plant is holding its targets." };
 }
 
 export const toneText: Record<Tone, string> = {
-  good: "text-green",
-  warn: "text-orange",
-  bad: "text-red",
-  info: "text-blue",
-  neutral: "text-text-secondary"
+  good: "text-text",
+  warn: "text-warn",
+  bad: "text-bad",
+  info: "text-text-2",
+  neutral: "text-text-2"
 };
 
-export const toneTint: Record<Tone, string> = {
-  good: "rgba(52,199,89,0.22)",
-  warn: "rgba(255,149,0,0.22)",
-  bad: "rgba(255,59,48,0.26)",
-  info: "rgba(0,122,255,0.2)",
-  neutral: "rgba(120,120,128,0.16)"
+export const toneDot: Record<Tone, string> = {
+  good: "bg-ok",
+  warn: "bg-warn",
+  bad: "bg-bad",
+  info: "bg-text-3",
+  neutral: "bg-text-3"
 };

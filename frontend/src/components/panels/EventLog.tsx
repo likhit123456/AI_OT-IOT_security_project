@@ -1,44 +1,32 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Section } from "@/components/ui/section";
 import type { ControlRoom } from "@/hooks/useControlRoom";
-import type { Tone } from "@/lib/status";
-import { clock } from "@/lib/utils";
+import { clock, cn } from "@/lib/utils";
 
-const KIND_TONE: Record<string, Tone> = {
-  attack: "bad",
-  trip: "bad",
-  error: "bad",
-  gate: "warn",
-  keel: "warn",
-  monitor: "warn",
-  governance: "info",
-  brain: "info",
-  plant: "good"
+const KIND_COLOR: Record<string, string> = {
+  attack: "text-bad",
+  trip: "text-bad",
+  error: "text-bad",
+  gate: "text-warn",
+  keel: "text-warn",
+  monitor: "text-warn"
 };
 
-export function EventLog({ room, limit = 40, className = "" }: { room: ControlRoom; limit?: number; className?: string }) {
+export function EventLog({ room, limit = 40 }: { room: ControlRoom; limit?: number }) {
   const items = [...room.events].reverse().slice(0, limit);
+  const now = room.snapshot?.t ?? 0;
 
   return (
-    <Card material="regular" className={className}>
-      <CardHeader>
-        <div>
-          <CardTitle>Event log</CardTitle>
-          <CardDescription>Newest first. Attacks, gate decisions, monitor flags and trips.</CardDescription>
-        </div>
-      </CardHeader>
-      <CardContent className="scroll-clean max-h-[420px] overflow-y-auto pt-0">
-        {items.length === 0 && <p className="py-6 text-center text-t13 text-text-tertiary">No events yet.</p>}
+    <Section title="Event log">
+      <ul className="scroll-clean max-h-[440px] divide-y divide-rule overflow-y-auto border-y border-rule">
+        {items.length === 0 && <li className="py-10 text-center text-t13 text-text-3">No events yet.</li>}
         {items.map((event) => (
-          <div key={event.id} className="grouped-row flex gap-3 py-2.5">
-            <span className="tabular w-11 shrink-0 pt-0.5 text-t11 text-text-tertiary">{clock(event.t)}</span>
-            <div className="min-w-0 flex-1">
-              <Badge tone={KIND_TONE[event.kind] ?? "neutral"} className="mb-1">{event.kind}</Badge>
-              <p className="break-words text-t13 text-text">{event.msg}</p>
-            </div>
-          </div>
+          <li key={event.id} className={cn("flex gap-4 py-3", now - event.t < 3 && "fresh-row")}>
+            <span className="tabular w-12 shrink-0 font-mono text-t12 text-text-3">{clock(event.t)}</span>
+            <span className={cn("w-20 shrink-0 text-t11 font-medium uppercase tracking-[0.08em]", KIND_COLOR[event.kind] ?? "text-text-3")}>{event.kind}</span>
+            <span className="min-w-0 flex-1 break-words text-t13 text-text">{event.msg}</span>
+          </li>
         ))}
-      </CardContent>
-    </Card>
+      </ul>
+    </Section>
   );
 }

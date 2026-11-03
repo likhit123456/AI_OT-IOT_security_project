@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Send } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Section } from "@/components/ui/section";
+import { Segmented } from "@/components/ui/segmented";
 import { Slider } from "@/components/ui/slider";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { ControlRoom } from "@/hooks/useControlRoom";
 import { cn, fmt } from "@/lib/utils";
 
@@ -34,7 +33,7 @@ export function OperatorPanel({ room }: { room: ControlRoom }) {
 
   useEffect(() => {
     scroller.current?.scrollTo({ top: scroller.current.scrollHeight, behavior: "smooth" });
-  }, [chat.length]);
+  }, [chat.length, brain?.inflight]);
 
   const submit = async (text: string) => {
     const value = text.trim();
@@ -55,40 +54,38 @@ export function OperatorPanel({ room }: { room: ControlRoom }) {
   };
 
   return (
-    <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
-      <Card material="regular" className="flex min-h-[560px] flex-col">
-        <CardHeader>
-          <div>
-            <CardTitle>Talk to the AI operator</CardTitle>
-            <CardDescription>
-              {canChat ? "Setpoint requests go to the model; valve commands become a manual override." : "The baseline rule brain only takes direct valve commands."}
-            </CardDescription>
-          </div>
-          <Badge tone={canChat ? "info" : "neutral"}>{brain?.label ?? "No operator"}</Badge>
-        </CardHeader>
-        <div ref={scroller} className="scroll-clean flex-1 space-y-3 overflow-y-auto px-5 py-3">
-          {chat.length === 0 && <p className="py-10 text-center text-t13 text-text-tertiary">Send an instruction to begin.</p>}
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-16">
+      <Section title="Conversation" aside={<span className="text-t12 text-text-3">{canChat ? "Setpoint requests go to the model. Valve commands become a manual override." : "The baseline brain only takes direct valve commands."}</span>}>
+        <div ref={scroller} className="scroll-clean flex min-h-[320px] max-h-[56vh] flex-col gap-5 overflow-y-auto pr-2">
+          {chat.length === 0 && <p className="my-auto py-16 text-center text-t13 text-text-3">Send an instruction to begin.</p>}
           {chat.map((message) => {
             const mine = message.role === "you";
+            const fresh = (snapshot?.t ?? 0) - message.t < 3;
             return (
-              <div key={message.id} className={cn("flex", mine ? "justify-end" : "justify-start")}>
-                <div
-                  className={cn(
-                    "max-w-[82%] rounded-[18px] px-4 py-2.5 text-t13",
-                    mine ? "bg-blue text-white" : "material-thick text-text"
-                  )}
-                >
-                  {!mine && <p className="mb-0.5 text-t11 font-semibold uppercase tracking-wide text-text-tertiary">{message.role}</p>}
-                  <p className="whitespace-pre-wrap break-words">{message.text}</p>
-                </div>
+              <div key={message.id} className={cn("flex", mine ? "justify-end" : "justify-start", fresh && "fresh-row")}>
+                {mine ? (
+                  <p className="max-w-[80%] whitespace-pre-wrap break-words rounded-[16px] rounded-br-[4px] bg-text px-4 py-2.5 text-t13 text-background">{message.text}</p>
+                ) : (
+                  <div className="max-w-[85%]">
+                    <p className="eyebrow mb-1.5">{message.role}</p>
+                    <p className="whitespace-pre-wrap break-words text-t15 text-text">{message.text}</p>
+                  </div>
+                )}
               </div>
             );
           })}
+          {brain?.inflight && (
+            <div className="flex items-center gap-1.5 py-2" aria-label="The model is responding">
+              {[0, 1, 2].map((i) => (
+                <i key={i} className="h-1.5 w-1.5 rounded-full bg-text-2" style={{ animation: "dots 1.2s linear infinite", animationDelay: `${i * 160}ms` }} />
+              ))}
+            </div>
+          )}
         </div>
-        <div className="px-5 pb-5 pt-2">
-          <div className="scroll-clean mb-3 flex gap-2 overflow-x-auto pb-1">
+        <div className="mt-6 border-t border-rule pt-5">
+          <div className="scroll-clean mb-4 flex gap-2 overflow-x-auto pb-1">
             {SUGGESTIONS.map((item) => (
-              <Button key={item.label} variant={item.risky ? "destructive" : "tinted"} size="sm" className="shrink-0" onClick={() => submit(item.text)}>
+              <Button key={item.label} variant={item.risky ? "danger" : "quiet"} size="sm" className="shrink-0" onClick={() => submit(item.text)}>
                 {item.label}
               </Button>
             ))}
@@ -101,75 +98,43 @@ export function OperatorPanel({ room }: { room: ControlRoom }) {
               onKeyDown={(e) => e.key === "Enter" && submit(draft)}
               maxLength={500}
             />
-            <Button onClick={() => submit(draft)} disabled={!draft.trim()} aria-label="Send">
-              <Send size={16} />
-              <span className="hidden sm:inline">Send</span>
+            <Button onClick={() => submit(draft)} disabled={!draft.trim()} aria-label="Send" className="w-11 shrink-0 px-0">
+              <ArrowUp size={16} strokeWidth={2.25} />
             </Button>
           </div>
         </div>
-      </Card>
+      </Section>
 
-      <div className="space-y-4">
-        <Card material="regular">
-          <CardHeader>
-            <div>
-              <CardTitle>Operator brain</CardTitle>
-              <CardDescription>Switch between the trained model and the rule baseline.</CardDescription>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <Tabs value={brain?.kind ?? "baseline"} onValueChange={(kind) => send("brain", { kind })}>
-              <TabsList className="w-full">
-                <TabsTrigger value="ollama" className="flex-1">Trained model</TabsTrigger>
-                <TabsTrigger value="baseline" className="flex-1">Baseline rules</TabsTrigger>
-              </TabsList>
-            </Tabs>
-            <p className="tabular mt-3 text-t11 text-text-tertiary">
-              {brain?.inflight ? "Waiting on the model…" : `${brain?.calls ?? 0} model calls`}
-            </p>
-          </CardContent>
-        </Card>
+      <div className="space-y-14">
+        <Section title="Operator brain">
+          <Segmented
+            label="Operator brain"
+            className="w-full"
+            value={brain?.kind ?? "baseline"}
+            onValueChange={(kind) => send("brain", { kind })}
+            options={[{ value: "ollama", label: "Trained model" }, { value: "baseline", label: "Baseline rules" }]}
+          />
+          <p className="tabular mt-4 text-t12 text-text-3">{brain?.inflight ? "Waiting on the model…" : `${brain?.calls ?? 0} model calls`}</p>
+        </Section>
 
-        <Card material="regular">
-          <CardHeader>
-            <div>
-              <CardTitle>AI authority</CardTitle>
-              <CardDescription>How far the supervisor may move setpoints.</CardDescription>
-            </div>
-            <span className="tabular text-t22 font-semibold text-text">{fmt(authority * 100, 0)}%</span>
-          </CardHeader>
-          <CardContent>
-            <Slider min={0} max={100} step={5} value={[Math.round(authority * 100)]} onValueChange={onAuthority} aria-label="AI authority" />
-            <p className="tabular mt-2 text-t11 text-text-tertiary">
-              Effective {fmt((brain?.effective ?? 0) * 100, 0)}% after Keel and governance limits.
-            </p>
-          </CardContent>
-        </Card>
+        <Section title="AI authority">
+          <p className="tabular text-t44 text-text">{fmt(authority * 100, 0)}<span className="ml-1 text-t17 text-text-3">%</span></p>
+          <Slider className="mt-4" min={0} max={100} step={5} value={[Math.round(authority * 100)]} onValueChange={onAuthority} aria-label="AI authority" />
+          <p className="tabular mt-3 text-t12 text-text-3">Effective {fmt((brain?.effective ?? 0) * 100, 0)}% after Keel and governance limits.</p>
+        </Section>
 
         {snapshot?.note && (
-          <Card material="regular">
-            <CardContent className="pt-4">
-              <p className="text-t11 font-semibold uppercase tracking-wide text-text-tertiary">Standing instruction</p>
-              <p className="mt-1 text-t13 text-text">{snapshot.note}</p>
-              <Button variant="plain" size="sm" className="mt-2 -ml-3" onClick={() => send("clear_note")}>
-                Clear
-              </Button>
-            </CardContent>
-          </Card>
+          <Section title="Standing instruction">
+            <p className="text-t13 text-text">{snapshot.note}</p>
+            <Button variant="plain" size="sm" className="-ml-3 mt-2" onClick={() => send("clear_note")}>Clear</Button>
+          </Section>
         )}
 
         {snapshot?.manual && Object.keys(snapshot.manual).length > 0 && (
-          <Card material="regular">
-            <CardContent className="pt-4">
-              <p className="text-t11 font-semibold uppercase tracking-wide text-text-tertiary">Manual valves</p>
-              <p className="tabular mt-1 text-t13 text-text">
-                {Object.entries(snapshot.manual).map(([k, v]) => `${k} ${String(v)}`).join(" · ")}
-              </p>
-              <Button variant="plain" size="sm" className="mt-2 -ml-3" onClick={() => send("chat", { text: "release" })}>
-                Release
-              </Button>
-            </CardContent>
-          </Card>
+          <Section title="Manual valves">
+            <p className="tabular text-t13 text-text">{Object.entries(snapshot.manual).map(([k, v]) => `${k} ${String(v)}`).join(" · ")}</p>
+            <Button variant="plain" size="sm" className="-ml-3 mt-2" onClick={() => send("chat", { text: "release" })}>Release</Button>
+          </Section>
         )}
       </div>
     </div>

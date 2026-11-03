@@ -33,6 +33,7 @@ export interface ControlRoom {
   connected: boolean;
   stale: boolean;
   notice: string;
+  noticeKey: number;
   clearNotice: () => void;
   send: (action: ActionName, extra?: Record<string, unknown>) => Promise<ActionResult>;
 }
@@ -43,6 +44,7 @@ export function useControlRoom(): ControlRoom {
   const [events, setEvents] = useState<EventRecord[]>([]);
   const [connected, setConnected] = useState(false);
   const [notice, setNotice] = useState("");
+  const [noticeKey, setNoticeKey] = useState(0);
   const cursor = useRef({ history: 0, event: 0, run: "" as string });
   const snapshotRef = useRef<Snapshot | null>(null);
 
@@ -97,10 +99,12 @@ export function useControlRoom(): ControlRoom {
     if (!current || current.telemetry_stale) {
       const result = { ok: false, error: "Waiting for current plant telemetry before accepting controls." };
       setNotice(result.error);
+      setNoticeKey((k) => k + 1);
       return result;
     }
     const result = await postAction(action, extra);
     setNotice(result.ok ? "" : result.error ?? "Action rejected.");
+    if (!result.ok) setNoticeKey((k) => k + 1);
     return result;
   }, []);
 
@@ -112,6 +116,7 @@ export function useControlRoom(): ControlRoom {
     connected,
     stale: !connected || (snapshot?.telemetry_stale ?? true),
     notice,
+    noticeKey,
     clearNotice: () => setNotice(""),
     send
   };
