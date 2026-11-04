@@ -229,7 +229,7 @@ export function TrendChart({ samples, metric, windowSeconds, limits, showSetpoin
       )}
       {hovered && geometry && (
         <div
-          className="pointer-events-none absolute top-2 rounded-[10px] bg-background px-3 py-2 text-t12 ring-1 ring-rule-strong"
+          className="glass pointer-events-none absolute top-2 rounded-[12px] px-3 py-2 text-t12"
           style={{ left: Math.min(Math.max(geometry.x(hovered.t) + 12, 8), width - 168) }}
         >
           <div className="tabular font-semibold text-text">{clock(hovered.t)}</div>

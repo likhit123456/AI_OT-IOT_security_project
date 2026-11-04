@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { Activity, Gauge, MessageSquare, Moon, ShieldAlert, Sun, Table2, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Activity, Gauge, MessageSquare, Moon, ShieldAlert, Sun, Table2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { AlarmEdge } from "@/components/AlarmEdge";
 import { Button } from "@/components/ui/button";
@@ -31,9 +31,6 @@ interface AppShellProps {
   onPage: (page: PageId) => void;
   connected: boolean;
   status: PlantStatus;
-  notice: string;
-  noticeKey: number;
-  onDismissNotice: () => void;
   overview: React.ReactNode;
   children: React.ReactNode;
 }
@@ -57,23 +54,11 @@ function useTheme() {
   return { dark, toggle: () => setMode(dark ? "light" : "dark") };
 }
 
-export function AppShell({ page, direction, onPage, connected, status, notice, noticeKey, onDismissNotice, overview, children }: AppShellProps) {
+export function AppShell({ page, direction, onPage, connected, status, overview, children }: AppShellProps) {
   const [scrolled, setScrolled] = useState(false);
-  const [mark, setMark] = useState<{ left: number; width: number } | null>(null);
-  const buttons = useRef<(HTMLButtonElement | null)[]>([]);
   const theme = useTheme();
   const index = Math.max(0, NAV.findIndex((item) => item.id === page));
   const current = NAV[index];
-
-  useLayoutEffect(() => {
-    const measure = () => {
-      const el = buttons.current[index];
-      if (el) setMark({ left: el.offsetLeft, width: el.offsetWidth });
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [index]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -83,36 +68,44 @@ export function AppShell({ page, direction, onPage, connected, status, notice, n
   }, []);
 
   return (
-    <div className="min-h-dvh">
+    <div className="min-h-dvh overflow-x-clip">
       <AlarmEdge tone={connected ? status.tone : "neutral"} />
-      <header className="sticky top-0 z-40 bg-background pt-safe">
-        <div className="mx-auto flex h-14 max-w-[1180px] items-center justify-between gap-6 px-5 md:px-8">
+      <header className="sticky top-0 z-40 pt-safe">
+        <div
+          aria-hidden
+          className="bar-glass pointer-events-none absolute inset-0 transition-opacity duration-ui ease-out"
+          style={{ opacity: scrolled ? 1 : 0 }}
+        />
+        <div className="relative mx-auto flex h-16 max-w-[1180px] items-center justify-between gap-6 px-5 md:px-8">
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2.5">
               <Activity size={18} strokeWidth={2.25} className="text-text" />
               <span className="font-display text-t15 font-semibold tracking-[-0.01em] text-text">SCRAM</span>
             </div>
-            <nav className="relative hidden h-14 items-stretch gap-1 md:flex" aria-label="Primary" data-instant={direction === "none" ? "" : undefined}>
-              {NAV.map(({ id, label }, i) => (
+            <nav
+              className="capsule relative hidden w-[440px] grid-flow-col auto-cols-fr rounded-full p-1 md:grid"
+              aria-label="Primary"
+              data-instant={direction === "none" ? "" : undefined}
+            >
+              <span
+                aria-hidden
+                className="slide-indicator capsule-thumb pointer-events-none absolute bottom-1 left-1 top-1 rounded-full"
+                style={{ width: "calc((100% - 8px) / 4)", transform: `translateX(${index * 100}%)` }}
+              />
+              {NAV.map(({ id, label }) => (
                 <button
                   key={id}
-                  ref={(el) => {
-                    buttons.current[i] = el;
-                  }}
                   type="button"
                   aria-current={page === id ? "page" : undefined}
                   onClick={() => onPage(id)}
-                  className={cn("flex items-center gap-2 px-3 text-t13 font-medium transition-colors duration-ui ease-out", page === id ? "text-text" : "text-text-3 hover:text-text-2")}
+                  className={cn(
+                    "relative flex h-8 items-center justify-center gap-2 rounded-full px-3 text-t13 font-medium transition-colors duration-ui ease-out",
+                    page === id ? "text-text" : "text-text-3 hover:text-text-2"
+                  )}
                 >
                   {label}
-                  <kbd className="text-t11 font-medium tracking-normal text-text-3">{i + 1}</kbd>
                 </button>
               ))}
-              <span
-                aria-hidden
-                className="slide-indicator absolute bottom-0 left-0 h-[2px] w-px origin-left bg-text"
-                style={{ opacity: mark ? 1 : 0, transform: mark ? `translateX(${mark.left}px) scaleX(${mark.width})` : undefined }}
-              />
             </nav>
           </div>
           <div className="flex items-center gap-4">
@@ -124,19 +117,8 @@ export function AppShell({ page, direction, onPage, connected, status, notice, n
             </Button>
           </div>
         </div>
-        <div aria-hidden className="h-px bg-rule transition-opacity duration-ui ease-out" style={{ opacity: scrolled ? 1 : 0 }} />
+        <div aria-hidden className="relative h-px bg-rule transition-opacity duration-ui ease-out" style={{ opacity: scrolled ? 1 : 0 }} />
       </header>
-
-      {notice && (
-        <div className="mx-auto mt-4 max-w-[1180px] px-5 md:px-8">
-          <div key={noticeKey} className="shake flex items-center justify-between gap-3 rounded-[10px] bg-sunken px-4 py-2.5 text-t13 text-warn" role="status">
-            <span>{notice}</span>
-            <button type="button" onClick={onDismissNotice} aria-label="Dismiss" className="text-text-3 transition-colors duration-ui hover:text-text">
-              <X size={15} />
-            </button>
-          </div>
-        </div>
-      )}
 
       <main className="mx-auto max-w-[1180px] px-5 pb-32 pt-10 md:px-8 md:pb-24 md:pt-14">
         {page !== "overview" && (
@@ -152,7 +134,7 @@ export function AppShell({ page, direction, onPage, connected, status, notice, n
         {overview}
       </main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-40 flex justify-around border-t border-rule bg-background px-2 pb-safe pt-1.5 md:hidden" aria-label="Primary">
+      <nav className="bar-glass fixed inset-x-0 bottom-0 z-40 flex justify-around border-t border-rule px-2 pb-safe pt-1.5 md:hidden" aria-label="Primary">
         {NAV.map(({ id, label, Icon }) => (
           <button
             key={id}

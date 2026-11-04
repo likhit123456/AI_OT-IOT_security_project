@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Toaster, toast } from "sonner";
 import { AppShell, NAV, type Direction, type PageId } from "@/components/AppShell";
 import { Reveal } from "@/components/Reveal";
 import { AttacksPanel } from "@/components/panels/AttacksPanel";
@@ -73,18 +74,22 @@ export default function App() {
     );
   }, [page, direction]);
 
+  useEffect(() => {
+    if (!room.notice) return;
+    toast.error(room.notice, { id: "notice", duration: 5000 });
+    room.clearNotice();
+  }, [room.noticeKey]);
+
   const status = derivePlantStatus(room.snapshot, room.connected);
 
   return (
+    <>
     <AppShell
       page={page}
       direction={direction}
       onPage={(next) => go(next, false)}
       connected={room.connected}
       status={status}
-      notice={room.notice}
-      noticeKey={room.noticeKey}
-      onDismissNotice={room.clearNotice}
       overview={
         <div ref={overviewRef} hidden={page !== "overview"} className="space-y-14">
           <Reveal index={0}><StatusHero room={room} /></Reveal>
@@ -108,5 +113,26 @@ export default function App() {
       )}
       {page === "telemetry" && <TelemetryPanel room={room} />}
     </AppShell>
+    <Toaster
+      theme="system"
+      position="bottom-right"
+      offset={24}
+      mobileOffset={{ bottom: "92px", left: "16px", right: "16px" }}
+      gap={10}
+      toastOptions={{
+        style: {
+          background: "var(--glass-bg-strong)",
+          color: "var(--text)",
+          border: "none",
+          borderRadius: "16px",
+          fontFamily: "var(--font-text)",
+          fontSize: "13px",
+          boxShadow: "inset 0 0 0 1px var(--glass-edge), inset 0 1px 0 var(--glass-highlight), var(--glass-shadow)",
+          backdropFilter: "blur(24px) saturate(160%)",
+          WebkitBackdropFilter: "blur(24px) saturate(160%)"
+        }
+      }}
+    />
+    </>
   );
 }

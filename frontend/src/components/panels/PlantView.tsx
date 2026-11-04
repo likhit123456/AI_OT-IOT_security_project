@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
+import { useSpotlight } from "@/hooks/useSpotlight";
 import { cn } from "@/lib/utils";
 
 export function PlantView() {
   const [loaded, setLoaded] = useState(false);
   const [ready, setReady] = useState(false);
+  const frame = useSpotlight<HTMLDivElement>();
 
   return (
     <Section
@@ -18,7 +20,7 @@ export function PlantView() {
         ) : undefined
       }
     >
-      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[12px] bg-sunken">
+      <div ref={frame} className="glass spot relative aspect-[16/9] w-full overflow-hidden rounded-[20px]">
         {loaded ? (
           <iframe
             title="GRFICS reactor"

@@ -164,7 +164,7 @@ const state = {
   const dispatched=actions.length;
   await page.getByRole('button',{name:'Send'}).click();
   assert.equal(actions.length,dispatched);
-  await page.getByRole('status').waitFor();
+  await page.locator('[data-sonner-toast]').first().waitFor();
   state.telemetry_stale=false;
   state.run_id='preview-2';state.t=1;
   state.events=[{id:1,t:0,kind:'plant',msg:'Restart recovered'}];

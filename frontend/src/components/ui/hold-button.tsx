@@ -38,7 +38,7 @@ export function HoldButton({ onConfirm, holdMs = 1200, className, children, disa
       onKeyUp={cancel}
       onBlur={cancel}
       className={cn(
-        "press relative inline-flex min-h-[34px] select-none items-center justify-center gap-2 overflow-hidden rounded-[10px] px-4 py-2 text-t13 font-medium text-bad ring-1 ring-inset ring-bad/35 transition-transform duration-press ease-out active:scale-[0.97] disabled:pointer-events-none disabled:opacity-35 [@media(pointer:coarse)]:min-h-11 [@media(pointer:coarse)]:text-t17",
+        "press relative inline-flex min-h-[34px] select-none items-center justify-center gap-2 overflow-hidden rounded-[10px] bg-bad/[0.06] px-4 py-2 text-t13 font-medium text-bad ring-1 ring-inset ring-bad/35 backdrop-blur-md transition-transform duration-press ease-out active:scale-[0.97] disabled:pointer-events-none disabled:opacity-35 [@media(pointer:coarse)]:min-h-11 [@media(pointer:coarse)]:text-t17",
         className
       )}
       {...props}

@@ -2,8 +2,18 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { isBooted } from "@/components/Reveal";
 import type { ControlRoom } from "@/hooks/useControlRoom";
-import { derivePlantStatus, toneText } from "@/lib/status";
+import { derivePlantStatus, toneText, type Tone } from "@/lib/status";
 import { clock, cn, fmt } from "@/lib/utils";
+
+const GLOW: Record<Tone, string> = {
+  good: "var(--glow-good)",
+  warn: "var(--glow-warn)",
+  bad: "var(--glow-bad)",
+  info: "var(--glow-quiet)",
+  neutral: "var(--glow-quiet)"
+};
+
+const TONES: Tone[] = ["good", "warn", "bad", "info", "neutral"];
 
 export function StatusHero({ room }: { room: ControlRoom }) {
   const { snapshot, connected, send } = room;
@@ -15,7 +25,15 @@ export function StatusHero({ room }: { room: ControlRoom }) {
   const intro = introTitle.current !== null && !wasBooted.current;
 
   return (
-    <section>
+    <section className="relative isolate">
+      {TONES.map((tone) => (
+        <div
+          key={tone}
+          aria-hidden
+          className="pointer-events-none absolute -left-24 -top-32 -z-10 h-[460px] w-[760px] max-w-[140vw] transition-opacity duration-move ease-in-out"
+          style={{ opacity: status.tone === tone ? 1 : 0, background: `radial-gradient(closest-side, ${GLOW[tone]}, transparent)` }}
+        />
+      ))}
       <p className="eyebrow flex flex-wrap items-center gap-x-3 gap-y-1">
         <span>Plant status</span>
         <span className="tabular">T+ {clock(snapshot?.t ?? 0)}</span>

@@ -8,10 +8,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-text text-background hover:opacity-85",
-        quiet: "bg-transparent text-text ring-1 ring-inset ring-rule-strong hover:bg-sunken",
+        primary: "btn-solid bg-text text-background hover:opacity-85",
+        quiet: "btn-glass text-text",
         plain: "bg-transparent text-text-2 hover:text-text",
-        danger: "bg-transparent text-bad ring-1 ring-inset ring-bad/35 hover:bg-bad/10"
+        danger: "bg-bad/[0.06] text-bad ring-1 ring-inset ring-bad/35 backdrop-blur-md hover:bg-bad/[0.14]"
       },
       size: {
         default: "min-h-[34px] px-4 py-2 text-t13 [@media(pointer:coarse)]:text-t17",

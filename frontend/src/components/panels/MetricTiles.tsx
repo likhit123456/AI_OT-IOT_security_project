@@ -1,4 +1,5 @@
 import { Sparkline } from "@/components/Sparkline";
+import { useSpotlight } from "@/hooks/useSpotlight";
 import type { ControlRoom } from "@/hooks/useControlRoom";
 import type { Sample } from "@/lib/types";
 import { cn, fmt } from "@/lib/utils";
@@ -48,11 +49,13 @@ export function MetricTiles({ room }: { room: ControlRoom }) {
     if (a === null || a === undefined || b === null || b === undefined) return { text: "Safety channel unavailable", warn: false };
     return { text: `Safety channel ${fmt(b, 1)} · Δ ${fmt(a - b, 1)}`, warn: Math.abs(a - b) > limit };
   };
+  const pane = useSpotlight<HTMLDivElement>();
   const p = gap(m?.pressure, tr?.pressure, 25);
   const l = gap(m?.level, tr?.level, 2);
 
   return (
-    <div className="grid grid-cols-2 border-t border-rule lg:grid-cols-4">
+    <div ref={pane} className="glass spot rounded-[20px] px-5 lg:px-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4">
       <Readout index={0} label="Pressure" value={fmt(m?.pressure, 0)} unit="kPa" hint={p.text} warn={p.warn} stale={stale} trend={recent(samples, (s) => s.pressure)} />
       <Readout index={1} label="Inventory" value={fmt(m?.level, 1)} unit="%" hint={l.text} warn={l.warn} stale={stale} trend={recent(samples, (s) => s.level)} />
       <Readout index={2} label="Product flow" value={fmt(m?.product_flow, 1)} unit="kmol/h" hint={`Target ${fmt(targets?.production_rate_sp, 1)}`} stale={stale} />
@@ -65,6 +68,7 @@ export function MetricTiles({ room }: { room: ControlRoom }) {
         stale={stale}
         trend={recent(samples, (s) => (s.authority === null ? null : s.authority * 100))}
       />
+      </div>
     </div>
   );
 }

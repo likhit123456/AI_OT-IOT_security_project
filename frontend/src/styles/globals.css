@@ -23,6 +23,26 @@
   --bad-rgb: 217 45 32;
   --bad: rgb(var(--bad-rgb));
 
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-hover: rgba(255, 255, 255, 0.78);
+  --glass-bg-strong: rgba(255, 255, 255, 0.86);
+  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.3));
+  --glass-edge: rgba(12, 12, 13, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.95);
+  --glass-shadow: 0 1px 2px rgba(12, 12, 13, 0.04), 0 12px 32px rgba(12, 12, 13, 0.06);
+  --bar-bg: rgba(251, 251, 250, 0.72);
+  --capsule-bg: rgba(12, 12, 13, 0.06);
+  --thumb-bg: #ffffff;
+  --spot: rgba(12, 12, 13, 0.06);
+  --glow-good: rgba(12, 12, 13, 0.07);
+  --glow-warn: rgba(199, 106, 0, 0.2);
+  --glow-bad: rgba(217, 45, 32, 0.2);
+  --glow-quiet: rgba(12, 12, 13, 0.04);
+  --ambient:
+    radial-gradient(60% 45% at 12% 0%, rgba(12, 12, 13, 0.06), transparent 70%),
+    radial-gradient(50% 40% at 92% 28%, rgba(12, 12, 13, 0.035), transparent 70%),
+    radial-gradient(60% 40% at 50% 100%, rgba(12, 12, 13, 0.04), transparent 70%);
+
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
@@ -40,6 +60,25 @@
     --rule: rgba(244, 244, 242, 0.09);
     --rule-strong: rgba(244, 244, 242, 0.22);
     --focus: rgba(244, 244, 242, 0.22);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-bg-hover: rgba(255, 255, 255, 0.09);
+    --glass-bg-strong: rgba(28, 28, 31, 0.78);
+    --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.012));
+    --glass-edge: rgba(255, 255, 255, 0.09);
+    --glass-highlight: rgba(255, 255, 255, 0.16);
+    --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+    --bar-bg: rgba(9, 9, 10, 0.62);
+    --capsule-bg: rgba(255, 255, 255, 0.07);
+    --thumb-bg: rgba(255, 255, 255, 0.16);
+    --spot: rgba(255, 255, 255, 0.08);
+    --glow-good: rgba(255, 255, 255, 0.08);
+    --glow-warn: rgba(255, 159, 10, 0.2);
+    --glow-bad: rgba(255, 69, 58, 0.24);
+    --glow-quiet: rgba(255, 255, 255, 0.05);
+    --ambient:
+      radial-gradient(60% 45% at 12% 0%, rgba(255, 255, 255, 0.075), transparent 70%),
+      radial-gradient(50% 40% at 92% 28%, rgba(255, 255, 255, 0.035), transparent 70%),
+      radial-gradient(60% 40% at 50% 100%, rgba(255, 255, 255, 0.045), transparent 70%);
     --ok-rgb: 48 209 88;
   --ok: rgb(var(--ok-rgb));
     --warn-rgb: 255 159 10;
@@ -58,6 +97,25 @@
   --rule: rgba(244, 244, 242, 0.09);
   --rule-strong: rgba(244, 244, 242, 0.22);
   --focus: rgba(244, 244, 242, 0.22);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-hover: rgba(255, 255, 255, 0.09);
+  --glass-bg-strong: rgba(28, 28, 31, 0.78);
+  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.012));
+  --glass-edge: rgba(255, 255, 255, 0.09);
+  --glass-highlight: rgba(255, 255, 255, 0.16);
+  --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+  --bar-bg: rgba(9, 9, 10, 0.62);
+  --capsule-bg: rgba(255, 255, 255, 0.07);
+  --thumb-bg: rgba(255, 255, 255, 0.16);
+  --spot: rgba(255, 255, 255, 0.08);
+  --glow-good: rgba(255, 255, 255, 0.08);
+  --glow-warn: rgba(255, 159, 10, 0.2);
+  --glow-bad: rgba(255, 69, 58, 0.24);
+  --glow-quiet: rgba(255, 255, 255, 0.05);
+  --ambient:
+    radial-gradient(60% 45% at 12% 0%, rgba(255, 255, 255, 0.075), transparent 70%),
+    radial-gradient(50% 40% at 92% 28%, rgba(255, 255, 255, 0.035), transparent 70%),
+    radial-gradient(60% 40% at 50% 100%, rgba(255, 255, 255, 0.045), transparent 70%);
   --ok-rgb: 48 209 88;
   --ok: rgb(var(--ok-rgb));
   --warn-rgb: 255 159 10;
@@ -104,6 +162,14 @@
     outline: none;
     box-shadow: 0 0 0 3px var(--focus);
   }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--ambient);
+  }
   html[data-switching] *,
   html[data-switching] *::before,
   html[data-switching] *::after {
@@ -122,7 +188,10 @@
   }
   .field {
     width: 100%;
-    background-color: var(--bg-sunken);
+    background: var(--glass-sheen), var(--glass-bg);
+    box-shadow: inset 0 0 0 1px var(--glass-edge);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     border: 0;
     border-radius: 10px;
     padding: 10px 14px;
@@ -140,7 +209,61 @@
   }
   .field:focus {
     outline: none;
-    box-shadow: 0 0 0 3px var(--focus);
+    box-shadow: inset 0 0 0 1px var(--rule-strong), 0 0 0 3px var(--focus);
+  }
+
+  .glass {
+    position: relative;
+    background: var(--glass-sheen), var(--glass-bg);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    backdrop-filter: blur(24px) saturate(160%);
+    box-shadow: inset 0 0 0 1px var(--glass-edge), inset 0 1px 0 var(--glass-highlight), var(--glass-shadow);
+  }
+  .btn-glass {
+    background: var(--glass-sheen), var(--glass-bg);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    backdrop-filter: blur(14px) saturate(150%);
+    box-shadow: inset 0 0 0 1px var(--glass-edge), inset 0 1px 0 var(--glass-highlight);
+  }
+  .btn-solid {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+  .bar-glass {
+    background: var(--bar-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+  .capsule {
+    background: var(--capsule-bg);
+    box-shadow: inset 0 0 0 1px var(--glass-edge);
+  }
+  .capsule-thumb {
+    background: var(--thumb-bg);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), inset 0 0 0 1px var(--glass-edge), 0 1px 3px rgba(0, 0, 0, 0.22);
+  }
+  .spot {
+    overflow: hidden;
+  }
+  .spot > * {
+    position: relative;
+  }
+  .spot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), var(--spot), transparent 65%);
+    opacity: 0;
+    transition: opacity 200ms var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .spot:hover::before {
+      opacity: 1;
+    }
+    .btn-glass:hover {
+      background: var(--glass-sheen), var(--glass-bg-hover);
+    }
   }
 }
 
