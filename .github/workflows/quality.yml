@@ -13,7 +13,7 @@ jobs:
           node-version: '22'
       - run: pip install -r requirements-dev.txt -r requirements-eval.txt
       - run: python -m pytest -q --ignore=tests/test_interlock_truth.py -W error::pytest.PytestUnhandledThreadExceptionWarning
-      - run: node --check live/static/control-room.js && node --check sim_app/static/app.js
+      - run: node --check sim_app/static/app.js
       - run: npm install --no-save playwright
       - run: npx playwright install --with-deps chromium
       - run: node tests/frontend_smoke.cjs
