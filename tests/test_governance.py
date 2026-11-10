@@ -1,7 +1,7 @@
 """Fast tests for monitor/governance.py: ceiling shape, debounce, asymmetric rates, recovery gate."""
 from __future__ import annotations
 
-from contracts import SupervisoryTargets
+from shared.contracts import SupervisoryTargets
 from monitor import governance as G
 from monitor.observer import Verdict
 

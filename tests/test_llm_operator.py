@@ -10,7 +10,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from contracts import PlantState
+from shared.contracts import PlantState
 import l3_brain.policy as policy_mod
 from l3_brain.policy import (SYSTEM_PROMPT, BaselineOperator, Envelope, LLMOperator,
                              OllamaOperator, build_state_prompt, make_policy, parse_llm_targets)

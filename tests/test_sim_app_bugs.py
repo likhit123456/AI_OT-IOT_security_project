@@ -8,7 +8,7 @@ from fastapi import HTTPException
 
 import sim_app.ai as ai
 import sim_app.server as server
-from contracts import SupervisoryTargets
+from shared.contracts import SupervisoryTargets
 
 
 # ---- fakes ---------------------------------------------------------------------

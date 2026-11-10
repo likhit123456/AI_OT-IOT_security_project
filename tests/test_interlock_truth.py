@@ -25,7 +25,7 @@ import time
 
 import pytest
 
-from contracts import ControlCommand
+from shared.contracts import ControlCommand
 from l0_plant.plant_service import PlantService
 from l0_plant import fault_injection as fi
 from scripts.reset_plant import reset_and_settle

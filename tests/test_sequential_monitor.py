@@ -1,7 +1,7 @@
 """Fast tests for monitor/sequential_monitor.py, incl. the case BehaviorMonitor misses."""
 from __future__ import annotations
 
-from contracts import PlantState, SupervisoryTargets
+from shared.contracts import PlantState, SupervisoryTargets
 from monitor.behavior_monitor import BehaviorMonitor
 from monitor.sequential_monitor import SequentialMonitor
 

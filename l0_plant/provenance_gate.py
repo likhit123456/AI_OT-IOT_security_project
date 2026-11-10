@@ -40,7 +40,7 @@ from collections import deque
 from dataclasses import dataclass, field, replace
 from typing import Deque, Dict, List, Optional, Tuple
 
-from contracts import ControlCommand
+from shared.contracts import ControlCommand
 
 VALVE_KEYS = ("f1_valve_pos", "f2_valve_pos", "purge_valve_pos", "product_valve_pos")
 AUDIT_TOLERANCE_PCT = 0.5

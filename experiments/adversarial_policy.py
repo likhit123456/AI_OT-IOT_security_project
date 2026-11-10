@@ -17,7 +17,7 @@ catch anywhere in the request stream.
 
 from __future__ import annotations
 
-from contracts import PlantState, SupervisoryTargets
+from shared.contracts import PlantState, SupervisoryTargets
 
 
 class AdversarialRamp:

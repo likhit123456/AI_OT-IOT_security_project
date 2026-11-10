@@ -6,7 +6,7 @@ import pytest
 from fastapi import HTTPException
 from test_sim_app_bugs import FakeSim, make_plant
 
-from contracts import ControlCommand
+from shared.contracts import ControlCommand
 from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
 from l0_plant.safety import SafeHold, SafetyInterlock
 from monitor.observer import Observer, Verdict
@@ -80,7 +80,7 @@ def test_estop_during_inference_prevents_all_later_ai_writes(monkeypatch):
         model = "test"
         def __init__(self, **_): self.log = []
         def decide(self, _):
-            from contracts import SupervisoryTargets
+            from shared.contracts import SupervisoryTargets
             entered.set()
             assert release.wait(3)
             return SupervisoryTargets(pressure_sp=2600, level_sp=44, production_rate_sp=70)

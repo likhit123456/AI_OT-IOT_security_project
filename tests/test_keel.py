@@ -4,7 +4,7 @@ from __future__ import annotations
 import math
 import random
 
-from contracts import ControlCommand, PlantState
+from shared.contracts import ControlCommand, PlantState
 from enforcer.keel import EventLog, Keel, KeelLimits, SisFrame
 
 KEY = b"test-key"

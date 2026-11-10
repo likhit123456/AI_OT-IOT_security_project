@@ -53,7 +53,7 @@ from typing import List, Optional
 
 from l0_plant import fault_injection as fi
 from l0_plant.safety import TripLimits
-from l1_stub import L1ControlStub
+from legacy.l1_stub import L1ControlStub
 from monitor.behavior_monitor import BehaviorMonitor
 from scripts.reset_plant import reset_and_settle
 

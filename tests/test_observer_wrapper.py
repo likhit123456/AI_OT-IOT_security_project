@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 
-from contracts import PlantState, SupervisoryTargets
+from shared.contracts import PlantState, SupervisoryTargets
 from monitor import observer as O
 from monitor import observer_v2_format as V2
 
@@ -95,7 +95,7 @@ def test_live_inputs_use_the_exact_v2_format():
 
 
 # ---- v3 path (served first; monitor/observer_v3_format) ---------------------------------
-from contracts import ControlCommand
+from shared.contracts import ControlCommand
 from monitor import observer_v3_format as V3
 from test_observer_v3_format import rebuild
 

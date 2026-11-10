@@ -1,0 +1,14 @@
+{
+  "all_343_original_files_preserved": true,
+  "new_python_syntax_errors": [],
+  "preexisting_syntax_issues": [
+    {
+      "path": "simulation/simulation/remote_io/modbus/remote_io.py",
+      "line": 16,
+      "preexisting": true
+    }
+  ],
+  "stale_imports_of_moved_modules": [],
+  "model_files_and_physics_features_byte_identical": true,
+  "runtime_tests_run": false
+}

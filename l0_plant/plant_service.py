@@ -30,7 +30,7 @@ import os
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from contracts import PlantState, ControlCommand          # noqa: E402
+from shared.contracts import PlantState, ControlCommand          # noqa: E402
 from l0_plant.grfics_client import GrficsClient            # noqa: E402
 from l0_plant.safety import SafeHold, SafetyInterlock, TripLimits    # noqa: E402
 from l0_plant.provenance_gate import ProvenanceGate        # noqa: E402

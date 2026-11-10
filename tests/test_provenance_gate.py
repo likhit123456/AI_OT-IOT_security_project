@@ -6,7 +6,7 @@ from dataclasses import replace
 
 import pytest
 
-from contracts import ControlCommand
+from shared.contracts import ControlCommand
 from l0_plant.plant_service import PlantService
 from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
 

@@ -1,7 +1,7 @@
 # SCRAM plant: run ONLY the prebuilt GRFICS simulation image (no local build).
 #   docker compose pull simulation
 #   docker compose up -d simulation
-# The full GRFICS lab compose is kept in docker-compose.grfics-full.yml.
+# This checkout supports the simulator-only Compose configuration.
 #
 # entrypoint.sh requires an interface with a 192.168.95.x address, so the
 # container sits on a plain bridge with that subnet and a static address.

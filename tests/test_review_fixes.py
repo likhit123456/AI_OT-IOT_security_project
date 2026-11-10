@@ -7,7 +7,7 @@ import threading
 
 import pytest
 
-from contracts import ControlCommand, PlantState, SupervisoryTargets
+from shared.contracts import ControlCommand, PlantState, SupervisoryTargets
 from l0_plant.plant_service import PlantService
 from l0_plant.provenance_gate import ProvenanceGate
 from l3_brain.operator import AIOperator

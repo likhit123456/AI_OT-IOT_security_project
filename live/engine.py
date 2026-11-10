@@ -34,14 +34,14 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Callable, Deque, Optional
 
-from contracts import ControlCommand, PlantState, SupervisoryTargets
+from shared.contracts import ControlCommand, PlantState, SupervisoryTargets
 from enforcer.keel import Keel, KeelLimits, SisFrame
 from l0_plant import fault_injection as fi
 from l0_plant.grfics_client import GrficsClient
 from l0_plant.plant_service import PlantService
 from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
 from l0_plant.safety import SafeHold, TripLimits
-from l1_regulator import L1Regulator
+from enforcer.regulator import L1Regulator
 from l3_brain.operator import AIOperator
 from live import commands
 from l3_brain.prompt_format import DESIGN_POINT

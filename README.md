@@ -1,3 +1,5 @@
+> **Navigation:** [File structure and folder guide](FILE_STRUCTURE.md) · [Refactor notes](docs/refactor-notes.md)
+
 # SCRAM
 
 An AI-supervised chemical-plant simulation with layered governance, deterministic
@@ -5,9 +7,9 @@ control, command provenance, and an independent simulated safety channel.
 
 The main application is the SCRAM control room in `live/`. The separate reactor
 studio in `sim_app/` is a direct-control sandbox. See
-[QUALITY_IMPROVEMENTS.md](QUALITY_IMPROVEMENTS.md) for the reliability pass,
-[ACCURACY_IMPROVEMENTS.md](ACCURACY_IMPROVEMENTS.md) for later detector results, and
-[ARCHITECTURE.md](ARCHITECTURE.md) for the original design and trust assumptions.
+[QUALITY_IMPROVEMENTS.md](docs/reports/quality-improvements.md) for the reliability pass,
+[ACCURACY_IMPROVEMENTS.md](docs/reports/accuracy-improvements.md) for later detector results, and
+[ARCHITECTURE.md](docs/architecture.md) for the original design and trust assumptions.
 
 ## Run the control room
 
@@ -20,7 +22,7 @@ from Git; see [model setup](model/README.md) for required files and registration
 For an explicit model-free operator, use `python -m live --brain baseline`.
 
 ```powershell
-python -m pip install -r requirements.txt
+python -m pip install -r requirements/runtime.txt
 docker compose up -d simulation
 python -m live
 ```
@@ -39,7 +41,7 @@ is available with `python -m live --configure-ollama`. That option can persist
 | --- | --- | --- |
 | L3 | `l3_brain/` | Local LLM or baseline emits supervisory setpoints |
 | L2 | `monitor/` | Rule monitors, proposal observer, telemetry observer, governance |
-| L1 | `l1_regulator.py`, `enforcer/keel.py` | PI regulation, deterministic command constraints, final signing |
+| L1 | `enforcer/regulator.py`, `enforcer/keel.py` | PI regulation, deterministic command constraints, final signing |
 | L0 | `l0_plant/` | Plant adapter, provenance gate and latched protective actions |
 | UI | `live/`, `sim_app/` | Full control room and separate manual studio |
 | Data/evaluation | `training/`, `model/`, `experiments/` | Collection, training, artifacts and reproducible evaluations |
@@ -49,7 +51,7 @@ judgments), and `scram-observer-v3` (telemetry). A release-gated 236 kB CPU
 physics detector corrects advisory telemetry verdicts and preserves the original
 LLM label. It never contributes to authority or protective actuation. Its model,
 features and evaluation evidence are checked by hash before loading. See
-[accuracy improvements](ACCURACY_IMPROVEMENTS.md) for measured results and remaining gaps.
+[accuracy improvements](docs/reports/accuracy-improvements.md) for measured results and remaining gaps.
 
 Measured composition values are fractions; composition setpoints are percentages.
 The `truth` field carries the independent simulated safety channel for L0/Keel
@@ -76,7 +78,7 @@ writes, and requires deliberate release. Avoid running two plant writers at once
 ## Verify and reproduce
 
 ```powershell
-python -m pip install -r requirements-dev.txt -r requirements-eval.txt
+python -m pip install -r requirements/dev.txt -r requirements/eval.txt
 python -m pytest -q --ignore=tests/test_interlock_truth.py
 ```
 
@@ -127,7 +129,7 @@ Install `libjsoncpp-dev` and `liblapacke-dev` first. This isolated test starts a
 separate process on a temporary port. Compose continues to use the prebuilt
 GRFICS image: local source fixes do not replace its binary automatically.
 
-`l1_stub.py`, `run_demo.py`, and `reference/` are historical/minimal paths. Use the
+`legacy/l1_stub.py`, `legacy/run_demo.py`, and `reference/` are historical/minimal paths. Use the
 full control room for the current integration. GRFICS is GPL-3.0; this project
 retains its license and attribution.
 

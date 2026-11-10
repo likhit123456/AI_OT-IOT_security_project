@@ -10,9 +10,9 @@ from __future__ import annotations
 
 from dataclasses import replace
 
-from contracts import ControlCommand, PlantState, SupervisoryTargets
+from shared.contracts import ControlCommand, PlantState, SupervisoryTargets
 from l0_plant.provenance_gate import ProvenanceGate
-from l1_regulator import (DESIGN_F1, DESIGN_F2, DESIGN_PRODUCT, DESIGN_PURGE, L1Regulator)
+from enforcer.regulator import (DESIGN_F1, DESIGN_F2, DESIGN_PRODUCT, DESIGN_PURGE, L1Regulator)
 
 KEY = b"l1-test-key"
 DESIGN = dict(pressure_sp=2700.6, level_sp=44.18, production_rate_sp=100.0, a_comp_sp=47.0)
@@ -89,7 +89,7 @@ def test_each_setpoint_step_settles_without_sustained_oscillation():
 
 
 def test_no_windup_after_an_unreachable_setpoint():
-    from l1_regulator import FEED_SPAN, FEED_TRIM_MAX
+    from enforcer.regulator import FEED_SPAN, FEED_TRIM_MAX
     l1, plant = fresh()
     run(l1, plant, {**DESIGN, "pressure_sp": 3500.0}, 300)      # feeds pinned at full trim
     assert abs(plant.v.f1_valve - DESIGN_F1 * (1 + FEED_TRIM_MAX)) < 0.5

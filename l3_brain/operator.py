@@ -38,7 +38,7 @@ from typing import Callable, Optional
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from contracts import PlantState, SupervisoryTargets   # noqa: E402
+from shared.contracts import PlantState, SupervisoryTargets   # noqa: E402
 from l3_brain.policy import Policy, BaselineOperator, make_policy   # noqa: E402,F401
 
 

@@ -47,5 +47,5 @@ visualization comes from the Docker image; local HTML/loader files alone are
 not a complete Unity build. The older VirtualBox/GRFICSv2 installation steps do
 not describe this repository's setup.
 
-GRFICS attribution is recorded in [README_GRFICS.md](../README_GRFICS.md), with
+GRFICS attribution is recorded in [README_GRFICS.md](../docs/upstream.md), with
 the inherited license in [LICENSE](../LICENSE).
