@@ -33,14 +33,11 @@ Start with [setup and usage](README.md). Run commands from the repository root.
 - `experiments/`: experimental scripts and saved results.
 - `artifacts/`: evaluation evidence and historical cleanup reports. Some files are consumed by tests.
 - `legacy/`: historical minimal control loop. Run its demo with `python -m legacy.run_demo`; collectors and experiments still import its L1 stub.
-- `data/samples/network/`: preserved packet captures.
 - `docs/`: architecture, runbook, frontend notes and upstream attribution.
 - `docs/reports/`: historical review and accuracy documents.
 
 ## Important boundaries
 
-This refactor preserves every original file; no optional feature or dataset was deleted. Existing package names and launch commands remain, except the historical root demo is now a module. The L0/L1/L2/L3 design is unchanged.
-
-Built frontend files and model evidence intentionally remain in their existing locations. Moving them requires coordinated build/runtime changes. The original four dependency sets remain separate; only their location and names changed.
-
-See [refactor notes](docs/refactor-notes.md) for changes and manual verification. [File move manifest](docs/file-moves.json) records original and new paths.
+The control room serves the committed build in `live/static/`. Model release
+checks depend on files in `model/telemetry-physics/`. See the
+[migration log](docs/migration.md) for changes from `main`.

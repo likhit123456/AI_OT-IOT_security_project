@@ -3,7 +3,8 @@
 > Historical review snapshot. A subsequent improvement pass fixed the safety,
 > E-stop, observer reset/freshness, signing, port exposure, lifecycle and simulator
 > source issues described below. See [QUALITY_IMPROVEMENTS.md](quality-improvements.md)
-> for current measurements, validation limits, and remaining model weaknesses.
+> for the follow-up results. Use the [README](../../README.md) and
+> [architecture guide](../architecture.md) for the current layout and launch commands.
 
 SCRAM is a substantial research prototype with a coherent central idea: an AI proposes operating targets, deterministic controllers turn those into actuator commands, and independent enforcement limits what reaches the simulated plant. The strongest work is the separation of responsibilities, the measured-versus-safety signal distinction, the attack scenarios, and the regression tests. It is more developed than the root README suggests.
 

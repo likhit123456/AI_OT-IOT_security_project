@@ -1,4 +1,4 @@
-> **Navigation:** [File structure and folder guide](FILE_STRUCTURE.md) · [Refactor notes](docs/refactor-notes.md)
+> **Navigation:** [File structure and folder guide](FILE_STRUCTURE.md) · [Migration log](docs/migration.md)
 
 # SCRAM
 

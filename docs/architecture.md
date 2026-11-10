@@ -4,14 +4,14 @@ SCRAM runs an **AI operator** on a simulated chemical plant. A **governance
 layer** dynamically reduces the AI's authority, and an **independent safety
 interlock** underneath it cannot be overridden by the AI.
 
-## 1. Layers (Purdue / ISA-95) and ownership
+## 1. Control layers
 
-| Level | Role | Code | Owner |
-|---|---|---|---|
-| L3 Brain | AI operator. `decide(state) -> SupervisoryTargets`. Emits setpoints (intent), never valve positions. | `l3_brain/` | **Me** |
-| L2 Supervisory | Monitoring, Guardian (attack detection / isolation), HMI, governance authority. | — | Teammates |
-| L1 Control | Regulatory PI loops. `regulate(targets, state, dt) -> ControlCommand`. | `legacy/l1_stub.py` (placeholder) | Teammates |
-| L0 Plant | Plant client, fault-injection helpers, SCRAM interlock. | `l0_plant/` | **Me** |
+| Level | Role | Code |
+|---|---|---|
+| L3 Brain | Proposes supervisory setpoints through an Ollama or baseline policy. | `l3_brain/` |
+| L2 Supervisory | Monitors behavior and proposals and adjusts the AI authority ceiling. Telemetry classification is advisory. | `l2_monitor/` |
+| L1 Control | Regulates valves with PI loops, applies Keel constraints, and signs commands. | `l1_enforcer/` |
+| L0 Plant | Checks command provenance, reads the simulator, and enforces the simulated safety interlock. | `l0_plant/` |
 
 Control flows down, state flows up:
 
@@ -29,7 +29,6 @@ Control flows down, state flows up:
 - `PlantState` (L0 up): measured process variables, valve positions, cost,
   `scrammed` / `scram_reason`, and `truth` (eval-only).
 - Everything above L0 works in engineering units, never 0-65535 Modbus scaling.
-- Contract changes are agreed with the teammates first; both sides build to them.
 
 ## 3. Plant
 
@@ -78,11 +77,14 @@ regardless of what L3 intends or how much authority governance granted:
 
 | Trip cause | Safe state | Why |
 |---|---|---|
-| pressure high, level high | `e_stop` (feeds shut, purge and product open) | relieves pressure / drains an overfull vessel |
+| pressure high or level high, with safe-hold disabled | `e_stop` (feeds shut, purge and product open) | relieves pressure / drains an overfull vessel |
 | level low | product valve closed; feed and purge valves held where they are (not written) | `e_stop` would open product and keep draining an already-low vessel; closing it lets inflow and reaction recover the level to the re-arm band |
 
-The first trip cause latches; a second hazard while latched does not change the
-safe state. A safety-channel reading that is missing or not a finite number trips
+The first trip cause stays latched. The interlock keeps evaluating secondary
+hazards and changes its override when pressure and low inventory occur together.
+It shuts feeds, opens purge, and closes product. The live control room enables
+closed-loop safe-hold for high pressure or high level, with escalation to E-stop.
+A safety-channel reading that is missing or not a finite number trips
 too (cause `sis_sensor_fault`, safe state `e_stop`): the SIS fails safe when it
 cannot read its own sensor. A command with a non-finite valve value is never
 applied (the gate rejects it; without a gate the valves are held).
@@ -107,7 +109,8 @@ applied (the gate rejects it; without a gate the valves are held).
   succeeds once the SIS channel is back inside the re-arm band
   (pressure <= 2800 kPa, level 15-85%; the bands are `TripLimits` fields); it reads the SIS channel directly, not
   `PlantState`'s measured fields, so a degraded basic-control sensor can't
-  unlock a reset either.
+  unlock a reset either. The live control room can also re-arm after ten stable
+  seconds in the configured band, subject to a repeated-trip lockout.
 - The AI has no code path to override it.
 
 Tests: `tests/test_safety_unit.py` is a fast, pure-logic unit test of
@@ -140,9 +143,8 @@ opt-in; with no gate every command is trusted (legacy behaviour).
   is logged, and is overwritten by the next write. Detected and bounded
   (dwell <= one control cycle), not prevented - prevention needs network-level
   controls on :55555.
-- **Seam note:** `seq` / `auth_tag` are a change to the L1 seam; the L1
-  teammate must confirm it (L1 signs before handing to L0) before the gate is
-  enabled outside experiments. `legacy/l1_stub.py` does not sign yet.
+- The live control room enables the gate and signs through `L1Regulator`.
+  The historical L1 stub is still used by some experiments and collectors.
 - Tests: `tests/test_provenance_gate.py` (fast); live demo
   `experiments/provenance_demo.py`.
 
@@ -189,32 +191,15 @@ Keel -> signed by L1 ->
 reactor embedded, the AI's decisions (what it saw vs. the truth), trends, and
 scenario buttons (level drift, pressure dropout, forged commands, out-of-band
 write, stolen L1 key) plus clear-faults / reset-interlock / reset-plant. On
-re-arm the plant restarts from the design valve lineup. Demo SIS limits by
+re-arm the controller reapplies the design valve lineup. Reset plant restarts
+the simulator. Demo SIS limits by
 default (40% low-level trip); `--production-limits` for the 5% default.
 
-## 6. Repo layout
+## 6. Repository layout
 
-    shared/contracts.py            shared dataclasses (the seams)
-    l0_plant/                grfics_client, plant_service, safety, provenance_gate, fault_injection
-    l3_brain/                policy, operator (authority handshake), prompt_format
-    training/                real-state collection, expert labels, fine-tune dataset
-    model/                   trained operator outputs (weights gitignored)
-    live/                    the whole stack running live + control room (python -m live, :8765)
-    legacy/l1_stub.py               placeholder for teammate's L1
-    legacy/run_demo.py              L0 + L1 stub + L3 end to end
-    docker-compose.yml       plant-only: simulation service, prebuilt image
-    simulation/               simulation image context (web_visualization, remote_io)
-    tests/                   test_safety_unit.py (fast), test_interlock_truth.py (live)
+See the [repository guide](../FILE_STRUCTURE.md) for the current folders and
+entry points.
 
 ## 7. Licence
 
 GRFICSv3 is GPL-3.0. Reusing the TE model makes SCRAM GPL-3.0 (`LICENSE`).
-
-## 8. Open items
-
-- Composition units: reactor reports `A_in_purge` as a fraction (~0.47);
-  baseline policy targets `47.0`. Reconcile at the L1 seam.
-- Baseline L3 policy is intentionally dumb — it's the floor an ML/LLM policy beats.
-- `legacy/l1_stub.py` is a placeholder; the teammate's real L1 replaces it wholesale.
-- Governance / L2 (authority_fn, Guardian) doesn't exist yet; `AIOperator`
-  defaults to full authority when none is supplied.

@@ -30,6 +30,7 @@ sim_app/run.log
 # python / tooling caches
 __pycache__/
 *.pyc
+*.tsbuildinfo
 .pytest_cache/
 unsloth_compiled_cache/
 .playwright-mcp/
