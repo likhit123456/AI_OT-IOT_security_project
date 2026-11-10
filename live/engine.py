@@ -35,23 +35,23 @@ from pathlib import Path
 from typing import Callable, Deque, Optional
 
 from shared.contracts import ControlCommand, PlantState, SupervisoryTargets
-from enforcer.keel import Keel, KeelLimits, SisFrame
+from l1_enforcer.keel import Keel, KeelLimits, SisFrame
 from l0_plant import fault_injection as fi
 from l0_plant.grfics_client import GrficsClient
 from l0_plant.plant_service import PlantService
 from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
 from l0_plant.safety import SafeHold, TripLimits
-from enforcer.regulator import L1Regulator
+from l1_enforcer.regulator import L1Regulator
 from l3_brain.operator import AIOperator
 from live import commands
 from l3_brain.prompt_format import DESIGN_POINT
 from l3_brain.policy import (BaselineOperator, LLMOperator, OllamaOperator,
                              ollama_available)
-from monitor.behavior_monitor import BehaviorMonitor, MonitorLimits
-from monitor.governance import Governor
-from monitor.observer import SplitObserver, make_split_observer
-from monitor.sequential_monitor import SequentialMonitor, Suspicion
-from monitor.telemetry_classifier import approved_specialist
+from l2_monitor.behavior_monitor import BehaviorMonitor, MonitorLimits
+from l2_monitor.governance import Governor
+from l2_monitor.observer import SplitObserver, make_split_observer
+from l2_monitor.sequential_monitor import SequentialMonitor, Suspicion
+from l2_monitor.telemetry_classifier import approved_specialist
 from scripts.reset_plant import DESIGN_PURGE_VALVE_PCT, reset_and_settle
 
 L1_KEY = os.environ.get("SCRAM_L1_KEY", "").encode() or secrets.token_bytes(32)

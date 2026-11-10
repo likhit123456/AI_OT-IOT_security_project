@@ -7,8 +7,7 @@ industrial networking, PLC/HMI components and security-training tools.
 This repository contains a SCRAM adaptation. Its current Compose file starts
 only the prebuilt `fortiphyd/grfics-simulation` image. Kali, Caldera, engineering
 workstations, PLC/HMI containers, routers and Wazuh from the broader lab are not
-services in this checkout. Historical screenshots under `images/` illustrate
-that broader lab and should not be interpreted as SCRAM's current interface.
+services in this checkout.
 
 ## Run this repository
 

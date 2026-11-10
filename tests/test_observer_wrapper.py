@@ -1,11 +1,11 @@
-"""Fast tests for monitor/observer.py: routing, flooring and degrade-to-zero (Ollama faked)."""
+"""Fast tests for l2_monitor/observer.py: routing, flooring and degrade-to-zero (Ollama faked)."""
 from __future__ import annotations
 
 import json
 
 from shared.contracts import PlantState, SupervisoryTargets
-from monitor import observer as O
-from monitor import observer_v2_format as V2
+from l2_monitor import observer as O
+from l2_monitor import observer_v2_format as V2
 
 STATE = PlantState(pressure=2700.0, level=44.18, f1_flow=384.0, f2_flow=21.2, purge_flow=717.9,
                    product_flow=127.5, a_in_purge=0.47, b_in_purge=0.14, c_in_purge=0.39,
@@ -94,9 +94,9 @@ def test_live_inputs_use_the_exact_v2_format():
             assert u["cycles"] == V2.HISTORY_N and u["proposals"][-1]["provenance"] == V2.OPERATOR_CHAIN
 
 
-# ---- v3 path (served first; monitor/observer_v3_format) ---------------------------------
+# ---- v3 path (served first; l2_monitor/observer_v3_format) ---------------------------------
 from shared.contracts import ControlCommand
-from monitor import observer_v3_format as V3
+from l2_monitor import observer_v3_format as V3
 from test_observer_v3_format import rebuild
 
 CMD = ControlCommand(f1_valve=31.45, f2_valve=13.24, purge_valve=0.3926, product_valve=52.0)

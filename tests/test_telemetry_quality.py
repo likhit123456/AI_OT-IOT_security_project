@@ -5,9 +5,9 @@ from pathlib import Path
 
 import pytest
 
-from monitor import observer_v3_format as V3
-from monitor.observer import Observer
-from monitor.telemetry_classifier import (
+from l2_monitor import observer_v3_format as V3
+from l2_monitor.observer import Observer
+from l2_monitor.telemetry_classifier import (
     TelemetryClassifier,
     approved_specialist,
     features,

@@ -1,9 +1,9 @@
-"""Fast tests for monitor/governance.py: ceiling shape, debounce, asymmetric rates, recovery gate."""
+"""Fast tests for l2_monitor/governance.py: ceiling shape, debounce, asymmetric rates, recovery gate."""
 from __future__ import annotations
 
 from shared.contracts import SupervisoryTargets
-from monitor import governance as G
-from monitor.observer import Verdict
+from l2_monitor import governance as G
+from l2_monitor.observer import Verdict
 
 DESIGN = SupervisoryTargets(pressure_sp=2700.6, level_sp=44.18, production_rate_sp=100.0, a_comp_sp=47.0)
 OFF = SupervisoryTargets(pressure_sp=2850.0, level_sp=44.18, production_rate_sp=112.0, a_comp_sp=47.0)

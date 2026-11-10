@@ -15,7 +15,7 @@ import subprocess
 import time
 from pathlib import Path
 
-from monitor import observer_v3_format as F
+from l2_monitor import observer_v3_format as F
 from training import build_observer_dataset as B
 
 SEED = 99271

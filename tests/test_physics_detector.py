@@ -4,10 +4,10 @@ import json
 
 import pytest
 
-from monitor import observer_v3_format as V3
-from monitor.observer import Observer
-from monitor.physics_detector import DEST, PhysicsDetector, approved_physics_detector
-from monitor.physics_features import physics_features
+from l2_monitor import observer_v3_format as V3
+from l2_monitor.observer import Observer
+from l2_monitor.physics_detector import DEST, PhysicsDetector, approved_physics_detector
+from l2_monitor.physics_features import physics_features
 
 
 def normal_window():
@@ -34,7 +34,7 @@ def test_release_evidence_and_prediction():
 
 
 def test_changed_model_evidence_is_rejected(monkeypatch, tmp_path):
-    from monitor import physics_detector as module
+    from l2_monitor import physics_detector as module
 
     for path in DEST.iterdir():
         if path.is_file():

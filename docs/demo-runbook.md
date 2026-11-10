@@ -26,7 +26,7 @@ Every attack button below is on the Console tab; watch its effect on Overview.
    `ollama list` shows `scram-operator`, `scram-observer`, `scram-observer-v3`.
 3. Close GPU-heavy apps. Three models use ~4.8 GB of the 6 GB GPU. Close or minimise Firefox and Chrome tabs as well: free RAM should be above 4 GB.
 4. From the repo root: `python -m live`
-   - It starts the plant container if needed and sets `LLAMA_ARG_CACHE_RAM=0` for Ollama. On the first run on a machine it restarts Ollama once to apply that. Without it, three models exhaust 16 GB of RAM in ~4.5 min.
+   - It starts the plant container if needed. Use `python -m live --configure-ollama` to apply the Ollama cache cap and restart Ollama if required.
    - It resets the plant to the design point and opens http://127.0.0.1:8765. Put the 3D plant (http://localhost/) on a second screen if you have one.
 5. Wait for these lines in the event stream (about 15 s):
    - `L2 observer online: proposals on scram-observer (feeds governance), telemetry on scram-observer-v3 (display only)`
@@ -154,7 +154,7 @@ Rehearsal:
 | Symptom | Fix |
 |---|---|
 | Observer line says `unavailable` | Ollama is not running, or a model is missing (`ollama list`). Restart Ollama, then use Reset plant. |
-| Laptop slows and free RAM is near 0 | Ollama was started without the cache cap. Quit Ollama from the tray and run `python -m live` again (it sets the cap). |
+| Laptop slows and free RAM is near 0 | Ollama was started without the cache cap. Quit Ollama from the tray and run `python -m live --configure-ollama`. |
 | `plant connection lost` | Docker Desktop paused or the container restarted. The engine reconnects by itself; if not, Reset plant. |
 | Authority dips to ~0.5 with no attack | The operator model sometimes invents "backing off" setpoints and the rule monitor reacts. Known limit; it recovers within a minute. |
 | A step misbehaves mid-demo | Clear faults and stop attacks, then Reset plant to design point (15 s), and continue from the next step. |

@@ -69,7 +69,7 @@ class TelemetryClassifier:
 
     def predict(self, window: dict) -> dict:
         if self.data["feature_version"] == 2:
-            from monitor.physics_features import physics_features
+            from l2_monitor.physics_features import physics_features
             xs = physics_features(window)
         else:
             xs = features(window)
@@ -103,7 +103,7 @@ class TelemetryClassifier:
 
 
 def approved_specialist():
-    from monitor.physics_detector import approved_physics_detector
+    from l2_monitor.physics_detector import approved_physics_detector
     physics = approved_physics_detector()
     if physics is not None:
         return physics

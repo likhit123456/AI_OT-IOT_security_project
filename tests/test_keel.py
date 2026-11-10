@@ -1,11 +1,11 @@
-"""Fast pure-logic tests for enforcer/keel.py (no container, no network)."""
+"""Fast pure-logic tests for l1_enforcer/keel.py (no container, no network)."""
 from __future__ import annotations
 
 import math
 import random
 
 from shared.contracts import ControlCommand, PlantState
-from enforcer.keel import EventLog, Keel, KeelLimits, SisFrame
+from l1_enforcer.keel import EventLog, Keel, KeelLimits, SisFrame
 
 KEY = b"test-key"
 NOMINAL = ControlCommand(f1_valve=31.45, f2_valve=13.24, purge_valve=0.0, product_valve=47.03)

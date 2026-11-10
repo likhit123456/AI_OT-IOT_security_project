@@ -8,7 +8,7 @@ import json
 import math
 import time
 
-from monitor.telemetry_classifier import TelemetryClassifier
+from l2_monitor.telemetry_classifier import TelemetryClassifier
 from training.build_clean_observer_dataset import OUT
 from training.train_telemetry_classifier import DEST, HISTORICAL, ROOT, load, metrics
 

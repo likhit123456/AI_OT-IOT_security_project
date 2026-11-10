@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from monitor.telemetry_classifier import TelemetryClassifier
+from l2_monitor.telemetry_classifier import TelemetryClassifier
 
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / "model/telemetry-physics"
@@ -33,7 +33,7 @@ def approved_physics_detector():
         raise ValueError("physics detector failed release gate")
     targets = {
         "model_sha256": DEST / "model.json",
-        "features_sha256": ROOT / "monitor/physics_features.py",
+        "features_sha256": ROOT / "l2_monitor/physics_features.py",
         "validation_sha256": DEST / "validation.json",
         "report_sha256": report_path,
     }

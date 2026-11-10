@@ -45,8 +45,8 @@ from dataclasses import dataclass
 from typing import Callable, Deque, Optional
 
 from l3_brain.prompt_format import measured_dict
-from monitor import observer_v2_format as V2
-from monitor import observer_v3_format as V3
+from l2_monitor import observer_v2_format as V2
+from l2_monitor import observer_v3_format as V3
 
 OLLAMA_URL = "http://127.0.0.1:11434"
 OBSERVER_MODEL = "scram-observer"

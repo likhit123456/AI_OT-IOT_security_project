@@ -4,9 +4,9 @@ import json
 import urllib.request
 from pathlib import Path
 
-from monitor import observer_v3_format as V3
-from monitor.physics_detector import DEST, PhysicsDetector
-from monitor.telemetry_classifier import DEFAULT_MODEL, TelemetryClassifier
+from l2_monitor import observer_v3_format as V3
+from l2_monitor.physics_detector import DEST, PhysicsDetector
+from l2_monitor.telemetry_classifier import DEFAULT_MODEL, TelemetryClassifier
 from training.train_physics_telemetry import evaluate
 
 

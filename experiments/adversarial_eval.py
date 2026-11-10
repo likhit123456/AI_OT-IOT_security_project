@@ -19,7 +19,7 @@ Calibration (see scratchpad calib*.py during development, same container):
 Three conditions, same scenario, same reset point:
   (a) no_enforcer   - nothing watches truth; valves obey the adversarial ask
                       unconditionally.
-  (b) monitor_only  - a BehaviorMonitor (monitor/behavior_monitor.py) runs
+  (b) monitor_only  - a BehaviorMonitor (l2_monitor/behavior_monitor.py) runs
                       every cycle, watching ONLY measured + requested
                       setpoints, but has no actuation path (consistent with
                       it being a detector, not an interlock) - included to
@@ -54,7 +54,7 @@ from typing import List, Optional
 from l0_plant import fault_injection as fi
 from l0_plant.safety import TripLimits
 from legacy.l1_stub import L1ControlStub
-from monitor.behavior_monitor import BehaviorMonitor
+from l2_monitor.behavior_monitor import BehaviorMonitor
 from scripts.reset_plant import reset_and_settle
 
 from experiments.adversarial_policy import AdversarialRamp

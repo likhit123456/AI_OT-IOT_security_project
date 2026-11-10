@@ -1,4 +1,4 @@
-> **Navigation:** [File structure and folder guide](FILE_STRUCTURE.md) · [Refactor notes](docs/refactor-notes.md)
+> **Navigation:** [File structure and folder guide](FILE_STRUCTURE.md) Â· [Refactor notes](docs/refactor-notes.md)
 
 # SCRAM
 
@@ -40,8 +40,8 @@ is available with `python -m live --configure-ollama`. That option can persist
 | Layer | Implementation | Role |
 | --- | --- | --- |
 | L3 | `l3_brain/` | Local LLM or baseline emits supervisory setpoints |
-| L2 | `monitor/` | Rule monitors, proposal observer, telemetry observer, governance |
-| L1 | `enforcer/regulator.py`, `enforcer/keel.py` | PI regulation, deterministic command constraints, final signing |
+| L2 | `l2_monitor/` | Rule monitors, proposal observer, telemetry observer, governance |
+| L1 | `l1_enforcer/regulator.py`, `l1_enforcer/keel.py` | PI regulation, deterministic command constraints, final signing |
 | L0 | `l0_plant/` | Plant adapter, provenance gate and latched protective actions |
 | UI | `live/`, `sim_app/` | Full control room and separate manual studio |
 | Data/evaluation | `training/`, `model/`, `experiments/` | Collection, training, artifacts and reproducible evaluations |
@@ -129,7 +129,7 @@ Install `libjsoncpp-dev` and `liblapacke-dev` first. This isolated test starts a
 separate process on a temporary port. Compose continues to use the prebuilt
 GRFICS image: local source fixes do not replace its binary automatically.
 
-`legacy/l1_stub.py`, `legacy/run_demo.py`, and `reference/` are historical/minimal paths. Use the
+`legacy/l1_stub.py` and `legacy/run_demo.py` are historical/minimal paths. Use the
 full control room for the current integration. GRFICS is GPL-3.0; this project
 retains its license and attribution.
 

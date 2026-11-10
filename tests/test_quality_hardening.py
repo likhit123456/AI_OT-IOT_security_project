@@ -9,7 +9,7 @@ from test_sim_app_bugs import FakeSim, make_plant
 from shared.contracts import ControlCommand
 from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
 from l0_plant.safety import SafeHold, SafetyInterlock
-from monitor.observer import Observer, Verdict
+from l2_monitor.observer import Observer, Verdict
 from sim_app import ai
 
 

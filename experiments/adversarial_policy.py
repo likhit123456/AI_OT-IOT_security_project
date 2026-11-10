@@ -5,7 +5,7 @@ not wired into run_demo.py.
 
 It issues a smoothly ramped pressure/production setpoint sequence. Each
 individual request is unremarkable on its own - it never asks for anything
-above the monitor's own legal ceiling (monitor.behavior_monitor.MonitorLimits
+above the monitor's own legal ceiling (l2_monitor.behavior_monitor.MonitorLimits
 .pressure_max_kpa) and never jumps by more than a plausible step per cycle.
 It stands in for an operator (human or AI) that is simply pushing too hard,
 not for a compromised/malicious L3 - the point of the evaluation is that this

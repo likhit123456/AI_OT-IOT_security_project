@@ -48,8 +48,7 @@ docker compose up -d simulation
   `product_valve_sp`), `e_stop`, and the per-channel fault write-fields
   (`<channel>_fault_mode` / `_fault_severity` — see `l0_plant/fault_injection.py`).
 - **:80** — helm: the GRFICS dashboard with the 3D plant view.
-- No custom reactor build is used. `reference/sim_cpp_unused/` holds an earlier
-  modified C++ reactor, shelved in favor of this design.
+- Compose uses the prebuilt GRFICS reactor image.
 
 ## 4. Measured vs. truth
 
@@ -182,7 +181,7 @@ and logs each decision's measured view next to the truth.
 
 `python -m live` runs the full stack continuously against the plant: the trained
 operator (`OllamaOperator`, falls back to baseline) -> governance authority ->
-L2 `BehaviorMonitor` -> L1 (`enforcer/regulator.py` `L1Regulator`: four PI loops - pressure on
+L2 `BehaviorMonitor` -> L1 (`l1_enforcer/regulator.py` `L1Regulator`: four PI loops - pressure on
 purge with split range onto the feeds, level on product, production by feed-1
 feedforward plus a slow trim, A on feed 2 - bumpless, real-time integration) ->
 Keel -> signed by L1 ->
@@ -195,17 +194,16 @@ default (40% low-level trip); `--production-limits` for the 5% default.
 
 ## 6. Repo layout
 
-    contracts.py            shared dataclasses (the seams)
+    shared/contracts.py            shared dataclasses (the seams)
     l0_plant/                grfics_client, plant_service, safety, provenance_gate, fault_injection
     l3_brain/                policy, operator (authority handshake), prompt_format
     training/                real-state collection, expert labels, fine-tune dataset
     model/                   trained operator outputs (weights gitignored)
     live/                    the whole stack running live + control room (python -m live, :8765)
-    l1_stub.py               placeholder for teammate's L1
-    run_demo.py              L0 + L1 stub + L3 end to end
+    legacy/l1_stub.py               placeholder for teammate's L1
+    legacy/run_demo.py              L0 + L1 stub + L3 end to end
     docker-compose.yml       plant-only: simulation service, prebuilt image
     simulation/               simulation image context (web_visualization, remote_io)
-    reference/sim_cpp_unused/   shelved custom C++ reactor (not used)
     tests/                   test_safety_unit.py (fast), test_interlock_truth.py (live)
 
 ## 7. Licence

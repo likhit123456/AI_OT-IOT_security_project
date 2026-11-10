@@ -11,9 +11,9 @@ from shared.contracts import ControlCommand, PlantState, SupervisoryTargets
 from l0_plant.plant_service import PlantService
 from l0_plant.provenance_gate import ProvenanceGate
 from l3_brain.operator import AIOperator
-from monitor import governance as G
-from monitor import observer as O
-from monitor.observer import Verdict
+from l2_monitor import governance as G
+from l2_monitor import observer as O
+from l2_monitor.observer import Verdict
 
 DESIGN_STATE = {"f1_valve_pos": 31.45, "f2_valve_pos": 13.24, "purge_valve_pos": 0.39,
                 "product_valve_pos": 47.03, "e_stop": 0}

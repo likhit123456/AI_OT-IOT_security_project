@@ -1,7 +1,7 @@
 """
 Sequential (cumulative) monitor -- the spec's "Lookout" (L2), advisory only.
 
-BehaviorMonitor (monitor/behavior_monitor.py) judges ONE step at a time: a
+BehaviorMonitor (l2_monitor/behavior_monitor.py) judges ONE step at a time: a
 setpoint jump over a cap, a rate over a cap, a frozen signal. An attacker who
 keeps every step under those caps is invisible to it by construction (the
 "sub-threshold / distributed" attack). This monitor looks at the TRAJECTORY of

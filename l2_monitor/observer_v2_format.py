@@ -13,7 +13,7 @@ functions and compares the strings - change nothing here without that test.
   assistant = {"label", "score", "reason"} with LABELS (7, incl. provenance_violation)
 
 Measured fields only, never the SIS channel. The v3 observer has its own format
-(monitor/observer_v3_format.py), which reuses this module's proposals turn verbatim.
+(l2_monitor/observer_v3_format.py), which reuses this module's proposals turn verbatim.
 """
 
 from __future__ import annotations

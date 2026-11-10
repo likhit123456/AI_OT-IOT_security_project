@@ -1,9 +1,9 @@
 # Advisory physics-feature telemetry detector
 
 This is the currently preferred CPU correction model loaded by
-`approved_specialist()` in [`monitor/telemetry_classifier.py`](../../monitor/telemetry_classifier.py).
+`approved_specialist()` in [`l2_monitor/telemetry_classifier.py`](../../l2_monitor/telemetry_classifier.py).
 It uses measured telemetry and command/response features from
-[`monitor/physics_features.py`](../../monitor/physics_features.py), with a JSON
+[`l2_monitor/physics_features.py`](../../l2_monitor/physics_features.py), with a JSON
 forest evaluated using Python's standard library. It needs no GPU.
 
 For v3 telemetry, it supplies the advisory classification and preserves the
@@ -23,7 +23,7 @@ The final 215-example holdout records 93.02% accuracy, 0 observed normal false
 alarms, 89.74% sensor-fault recall and 93.62% actuator-fault recall. The sample
 includes simulated trajectories and explicitly synthetic faults. These results
 do not establish physical deployment safety or a zero population false-alarm
-rate. See [accuracy improvements](../../ACCURACY_IMPROVEMENTS.md) for the
+rate. See [accuracy improvements](../../docs/reports/accuracy-improvements.md) for the
 candidate history and remaining limitations.
 
 ## Reproduction and changes
@@ -39,7 +39,7 @@ and use a separate checkout for experiments. Preserve the frozen evidence.
 To verify the bundled release without retraining, run from the repository root:
 
 ```sh
-python -m pip install -r requirements-dev.txt -r requirements-eval.txt
+python -m pip install -r requirements/dev.txt -r requirements/eval.txt
 python -m pytest -q tests/test_physics_detector.py
 ```
 

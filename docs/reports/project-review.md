@@ -23,9 +23,9 @@ It is not yet a production control system. The safety boundary is simulated in P
 | --- | --- | --- |
 | `shared/contracts.py` | State, supervisory intent, actuator commands | Good seam. Composition units and the meaning of `truth` need more precise documentation. |
 | `l0_plant/` | TCP adapter, safety latch, command provenance, fault injection | Clear separation. Secondary-hazard handling and transport assumptions need strengthening. |
-| `enforcer/regulator.py` | Four PI loops, bumpless transfer, command signing | Considerably stronger than the old stub; toy-plant tests cover useful behavior. |
+| `l1_enforcer/regulator.py` | Four PI loops, bumpless transfer, command signing | Considerably stronger than the old stub; toy-plant tests cover useful behavior. |
 | `l3_brain/` | Baseline and local LLM operators, prompt formatting, output validation | Shared training/serving format and hold-on-failure behavior are good choices. |
-| `monitor/`, `enforcer/` | Rule and sequential monitoring, observer inference, governance, Keel | Deterministic enforcement is a strong foundation. Observer lifecycle and evidence freshness need work. |
+| `l2_monitor/`, `l1_enforcer/` | Rule and sequential monitoring, observer inference, governance, Keel | Deterministic enforcement is a strong foundation. Observer lifecycle and evidence freshness need work. |
 | `live/` | Full-stack engine, scenarios, operator console | Main product/demo experience. Single-owner plant I/O is useful, but the engine is large and its action queue is unbounded. |
 | `sim_app/` | Separate direct-control sandbox and AI rescue | Useful comparison environment; it intentionally lacks the full SCRAM protections. Emergency-stop precedence needs repair. |
 | `training/`, `model/` | Collection, expert labels, fine-tuning, exported models, evaluations | Reproducible prompt formatting is a strength. Observer validation contamination is confirmed below. |
@@ -41,7 +41,7 @@ Both interfaces now share graphite surfaces, mint accents, quieter borders, clea
 
 Existing endpoints and control flows are retained. The control-room CSS and JavaScript have been extracted from its monolithic HTML into separate assets. Tab semantics, keyboard arrow/Home/End navigation, a skip link, an accessible command label, and reduced-motion support were added or improved.
 
-Preview files: [overview](../../artifacts/frontend/overview-desktop.png), [console](../../artifacts/frontend/console.png), [analysis](../../artifacts/frontend/analysis.png), [mobile](../../artifacts/frontend/overview-390.png), [manual station](../../artifacts/frontend/studio-desktop.png). These use test telemetry, not live reactor measurements.
+Run `node tests/frontend_smoke.cjs` to generate current previews under `artifacts/frontend/` using test telemetry.
 
 ## Bugs fixed in this change
 

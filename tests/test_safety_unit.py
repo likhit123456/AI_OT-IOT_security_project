@@ -187,7 +187,7 @@ def test_cannot_rearm_on_invalid_reading():
 
 def test_monitor_settling_grace_mutes_only_staleness():
     from shared.contracts import PlantState, SupervisoryTargets
-    from monitor.behavior_monitor import BehaviorMonitor
+    from l2_monitor.behavior_monitor import BehaviorMonitor
     now = [0.0]
     m = BehaviorMonitor(clock=lambda: now[0])
     flat = PlantState(pressure=2700.0, level=44.18, f1_flow=0, f2_flow=0, purge_flow=0,
@@ -211,7 +211,7 @@ def test_monitor_settling_grace_mutes_only_staleness():
 
 def test_flat_level_at_steady_state_is_not_frozen():
     from shared.contracts import PlantState, SupervisoryTargets
-    from monitor.behavior_monitor import BehaviorMonitor
+    from l2_monitor.behavior_monitor import BehaviorMonitor
     m = BehaviorMonitor()
     flat = PlantState(pressure=2700.0, level=44.18, f1_flow=0, f2_flow=0, purge_flow=0,
                       product_flow=100.0, a_in_purge=0.47, b_in_purge=0, c_in_purge=0,

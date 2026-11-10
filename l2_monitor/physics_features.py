@@ -6,8 +6,8 @@ changes as faults. No labels, rationale, scenario names or SIS truth are inputs.
 
 import math
 
-from monitor.telemetry_classifier import _stats
-from monitor.telemetry_classifier import features as validate_window
+from l2_monitor.telemetry_classifier import _stats
+from l2_monitor.telemetry_classifier import features as validate_window
 
 VERSION = 2
 VALVES = (("f1", 6.4046), ("f2", 0.4246), ("purge", 0.352), ("product", 0.0417))

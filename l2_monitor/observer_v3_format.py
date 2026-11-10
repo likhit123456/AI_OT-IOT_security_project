@@ -2,7 +2,7 @@
 The v3 L2 observer prompt format - ONE definition shared by training
 (training/build_observer_dataset.py) and, once v3 is trained, serving.
 
-v3 changes only the TELEMETRY side of v2 (monitor/observer_v2_format.py):
+v3 changes only the TELEMETRY side of v2 (l2_monitor/observer_v2_format.py):
   * a longer window: WINDOW_N samples at SAMPLE_S spacing (~15 s, v2: 6 samples
     ~2.6 s), so slow drifts are visible
   * every flow (v2 had no feed 2) and, per valve, the actual position next to the
@@ -19,7 +19,7 @@ from __future__ import annotations
 import json
 from typing import Optional, Sequence
 
-from monitor import observer_v2_format as V2
+from l2_monitor import observer_v2_format as V2
 
 LABELS = V2.LABELS
 ATTACK_LABELS = V2.ATTACK_LABELS
@@ -31,7 +31,7 @@ proposal_dict = V2.proposal_dict
 proposals_to_json = V2.proposals_to_json          # proposals turn: v2 verbatim
 parse = V2.parse
 
-TELEMETRY_COMMANDED = True     # telemetry_to_json also takes L1's commanded valves (monitor/observer.py)
+TELEMETRY_COMMANDED = True     # telemetry_to_json also takes L1's commanded valves (l2_monitor/observer.py)
 WINDOW_N = 16                  # telemetry samples per window
 SAMPLE_S = 1.0                 # spacing -> a 15 s window
 VALVES = ("f1", "f2", "purge", "product")

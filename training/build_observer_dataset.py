@@ -1,5 +1,5 @@
 """
-Build the v3 L2 observer dataset (monitor/observer_v3_format.py).
+Build the v3 L2 observer dataset (l2_monitor/observer_v3_format.py).
 
 v3 fixes v2's TELEMETRY side only:
   * PROPOSALS examples are v2's, carried over VERBATIM (user and assistant turns
@@ -43,7 +43,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-from monitor import observer_v3_format as F
+from l2_monitor import observer_v3_format as F
 
 HERE = Path(__file__).resolve().parent
 STATES = HERE / "states.jsonl"

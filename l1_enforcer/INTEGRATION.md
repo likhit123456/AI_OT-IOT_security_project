@@ -5,8 +5,8 @@ the unit tests cover the logic. Four small edits.
 
 ```python
 # --- imports ---
-from enforcer.keel import Keel, KeelLimits, SisFrame
-from monitor.sequential_monitor import SequentialMonitor
+from l1_enforcer.keel import Keel, KeelLimits, SisFrame
+from l2_monitor.sequential_monitor import SequentialMonitor
 KEEL_KEY = b"scram-keel-log-key-not-a-real-secret"
 
 # --- _make_brain(): slider becomes a CAP, Keel's budget is the live value ---

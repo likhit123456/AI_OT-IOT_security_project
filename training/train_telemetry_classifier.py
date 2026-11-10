@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 from sklearn.ensemble import ExtraTreesClassifier
 
-from monitor.telemetry_classifier import FEATURE_VERSION, TelemetryClassifier, features
+from l2_monitor.telemetry_classifier import FEATURE_VERSION, TelemetryClassifier, features
 from training.build_clean_observer_dataset import OUT, canonical
 
 ROOT = Path(__file__).resolve().parents[1]

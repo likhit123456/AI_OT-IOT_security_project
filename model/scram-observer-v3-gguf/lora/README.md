@@ -35,8 +35,8 @@ The [current notebook](../../../training/scram_observer_finetune.ipynb) defaults
 to recording-separated data under `training/observer_clean/` and a separate
 candidate export. It has not retroactively retrained these deployed weights.
 Fresh held-out testing exposed substantial false alarms in the original LLM;
-see [quality findings](../../../QUALITY_IMPROVEMENTS.md) and
-[later accuracy work](../../../ACCURACY_IMPROVEMENTS.md).
+see [quality findings](../../../docs/reports/quality-improvements.md) and
+[later accuracy work](../../../docs/reports/accuracy-improvements.md).
 
 ## Runtime limitations
 

@@ -7,8 +7,8 @@ Start with [setup and usage](README.md). Run commands from the repository root.
 - `live/`: main SCRAM control-room engine, server and deployed web assets. Start with `python -m live`.
 - `frontend/`: React source and build configuration. Its output is served from `live/static/`.
 - `l0_plant/`: plant connection, provenance gate, fault injection and safety mechanisms.
-- `enforcer/`: deterministic enforcement; `regulator.py` contains L1 regulation and `keel.py` contains command constraints.
-- `monitor/`: behavior, governance, observer and telemetry monitoring.
+- `l1_enforcer/`: deterministic enforcement; `regulator.py` contains L1 regulation and `keel.py` contains command constraints.
+- `l2_monitor/`: behavior, governance, observer and telemetry monitoring.
 - `l3_brain/`: supervisory operator logic and model prompts.
 - `shared/contracts.py`: shared command/state contracts.
 - `sim_app/`: optional separate manual studio; start with `python -m sim_app`.
@@ -33,11 +33,9 @@ Start with [setup and usage](README.md). Run commands from the repository root.
 - `experiments/`: experimental scripts and saved results.
 - `artifacts/`: evaluation evidence and historical cleanup reports. Some files are consumed by tests.
 - `legacy/`: historical minimal control loop. Run its demo with `python -m legacy.run_demo`; collectors and experiments still import its L1 stub.
-- `reference/`: shelved simulator source.
 - `data/samples/network/`: preserved packet captures.
 - `docs/`: architecture, runbook, frontend notes and upstream attribution.
 - `docs/reports/`: historical review and accuracy documents.
-- `docs/assets/upstream/`: historical GRFICS screenshots, not current SCRAM UI screenshots.
 
 ## Important boundaries
 
