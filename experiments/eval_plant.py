@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from contracts import PlantState, ControlCommand
+from shared.contracts import PlantState, ControlCommand
 from l0_plant.grfics_client import GrficsClient
 from l0_plant.safety import SafetyInterlock, TripLimits
 

@@ -27,10 +27,10 @@ import sys
 import time
 from pathlib import Path
 
-from contracts import SupervisoryTargets
+from shared.contracts import SupervisoryTargets
 from l0_plant import fault_injection as fi
 from l0_plant.plant_service import PlantService
-from l1_stub import L1ControlStub
+from legacy.l1_stub import L1ControlStub
 from l3_brain.prompt_format import measured_dict
 from scripts.reset_plant import reset_and_settle
 

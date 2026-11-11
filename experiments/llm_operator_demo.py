@@ -36,7 +36,7 @@ from types import SimpleNamespace
 
 from l0_plant.plant_service import PlantService
 from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
-from l1_stub import L1ControlStub
+from legacy.l1_stub import L1ControlStub
 from l3_brain.operator import AIOperator
 from l3_brain.policy import Envelope, LLMOperator, OllamaOperator, ollama_available
 from scripts.reset_plant import reset_and_settle

@@ -5,7 +5,7 @@ import types
 
 import pytest
 
-from contracts import PlantState
+from shared.contracts import PlantState
 from l0_plant.provenance_gate import ProvenanceGate
 from l0_plant.safety import SafeHold, SafetyInterlock, TripLimits
 from l3_brain.policy import OllamaOperator

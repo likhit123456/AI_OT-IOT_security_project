@@ -23,7 +23,7 @@ import json
 import time
 from pathlib import Path
 
-from contracts import ControlCommand
+from shared.contracts import ControlCommand
 from l0_plant.grfics_client import GrficsClient
 from l0_plant.plant_service import PlantService
 from l0_plant.provenance_gate import CommandSigner, ProvenanceGate

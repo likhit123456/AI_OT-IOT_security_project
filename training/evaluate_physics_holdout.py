@@ -10,7 +10,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
-from monitor.telemetry_classifier import TelemetryClassifier
+from l2_monitor.telemetry_classifier import TelemetryClassifier
 from training.train_physics_telemetry import DEST, evaluate
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,7 +39,7 @@ def main(
     freeze = {
         "model_sha256": model_digest,
         "features_sha256": hashlib.sha256(
-            (ROOT / "monitor/physics_features.py").read_bytes()
+            (ROOT / "l2_monitor/physics_features.py").read_bytes()
         ).hexdigest(),
         "validation_sha256": hashlib.sha256(
             (DEST / "validation.json").read_bytes()

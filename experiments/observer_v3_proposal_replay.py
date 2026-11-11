@@ -5,7 +5,7 @@
 import json, sys, time, urllib.request
 sys.path[:0] = ["."]
 from live.engine import Engine
-from monitor import observer_v2_format as V2, observer_v3_format as V3
+from l2_monitor import observer_v2_format as V2, observer_v3_format as V3
 
 eng = Engine(brain="ollama").start()
 while eng.status != "running" or eng.cycles < 5:

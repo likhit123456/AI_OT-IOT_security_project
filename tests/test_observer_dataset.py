@@ -6,8 +6,8 @@ from collections import Counter
 
 import pytest
 
-from monitor import observer_v2_format as V2
-from monitor import observer_v3_format as V3
+from l2_monitor import observer_v2_format as V2
+from l2_monitor import observer_v3_format as V3
 from training import build_observer_dataset as B
 
 MEAS = {"pressure": 2700.0, "level": 44.18, "f1_flow": 384.0, "f2_flow": 21.2, "purge_flow": 717.9,

@@ -9,7 +9,7 @@ Run only one plant writer at a time: stop the control room before using this stu
 Run from the repository root with Python 3.11+ and Docker available:
 
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install -r requirements/runtime.txt
 docker compose up -d simulation      # or let the app start it
 python -m sim_app                    # http://127.0.0.1:8770  (--port, --no-browser)
 ```

@@ -8,10 +8,10 @@ import threading
 from dataclasses import replace
 
 from fastapi import HTTPException
-from contracts import ControlCommand
+from shared.contracts import ControlCommand
 from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
 from l0_plant.safety import SafeHold, SafetyInterlock
-from monitor.observer import Observer
+from l2_monitor.observer import Observer
 from sim_app.server import Plant
 
 

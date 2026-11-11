@@ -151,8 +151,13 @@ def main() -> int:
         print("[live] Ollama is not serving 'scram-operator' - start Ollama, or the brain falls back to baseline")
 
     engine = Engine(brain=a.brain, limits=TripLimits() if a.production_limits else DEMO_LIMITS,
-                    reset=not a.no_reset).start()
-    srv = serve(engine, a.port)
+                    reset=not a.no_reset)
+    try:
+        srv = serve(engine, a.port)
+    except OSError as exc:
+        print(f"[live] could not bind the control room to port {a.port}: {exc}", file=sys.stderr)
+        return 1
+    engine.start()
     url = f"http://127.0.0.1:{a.port}/"
     print(f"[live] control room: {url}   (3D plant: http://localhost/)   Ctrl+C to stop")
     if not a.no_browser:
@@ -171,6 +176,7 @@ def main() -> int:
     finally:
         engine.stop()
         srv.shutdown()
+        srv.server_close()
     return 0
 
 

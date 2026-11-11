@@ -11,8 +11,8 @@ from pathlib import Path
 import numpy as np
 from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
 
-from monitor.physics_features import VERSION, physics_features
-from monitor.telemetry_classifier import TelemetryClassifier
+from l2_monitor.physics_features import VERSION, physics_features
+from l2_monitor.telemetry_classifier import TelemetryClassifier
 from training import build_observer_dataset as B
 from training.build_clean_observer_dataset import OUT, canonical
 from training.train_telemetry_classifier import HISTORICAL, load

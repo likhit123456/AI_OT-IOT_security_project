@@ -33,7 +33,7 @@ import urllib.request
 from collections import deque
 from typing import Callable, Optional
 
-from contracts import PlantState, SupervisoryTargets
+from shared.contracts import PlantState, SupervisoryTargets
 from l3_brain.policy import OllamaOperator
 from l3_brain.prompt_format import DESIGN_POINT
 from scripts.reset_plant import DESIGN_PURGE_VALVE_PCT

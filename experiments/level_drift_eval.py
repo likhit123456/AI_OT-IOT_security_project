@@ -42,11 +42,11 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import List, Optional
 
-from contracts import PlantState, SupervisoryTargets
+from shared.contracts import PlantState, SupervisoryTargets
 from l0_plant import fault_injection as fi
-from l1_stub import L1ControlStub
+from legacy.l1_stub import L1ControlStub
 from l0_plant.safety import TripLimits
-from monitor.behavior_monitor import BehaviorMonitor, MonitorLimits
+from l2_monitor.behavior_monitor import BehaviorMonitor, MonitorLimits
 from scripts.reset_plant import reset_and_settle
 
 from experiments.eval_plant import EvalPlant

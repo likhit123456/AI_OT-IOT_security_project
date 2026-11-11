@@ -15,8 +15,8 @@ import urllib.request
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from monitor import observer_v3_format as F
-from monitor.telemetry_classifier import approved_specialist
+from l2_monitor import observer_v3_format as F
+from l2_monitor.telemetry_classifier import approved_specialist
 from training.build_clean_observer_dataset import OUT
 
 

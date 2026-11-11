@@ -24,7 +24,7 @@ if a future image version needs a real warmup.
 
 Usage:
     python -m scripts.reset_plant                 # restart + wait, print the settled point
-    python -m scripts.reset_plant --no-restart     # skip the restart, just wait/confirm settled
+    python -m scripts.reset_plant --no-restart     # skip the restart, set design purge and wait
 
 As a library:
     from scripts.reset_plant import reset_and_settle
@@ -205,7 +205,7 @@ def reset_and_settle(restart: bool = True, fix_purge: bool = True, **settle_kwar
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--no-restart", action="store_true",
-                     help="skip docker compose restart; just wait for / confirm settled")
+                     help="skip the container restart; still set design purge and wait for stability")
     args = ap.parse_args()
 
     try:

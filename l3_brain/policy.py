@@ -24,7 +24,7 @@ from typing import Callable, Deque, Optional, Protocol, Tuple
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from contracts import PlantState, SupervisoryTargets   # noqa: E402
+from shared.contracts import PlantState, SupervisoryTargets   # noqa: E402
 from l0_plant.safety import TripLimits   # noqa: E402
 from l3_brain.prompt_format import DESIGN_POINT, state_to_json, system_prompt   # noqa: E402
 

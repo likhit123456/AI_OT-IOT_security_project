@@ -1,6 +1,6 @@
 {
   "model_sha256": "79511431c50edc490982f1c89a927ac820115d273099e9b98c747b62f6964ec6",
-  "features_sha256": "0e5b7190b87365ed2fba08ab8e32fbdc38015b135a1f9c2db16b66d9f43a8e2e",
+  "features_sha256": "9cd8ed5775913addf6556181573213d7b201e05b9fdc27636df134aee322842b",
   "validation_sha256": "e735490ebb4a85a36980a246d9cfc646a38fe85818675211c4ee688976a53b8b",
   "criteria": {
     "accuracy_min": 0.9,

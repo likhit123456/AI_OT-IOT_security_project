@@ -29,11 +29,11 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Optional
 
-from contracts import ControlCommand
+from shared.contracts import ControlCommand
 from l0_plant import fault_injection as fi
 from l0_plant.plant_service import PlantService
 from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
-from l1_stub import L1ControlStub
+from legacy.l1_stub import L1ControlStub
 from scripts.reset_plant import reset_and_settle
 
 from experiments.level_drift_eval import DRIFT_RATE_PCT_PER_HR, SIS_LIMITS, decide

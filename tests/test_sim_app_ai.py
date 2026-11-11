@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from contracts import SupervisoryTargets
+from shared.contracts import SupervisoryTargets
 from sim_app.ai import DESIGN_VALVES, parse_command, plant_state, regulate
 
 

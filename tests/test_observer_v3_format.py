@@ -1,4 +1,4 @@
-"""Parity gate: monitor/observer_v3_format rebuilds EVERY stored v3 train/val/unseen input
+"""Parity gate: l2_monitor/observer_v3_format rebuilds EVERY stored v3 train/val/unseen input
 byte-for-byte, so the served v3 observer sees exactly what it was trained on. The live
 wrapper builds its v3 telemetry through the same module; a live-built window must pass
 the same gate (tests/test_observer_wrapper.py and the live sanity run check that)."""
@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from monitor import observer_v3_format as V3
+from l2_monitor import observer_v3_format as V3
 
 DATA = Path(__file__).resolve().parent.parent / "training"
 FILES = {s: DATA / f"observer_v3_{s}.jsonl" for s in ("train", "val", "unseen")}

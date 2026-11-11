@@ -44,7 +44,7 @@ The manual studio additionally uses the stock `qwen2.5:1.5b` parser model
 
 The live operator falls back to deterministic baseline control when unavailable.
 Observer routing tries the available models in the chains defined in
-[`monitor/observer.py`](../monitor/observer.py). CPU corrections apply to v3
+[`l2_monitor/observer.py`](../l2_monitor/observer.py). CPU corrections apply to v3
 telemetry judgments; they are not a separate always-running observer.
 
 ## Training and evaluation
@@ -52,7 +52,7 @@ telemetry judgments; they are not a separate always-running observer.
 The operator pipeline is [`training/train_local.py`](../training/train_local.py),
 using `training/train.jsonl` and `training/val.jsonl`. Its shared training/serving
 format lives in [`l3_brain/prompt_format.py`](../l3_brain/prompt_format.py).
-Training requires the separate [training dependencies](../requirements-train.txt),
+Training requires the separate [training dependencies](../requirements/train.txt),
 a compatible GPU environment, and local llama.cpp conversion/quantization tools
 under `.tools/llama.cpp` for export. The script documents its stages and paths;
 training/export can replace local operator outputs.

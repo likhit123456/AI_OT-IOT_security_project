@@ -1,4 +1,4 @@
-"""Parity gate: monitor/observer_v2_format rebuilds EVERY stored v2 training/val input
+"""Parity gate: l2_monitor/observer_v2_format rebuilds EVERY stored v2 training/val input
 byte-for-byte, so the served v2 observer sees exactly what it was trained on."""
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from monitor import observer_v2_format as V2
+from l2_monitor import observer_v2_format as V2
 
 DATA = Path(__file__).resolve().parent.parent / "training" / "observer_v2"
 FILES = [DATA / "observer_train.jsonl", DATA / "observer_val.jsonl"]
