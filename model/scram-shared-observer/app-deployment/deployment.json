@@ -1,0 +1,13 @@
+{
+  "alias": "scram-observer-demo-f16",
+  "weights_file": "scram-observer-demo-f16.gguf",
+  "weights_sha256": "f155e25ce8898a332c11191d70f36a308cf12a8d14fce6743f11c792959f561d",
+  "modelfile_sha256": "c5aafc421095e2c0ce785e1f46fab68d81907be8c8db0f8878f24cae6bcf9ae3",
+  "validation_report_sha256": "d143b944da0ab3a3833b10408896bbe114be68078d28caf9b1936ef86021ea98",
+  "schema": "measured-evidence-v2",
+  "release_qualified": false,
+  "demo_only": true,
+  "selected_backend": "llama_cpp",
+  "ollama_status": "unverified_access_denied_on_q8_import",
+  "q8_selected": false
+}

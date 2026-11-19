@@ -1,0 +1,77 @@
+{
+  "plant_writes": false,
+  "model_requests": false,
+  "command_parser": [
+    {
+      "input": "do not open feed 1",
+      "result": {
+        "kind": "valves",
+        "valves": {
+          "f1": 100.0
+        }
+      }
+    },
+    {
+      "input": "do not release the valves",
+      "result": {
+        "kind": "release"
+      }
+    },
+    {
+      "input": "do not raise pressure by 50",
+      "result": {
+        "kind": "setpoints",
+        "sp": {
+          "pressure_sp": 2750.6
+        },
+        "note": "do not raise pressure by 50 Targets: Set pressure to 2750.6 kPa."
+      }
+    },
+    {
+      "input": "set pressure to 2600 and level to 50",
+      "result": {
+        "kind": "setpoints",
+        "sp": {
+          "pressure_sp": 2600.0,
+          "level_sp": 50.0
+        },
+        "note": "set pressure to 2600 and level to 50 Targets: Set pressure to 2600 kPa, level to 50 %."
+      }
+    },
+    {
+      "input": "feed 1 and feed 2 to 50%",
+      "result": {
+        "kind": "valves",
+        "valves": {
+          "f1": 50.0,
+          "f2": 50.0
+        }
+      }
+    }
+  ],
+  "foreign_origin_text_plain": {
+    "status": 200,
+    "body": {
+      "ok": true,
+      "result": "queued"
+    },
+    "submitted_to_fixture": [
+      "clear_faults"
+    ]
+  },
+  "reset_between_read_and_submit": {
+    "status": 200,
+    "body": {
+      "ok": true,
+      "result": "queued"
+    },
+    "executed_in_runs": [
+      "new-run"
+    ]
+  },
+  "missing_undeclared_psutil": {
+    "exit_code": 1,
+    "error": "ModuleNotFoundError: No module named 'psutil' (isolated dependency probe)",
+    "requirements_declare_psutil": false
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "read_only": true,
+  "application": {
+    "status": "running",
+    "error": "",
+    "telemetry_stale": false,
+    "telemetry_age_s": 0.17,
+    "run_id": "baef8c47de9e432fa28189dc6682fcd1"
+  },
+  "observer": {
+    "mode": "unified",
+    "calls": 1176,
+    "failures": 0,
+    "fallback": null,
+    "cpu_status": "ok",
+    "evidence_review": {
+      "enabled": true,
+      "proposals": {
+        "label": null,
+        "status": "unconfirmed",
+        "reason": "Model alarm lacks matching numerical or source evidence in this window.",
+        "raw_label": "setpoint_drift",
+        "findings": [],
+        "version": "demo-evidence-review-v1"
+      },
+      "telemetry": {
+        "label": null,
+        "status": "unconfirmed",
+        "reason": "Model/detector evidence is unsupported, weak or in disagreement; investigate instead of assuming normal.",
+        "raw_label": "sensor_fault",
+        "findings": [],
+        "version": "demo-evidence-review-v1"
+      }
+    }
+  },
+  "listeners": [
+    {
+      "port": 11437,
+      "pid": 61120,
+      "started": "2026-11-18T21:57:43.619852"
+    },
+    {
+      "port": 8765,
+      "pid": 57508,
+      "started": "2026-11-18T21:57:47.107354"
+    }
+  ]
+}

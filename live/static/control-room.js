@@ -560,8 +560,8 @@ function renderObservers(s) {
     ["ocP", "ocT"].forEach(c => level($(c), "off")); return;
   }
   $("mP").textContent = (o.models && o.models.proposals) || "none";
-  $("mT").textContent = (o.models && o.models.telemetry) || "none";
-  $("obsModels").textContent = `${o.calls} calls · ${o.failures} failed`;
+  $("mT").textContent = o.cpu_telemetry ? "CPU detector (advisory)" : ((o.models && o.models.telemetry) || "none");
+  $("obsModels").textContent = `${o.mode || "legacy"} · ${o.calls} calls · ${o.failures} failed${o.cpu_status ? " · CPU " + o.cpu_status : ""}${o.disagreement ? " · CPU/LLM disagree" : ""}`;
   obsCard("ocP", "lP", "rP", "tP", o.proposals, s, true);
   obsCard("ocT", "lT", "rT", "tT", o.telemetry, s, false);
 }

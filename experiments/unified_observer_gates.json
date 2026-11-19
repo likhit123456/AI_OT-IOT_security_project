@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "declared_before_candidate_evaluation": true,
+  "default_change_requires_real_inference": true,
+  "quality": {
+    "each_task_each_class_recall_vs_specialist_min_delta": 0,
+    "each_task_each_class_precision_vs_specialist_min_delta": 0,
+    "proposal_false_positive_count_vs_v2_max_delta": 0,
+    "telemetry_combined_missed_faults_vs_deployed_max_delta": 0,
+    "invalid_output_rate_max": 0.01,
+    "frozen_level_and_dropout_recall_vs_deployed_min_delta": 0,
+    "minimum_examples_per_class": 30
+  },
+  "runtime": {
+    "p95_verdict_age_vs_legacy_max_ratio": 1,
+    "p95_control_tick_vs_legacy_max_ratio": 1.05,
+    "maximum_observer_runners": 1,
+    "reloads_during_sustained_operation": 0,
+    "observer_resident_memory_vs_legacy_max_ratio": 0.8,
+    "process_plus_runner_ram_vs_legacy_max_ratio": 1,
+    "duration_s_minimum": 300,
+    "reset_reconnect_and_operator_contention_required": true
+  },
+  "note": "Targets are acceptance gates, not claimed savings. No real model baseline is accessible in this session; relative gates remain unmeasured and block promotion. Disk size alone cannot pass memory/compute gates."
+}

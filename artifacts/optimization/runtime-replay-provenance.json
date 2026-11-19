@@ -1,0 +1,7 @@
+{
+  "source": "training\\observer_states.jsonl",
+  "source_sha256": "ef5fc8ee3dd75c3a121e052e3a85ca63a1b169372f442cb7a17e2406a6296668",
+  "recording": "f1_stuck",
+  "truth_and_fault_metadata_removed": true,
+  "cost_field": "zero filler; cost is unused by observer feature contract"
+}

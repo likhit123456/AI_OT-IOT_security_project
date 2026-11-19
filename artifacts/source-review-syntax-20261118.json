@@ -1,0 +1,13 @@
+{
+  "python_source_files": 143,
+  "syntax_errors": [],
+  "excluded": [
+    "artifacts",
+    "virtual environments",
+    "reference",
+    "vendored remote_io",
+    "node_modules",
+    "model artifacts",
+    ".tools"
+  ]
+}

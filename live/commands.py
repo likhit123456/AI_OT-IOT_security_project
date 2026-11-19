@@ -42,25 +42,34 @@ _DOWN = r"\b(lower|decrease|reduce|down|less|cut|drop)\b"
 
 
 def _valve_targets(t: str) -> Optional[Dict[str, float]]:
-    found = []
-    rest = t
-    for names, rx in _VALVES:
-        if re.search(rx, rest):
-            found.extend(n for n in names if n not in found)
-            rest = re.sub(rx, " ", rest)
-    if not found:
-        return None
-    m = re.search(_NUM + r"\s*%", t) or re.search(r"\bto\s+" + _NUM + r"\b", t)
-    if m:
-        pct = float(m.group(1))
-    elif re.search(r"\b(fully|wide open|full|max(?:imum)?|open)\b", t):
-        pct = 100.0
-    elif re.search(r"\b(close|shut|zero)\b", t):
-        pct = 0.0
-    else:
-        return None
-    pct = max(0.0, min(100.0, pct))
-    return {v: pct for v in found}
+    out, pending = {}, []
+    # Each clause owns its value: "feeds 100% and close purge" must not
+    # become feeds=100%, purge=100%. Bare valve names can share the next value.
+    for clause in re.split(r"[,;]|\band\b|\bthen\b", t):
+        found, rest = [], clause
+        for names, rx in _VALVES:
+            if re.search(rx, rest):
+                found.extend(n for n in names if n not in found)
+                rest = re.sub(rx, " ", rest)
+        if not found:
+            continue
+        m = re.search(_NUM + r"\s*%", rest) or re.search(r"\bto\s+" + _NUM + r"\b", rest)
+        if m:
+            pct = float(m.group(1))
+        elif re.search(r"\b(close|closed|shut|zero)\b", rest):
+            pct = 0.0
+        elif re.search(r"\b(fully|wide open|full|max(?:imum)?|open)\b", rest):
+            pct = 100.0
+        else:
+            pending.extend(found)
+            continue
+        if not 0 <= pct <= 100:
+            raise ValueError("valve opening must be within 0-100 %")
+        if any(v in out and out[v] != pct for v in (*pending, *found)):
+            raise ValueError("Conflicting valve targets: send one clear command per valve.")
+        out.update({v: pct for v in (*pending, *found)})
+        pending.clear()
+    return out or None
 
 
 def _setpoints(t: str, current: Dict[str, Optional[float]]) -> Dict[str, float]:
@@ -92,6 +101,15 @@ def _setpoints(t: str, current: Dict[str, Optional[float]]) -> Dict[str, float]:
 def parse(text: str, current: Optional[Dict[str, Optional[float]]] = None) -> dict:
     """Classify an operator command. `current` = the setpoints in force (for relative changes)."""
     t = " " + text.lower().replace("’", "'") + " "
+    # Reject the whole message before any route (including the model fallback).
+    # This deliberately conservative grammar cannot safely resolve negation,
+    # conditional instructions, questions, or conflicting commands.
+    if (re.search(r"\b(?:not|no|never|without|avoid|unless|if|instead|except|maybe|stop|prevent|cancel|should|whether)\b|\b\w+n't\b", t)
+            or ("?" in t and re.search(r"\b(?:open|close|set|release|raise|lower|feed|purge|product|pressure|production|level)\b", t))):
+        raise ValueError("Negated or ambiguous instruction: use a clear affirmative command; no action was taken.")
+    if (re.search(r"\b(?:open|raise|increase)\b", t)
+            and re.search(r"\bor\b", t)):
+        raise ValueError("Ambiguous alternatives: send one clear affirmative command; no action was taken.")
     if re.search(_RELEASE, t):
         return {"kind": "release"}
     valves = _valve_targets(t)

@@ -14,20 +14,21 @@ Binds to 127.0.0.1 only: the actions drive a (simulated) plant.
 from __future__ import annotations
 
 import json
+import http.client
 import urllib.error
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-from live.engine import Engine
+from live.engine import Engine, RunChangedError
 
 STATIC = Path(__file__).resolve().parent / "static"
 ACTIONS = {"authority", "brain", "level_drift", "pressure_dropout", "forged", "operator_injection", "stolen_key",
            "oob_write", "actuator_fault", "sensor_fault", "chat", "clear_note", "clear_faults",
            "reset_interlock", "reset_plant"}
 TYPES = {".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css",
-         ".svg": "image/svg+xml"}
+         ".svg": "image/svg+xml", ".woff2": "font/woff2"}
 PLANT_WEB = "http://127.0.0.1:80"
 PROXY_ROOTS = ("/Build/", "/TemplateData/", "/data/")   # what the Unity page asks for
 
@@ -47,15 +48,21 @@ def make_handler(engine: Engine):
 
         def _proxy(self, path: str, query: str) -> None:
             url = PLANT_WEB + path + (f"?{query}" if query else "")
-            try:
-                with urllib.request.urlopen(url, timeout=30) as r:
-                    body = r.read()
-                    ctype = r.headers.get("Content-Type", "application/octet-stream")
-                    self.send_response(r.status)
-            except urllib.error.HTTPError as e:
-                return self._send(e.code, b"", "text/plain")
-            except (urllib.error.URLError, OSError):
-                return self._send(502, b'{"error":"plant web server (:80) not reachable"}')
+            # Unity assets can exceed 200 MB. Retry interrupted upstream reads
+            # before sending headers, so a partial file is never served as valid.
+            for attempt in range(2):
+                try:
+                    with urllib.request.urlopen(url, timeout=120) as r:
+                        body = r.read()
+                        ctype = r.headers.get("Content-Type", "application/octet-stream")
+                        status = r.status
+                    break
+                except urllib.error.HTTPError as e:
+                    return self._send(e.code, b"", "text/plain")
+                except (urllib.error.URLError, OSError, http.client.HTTPException):
+                    if attempt == 1:
+                        return self._send(502, b'{"error":"plant asset download failed; reload the 3D view to retry"}')
+            self.send_response(status)
             self.send_header("Content-Type", ctype)
             self.send_header("Content-Length", str(len(body)))
             self.send_header("Cache-Control", "max-age=3600" if "/Build/" in path else "no-store")
@@ -87,6 +94,19 @@ def make_handler(engine: Engine):
         def do_POST(self):
             if urlparse(self.path).path != "/api/action":
                 return self._send(404, b'{"error":"not found"}')
+            # Allow the local UI and its explicitly supported Vite proxy only.
+            # Host validation also prevents arbitrary DNS names resolving to loopback.
+            ports = {self.server.server_port}
+            if self.server.server_port == 8765:
+                ports.add(5173)
+            hosts = {f"{host}:{port}" for host in ("127.0.0.1", "localhost") for port in ports}
+            host = self.headers.get("Host", "")
+            origin = self.headers.get("Origin")
+            if (host not in hosts or (origin is not None and origin != f"http://{host}")
+                    or self.headers.get("Sec-Fetch-Site") == "cross-site"):
+                return self._send(403, b'{"ok":false,"error":"Action origin is not allowed"}')
+            if self.headers.get("Content-Type", "").split(";", 1)[0].strip().lower() != "application/json":
+                return self._send(415, b'{"ok":false,"error":"Actions require application/json"}')
             try:
                 length = int(self.headers.get("Content-Length", 0))
                 if not 0 <= length <= 65536:
@@ -95,10 +115,21 @@ def make_handler(engine: Engine):
                 if not isinstance(body, dict):
                     raise ValueError("request body must be a JSON object")
                 action = body.pop("action", None)
+                expected_run_id = body.pop("expected_run_id", None)
+                if expected_run_id is not None and (not isinstance(expected_run_id, str) or not expected_run_id):
+                    raise ValueError("expected_run_id must be a nonempty string")
                 if action not in ACTIONS:
                     raise ValueError(f"unknown action {action!r}")
-                res = engine.submit(action, **body)
+                state = engine.read(0, 0)
+                if expected_run_id and state.get("run_id") != expected_run_id:
+                    return self._send(409, b'{"ok":false,"error":"The plant restarted. Wait for the new readings before retrying."}')
+                if (state.get("telemetry_stale") and action not in
+                        {"reset_plant", "clear_faults", "reset_interlock", "clear_note"}):
+                    return self._send(409, b'{"ok":false,"error":"Plant telemetry is stale. Operating controls are paused; recovery remains available."}')
+                res = engine.submit(action, expected_run_id=expected_run_id or state.get("run_id"), **body)
                 self._send(200, json.dumps({"ok": True, "result": res}).encode())
+            except RunChangedError as e:
+                self._send(409, json.dumps({"ok": False, "error": str(e)}).encode())
             except (ValueError, TypeError) as e:
                 self._send(400, json.dumps({"ok": False, "error": str(e)}).encode())
 

@@ -53,6 +53,25 @@ class BaselineOperator:
         self.level_target = level_target
         self.production_target = production_target
         self.a_comp_target = a_comp_target
+        self.note = None
+        self._defaults = (pressure_target, level_target, production_target, a_comp_target)
+
+    def instruct(self, sp: dict, text: str) -> None:
+        """Apply explicit user setpoints through the model output envelope."""
+        targets, _ = parse_llm_targets(json.dumps({**sp, "rationale": "operator request"}))
+        if targets is None:
+            raise ValueError("invalid supervisory targets")
+        for key, attr in (("pressure_sp", "pressure_target"), ("level_sp", "level_target"),
+                          ("production_rate_sp", "production_target"), ("a_comp_sp", "a_comp_target")):
+            value = getattr(targets, key)
+            if value is not None:
+                setattr(self, attr, value)
+        self.note = text
+
+    def clear_instruction(self) -> None:
+        (self.pressure_target, self.level_target, self.production_target,
+         self.a_comp_target) = self._defaults
+        self.note = None
 
     def decide(self, state: PlantState) -> SupervisoryTargets:
         # If L0 has scrammed, intent is irrelevant - ask for nothing and say so.
@@ -70,7 +89,7 @@ class BaselineOperator:
             rationale = f"pressure margin low ({pressure_margin:.0f} kPa); easing production"
         else:
             prod = self.production_target
-            rationale = "nominal economic operation"
+            rationale = "operator setpoints (baseline rules)" if self.note else "nominal economic operation"
 
         return SupervisoryTargets(
             pressure_sp=self.pressure_target,
@@ -207,6 +226,7 @@ class LLMOperator:
         self.note: Optional[str] = None
         self.note_id = 0
         self._call_note: Optional[str] = None
+        self._generation = 0
 
     # ---- Policy interface ----------------------------------------------------
     def decide(self, state: PlantState) -> SupervisoryTargets:
@@ -219,13 +239,14 @@ class LLMOperator:
                    and not self._inflight)
             if due:
                 self._inflight, self._last_started = True, now
+                context = (self._generation, self.note_id, self.note)
             cached = self._cached
         if due:
             if self._background:
-                threading.Thread(target=self._refresh, args=(state, cached),
+                threading.Thread(target=self._refresh, args=(state, cached, context),
                                  daemon=True).start()
             else:
-                self._refresh(state, cached)
+                self._refresh(state, cached, context)
                 with self._lock:
                     cached = self._cached
         return cached
@@ -249,16 +270,26 @@ class LLMOperator:
         with self._lock:
             self.note = (text or "").strip()[:500] or None
             self.note_id += 1
+            self._generation += 1
+            self._cached = hold_targets("instruction changed; awaiting model decision")
+            self._last_started = None
             return self.note_id
+
+    def reset(self) -> None:
+        """Invalidate old decisions without starting a second concurrent request."""
+        with self._lock:
+            self._generation += 1
+            self._cached = hold_targets("reset; awaiting model decision")
+            self._last_started = None
 
     def _user_prompt(self, state: PlantState) -> str:
         note = self._call_note
         return build_state_prompt(state) + (f"\nOperator instruction: {note}" if note else "")
 
-    def _refresh(self, state: PlantState, last: SupervisoryTargets) -> None:
+    def _refresh(self, state: PlantState, last: SupervisoryTargets, context=None) -> None:
         t0 = self._clock()
         with self._lock:
-            self._call_note, note_id = self.note, self.note_id
+            generation, note_id, self._call_note = context or (self._generation, self.note_id, self.note)
         try:
             text = self._call_model(state, last)
             targets, note = parse_llm_targets(text, self.envelope)
@@ -270,9 +301,15 @@ class LLMOperator:
             targets = hold_targets(f"model unavailable ({type(e).__name__})")
             outcome = f"error: {type(e).__name__}: {str(e)[:120]}"
         with self._lock:
-            self._cached, self._inflight = targets, False
+            stale = generation != self._generation or self._clock() - t0 > self.timeout_s
+            if not stale:
+                self._cached = targets
+            elif generation == self._generation:
+                self._cached = hold_targets("model response expired")
+            self._inflight = False
             self.calls += 1
-            self.log.append({"t": round(t0, 2), "outcome": outcome,
+            self.log.append({"t": round(t0, 2), "outcome": "discarded stale result" if stale else outcome,
+                             "generation": generation, "discarded": stale,
                              "sp": [targets.pressure_sp, targets.level_sp,
                                     targets.production_rate_sp, targets.a_comp_sp],
                              # what the model was shown (measured only) and how it answered

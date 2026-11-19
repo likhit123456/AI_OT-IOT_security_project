@@ -1,0 +1,1518 @@
+{
+  "schema_version": 1,
+  "seed": 3407,
+  "split": "validation",
+  "dataset_sha256": "9936110bb3ec9182aa635d285466338e399ee0a2f2b661fddc412db9c9275083",
+  "gates_sha256": "743266e28f1b7864509d2cdad9d6b42342ee1f1ffb824ebdd6c1e2571bb947a7",
+  "inventory": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "logical_cpus": 16,
+    "gpu_csv": "NVIDIA GeForce RTX 3050 6GB Laptop GPU, 6144, 1277, 12, 5.84",
+    "memory": {
+      "system": {
+        "total": 16438312960,
+        "available": 2272915456,
+        "percent": 86.2,
+        "used": 14165397504,
+        "free": 2272915456
+      },
+      "process_rss_bytes": 34545664,
+      "cpu_percent": 0.0,
+      "runners": []
+    },
+    "ollama_version": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "installed": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "residency": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "weights": [
+      {
+        "path": "model\\scram-observer-gguf\\scram-observer-v2-q4_k_m.gguf",
+        "bytes": 986047872
+      },
+      {
+        "path": "model\\scram-observer-v3-gguf\\scram-observer-v3-q4_k_m.gguf",
+        "bytes": 986047808
+      },
+      {
+        "path": "model\\scram-operator-gguf\\scram-operator-q4_k_m.gguf",
+        "bytes": 986048000
+      }
+    ]
+  },
+  "candidate_model": "scram-observer",
+  "cpu_only": true,
+  "rows": [
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "2c62e207a30f6d440644ea7077b7c6304567707e21833eac84b2781142eca26d"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "03bfb81561abfc572b4d06298c85902b37618f643e08dfe7ff2aed5c3cfbcc6c"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "15086096e13f2b7cb462f088cd078eeade050f31e20c58cf6ebb64f26810cfa1"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "f443ca094199d5cfb0cbf034d6e62780828d1a90d582f05ff3f1cfd626d4b501"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "8a9f10b7a85677363868d5c8e3b660b6365af5fb3c6b873a0ef393bcf8d83d32"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "43d3e042b7b71148273834d45e88700599b24ce55d7658c6363c3948ac77ba26"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "5183c85de96468f867a66d2e4452d675a6a971cb8932e3e570231cef0d55cf22"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "45b3464523339bdb4ece998813621b7d13594914c519e1e39025bee99aef0fee"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "d77bce720845da0118d703e1c7b088ccdee5e1ccb80e70fd353e99036ea50347"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "a78c506473542c0554e83298f6ac39aa1831ed399447be8aaa03e91e87cbaab9"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "26a88113fe6037f6313d90c6dd1b38efb26b03ba71566690329e54b9bc6d97e1"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "60515153d8c48a786c2485424d34f2f2ecc3f128e0724cae339b477bc5658a71"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "cd3862a1e3aea5339f80b86ea105568cb47d704e7e33cce28fc769b8ae85e86d"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "95cea10d88b311b02bf907ed6e57fd4a75bf16a90e969b5082a54e719dc10a5e"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "0c458f3d25e5dbbccc924b8a355d2c65dd777d4e3a02537f4c17d42bc6f482d3"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "81e26169ae0a966844fa90c00f5d0726124db0e17f54b11943b30ea3cfacd66a"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "afafb5fa577305a632b17fd432d8d7e1c92bb418df4d43e4371ecbd4c03185fc"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "434694f91f4f9f04f150e10b5b4313cdd4d1eca78444b5cf5186a62a361c8676"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "15b5767e86c5b2599b69ec1fecbade532827f4ad70d15c6c1fab1bc55c9e18d7"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "45a2c045c20717d602b3c8a2c0da98b343651384de864253513b9e0769b6ca7b"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "b0ba58e9a5acc5ceaff7b3923681e6a8e90d3cae32a04c20b2e2de05f6af5ac7"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "8eb3029f1414ca8fb2ad1b63d7f55c05567b0f0b03db18e397cfa344d04e152b"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "0b6c354bb41b5ddac01fabc3a12962b891074c5128b4570cc97b17f9453602ca"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "3e58570f734e130813423ee1e481c45f4829cead4b4e6b08c757ccf6ac7f2d24"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "ef3c6514125402d95734af81d8b94b86306eee19c7802f4dc63d6126b177a7b5"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "35ff95c8082adbad8df64f29555cebe72efd2d34f241b14a57477eff6b9adbfb"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "1ed8fb072e67635f132aea13a8aba4a1486cda6a1a936581b0073dfa44cfbf54"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "772db387d27e1f077137dbc30494117a433b9524d1e946406df2a85e6489b94e"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "6d76d0dc3c2b7d2c415252fd27b521f8b576f3c4e83e0c8eabd7110df2279f26"
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "input_sha256": "fca149af0bc1a923f633e5e7d64b4478b41012bbae6b449fffdca9b13deb8ea1"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "b67b31decaa6b6b8b7c6b8d07ac5e1bb35be9c486a588c1be654ec2d748566a2"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "0b7c97f1e1f4ae31e1f1a6a1029c22a0c9eb2c8f3a16c0c86e057ceec41b1bae"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "ca76b88fe28ec26995b7f03bed0ffac71b4b24bd31202a7cd6402aa66f44f315"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "dce14e0c473969de5a83ba5f3e6945aa9bdb3fa8e2ce2d1ccf49c94a0da6cec7"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "573ce5f99a1d8468e5dfce4bd06a5ea72e394522782aa43e23670e89d8ebf222"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "ef10f8853229ea821834d9edf11eaad0a4948e72486864882055732d4acd8397"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "f718acf979c63168e4bd47f7d7a6e5395e1aa73bb0318cce78141e1ec1842be7"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "85dd9ef96b89cf6759d7bff2738dd0ba47f358b8a604ec379371454a8f15ea3a"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "04f26898ce6602c5164125741eef366cc9abafd14b693ca850de33ea99dc48e4"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "bc3930efebbcb67543aa5ca07c61494c4eff2aa5771be84bb4585bac747bb82c"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "a79dfd5b3ea7ff52b19803ed9d2365b316f0667743c6302f44ae11d38e641b08"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "0165c64e08892d36831cb0f05d94e31b204ae86a931312de5c465160b76eaf9a"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "d131f2f78eb5cea0556adc400523fb341b11394d06f2eeabab2086e579fc1e89"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "c5ef8eefdf5c46818adc3dad97f4fffdea6ba269a28c82328c95ae514c361406"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "1d2501324e69686dc56e4c1c16382c545a8ea36b341772422b97a900c7e761bb"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "6bdaed7fbff62c750103bed372accd9628d301e8a409cdcc3fb898369d833d48"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "c927efabce00107e9b40a55259dd4b84579f8b1b2b563b4c28651c0881439f3d"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "6e137ab668412edc32eea53a36d248fe98cec167650100235ecc4d6958476fa5"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "58521ea8bcbe3d0bc8955621194ea44938ebe28437ac36cf123b25b47e863806"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "41f10c584b7f43bac5e8ab13fa4cbf7872f303efd70b69f35dd3fdbeccdb1456"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "445baef0c4f91cac82fbecbbd7cf3b829d7794e557544f61940832d390b4eb41"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "f7edcb304613c3e22bb5adb36fbd6236aaceb3646e71b6b23d4e2386447efcf5"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "d54522fdb67045ba1bbd17a70d6f9edfc8519181028a2ef6211549b168d80fa5"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "6f7e3848b29c6ad37dd5ccb33d8e84c9130250154950708370f56ffd6f222cd7"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "f00fbe2f1c18d141d446c3752568c4872aa76c3bc43d0ecbc6651b81a0229273"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "c8a81ef7b86b5e8ba18eb004b2f17eb16a7840b92c4da94852ec4a5f584c50b1"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "f8abe896814acfb8ec15715b29be51f37b0dda0097308165567a0b6b718229d7"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "abd6bb38ca031ff57927c186c939561a896fa87bcf2c445a52a6e669a98a4677"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "00c5ba3e2639d91d96108686979bd36d1d0cd9c54d2a051af6a05c90e8a7f220"
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "input_sha256": "278fc122963991da287b02520eb9772a37dfbb20810aeaf866313bf808730ec0"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "ba396abb4cedae55ea8b4f690fee495e93656294ae568e6d634605d453c2af45"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "ed977c1f64619d9cfa769455534e156377527dece652c93b57a3ba79942be89f"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "196ec35219fa13ce6019a75f730b2b4779e6174d34ab1621ef9212e9157dfd17"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "80d511931b4023f5c905783f0ada6d2205690296926b45f9b719dcb367a324bb"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "67c303bc313c77e9b2aa12a6bce28c4c3029c0a53b87be98bd878876ed881d72"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "bc0feb06ac44b431571db989ee895fd74e7009fea13ea28c2486e4830ffa3d3e"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "ddd861d05e66b4f2a5c554482c4b48bead3d2ed09d44b1cc309eb63918ba17f7"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "2a4fb415eb09c7efb34308e3673f80d447fd7453255b96bfb30705bc978d72e0"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "2d55e574101cfdee1c68a79428ca48a11f1c54236d5b1912dd49e5e3bb8c8687"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "d21d22c8ea7808c750362c52b69c2abcde73c5519bedfd833ae7d2be53a1d8d2"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "82d00ed1a92e50a4a476a53f57b31028d6fee07e3df2a0004b55be94f9b4f5f8"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "343c01c9aaf823df108910911a93ae7fdd823f35d280797642caaa66ccfde9a0"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "78b7192d0f9c22a12bce8f4985888730eaf716f8527f66333d6ae824d55daebd"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "d04c460093ca6b330b1969a935a1c3eb4dcbd576ca0cf5da83a59559e99edc13"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "1f2ad2a1099f01b0ab5f966230370b96f2360490c4d332df8a09ddd5757b8bfd"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "1287bb5e03793a174bd697983d318ed916df9c864c5cb349edd04b8bf3c9fa9d"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "5703f6b9c124832b5ecce1749d95767874f0ce2554693ebea206afa43d7b480e"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "21d6525e633403bbeeca4e6f2cc3e3e5ac140a12d8886e4170070351513c52eb"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "4b0a2a841bc478e1dc6b2f9917a859c2b1833217b00d4a83766feb1987e53c41"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "09d692faa280661486e1940aaeabd4af704008a7d41bb893a1fb2ce350abe0db"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "bf802e73a2ca0954dc6798f5961873aec277781345703754ddb5ea4eaf348bb1"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "911661e6d700e36bb688d96e06f39b0c340cdb891f2b0c64acac05a8954dd7f0"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "1b8163f8e137a7bff5ecdadeccc94946c75bebfd9b642a0b95333b979225093d"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "b3ae9190d5bba7cea529fd55891c70e59d33906a8494b9c58df8b7b4dfd83bac"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "b0d1d5b462e1cd7cd13a189f25ab0373ad39fbdb3ffd17063497e9c74c372390"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "fe0b05d7d11a72b3570f01996ec399225a37cd11f4ff9d524035f0b4275c0d60"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "99eec1cdc008c9b35314d2f3801afa0b2774d72b25e09b6d0fe5abeca6198d1a"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "5b806795c91c9aede2578f4b1121e99ae05e0a85f1e9c5b63ba362a95f69b40c"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "05770878104b9ab5a4f0449dcb10f7d96b69d7399e48f521ac96615ef910e8c6"
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "input_sha256": "098ada070044584a851cc68f87ae140a52a0bb77bd9963cdf9cc97795f4028a1"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "62bdf7246ad5d82b6b292fa540a5d2bf5eb230801904d11d480cf63246fa8d1a"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "d5f110cb93873ca0b366689106a2115a179d7d80415551b87310d3edc3089244"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "07eb10c93fb7f9b3e43b1c15d14f19bcefe2e98a9eafbe3a66325d3ffecc954b"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "f1581ba1959264d4508b8b8eeb653acc2e32647441aeed9070b0edb5c31f52a1"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "851b431399d4a086b28707f85600adceca30b36ecf771ecb0ee0e081b6caa739"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "bff9ccb8094cee8ca9fad0de0356d58e27fc4930a9298bf5ef5a60511a4a175e"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "f6d5259b89c36a9238847c02c79f3c5a1ae280a0259c7e9ca8f06f1cc2cd3346"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "7be568b0487fe666441070dd6146c59cfc7e76e58cc271cecc3406d339587cd0"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "d34a37fcec90313525c3c2399a0561aecbc9358d552edd45b54107ddb445cd3a"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "9b7499d364a89102112a53b5be6e9fc4a457b371388ac9a45b15b83bdf2dcb6a"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "87ee9a55e6879e1ae35b311a8d75961626a0f47a328f26334cd59b6c3520ea49"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "b2c1893b5633bdd04712f0724b67dde4c973fafe16e3f182833388c70a9deaab"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "9fc65cf567e528e6b837d6b5eb914f6e5f6902cd8445105bc17b71ed42c6e4f9"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "e13d5925ba595af77e4807b9f06bbdcab6e415df525baac2a49fbed42125c934"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "18ad937fdcff2762dea5dc1a0243f80f574eed1cd365ac7eff89126c9ecce0b9"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "92c6e0391f21ffe82cee2ae6f5f5a79b7f11b30a0f28e39fb4639e4bab4acd6e"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "5eae998113653bbe7ca9d88c0c6f53d0dbff58e0756108ae7c8565d48c01318c"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "1e38a0c12e5b84265d49d03421e81bcc2f0c1fed1d41023f7f761b066beff290"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "4ed4c97590e90fbece50d8bf414c7710f8206078aac829e94958c7165268d41c"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "67dfae66b227c15cc679ba6a097cb75c9ff949b8d2f07d1185ba079826f2f328"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "ed1afa2b9e847b032da8d922ad79e43c8f8e6c6c2d7d5949e8dc64da50854849"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "7732d8cf88d38ddeb2c972588416d40a3eeca3336964a91b57b1b9e261a7c21a"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "e2ae1a3c362fe200f7ab8ba7fa23a6cf0b82ad534612c6f6650c25f121ffea3a"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "bb5bc23c26b53235d6a0f5efa680fc0b886a0f603e4044d48058b03206ca7c3f"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "0b5ceda3d0f90c6b5ca7f13933f5d5b0359a27aa74f39ca085d822461ba0d445"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "d37a3713ff3bef13e9337d11c70cc7ffdf112989d8bd9fc606262c6a21193890"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "3e504cdd65608102880155f264e07ccda628206c7be5b91faa694d4518d3e7ba"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "3655232cc1f0529b64eb84154c3b1030f3102fa9f5d69ca5d8d94dd6196b5920"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "5a829a907c8621cf56429d42a74ac15bcedcea03b3b44b0305c1ab5d1fe80a6d"
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "input_sha256": "6a5b5cff750f9e959e061c9a30f3923d64a14a0a150a6a6ca34f0b15d8c8100d"
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "65ed0c869ad55aaba05dd7ea45ffe13115406456b2be7876b18c11d7054be6ed",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.002559199998358963
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "a3bd69d0c2fdc8a931b9b50703892ba96fefe52145b5bb0f9373aab49f5820b7",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0018601000010676216
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "eb900219b9c6615f41ee5ddb182d393afe95d6c4f283433b02f07fd78ea46381",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0013068000007478986
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "3a2f22d109e588ccb8dbbd043216f1ce99d6e563c427a96813aec4a0bff55e8a",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011978000002272893
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "cf76863e2595dae8c331d8f4eee47590d534d28e549a79280e9a27c8e63ad264",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.001168100003269501
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "6f728467abdc575c37bafdc4c0086387fbd32a8d8384902587e3d139e7f1a246",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011562999970919918
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "26a5462b8b934a51e12c42dab0ddd1427823363c2661b6833846df6a414baf05",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011393000022508204
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "c59b2c34034b5f87e2702ed09bd57098da6be2db2cdb3ba85b88c1aa94e35fc2",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0017374000017298386
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "2f6e082a0f7633198fcdce54429d9b5dadc9a8e816eced1acdd4b32b2ffe6ee4",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.001950800000486197
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "39dc8c9e35c10abe37b5f94bed5fbad382d448caad35e5dea7776dc1c883be1b",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0014091000011831056
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "87b875302c2ca91762181684822fb655bb549f8aa6e3e40ff5a1a9d7e57b3094",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0012096999998902902
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "9f064644d2ee40af1e014bb0f3c387cfa4cd4c3f01d02c4ca97ee8458b46320e",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011736999986169394
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "d5a239085b7c55ccff1e8be35b341d7b61c1b8b8fa6802ccacf978580b6c55c7",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0013687999999092426
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "3d9efcdf4f0e71364a0760634eaf311d12df251e634599635510945744c12c82",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0017121999990195036
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "399caaaa70b7d2422adf26187fe0a608d9d521f322e40adb68922f1ba359bfb4",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011589000023377594
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "0716c3a2cc6bffca78caef653ca989a98115284e0c145c630c3f2ba6df414e6e",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011932000015804078
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "09cf704ba09b55a59b1175cf0c7e981fea26deeaaaaf7036e63e8643f60718f7",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0012003000010736287
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "1237584103616bccd53df2f7eb8f5cd93ff8c60416e00a2f5d4709ce12e0c057",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0014660999986517709
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "2957e1a8ffdd0ed365a01e04cf1123606eae7e9e2ef8db6a412ad43bfcb08ca2",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0016306000034091994
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "db8f49d307836c80892531c39e711d7c94caca020a618d8cb6d4cd6904bd08d1",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0012319000015850179
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "dd2ec1eae45a4806752651948a48bb3d017bb7c84ebbbd697c7a98f3c7f2cf72",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011963999968429562
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "107af725f9403c539c3e6256c77a73f4e018ce89cfb90cae186a546e8bb0fff1",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011742999995476566
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "7cd1f4d10f9ef2742d5f73b0ae7139346fdea2f34b440f87eb98321068385b2e",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011959999974351376
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "5da226324b94fa8a279784701a9047392bf25b690145d81cd6113fb3cd1da420",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011519000036059879
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "f9bce2ee769cca320fdd8e0ff55ecf29d08bda537d7d9c7d02e676c129318ee7",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0012753000009979587
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "5ad77265df19da308cf2621c68e3590ef217299323da2ede4ffc57cf26c0c513",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.001200400001835078
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "c8d9229d793a7e6797d0c29fe843745349680228eb7040ffbab18239becf9806",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011553000003914349
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "10cc396537d754348892a7df1eccf5a700780cf2b1626f440cbd874228dcb1ca",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011436000022513326
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "990781da6a3f496726d9bd3fa52c5c37f294efb590b14aeb8bd2968c6cf948ca",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011549000009836163
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "input_sha256": "ac1e38d7d91ccab636d56065df4e8c1632f316c29022d3d21e9c2f3de6961176",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0011740000009012874
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "0812e06c50b23babedca63cc14ef9836549eb875b16fa3798bcb015d98199c9a",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0022308000006887596
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "461af196478a9ffaa33c7b9653e44c8409ef70098d24c6a21649c4f07793958d",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0012853000007453375
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "4e8cffb3c4b893d50ee1ef12512611287c633ba1d6a5231a85aa7215f535c31c",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0013997999994899146
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "a69cdc573f2af3a08929f43d7ae1399c3cbdb0ecf3f639f801f965c2022eb0b7",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0011660000018309802
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "f9f7f5a4d2c81a93874e7f0ee9c269b55bfd09c5bb23366b81413665681395a4",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0011962999997194856
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "ebf0df1d2ec70c95e44264daffaece68746dd69df6e7d6184cfca9c6d06c604c",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0011400000003050081
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "8e16045ca4a57af6ce9243a56416afd683e7659dac1b78439d07a54f3fa91cf7",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0011508999996294733
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "05e38a9b4735dc17e103024f776480b926b6831ed9025b09d51dbbc4230f222e",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0012420999992173165
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "5975945730b77314ad99a88627a97c97c553d04a97e13505033f5845c7ce4800",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0011396000008971896
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "8fed8b12b31eadc2ea6d1066f44e5e32d4730969fe8bcd9d311f2baa64c042aa",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0011535999983607326
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "557f3d397b2ee7613f856635843ad62b01cc45cf2871f847a60a4e048c071632",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0012090000018361025
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "2022ea3e688ec90e50d8eb61e52f5aec81b8ad08af54928b76561259717b92cd",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0016591999992670026
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "a877dc9699cf7d93411e5d56385d9dd95b0ed10e740c18d998a0802afa3d0f59",
+      "cpu": "normal",
+      "cpu_latency_s": 0.001336600002105115
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "734a77dcbe93b65669f9e26ce7492267ddaf7d47066fd40ee77ee3a44eef9c71",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0013744999996561091
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "7d2fa41754212d2e293d19396b8875faedb74fcd26cdf11ff879fbb04437f7b4",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0011985000019194558
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "9146c4bb68c8878bb71b387bf1bfc0eaf31a0d82450961642973adac0d37e917",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0011872999966726638
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "e8339fda1aca1a897751a824bc4b82f00d2ef9a90c7780591517c05ae28e289a",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0011575999997148756
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "558ea6cb0152d214822ffc09ba00e75ca49b2f0ba754e098776d7305409e8ca5",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.001152099997852929
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "input_sha256": "8dbfb16ef109865d3d7cd7eba2a4e6fc29530a44e308789795110308a46958e8",
+      "cpu": "excursion",
+      "cpu_latency_s": 0.0011508999996294733
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "fe96c5192eddb34bd45737c3a57295f9ccc8d8b3fb9bb4e02156d0dd920f380a",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0014258000010158867
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "5e11bdd092b3ee483ae39d6f7dcd9f93cc1ecd52437853c847cc51cf326d8701",
+      "cpu": "normal",
+      "cpu_latency_s": 0.001266100000066217
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "bb786a09ddfaf556510db297d70a5a2a7d840ba71c63c7a4e335d2d0875a6538",
+      "cpu": "normal",
+      "cpu_latency_s": 0.001225799998792354
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "93655cea0ce323a4d0d7bb46fb20d140611bdeacf1dd7106eec563aaa96c6000",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0012370999975246377
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "f269d686351e3fb1ca6ade0af36cc2549232d263b9ddbfcddb7b2f57b1f0f446",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0017856000013125595
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "b5e4f92382f014d77a85b775fabe1e4f55eb301066a69c6d7f54a77ab0359008",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0012418000005709473
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "414048a289193a60eda5ec0ca6e181c382df5e910d4a36b89f9ec69d8f6e3a70",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0012018999987049028
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "a5f4d67b5db85a57db1b6b5be997df2d01ba90f878874b945eb18f10374cfb30",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0012279000002308749
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "0a35bce6105430463c011cebb85f6293b32773c2ede3254c965bce5db62621dd",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0012047000018355902
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "3b552e9f00e5a912e72500edb4c640894f7d33075d69cafb5c41b4c2ed96d7c4",
+      "cpu": "normal",
+      "cpu_latency_s": 0.001192399999126792
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "2d084ab523d13911b5389304e1d5bcbf13228548ea68d936d7d9acfeb1265d60",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0011864000007335562
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "e2cc52b4501a699348c75fc827d01a8c21acd7f208a2179082d61e6c54798d91",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0011934000031033065
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "5f49490af4ae7b54d48cb920fe54b59144d54a7032a57b449f7fb90bf2be7753",
+      "cpu": "normal",
+      "cpu_latency_s": 0.001188700000056997
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "b867b17f1f3686f0983c5797ad6b3ff887ea2328bf52f82f4735a268c6ea43ea",
+      "cpu": "normal",
+      "cpu_latency_s": 0.001216000000567874
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "dbef12eb9188741e74ec4b0fb99cff01f71d29d10854a51d087ec6118d041598",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0011970000014116522
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "9b074d368dd69237b30c8c3d6688c5ae21bd6392e45372a39c593a476b180e8d",
+      "cpu": "normal",
+      "cpu_latency_s": 0.001187099998787744
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "365b7df68a001809d2e4d013fa2b882142358dd41a87ebab8d1f6d92bfddb51d",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0018837999996321741
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "145a61645c6cbb01e472ac65d18c320c7de7f0f5d69e1b76058decccdd0e6659",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0012242000011610799
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "f1738ea2befc09a0334dfe871a7324cecbf3a2fcdc26b7dfedd649684748a361",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0012167000022600405
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "11ed9750610066c6eff9d5810cf5159306c17a0741cc61333c4d1566ca7be6d3",
+      "cpu": "normal",
+      "cpu_latency_s": 0.001202999999804888
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "49209442944d9b7e2644606182f08ffa3f864fa2367673406b6f55f0526b420e",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0012067999996361323
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "8c7f9fb272fd8c89df0806646bd40e1919dce6e1f52ad505b91936d4cb7c3b7e",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0012002000003121793
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "72e351fcca454674a1fc76ec96a5a10e3560f140dde41b4fc1038c75a62acaa3",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0011921999976038933
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "34e113ed6021df3c57986a04706beebb4fb1321107e8d9936d5481707c04e025",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0011963999968429562
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "956027208879e0e049b80284172eb6e21f1bc472539e929af1885c17d3e6b5be",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0011986000026809052
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "50dc371d818dd2cd3fb934a8e837621bdc8117f0b114ec7d671ce739837b8f61",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0013066999999864493
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "3a36b70b51cfa1236c2ffc1912a9085d083083b78d6b017fcf34e33bf6ae2a33",
+      "cpu": "normal",
+      "cpu_latency_s": 0.001253599999472499
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "9e0a5ba2afde2f80ab569d988f4093191b38cea972934ba6725fb2a26fb52824",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0021006999995734077
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "790dc9a60de571c365532d15321d19b2accba965ad778d8cd0860fd9cf3b67b0",
+      "cpu": "normal",
+      "cpu_latency_s": 0.0020308999992266763
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "input_sha256": "86a67f303b6d0306616316ff2b0e1d19d0c8ad88e40f4228a187d5c7c044b609",
+      "cpu": "normal",
+      "cpu_latency_s": 0.001426700000592973
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "d07fe31ed9a00c835206287a7a305e33abff3094771bede4d7929d120dc57947",
+      "cpu": "actuator_fault",
+      "cpu_latency_s": 0.0014014000007591676
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "b89d27f4390cd0116718c47e7f1e975859798cd490a54b7c48ebcb7d602ba699",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.00128249999761465
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "bbd4462e964f79bfecbdc0b3951d9f99bfec5614cefbde8471e57163b4fb2c7b",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.001228699999046512
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "e8b20ed21936ff52643ebf20bb9b74284cc5db0a11524faa409aae8992bb3138",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0012189999979455024
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "be38f5ca2d5bb0e7d8e24bbd2377587dbaaedda3819f5fc049352762abe707c5",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.001186600002256455
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "94f56afeb155ab191a6470823bc2618c2c659fa3e9704fdcd1fefc5925159c63",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0012231000000610948
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "bd37570a0af87649a3bc10fbd66d85de7ff01d5ec563ae90aa7d34ac7623d0f7",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0013714000015170313
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "db7e8f5218d9d228e3367a823e9a53cfaa4bd04f761b7688df2a3bcfd16b7d13",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0022887999984959606
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "16942064062407eaab31248c24f06f4e7f5451cd8f4f219bf1dda85b1eb49cc1",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.002279700001963647
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "cfc4cba203a97d6c3565aae9c0476484bb0e894a2635d882a0bfd3758b44fd1f",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0018715999976848252
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "3c57d4258ab2f3b16e5ca25fdeacb02343cb092f97f87ef2039cf708ce00b815",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.001274600002943771
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "374a13e4c4a298a788ee8665dbf5e5f971fe90507e0e07fd60f0fe705e3ba07f",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0012473999995563645
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "5bbe5a5507873ffbf155d1706a950bdf65841cc6334fa29d51c2a107b1ab0674",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0011898999982804526
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "0576718a02c004d4a4c20df457ef4dff7ecfcf311cd841fbc5022843d8ccf0a7",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0011783000009017996
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "56af78a44238bf1f2aa237b93c8988929055cb44748ba95c7824c1120dd656f7",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.001217299999552779
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "f68915e82094e4e0601975ce372b946971b022c8fcb16c89772a258eab23c8de",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0012213999980303925
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "6b9b76ac815c42d579d9c8e8d35e8a0a42a252016842a93228ad66f4f986b03a",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0012919000000692904
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "244ba4cca083e3923f5ca288aa1317b7d44d67794007d6ae4788480cf20aaae8",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0021598000021185726
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "7172d52683388cce15586d02c9594bdf507a23dfba2e71bfb3ab22734500065c",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0017358000004605856
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "a30036e4dacd2271ee02b106d0fa4d3e70cfd50141f08756aebcba4d67991073",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0013345000006665941
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "f994b74f597e75bd6ebf96dc94dd98f4ccb44c3e7de90e448d8f23c176ce5a7e",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0012471000009099953
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "8d15798dea70d8b192cad1512a1c2b1f2654c91da3b7c0d778044a55fedfb3f3",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0012032000013277866
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "442586006e5f677ef74d298876a559ed49780cc905f0256c76876554153759b4",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0012219000018376391
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "4c091386a4df7a1ef8840feb317ef6c1b427b45a851ee38511088ab0fa8bd975",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0011708999991242308
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "a5a79253790deab8255c31493f70258161cd0255fe8d9842db3cf827dbbb2cbc",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0011798999985330738
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "a4ca79b7bd71d17f3fba7bfe70ee1930d1bb0745daae43904c31daa01daa6652",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0011617999989539385
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "a92706908d9b48c55f5d466fb96cb17696c344837a42f54750578a2e215a26a1",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0012852999971073586
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "99f4753d6fa353b49ee2d67969a3c999e8ccce838c3922911cad4acd8aec76c6",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0012201000026834663
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "7a33248f283a55f99b42a371d11517950cf1175c78aa778f89f53bcd917af560",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.0014412000018637627
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "input_sha256": "d8b187767300085e27fb2cfaa9c1f57ce056995c8153900ef8ad0f1bd4db4b84",
+      "cpu": "sensor_fault",
+      "cpu_latency_s": 0.001943400002346607
+    }
+  ],
+  "promotion": "blocked: runtime and quality gates require review",
+  "real_inference_available": false,
+  "metrics": {
+    "proposals": {
+      "specialist": {
+        "n": 120,
+        "status": "not_run",
+        "reason": "unavailable backend, CPU-only run, or inapplicable task"
+      },
+      "candidate": {
+        "n": 120,
+        "status": "not_run",
+        "reason": "unavailable backend, CPU-only run, or inapplicable task"
+      },
+      "cpu": {
+        "n": 120,
+        "status": "not_run",
+        "reason": "unavailable backend, CPU-only run, or inapplicable task"
+      },
+      "deployed_combined": {
+        "n": 120,
+        "status": "not_run",
+        "reason": "unavailable backend, CPU-only run, or inapplicable task"
+      }
+    },
+    "telemetry": {
+      "specialist": {
+        "n": 109,
+        "status": "not_run",
+        "reason": "unavailable backend, CPU-only run, or inapplicable task"
+      },
+      "candidate": {
+        "n": 109,
+        "status": "not_run",
+        "reason": "unavailable backend, CPU-only run, or inapplicable task"
+      },
+      "cpu": {
+        "n": 109,
+        "confusion": {
+          "actuator_fault": {
+            "actuator_fault": 30
+          },
+          "excursion": {
+            "excursion": 17,
+            "normal": 2
+          },
+          "normal": {
+            "normal": 30
+          },
+          "sensor_fault": {
+            "actuator_fault": 1,
+            "sensor_fault": 29
+          }
+        },
+        "per_class": {
+          "actuator_fault": {
+            "support": 30,
+            "recall": 1.0,
+            "precision": 0.967741935483871
+          },
+          "excursion": {
+            "support": 19,
+            "recall": 0.8947368421052632,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 30,
+            "recall": 1.0,
+            "precision": 0.9375
+          },
+          "sensor_fault": {
+            "support": 30,
+            "recall": 0.9666666666666667,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 30,
+        "false_positive_rate": 0.0,
+        "missed_faults": 2,
+        "fault_classification_errors": 3,
+        "fault_denominator": 79,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "deployed_combined": {
+        "n": 109,
+        "status": "not_run",
+        "reason": "unavailable backend, CPU-only run, or inapplicable task"
+      }
+    }
+  },
+  "cpu_latency_s": {
+    "p50": 0.0012189999979455024,
+    "p95": 0.0021006999995734077,
+    "max": 0.002559199998358963
+  },
+  "limitations": [
+    "Static windows cannot measure detection delay, gradual-fault scheduling, or control jitter.",
+    "Paired evaluation loads comparison models; use unified-only replay for residency proof.",
+    "No calibrated model probabilities or statistical quality equivalence are claimed."
+  ]
+}

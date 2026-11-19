@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "mode": "none",
+  "seed": 0,
+  "before": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "logical_cpus": 16,
+    "gpu_csv": "NVIDIA GeForce RTX 3050 6GB Laptop GPU, 6144, 1277, 9, 5.82",
+    "memory": {
+      "system": {
+        "total": 16438312960,
+        "available": 2333712384,
+        "percent": 85.8,
+        "used": 14104600576,
+        "free": 2333712384
+      },
+      "process_rss_bytes": 26247168,
+      "cpu_percent": 0.0,
+      "runners": []
+    },
+    "ollama_version": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "installed": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "residency": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "weights": [
+      {
+        "path": "model\\scram-observer-gguf\\scram-observer-v2-q4_k_m.gguf",
+        "bytes": 986047872
+      },
+      {
+        "path": "model\\scram-observer-v3-gguf\\scram-observer-v3-q4_k_m.gguf",
+        "bytes": 986047808
+      },
+      {
+        "path": "model\\scram-operator-gguf\\scram-operator-q4_k_m.gguf",
+        "bytes": 986048000
+      }
+    ]
+  },
+  "real_inference": false,
+  "control_jitter_s": null,
+  "energy_joules": null,
+  "limitations": [
+    "Replay feed cost is not full plant control-loop timing.",
+    "Total GPU memory includes unrelated workloads.",
+    "RAM/RVRAM samples cannot isolate KV cache from weights.",
+    "Operator contention requires separately running the unchanged operator."
+  ],
+  "replay_sha256": "2a30263539593163de0fe1e210a82ca475339f0735cbb0d265174a64f957bd3a",
+  "feed_latency_s": {
+    "p50": 4.9199999921256676e-05,
+    "p95": 0.0027625999973679427,
+    "max": 0.0032233999991149176
+  },
+  "samples": [
+    {
+      "python": "3.13.5",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "cpu": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+      "logical_cpus": 16,
+      "gpu_csv": "NVIDIA GeForce RTX 3050 6GB Laptop GPU, 6144, 1277, 12, 5.84",
+      "memory": {
+        "system": {
+          "total": 16438312960,
+          "available": 2327695360,
+          "percent": 85.8,
+          "used": 14110617600,
+          "free": 2327695360
+        },
+        "process_rss_bytes": 39579648,
+        "cpu_percent": 5.4,
+        "runners": []
+      },
+      "ollama_version": {
+        "unavailable": "<urlopen error timed out>"
+      },
+      "installed": {
+        "unavailable": "<urlopen error timed out>"
+      },
+      "residency": {
+        "unavailable": "<urlopen error timed out>"
+      },
+      "weights": [
+        {
+          "path": "model\\scram-observer-gguf\\scram-observer-v2-q4_k_m.gguf",
+          "bytes": 986047872
+        },
+        {
+          "path": "model\\scram-observer-v3-gguf\\scram-observer-v3-q4_k_m.gguf",
+          "bytes": 986047808
+        },
+        {
+          "path": "model\\scram-operator-gguf\\scram-operator-q4_k_m.gguf",
+          "bytes": 986048000
+        }
+      ]
+    }
+  ],
+  "observer": {
+    "calls": 0,
+    "failures": 0,
+    "models": {
+      "proposals": null,
+      "telemetry": null
+    },
+    "proposals": null,
+    "telemetry": {
+      "t": 34.9,
+      "kind": "telemetry",
+      "label": "actuator_fault",
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "note": "ok",
+      "latency_s": 0.0,
+      "source": "cpu-detector",
+      "llm_label": null
+    },
+    "mode": "none",
+    "suspicion": 0.0,
+    "cpu_status": "ok",
+    "cpu_telemetry": {
+      "t": 34.9,
+      "kind": "telemetry",
+      "label": "actuator_fault",
+      "score": 1.0,
+      "reason": "Measured telemetry classifier: actuator fault.",
+      "note": "ok",
+      "latency_s": 0.0,
+      "source": "cpu-detector",
+      "llm_label": null
+    },
+    "llm_telemetry": null,
+    "disagreement": false,
+    "telemetry_specialist": true
+  },
+  "elapsed_s": 34.94057959999918,
+  "after": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "logical_cpus": 16,
+    "gpu_csv": "NVIDIA GeForce RTX 3050 6GB Laptop GPU, 6144, 1277, 12, 5.84",
+    "memory": {
+      "system": {
+        "total": 16438312960,
+        "available": 2322145280,
+        "percent": 85.9,
+        "used": 14116167680,
+        "free": 2322145280
+      },
+      "process_rss_bytes": 39616512,
+      "cpu_percent": 8.4,
+      "runners": []
+    },
+    "ollama_version": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "installed": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "residency": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "weights": [
+      {
+        "path": "model\\scram-observer-gguf\\scram-observer-v2-q4_k_m.gguf",
+        "bytes": 986047872
+      },
+      {
+        "path": "model\\scram-observer-v3-gguf\\scram-observer-v3-q4_k_m.gguf",
+        "bytes": 986047808
+      },
+      {
+        "path": "model\\scram-operator-gguf\\scram-operator-q4_k_m.gguf",
+        "bytes": 986048000
+      }
+    ]
+  }
+}

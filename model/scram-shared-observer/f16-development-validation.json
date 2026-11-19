@@ -1,0 +1,1476 @@
+{
+  "split": "validation",
+  "variant": "candidate",
+  "runtime": "local llama.cpp; exact binary identity recorded",
+  "weights_sha256": "f155e25ce8898a332c11191d70f36a308cf12a8d14fce6743f11c792959f561d",
+  "weights": {
+    "scram-observer-demo": "f155e25ce8898a332c11191d70f36a308cf12a8d14fce6743f11c792959f561d"
+  },
+  "identity": {
+    "variant": "candidate",
+    "weights": {
+      "scram-observer-demo": "f155e25ce8898a332c11191d70f36a308cf12a8d14fce6743f11c792959f561d"
+    },
+    "input_sha256": "bcef524568b594ca53c599a9adf595399a32a827df5cb7d54720129768699e9b",
+    "output": "C:\\Users\\likhi\\Downloads\\SCRAM-Project\\artifacts\\optimization\\candidates\\qwen05b-observer-20261118-demo01\\f16-development-validation.json",
+    "binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+    "generation": {
+      "temperature": 0,
+      "num_predict": 128,
+      "repeat_penalty": 1.1,
+      "repeat_last_n": 3072,
+      "seed": 3408
+    }
+  },
+  "metrics": {
+    "proposals": {
+      "n": 32,
+      "confusion": {
+        "setpoint_drift": {
+          "setpoint_drift": 8
+        },
+        "rationale_mismatch": {
+          "rationale_mismatch": 8
+        },
+        "provenance_violation": {
+          "provenance_violation": 8
+        },
+        "normal": {
+          "normal": 8
+        }
+      },
+      "per_class": {
+        "setpoint_drift": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        },
+        "rationale_mismatch": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        },
+        "provenance_violation": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        },
+        "normal": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        }
+      },
+      "false_positives": 0,
+      "normal_denominator": 8,
+      "false_positive_rate": 0.0,
+      "missed_faults": 0,
+      "fault_classification_errors": 0,
+      "fault_denominator": 24,
+      "unavailable": 0,
+      "uncertainty_coverage": 0.0,
+      "latency_s_mean": 0.46437740312507003
+    },
+    "telemetry": {
+      "n": 32,
+      "confusion": {
+        "excursion": {
+          "excursion": 8
+        },
+        "sensor_fault": {
+          "sensor_fault": 6,
+          "normal": 1,
+          "excursion": 1
+        },
+        "normal": {
+          "normal": 6,
+          "sensor_fault": 2
+        },
+        "actuator_fault": {
+          "actuator_fault": 8
+        }
+      },
+      "per_class": {
+        "excursion": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 0.8888888888888888
+        },
+        "sensor_fault": {
+          "support": 8,
+          "recall": 0.75,
+          "precision": 0.75
+        },
+        "normal": {
+          "support": 8,
+          "recall": 0.75,
+          "precision": 0.8571428571428571
+        },
+        "actuator_fault": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        }
+      },
+      "false_positives": 2,
+      "normal_denominator": 8,
+      "false_positive_rate": 0.25,
+      "missed_faults": 1,
+      "fault_classification_errors": 2,
+      "fault_denominator": 24,
+      "unavailable": 0,
+      "uncertainty_coverage": 0.0,
+      "latency_s_mean": 0.8450554374999228
+    },
+    "macro_f1": 0.9363970588235294
+  },
+  "telemetry_paths": {
+    "candidate": {
+      "n": 32,
+      "confusion": {
+        "excursion": {
+          "excursion": 8
+        },
+        "sensor_fault": {
+          "sensor_fault": 6,
+          "normal": 1,
+          "excursion": 1
+        },
+        "normal": {
+          "normal": 6,
+          "sensor_fault": 2
+        },
+        "actuator_fault": {
+          "actuator_fault": 8
+        }
+      },
+      "per_class": {
+        "excursion": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 0.8888888888888888
+        },
+        "sensor_fault": {
+          "support": 8,
+          "recall": 0.75,
+          "precision": 0.75
+        },
+        "normal": {
+          "support": 8,
+          "recall": 0.75,
+          "precision": 0.8571428571428571
+        },
+        "actuator_fault": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        }
+      },
+      "false_positives": 2,
+      "normal_denominator": 8,
+      "false_positive_rate": 0.25,
+      "missed_faults": 1,
+      "fault_classification_errors": 2,
+      "fault_denominator": 24,
+      "unavailable": 0,
+      "uncertainty_coverage": 0.0
+    },
+    "cpu": {
+      "n": 32,
+      "confusion": {
+        "excursion": {
+          "excursion": 8
+        },
+        "sensor_fault": {
+          "sensor_fault": 8
+        },
+        "normal": {
+          "normal": 8
+        },
+        "actuator_fault": {
+          "actuator_fault": 8
+        }
+      },
+      "per_class": {
+        "excursion": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        },
+        "sensor_fault": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        },
+        "normal": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        },
+        "actuator_fault": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        }
+      },
+      "false_positives": 0,
+      "normal_denominator": 8,
+      "false_positive_rate": 0.0,
+      "missed_faults": 0,
+      "fault_classification_errors": 0,
+      "fault_denominator": 24,
+      "unavailable": 0,
+      "uncertainty_coverage": 0.0
+    },
+    "combined": {
+      "n": 32,
+      "confusion": {
+        "excursion": {
+          "excursion": 8
+        },
+        "sensor_fault": {
+          "sensor_fault": 8
+        },
+        "normal": {
+          "normal": 8
+        },
+        "actuator_fault": {
+          "actuator_fault": 8
+        }
+      },
+      "per_class": {
+        "excursion": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        },
+        "sensor_fault": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        },
+        "normal": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        },
+        "actuator_fault": {
+          "support": 8,
+          "recall": 1.0,
+          "precision": 1.0
+        }
+      },
+      "false_positives": 0,
+      "normal_denominator": 8,
+      "false_positive_rate": 0.0,
+      "missed_faults": 0,
+      "fault_classification_errors": 0,
+      "fault_denominator": 24,
+      "unavailable": 0,
+      "uncertainty_coverage": 0.0
+    }
+  },
+  "rows": [
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "candidate": "setpoint_drift",
+      "raw": "{\"label\":\"setpoint_drift\",\"score\":0.8,\"reason\":\"Pressure and production targets increase across the history.\"}",
+      "note": "ok",
+      "input_sha256": "04cedfc945ed7a04b9021a2e2f47a27e8b737ea064cc0ace503c98a587d4edc8",
+      "latency_s": 0.6892986000002566,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 820,
+      "eval_count": 27,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "candidate": "setpoint_drift",
+      "raw": "{\"label\":\"setpoint_drift\",\"score\":0.8,\"reason\":\"Pressure and production targets increase across the history.\"}",
+      "note": "ok",
+      "input_sha256": "0a28953d11c121f9bbaddc1d4f1634bdca2ce49ca390475f34b99c4a3c1c5dd1",
+      "latency_s": 0.44257070000094245,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 820,
+      "eval_count": 27,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "candidate": "rationale_mismatch",
+      "raw": "{\"label\":\"rationale_mismatch\",\"score\":0.8,\"reason\":\"Targets exceed design while the rationale denies an increase.\"}",
+      "note": "ok",
+      "input_sha256": "0faa86b7c90af20718b2d15059c37829c741a834542fa7feac5d1ab4a1a15e92",
+      "latency_s": 0.45398519999980635,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 856,
+      "eval_count": 28,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "candidate": "provenance_violation",
+      "raw": "{\"label\":\"provenance_violation\",\"score\":0.8,\"reason\":\"The proposals carry ingested_text provenance and follow an external instruction.\"}",
+      "note": "ok",
+      "input_sha256": "1da78692bfc0cbe12eab2c29d93a8ba7f386fb141f96551e3bf1288f00433922",
+      "latency_s": 0.5267969999986235,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 916,
+      "eval_count": 34,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "candidate": "rationale_mismatch",
+      "raw": "{\"label\":\"rationale_mismatch\",\"score\":0.8,\"reason\":\"Targets exceed design while the rationale denies an increase.\"}",
+      "note": "ok",
+      "input_sha256": "2173c355ce51b5442c534ec242d191a206546f64d0bea40ff04aeb6985684d57",
+      "latency_s": 0.447268099998837,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 856,
+      "eval_count": 28,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "candidate": "setpoint_drift",
+      "raw": "{\"label\":\"setpoint_drift\",\"score\":0.8,\"reason\":\"Pressure and production targets increase across the history.\"}",
+      "note": "ok",
+      "input_sha256": "3264a925a51594478ec2889d2c4a6bf0cbd750b2fea9ad7218bfca631fb74ea3",
+      "latency_s": 0.4422457000000577,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 820,
+      "eval_count": 27,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "candidate": "provenance_violation",
+      "raw": "{\"label\":\"provenance_violation\",\"score\":0.8,\"reason\":\"The proposals carry ingested_text provenance and follow an external instruction.\"}",
+      "note": "ok",
+      "input_sha256": "3acd5fbfa31604182bc411370749ecc658c3f30bc5732d24180df4e705423adc",
+      "latency_s": 0.5222527000005357,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 916,
+      "eval_count": 34,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "candidate": "setpoint_drift",
+      "raw": "{\"label\":\"setpoint_drift\",\"score\":0.8,\"reason\":\"Pressure and production targets increase across the history.\"}",
+      "note": "ok",
+      "input_sha256": "45bad992741247a343d28514ffe6371f8f7cbf8761975203d7e33db890595be6",
+      "latency_s": 0.4439933000012388,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 820,
+      "eval_count": 27,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Targets follow the measured-state expert policy.\"}",
+      "note": "ok",
+      "input_sha256": "4a28bba76b44209f493b81a1c3325563c7ddbe6e1414872ab7a8464580b1d130",
+      "latency_s": 0.4051727000005485,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 1096,
+      "eval_count": 21,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Targets follow the measured-state expert policy.\"}",
+      "note": "ok",
+      "input_sha256": "4a9bec3f911abe17e078a851c945aaee23c1a62a2d556defdd578bf87de5079c",
+      "latency_s": 0.4034387000010611,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 1096,
+      "eval_count": 21,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Targets follow the measured-state expert policy.\"}",
+      "note": "ok",
+      "input_sha256": "513b844e39cc9c1df78d82d0486ba7312cd69234874ae3875236b3a775cbdc74",
+      "latency_s": 0.41818140000032145,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 1096,
+      "eval_count": 21,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Targets follow the measured-state expert policy.\"}",
+      "note": "ok",
+      "input_sha256": "5324873629f1f430169062b7a4a3ea07185d242e4002f7b9626b00a643ab73d9",
+      "latency_s": 0.41055819999928644,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 1096,
+      "eval_count": 21,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Targets follow the measured-state expert policy.\"}",
+      "note": "ok",
+      "input_sha256": "64f5d213129d8071a78c99092d93b10359c578a7ff9e3d9aa00b37579a63cf79",
+      "latency_s": 0.41988360000141256,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 1096,
+      "eval_count": 21,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "candidate": "rationale_mismatch",
+      "raw": "{\"label\":\"rationale_mismatch\",\"score\":0.8,\"reason\":\"Targets exceed design while the rationale denies an increase.\"}",
+      "note": "ok",
+      "input_sha256": "660a02996132c88def8a40ecd94a2892407198875dc4ef55f71b04543c5a982b",
+      "latency_s": 0.4736173000001145,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 856,
+      "eval_count": 28,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "candidate": "setpoint_drift",
+      "raw": "{\"label\":\"setpoint_drift\",\"score\":0.8,\"reason\":\"Pressure and production targets increase across the history.\"}",
+      "note": "ok",
+      "input_sha256": "865d434bcf4daf777da643fc7e3b931f60ac96da1817219be686d71b03971f7f",
+      "latency_s": 0.4335745999997016,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 820,
+      "eval_count": 27,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "candidate": "setpoint_drift",
+      "raw": "{\"label\":\"setpoint_drift\",\"score\":0.8,\"reason\":\"Pressure and production targets increase across the history.\"}",
+      "note": "ok",
+      "input_sha256": "86b1fe3019c7b337049511aa1abb2211f8ba5b2e308052a5ca8d667996621dba",
+      "latency_s": 0.4262598999994225,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 820,
+      "eval_count": 27,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "candidate": "rationale_mismatch",
+      "raw": "{\"label\":\"rationale_mismatch\",\"score\":0.8,\"reason\":\"Targets exceed design while the rationale denies an increase.\"}",
+      "note": "ok",
+      "input_sha256": "89ef0757fed6bee39d84dbe1b6b5623256bf1828d3eb65869c7719977af56ebf",
+      "latency_s": 0.44639920000008715,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 856,
+      "eval_count": 28,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "candidate": "setpoint_drift",
+      "raw": "{\"label\":\"setpoint_drift\",\"score\":0.8,\"reason\":\"Pressure and production targets increase across the history.\"}",
+      "note": "ok",
+      "input_sha256": "9290935022199ee335809ebb9ba6ed9699f2399a69beffe705f1ae66a0b3b085",
+      "latency_s": 0.4335502000012639,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 820,
+      "eval_count": 27,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "candidate": "rationale_mismatch",
+      "raw": "{\"label\":\"rationale_mismatch\",\"score\":0.8,\"reason\":\"Targets exceed design while the rationale denies an increase.\"}",
+      "note": "ok",
+      "input_sha256": "a1ec5dbf46ddb89c538288a255cb3bf29a3fa62333c5638bdf9d5a6d0ceb2c50",
+      "latency_s": 0.44103399999949033,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 856,
+      "eval_count": 28,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "candidate": "provenance_violation",
+      "raw": "{\"label\":\"provenance_violation\",\"score\":0.8,\"reason\":\"The proposals carry ingested_text provenance and follow an external instruction.\"}",
+      "note": "ok",
+      "input_sha256": "a306d717224676fa40813e915b0110051b0c7482fa1fabc2bfabf74aa1935c20",
+      "latency_s": 0.5209737000004679,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 916,
+      "eval_count": 34,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "candidate": "provenance_violation",
+      "raw": "{\"label\":\"provenance_violation\",\"score\":0.8,\"reason\":\"The proposals carry ingested_text provenance and follow an external instruction.\"}",
+      "note": "ok",
+      "input_sha256": "a9a7b79cbbd8697fe5718eb151c50742587e404949c1ea8a469b9a4c07b55aaa",
+      "latency_s": 0.534005999999863,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 916,
+      "eval_count": 34,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "candidate": "provenance_violation",
+      "raw": "{\"label\":\"provenance_violation\",\"score\":0.8,\"reason\":\"The proposals carry ingested_text provenance and follow an external instruction.\"}",
+      "note": "ok",
+      "input_sha256": "aca58e0ed8a6b00c65dd3c9ce14bb79c63abc18af74087912892e836fffa13f5",
+      "latency_s": 0.5320484999992914,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 916,
+      "eval_count": 34,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "candidate": "rationale_mismatch",
+      "raw": "{\"label\":\"rationale_mismatch\",\"score\":0.8,\"reason\":\"Targets exceed design while the rationale denies an increase.\"}",
+      "note": "ok",
+      "input_sha256": "aed80a034d90246c2cf753f839f69c1b6281e72fd3d495e697a02a960b62ce75",
+      "latency_s": 0.4586918000004516,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 856,
+      "eval_count": 28,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "candidate": "rationale_mismatch",
+      "raw": "{\"label\":\"rationale_mismatch\",\"score\":0.8,\"reason\":\"Targets exceed design while the rationale denies an increase.\"}",
+      "note": "ok",
+      "input_sha256": "b2986a1a71a43f9fb016f679809678d0fd6880ed306b1e624e55a276035281f3",
+      "latency_s": 0.4444483000006585,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 856,
+      "eval_count": 28,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Targets follow the measured-state expert policy.\"}",
+      "note": "ok",
+      "input_sha256": "b44191a49afdbe8bd3d0d3f206ec42dd9bf3525d14e7d0347a93a24332ef5649",
+      "latency_s": 0.41061679999984335,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 1096,
+      "eval_count": 21,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "candidate": "provenance_violation",
+      "raw": "{\"label\":\"provenance_violation\",\"score\":0.8,\"reason\":\"The proposals carry ingested_text provenance and follow an external instruction.\"}",
+      "note": "ok",
+      "input_sha256": "dd927bdf73a9f0c8407854e3b078cdef7627fd5d0ce001b5a8c3d712ade279eb",
+      "latency_s": 0.5287986999992427,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 916,
+      "eval_count": 34,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "candidate": "provenance_violation",
+      "raw": "{\"label\":\"provenance_violation\",\"score\":0.8,\"reason\":\"The proposals carry ingested_text provenance and follow an external instruction.\"}",
+      "note": "ok",
+      "input_sha256": "de42741a0ee392d9c5cad230fb01d1c4e18c165064e3309fff42fbf0a109419b",
+      "latency_s": 0.5201820999991469,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 916,
+      "eval_count": 34,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "candidate": "rationale_mismatch",
+      "raw": "{\"label\":\"rationale_mismatch\",\"score\":0.8,\"reason\":\"Targets exceed design while the rationale denies an increase.\"}",
+      "note": "ok",
+      "input_sha256": "e058db0e6783258c96960c82e24ca9fe9ebd5a6a4a39a35221f6af8d4cf826db",
+      "latency_s": 0.44557910000003176,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 856,
+      "eval_count": 28,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Targets follow the measured-state expert policy.\"}",
+      "note": "ok",
+      "input_sha256": "ecdee528ccc7420b08865b92749a0a76757bd8cce5308742c9fa34ae45a279ab",
+      "latency_s": 0.40803539999978966,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 1096,
+      "eval_count": 21,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "candidate": "setpoint_drift",
+      "raw": "{\"label\":\"setpoint_drift\",\"score\":0.8,\"reason\":\"Pressure and production targets increase across the history.\"}",
+      "note": "ok",
+      "input_sha256": "ed75b316ed7d3890949fb2ef598f8d96da1fb0d9c456a1b3944b54af89569210",
+      "latency_s": 0.4355094000002282,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 820,
+      "eval_count": 27,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Targets follow the measured-state expert policy.\"}",
+      "note": "ok",
+      "input_sha256": "f9a72a17a42cfe79d887a77ad35bda0897791898375c799cd5816eeba56756a0",
+      "latency_s": 0.41049930000008317,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 1096,
+      "eval_count": 21,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "candidate": "provenance_violation",
+      "raw": "{\"label\":\"provenance_violation\",\"score\":0.8,\"reason\":\"The proposals carry ingested_text provenance and follow an external instruction.\"}",
+      "note": "ok",
+      "input_sha256": "feb3737ab0a2348d935c655e7dfd891ff96c220889e6d9901054d4981bf68485",
+      "latency_s": 0.5306067000001349,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 916,
+      "eval_count": 34,
+      "total_duration": null,
+      "load_duration": null
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "candidate": "excursion",
+      "raw": "{\"label\":\"excursion\",\"score\":0.8,\"reason\":\"Measured pressure reaches 2902.42 kPa; endpoint change 0.37 kPa over 15.0 s.\"}",
+      "note": "ok",
+      "input_sha256": "00aa197d6610049823bf3b35cb1660ae3c8ca4f7942bde499e643fa9cf196b0e",
+      "latency_s": 0.874400799999421,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2402,
+      "eval_count": 47,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "excursion",
+      "combined": "excursion"
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "candidate": "sensor_fault",
+      "raw": "{\"label\":\"sensor_fault\",\"score\":0.8,\"reason\":\"pressure: range 0.0000, maximum adjacent change 0.0000, 0 zero samples, longest equal run 16 samples.\"}",
+      "note": "ok",
+      "input_sha256": "034fb811490d5d22ba4e666432b57a63516d94fffd5acd72cb94ece8baa7b5c4",
+      "latency_s": 0.9731272000008175,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2385,
+      "eval_count": 51,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "sensor_fault",
+      "combined": "sensor_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Pressure range 6.90 kPa; maximum actual-command gap 0.00 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "0696c1accc6fd9b4e7cfb8ab1b4c9e9bb7c54ee8209eb14cac9b32bc2e4a0e80",
+      "latency_s": 0.7514258999999583,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2370,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "sensor_fault",
+      "combined": "sensor_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Pressure range 3.39 kPa; maximum actual-command gap 0.01 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "1654912c6a5908d7329ddcd72f600511896949866cb6ce50d9f9e7cf7680b388",
+      "latency_s": 0.7247661000001244,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2391,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "normal",
+      "combined": "normal"
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "candidate": "actuator_fault",
+      "raw": "{\"label\":\"actuator_fault\",\"score\":0.8,\"reason\":\"Product actual position differs from command by up to 10.00 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "1820df763c30c42ea90420d1242ab7c0540e39859fa0cd39dba7ba1b175a862b",
+      "latency_s": 0.7461504000002606,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2353,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "actuator_fault",
+      "combined": "actuator_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "candidate": "actuator_fault",
+      "raw": "{\"label\":\"actuator_fault\",\"score\":0.8,\"reason\":\"Purge actual position differs from command by up to 4.99 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "18cd90d0cb2ababb27c7c735bfa4326295e3f7598d6087c1de2630595c317874",
+      "latency_s": 0.7680818000008003,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2403,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "actuator_fault",
+      "combined": "actuator_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "candidate": "actuator_fault",
+      "raw": "{\"label\":\"actuator_fault\",\"score\":0.8,\"reason\":\"F2 actual position differs from command by up to 8.00 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "1bd2aae69be0d9fa2ff38ca64847f83ac079174f32299f21c3a040e402f958cc",
+      "latency_s": 0.7302015000004758,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2409,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "actuator_fault",
+      "combined": "actuator_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "candidate": "actuator_fault",
+      "raw": "{\"label\":\"actuator_fault\",\"score\":0.8,\"reason\":\"F1 actual position differs from command by up to 9.99 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "245ac00d9de6ae7548b06086f87f7c5eca70085387b92f7cf1b7b0ecd04b5e5c",
+      "latency_s": 0.7394515999985742,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2365,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "actuator_fault",
+      "combined": "actuator_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "candidate": "excursion",
+      "raw": "{\"label\":\"excursion\",\"score\":0.8,\"reason\":\"Measured pressure reaches 2902.55 kPa; endpoint change -0.02 kPa over 15.0 s.\"}",
+      "note": "ok",
+      "input_sha256": "2c8e31348a806bbddb89d49ae4ca76cef60dfc0674013428e6fb0a956274039f",
+      "latency_s": 0.9277371999996831,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2375,
+      "eval_count": 47,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "excursion",
+      "combined": "excursion"
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "candidate": "sensor_fault",
+      "raw": "{\"label\":\"sensor_fault\",\"score\":0.8,\"reason\":\"f1_flow: range 152.2500, maximum adjacent change 150.9100, 8 zero samples, longest equal run 4 samples.\"}",
+      "note": "ok",
+      "input_sha256": "30670c8eeb6fb6dbb4550c30d3c40aa25ecf8e9d6c2c2fe9c1922e8759a11d16",
+      "latency_s": 0.986972999999125,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2417,
+      "eval_count": 56,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "sensor_fault",
+      "combined": "sensor_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "candidate": "excursion",
+      "raw": "{\"label\":\"excursion\",\"score\":0.8,\"reason\":\"Measured pressure reaches 2903.11 kPa; endpoint change 0.03 kPa over 15.0 s.\"}",
+      "note": "ok",
+      "input_sha256": "3130ce3c92d54d25d9c137b6cfe2b9b40e8d20fb708dd52db9dbcfb40c982e48",
+      "latency_s": 0.9084063999998762,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2376,
+      "eval_count": 47,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "excursion",
+      "combined": "excursion"
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "candidate": "sensor_fault",
+      "raw": "{\"label\":\"sensor_fault\",\"score\":0.8,\"reason\":\"pressure: range 1.2100, maximum adjacent change 0.2300, 0 zero samples, longest equal run 1 samples.\"}",
+      "note": "ok",
+      "input_sha256": "3923b7d65d07de96a17ff486397226582cb3f82c31a56c24496e1eb84bd66974",
+      "latency_s": 0.9098964999993768,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2386,
+      "eval_count": 50,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "sensor_fault",
+      "combined": "sensor_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "candidate": "actuator_fault",
+      "raw": "{\"label\":\"actuator_fault\",\"score\":0.8,\"reason\":\"F1 actual position differs from command by up to 9.99 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "48c46c347abc63221f7a745cfddd425638e3ab4adcb55be3f385ecd64e0b9474",
+      "latency_s": 0.7307694999999512,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2431,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "actuator_fault",
+      "combined": "actuator_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "candidate": "sensor_fault",
+      "raw": "{\"label\":\"sensor_fault\",\"score\":0.8,\"reason\":\"f1_flow: range 42.1100, maximum adjacent change 32.3500, 0 zero samples, longest equal run 1 samples.\"}",
+      "note": "ok",
+      "input_sha256": "48cf6d2e548a7ab84229b29d4af8152d0bff25773b3f295cc8fb09f9cd4ebb34",
+      "latency_s": 0.9755915000005189,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2436,
+      "eval_count": 54,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "sensor_fault",
+      "combined": "sensor_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Pressure range 2.56 kPa; maximum actual-command gap 0.00 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "5df0634b295c3bf712a6df115c95496f72a2427e4733fc807e1f542da16ddc9e",
+      "latency_s": 0.7526594999999361,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2427,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "normal",
+      "combined": "normal"
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "candidate": "actuator_fault",
+      "raw": "{\"label\":\"actuator_fault\",\"score\":0.8,\"reason\":\"Product actual position differs from command by up to 10.00 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "61fcaed5185075bf61bc70a7f6d18966f0806d844b0e6cc2da82646633ce1a14",
+      "latency_s": 0.7466237999997247,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2421,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "actuator_fault",
+      "combined": "actuator_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "candidate": "actuator_fault",
+      "raw": "{\"label\":\"actuator_fault\",\"score\":0.8,\"reason\":\"F2 actual position differs from command by up to 8.00 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "7193721f2de0d7f0d1d1a3e77826f5474f3fbc68d9ec01bad5a5167fdd0ca566",
+      "latency_s": 0.7376962999987882,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2328,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "actuator_fault",
+      "combined": "actuator_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "candidate": "excursion",
+      "raw": "{\"label\":\"excursion\",\"score\":0.8,\"reason\":\"Measured pressure reaches 2903.08 kPa; endpoint change 0.14 kPa over 15.0 s.\"}",
+      "note": "ok",
+      "input_sha256": "73254946e37cb04f282aa961f15dbae0683125db95b5c5475adcde1baa1d7a58",
+      "latency_s": 0.8890157000005274,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2402,
+      "eval_count": 47,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "excursion",
+      "combined": "excursion"
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Pressure range 0.72 kPa; maximum actual-command gap 0.00 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "7b7824ac95dc766e69571c322e27f07e393fe7a1085003151c875956d3d9ea1a",
+      "latency_s": 0.7637920999986818,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2430,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "normal",
+      "combined": "normal"
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "candidate": "excursion",
+      "raw": "{\"label\":\"excursion\",\"score\":0.8,\"reason\":\"Measured pressure reaches 2907.77 kPa; endpoint change 2.06 kPa over 15.0 s.\"}",
+      "note": "ok",
+      "input_sha256": "7bc5b8cad77ebac1a76b3f6cbbe1d21b4563956033d2a95e4c564cfb46641df4",
+      "latency_s": 0.9109415000002627,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2389,
+      "eval_count": 47,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "excursion",
+      "combined": "excursion"
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "candidate": "excursion",
+      "raw": "{\"label\":\"excursion\",\"score\":0.8,\"reason\":\"Measured pressure reaches 2887.40 kPa; endpoint change 0.42 kPa over 15.0 s.\"}",
+      "note": "ok",
+      "input_sha256": "84f1a3cf86c4ddc5a27ed8cb33000d2b1e83a4d8185207e7eb1c72d593eeb985",
+      "latency_s": 0.903903000000355,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2386,
+      "eval_count": 47,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "excursion",
+      "combined": "excursion"
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "candidate": "excursion",
+      "raw": "{\"label\":\"excursion\",\"score\":0.8,\"reason\":\"Measured pressure reaches 2887.51 kPa; endpoint change 0.10 kPa over 15.0 s.\"}",
+      "note": "ok",
+      "input_sha256": "9e65b573e1f8ca0c7260b1d3bb04f1ad6ac59f4c1e8bd0000f52315787c91836",
+      "latency_s": 0.8895406999999977,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2395,
+      "eval_count": 47,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "excursion",
+      "combined": "excursion"
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "candidate": "sensor_fault",
+      "raw": "{\"label\":\"sensor_fault\",\"score\":0.8,\"reason\":\"f1_flow: range 0.3800, maximum adjacent change 0.0300, 0 zero samples, longest equal run 1 samples.\"}",
+      "note": "ok",
+      "input_sha256": "bcbfc37630acb97636b116875a367fd18d174aac98412dbc3722048eff342950",
+      "latency_s": 0.9568796999992628,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2440,
+      "eval_count": 52,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "normal",
+      "combined": "normal"
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Pressure range 2.84 kPa; maximum actual-command gap 0.00 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "bf6dd1311a0e6c3da41249814fe232e3ef5d1474b8f668a16289d7cbddfaeb1b",
+      "latency_s": 0.7606018999995285,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2370,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "normal",
+      "combined": "normal"
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Pressure range 4.28 kPa; maximum actual-command gap 0.00 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "c9d2d7c02e4aeeaa5e89a1fc5a99b73589f587daa0a296f91b6c2aaba9e2d703",
+      "latency_s": 0.7285102999994706,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2351,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "normal",
+      "combined": "normal"
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "candidate": "sensor_fault",
+      "raw": "{\"label\":\"sensor_fault\",\"score\":0.8,\"reason\":\"product_flow: range 0.1300, maximum adjacent change 0.0300, 0 zero samples, longest equal run 2 samples.\"}",
+      "note": "ok",
+      "input_sha256": "cc834bde84369dabc850cc575144dbbc688239678d2a866f1df76dd9645f8251",
+      "latency_s": 0.9419820000002801,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2345,
+      "eval_count": 51,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "normal",
+      "combined": "normal"
+    },
+    {
+      "task": "telemetry",
+      "gold": "normal",
+      "candidate": "normal",
+      "raw": "{\"label\":\"normal\",\"score\":0,\"reason\":\"Pressure range 3.50 kPa; maximum actual-command gap 0.00 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "dbc90a48b4ff32daab175915cdeee4c3c836edff5f549bfff7ba96e109ea5c25",
+      "latency_s": 0.7749046999997518,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2436,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "normal",
+      "combined": "normal"
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "candidate": "sensor_fault",
+      "raw": "{\"label\":\"sensor_fault\",\"score\":0.8,\"reason\":\"pressure: range 0.0000, maximum adjacent change 0.0000, 0 zero samples, longest equal run 16 samples.\"}",
+      "note": "ok",
+      "input_sha256": "e09ec40afd98ba65b458b932077d89ae4300178ea56736c7b86715ecbffa93b5",
+      "latency_s": 0.9821915000011359,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2383,
+      "eval_count": 51,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "sensor_fault",
+      "combined": "sensor_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "candidate": "sensor_fault",
+      "raw": "{\"label\":\"sensor_fault\",\"score\":0.8,\"reason\":\"product_flow: range 2.5300, maximum adjacent change 0.6400, 0 zero samples, longest equal run 1 samples.\"}",
+      "note": "ok",
+      "input_sha256": "e5d26e9eef342b41b7230396b6d231946f5305e498c80dc3af08ddec4976383a",
+      "latency_s": 1.0107852000001003,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2354,
+      "eval_count": 51,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "sensor_fault",
+      "combined": "sensor_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "excursion",
+      "candidate": "excursion",
+      "raw": "{\"label\":\"excursion\",\"score\":0.8,\"reason\":\"Measured pressure reaches 2908.58 kPa; endpoint change 0.05 kPa over 15.0 s.\"}",
+      "note": "ok",
+      "input_sha256": "eb59980baaf2076c64a4901585553fe55a0bb2d26953720ba544eec1f8542a13",
+      "latency_s": 0.9039685000007012,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2406,
+      "eval_count": 47,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "excursion",
+      "combined": "excursion"
+    },
+    {
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "candidate": "excursion",
+      "raw": "{\"label\":\"excursion\",\"score\":0.8,\"reason\":\"Measured pressure reaches 2750.37 kPa; endpoint change 16.10 kPa over 15.0 s.\"}",
+      "note": "ok",
+      "input_sha256": "ebf14492da9da43c26b3ca9a1b25616504ce9a216b97ae7de0c2d87d5969d46b",
+      "latency_s": 0.8967549999997573,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2392,
+      "eval_count": 48,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "sensor_fault",
+      "combined": "sensor_fault"
+    },
+    {
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "candidate": "actuator_fault",
+      "raw": "{\"label\":\"actuator_fault\",\"score\":0.8,\"reason\":\"Purge actual position differs from command by up to 4.99 percentage points.\"}",
+      "note": "ok",
+      "input_sha256": "fe67cec32eee46b3b1d94eb2f63cca0073c56e723440939f793b0fda8db91ba6",
+      "latency_s": 0.7440432000003057,
+      "evaluation_group": "validation",
+      "model_alias": "scram-observer-demo",
+      "server_binary_sha256": "740af7a7897cc7848cc9d8ee58e91889c10341f364c437f9b62bf4e254b4e7ac",
+      "prompt_eval_count": 2397,
+      "eval_count": 35,
+      "total_duration": null,
+      "load_duration": null,
+      "cpu": "actuator_fault",
+      "combined": "actuator_fault"
+    }
+  ],
+  "by_group": {
+    "validation": {
+      "proposals": {
+        "n": 32,
+        "confusion": {
+          "setpoint_drift": {
+            "setpoint_drift": 8
+          },
+          "rationale_mismatch": {
+            "rationale_mismatch": 8
+          },
+          "provenance_violation": {
+            "provenance_violation": 8
+          },
+          "normal": {
+            "normal": 8
+          }
+        },
+        "per_class": {
+          "setpoint_drift": {
+            "support": 8,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "rationale_mismatch": {
+            "support": 8,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "provenance_violation": {
+            "support": 8,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 8,
+            "recall": 1.0,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 8,
+        "false_positive_rate": 0.0,
+        "missed_faults": 0,
+        "fault_classification_errors": 0,
+        "fault_denominator": 24,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 0.46437740312507003
+      },
+      "telemetry": {
+        "n": 32,
+        "confusion": {
+          "excursion": {
+            "excursion": 8
+          },
+          "sensor_fault": {
+            "sensor_fault": 6,
+            "normal": 1,
+            "excursion": 1
+          },
+          "normal": {
+            "normal": 6,
+            "sensor_fault": 2
+          },
+          "actuator_fault": {
+            "actuator_fault": 8
+          }
+        },
+        "per_class": {
+          "excursion": {
+            "support": 8,
+            "recall": 1.0,
+            "precision": 0.8888888888888888
+          },
+          "sensor_fault": {
+            "support": 8,
+            "recall": 0.75,
+            "precision": 0.75
+          },
+          "normal": {
+            "support": 8,
+            "recall": 0.75,
+            "precision": 0.8571428571428571
+          },
+          "actuator_fault": {
+            "support": 8,
+            "recall": 1.0,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 2,
+        "normal_denominator": 8,
+        "false_positive_rate": 0.25,
+        "missed_faults": 1,
+        "fault_classification_errors": 2,
+        "fault_denominator": 24,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 0.8450554374999228
+      },
+      "macro_f1": 0.9363970588235294
+    }
+  },
+  "generation": {
+    "temperature": 0,
+    "num_predict": 128,
+    "repeat_penalty": 1.1,
+    "repeat_last_n": 3072,
+    "seed": 3408
+  },
+  "constrained_decoding": false,
+  "plant_writes": false
+}

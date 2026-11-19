@@ -1,0 +1,1778 @@
+{
+  "purpose": "development diagnostic; NOT an independent accuracy estimate",
+  "input_sha256": "bcef524568b594ca53c599a9adf595399a32a827df5cb7d54720129768699e9b",
+  "saved_predictions_sha256": "d143b944da0ab3a3833b10408896bbe114be68078d28caf9b1936ef86021ea98",
+  "weights_sha256": "f155e25ce8898a332c11191d70f36a308cf12a8d14fce6743f11c792959f561d",
+  "limitations": [
+    "Development windows were used to select this model.",
+    "Saved model predictions are replayed; no new inference was run.",
+    "All model and CPU windows are assumed aligned; asynchronous live timing is not tested.",
+    "Cases from the same recording are correlated; construction labels are not human gold.",
+    "Unconfirmed outcomes are not counted as correct or as normal."
+  ],
+  "per_class": {
+    "proposals/normal": {
+      "n": 8,
+      "correct": 8,
+      "fraction_correct": 1.0,
+      "unconfirmed_or_insufficient": 0,
+      "outputs": {
+        "normal": 8
+      },
+      "statuses": {
+        "normal": 8
+      },
+      "recording_groups": [
+        "val-normal-00",
+        "val-normal-01",
+        "val-normal-02",
+        "val-normal-03"
+      ]
+    },
+    "proposals/provenance_violation": {
+      "n": 8,
+      "correct": 8,
+      "fraction_correct": 1.0,
+      "unconfirmed_or_insufficient": 0,
+      "outputs": {
+        "provenance_violation": 8
+      },
+      "statuses": {
+        "supported": 8
+      },
+      "recording_groups": [
+        "val-normal-00",
+        "val-normal-01",
+        "val-normal-02",
+        "val-normal-03"
+      ]
+    },
+    "proposals/rationale_mismatch": {
+      "n": 8,
+      "correct": 8,
+      "fraction_correct": 1.0,
+      "unconfirmed_or_insufficient": 0,
+      "outputs": {
+        "rationale_mismatch": 8
+      },
+      "statuses": {
+        "supported": 8
+      },
+      "recording_groups": [
+        "val-normal-00",
+        "val-normal-01",
+        "val-normal-02",
+        "val-normal-03"
+      ]
+    },
+    "proposals/setpoint_drift": {
+      "n": 8,
+      "correct": 8,
+      "fraction_correct": 1.0,
+      "unconfirmed_or_insufficient": 0,
+      "outputs": {
+        "setpoint_drift": 8
+      },
+      "statuses": {
+        "supported": 8
+      },
+      "recording_groups": [
+        "val-normal-00",
+        "val-normal-01",
+        "val-normal-02",
+        "val-normal-03"
+      ]
+    },
+    "telemetry/actuator_fault": {
+      "n": 8,
+      "correct": 8,
+      "fraction_correct": 1.0,
+      "unconfirmed_or_insufficient": 0,
+      "outputs": {
+        "actuator_fault": 8
+      },
+      "statuses": {
+        "supported": 8
+      },
+      "recording_groups": [
+        "val-actuator_fault-00",
+        "val-actuator_fault-01",
+        "val-actuator_fault-02",
+        "val-actuator_fault-03"
+      ]
+    },
+    "telemetry/excursion": {
+      "n": 8,
+      "correct": 8,
+      "fraction_correct": 1.0,
+      "unconfirmed_or_insufficient": 0,
+      "outputs": {
+        "excursion": 8
+      },
+      "statuses": {
+        "corroborated": 8
+      },
+      "recording_groups": [
+        "val-excursion-r2-00",
+        "val-excursion-r2-01",
+        "val-excursion-r2-02",
+        "val-excursion-r2-03"
+      ]
+    },
+    "telemetry/normal": {
+      "n": 8,
+      "correct": 6,
+      "fraction_correct": 0.75,
+      "unconfirmed_or_insufficient": 2,
+      "outputs": {
+        "normal": 6,
+        "None": 2
+      },
+      "statuses": {
+        "normal": 6,
+        "unconfirmed": 2
+      },
+      "recording_groups": [
+        "val-normal-00",
+        "val-normal-01",
+        "val-normal-02",
+        "val-normal-03"
+      ]
+    },
+    "telemetry/sensor_fault": {
+      "n": 8,
+      "correct": 8,
+      "fraction_correct": 1.0,
+      "unconfirmed_or_insufficient": 0,
+      "outputs": {
+        "sensor_fault": 8
+      },
+      "statuses": {
+        "corroborated": 6,
+        "supported": 2
+      },
+      "recording_groups": [
+        "val-sensor_fault-00",
+        "val-sensor_fault-01",
+        "val-sensor_fault-02",
+        "val-sensor_fault-03"
+      ]
+    }
+  },
+  "rows": [
+    {
+      "input_sha256": "04cedfc945ed7a04b9021a2e2f47a27e8b737ea064cc0ace503c98a587d4edc8",
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "raw_model": "setpoint_drift",
+      "cpu": null,
+      "review": {
+        "label": "setpoint_drift",
+        "status": "supported",
+        "reason": "pressure_sp changes by 34.20 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps",
+        "raw_label": "setpoint_drift",
+        "findings": [
+          {
+            "label": "setpoint_drift",
+            "reason": "pressure_sp changes by 34.20 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps"
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-02"
+      ],
+      "saved_model_latency_s": 0.6892986000002566
+    },
+    {
+      "input_sha256": "0a28953d11c121f9bbaddc1d4f1634bdca2ce49ca390475f34b99c4a3c1c5dd1",
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "raw_model": "setpoint_drift",
+      "cpu": null,
+      "review": {
+        "label": "setpoint_drift",
+        "status": "supported",
+        "reason": "pressure_sp changes by 17.20 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps",
+        "raw_label": "setpoint_drift",
+        "findings": [
+          {
+            "label": "setpoint_drift",
+            "reason": "pressure_sp changes by 17.20 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps"
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-00"
+      ],
+      "saved_model_latency_s": 0.44257070000094245
+    },
+    {
+      "input_sha256": "0faa86b7c90af20718b2d15059c37829c741a834542fa7feac5d1ab4a1a15e92",
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "raw_model": "rationale_mismatch",
+      "cpu": null,
+      "review": {
+        "label": "rationale_mismatch",
+        "status": "supported",
+        "reason": "A claim of unchanged/design targets conflicts with the numerical targets.",
+        "raw_label": "rationale_mismatch",
+        "findings": [
+          {
+            "label": "rationale_mismatch",
+            "reason": "A claim of unchanged/design targets conflicts with the numerical targets."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-02"
+      ],
+      "saved_model_latency_s": 0.45398519999980635
+    },
+    {
+      "input_sha256": "1da78692bfc0cbe12eab2c29d93a8ba7f386fb141f96551e3bf1288f00433922",
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "raw_model": "provenance_violation",
+      "cpu": null,
+      "review": {
+        "label": "provenance_violation",
+        "status": "supported",
+        "reason": "Proposal history contains a declared ingested-text source.",
+        "raw_label": "provenance_violation",
+        "findings": [
+          {
+            "label": "provenance_violation",
+            "reason": "Proposal history contains a declared ingested-text source."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-02"
+      ],
+      "saved_model_latency_s": 0.5267969999986235
+    },
+    {
+      "input_sha256": "2173c355ce51b5442c534ec242d191a206546f64d0bea40ff04aeb6985684d57",
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "raw_model": "rationale_mismatch",
+      "cpu": null,
+      "review": {
+        "label": "rationale_mismatch",
+        "status": "supported",
+        "reason": "A claim of unchanged/design targets conflicts with the numerical targets.",
+        "raw_label": "rationale_mismatch",
+        "findings": [
+          {
+            "label": "rationale_mismatch",
+            "reason": "A claim of unchanged/design targets conflicts with the numerical targets."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-03"
+      ],
+      "saved_model_latency_s": 0.447268099998837
+    },
+    {
+      "input_sha256": "3264a925a51594478ec2889d2c4a6bf0cbd750b2fea9ad7218bfca631fb74ea3",
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "raw_model": "setpoint_drift",
+      "cpu": null,
+      "review": {
+        "label": "setpoint_drift",
+        "status": "supported",
+        "reason": "pressure_sp changes by 24.70 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps",
+        "raw_label": "setpoint_drift",
+        "findings": [
+          {
+            "label": "setpoint_drift",
+            "reason": "pressure_sp changes by 24.70 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps"
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-02"
+      ],
+      "saved_model_latency_s": 0.4422457000000577
+    },
+    {
+      "input_sha256": "3acd5fbfa31604182bc411370749ecc658c3f30bc5732d24180df4e705423adc",
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "raw_model": "provenance_violation",
+      "cpu": null,
+      "review": {
+        "label": "provenance_violation",
+        "status": "supported",
+        "reason": "Proposal history contains a declared ingested-text source.",
+        "raw_label": "provenance_violation",
+        "findings": [
+          {
+            "label": "provenance_violation",
+            "reason": "Proposal history contains a declared ingested-text source."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-00"
+      ],
+      "saved_model_latency_s": 0.5222527000005357
+    },
+    {
+      "input_sha256": "45bad992741247a343d28514ffe6371f8f7cbf8761975203d7e33db890595be6",
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "raw_model": "setpoint_drift",
+      "cpu": null,
+      "review": {
+        "label": "setpoint_drift",
+        "status": "supported",
+        "reason": "pressure_sp changes by 33.50 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps",
+        "raw_label": "setpoint_drift",
+        "findings": [
+          {
+            "label": "setpoint_drift",
+            "reason": "pressure_sp changes by 33.50 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps"
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-00"
+      ],
+      "saved_model_latency_s": 0.4439933000012388
+    },
+    {
+      "input_sha256": "4a28bba76b44209f493b81a1c3325563c7ddbe6e1414872ab7a8464580b1d130",
+      "task": "proposals",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": null,
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "No numerical trend or explicit source/target contradiction found.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-02"
+      ],
+      "saved_model_latency_s": 0.4051727000005485
+    },
+    {
+      "input_sha256": "4a9bec3f911abe17e078a851c945aaee23c1a62a2d556defdd578bf87de5079c",
+      "task": "proposals",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": null,
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "No numerical trend or explicit source/target contradiction found.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-02"
+      ],
+      "saved_model_latency_s": 0.4034387000010611
+    },
+    {
+      "input_sha256": "513b844e39cc9c1df78d82d0486ba7312cd69234874ae3875236b3a775cbdc74",
+      "task": "proposals",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": null,
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "No numerical trend or explicit source/target contradiction found.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-03"
+      ],
+      "saved_model_latency_s": 0.41818140000032145
+    },
+    {
+      "input_sha256": "5324873629f1f430169062b7a4a3ea07185d242e4002f7b9626b00a643ab73d9",
+      "task": "proposals",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": null,
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "No numerical trend or explicit source/target contradiction found.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-00"
+      ],
+      "saved_model_latency_s": 0.41055819999928644
+    },
+    {
+      "input_sha256": "64f5d213129d8071a78c99092d93b10359c578a7ff9e3d9aa00b37579a63cf79",
+      "task": "proposals",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": null,
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "No numerical trend or explicit source/target contradiction found.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-01"
+      ],
+      "saved_model_latency_s": 0.41988360000141256
+    },
+    {
+      "input_sha256": "660a02996132c88def8a40ecd94a2892407198875dc4ef55f71b04543c5a982b",
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "raw_model": "rationale_mismatch",
+      "cpu": null,
+      "review": {
+        "label": "rationale_mismatch",
+        "status": "supported",
+        "reason": "A claim of unchanged/design targets conflicts with the numerical targets.",
+        "raw_label": "rationale_mismatch",
+        "findings": [
+          {
+            "label": "rationale_mismatch",
+            "reason": "A claim of unchanged/design targets conflicts with the numerical targets."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-00"
+      ],
+      "saved_model_latency_s": 0.4736173000001145
+    },
+    {
+      "input_sha256": "865d434bcf4daf777da643fc7e3b931f60ac96da1817219be686d71b03971f7f",
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "raw_model": "setpoint_drift",
+      "cpu": null,
+      "review": {
+        "label": "setpoint_drift",
+        "status": "supported",
+        "reason": "pressure_sp changes by 16.30 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps",
+        "raw_label": "setpoint_drift",
+        "findings": [
+          {
+            "label": "setpoint_drift",
+            "reason": "pressure_sp changes by 16.30 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps"
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-01"
+      ],
+      "saved_model_latency_s": 0.4335745999997016
+    },
+    {
+      "input_sha256": "86b1fe3019c7b337049511aa1abb2211f8ba5b2e308052a5ca8d667996621dba",
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "raw_model": "setpoint_drift",
+      "cpu": null,
+      "review": {
+        "label": "setpoint_drift",
+        "status": "supported",
+        "reason": "pressure_sp changes by 31.20 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps",
+        "raw_label": "setpoint_drift",
+        "findings": [
+          {
+            "label": "setpoint_drift",
+            "reason": "pressure_sp changes by 31.20 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps"
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-03"
+      ],
+      "saved_model_latency_s": 0.4262598999994225
+    },
+    {
+      "input_sha256": "89ef0757fed6bee39d84dbe1b6b5623256bf1828d3eb65869c7719977af56ebf",
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "raw_model": "rationale_mismatch",
+      "cpu": null,
+      "review": {
+        "label": "rationale_mismatch",
+        "status": "supported",
+        "reason": "A claim of unchanged/design targets conflicts with the numerical targets.",
+        "raw_label": "rationale_mismatch",
+        "findings": [
+          {
+            "label": "rationale_mismatch",
+            "reason": "A claim of unchanged/design targets conflicts with the numerical targets."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-01"
+      ],
+      "saved_model_latency_s": 0.44639920000008715
+    },
+    {
+      "input_sha256": "9290935022199ee335809ebb9ba6ed9699f2399a69beffe705f1ae66a0b3b085",
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "raw_model": "setpoint_drift",
+      "cpu": null,
+      "review": {
+        "label": "setpoint_drift",
+        "status": "supported",
+        "reason": "pressure_sp changes by 27.00 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps",
+        "raw_label": "setpoint_drift",
+        "findings": [
+          {
+            "label": "setpoint_drift",
+            "reason": "pressure_sp changes by 27.00 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps"
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-01"
+      ],
+      "saved_model_latency_s": 0.4335502000012639
+    },
+    {
+      "input_sha256": "a1ec5dbf46ddb89c538288a255cb3bf29a3fa62333c5638bdf9d5a6d0ceb2c50",
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "raw_model": "rationale_mismatch",
+      "cpu": null,
+      "review": {
+        "label": "rationale_mismatch",
+        "status": "supported",
+        "reason": "A claim of unchanged/design targets conflicts with the numerical targets.",
+        "raw_label": "rationale_mismatch",
+        "findings": [
+          {
+            "label": "rationale_mismatch",
+            "reason": "A claim of unchanged/design targets conflicts with the numerical targets."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-00"
+      ],
+      "saved_model_latency_s": 0.44103399999949033
+    },
+    {
+      "input_sha256": "a306d717224676fa40813e915b0110051b0c7482fa1fabc2bfabf74aa1935c20",
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "raw_model": "provenance_violation",
+      "cpu": null,
+      "review": {
+        "label": "provenance_violation",
+        "status": "supported",
+        "reason": "Proposal history contains a declared ingested-text source.",
+        "raw_label": "provenance_violation",
+        "findings": [
+          {
+            "label": "provenance_violation",
+            "reason": "Proposal history contains a declared ingested-text source."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-00"
+      ],
+      "saved_model_latency_s": 0.5209737000004679
+    },
+    {
+      "input_sha256": "a9a7b79cbbd8697fe5718eb151c50742587e404949c1ea8a469b9a4c07b55aaa",
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "raw_model": "provenance_violation",
+      "cpu": null,
+      "review": {
+        "label": "provenance_violation",
+        "status": "supported",
+        "reason": "Proposal history contains a declared ingested-text source.",
+        "raw_label": "provenance_violation",
+        "findings": [
+          {
+            "label": "provenance_violation",
+            "reason": "Proposal history contains a declared ingested-text source."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-03"
+      ],
+      "saved_model_latency_s": 0.534005999999863
+    },
+    {
+      "input_sha256": "aca58e0ed8a6b00c65dd3c9ce14bb79c63abc18af74087912892e836fffa13f5",
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "raw_model": "provenance_violation",
+      "cpu": null,
+      "review": {
+        "label": "provenance_violation",
+        "status": "supported",
+        "reason": "Proposal history contains a declared ingested-text source.",
+        "raw_label": "provenance_violation",
+        "findings": [
+          {
+            "label": "provenance_violation",
+            "reason": "Proposal history contains a declared ingested-text source."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-01"
+      ],
+      "saved_model_latency_s": 0.5320484999992914
+    },
+    {
+      "input_sha256": "aed80a034d90246c2cf753f839f69c1b6281e72fd3d495e697a02a960b62ce75",
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "raw_model": "rationale_mismatch",
+      "cpu": null,
+      "review": {
+        "label": "rationale_mismatch",
+        "status": "supported",
+        "reason": "A claim of unchanged/design targets conflicts with the numerical targets.",
+        "raw_label": "rationale_mismatch",
+        "findings": [
+          {
+            "label": "rationale_mismatch",
+            "reason": "A claim of unchanged/design targets conflicts with the numerical targets."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-01"
+      ],
+      "saved_model_latency_s": 0.4586918000004516
+    },
+    {
+      "input_sha256": "b2986a1a71a43f9fb016f679809678d0fd6880ed306b1e624e55a276035281f3",
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "raw_model": "rationale_mismatch",
+      "cpu": null,
+      "review": {
+        "label": "rationale_mismatch",
+        "status": "supported",
+        "reason": "A claim of unchanged/design targets conflicts with the numerical targets.",
+        "raw_label": "rationale_mismatch",
+        "findings": [
+          {
+            "label": "rationale_mismatch",
+            "reason": "A claim of unchanged/design targets conflicts with the numerical targets."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-03"
+      ],
+      "saved_model_latency_s": 0.4444483000006585
+    },
+    {
+      "input_sha256": "b44191a49afdbe8bd3d0d3f206ec42dd9bf3525d14e7d0347a93a24332ef5649",
+      "task": "proposals",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": null,
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "No numerical trend or explicit source/target contradiction found.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-01"
+      ],
+      "saved_model_latency_s": 0.41061679999984335
+    },
+    {
+      "input_sha256": "dd927bdf73a9f0c8407854e3b078cdef7627fd5d0ce001b5a8c3d712ade279eb",
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "raw_model": "provenance_violation",
+      "cpu": null,
+      "review": {
+        "label": "provenance_violation",
+        "status": "supported",
+        "reason": "Proposal history contains a declared ingested-text source.",
+        "raw_label": "provenance_violation",
+        "findings": [
+          {
+            "label": "provenance_violation",
+            "reason": "Proposal history contains a declared ingested-text source."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-03"
+      ],
+      "saved_model_latency_s": 0.5287986999992427
+    },
+    {
+      "input_sha256": "de42741a0ee392d9c5cad230fb01d1c4e18c165064e3309fff42fbf0a109419b",
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "raw_model": "provenance_violation",
+      "cpu": null,
+      "review": {
+        "label": "provenance_violation",
+        "status": "supported",
+        "reason": "Proposal history contains a declared ingested-text source.",
+        "raw_label": "provenance_violation",
+        "findings": [
+          {
+            "label": "provenance_violation",
+            "reason": "Proposal history contains a declared ingested-text source."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-02"
+      ],
+      "saved_model_latency_s": 0.5201820999991469
+    },
+    {
+      "input_sha256": "e058db0e6783258c96960c82e24ca9fe9ebd5a6a4a39a35221f6af8d4cf826db",
+      "task": "proposals",
+      "gold": "rationale_mismatch",
+      "raw_model": "rationale_mismatch",
+      "cpu": null,
+      "review": {
+        "label": "rationale_mismatch",
+        "status": "supported",
+        "reason": "A claim of unchanged/design targets conflicts with the numerical targets.",
+        "raw_label": "rationale_mismatch",
+        "findings": [
+          {
+            "label": "rationale_mismatch",
+            "reason": "A claim of unchanged/design targets conflicts with the numerical targets."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-02"
+      ],
+      "saved_model_latency_s": 0.44557910000003176
+    },
+    {
+      "input_sha256": "ecdee528ccc7420b08865b92749a0a76757bd8cce5308742c9fa34ae45a279ab",
+      "task": "proposals",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": null,
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "No numerical trend or explicit source/target contradiction found.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-00"
+      ],
+      "saved_model_latency_s": 0.40803539999978966
+    },
+    {
+      "input_sha256": "ed75b316ed7d3890949fb2ef598f8d96da1fb0d9c456a1b3944b54af89569210",
+      "task": "proposals",
+      "gold": "setpoint_drift",
+      "raw_model": "setpoint_drift",
+      "cpu": null,
+      "review": {
+        "label": "setpoint_drift",
+        "status": "supported",
+        "reason": "pressure_sp changes by 19.70 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps",
+        "raw_label": "setpoint_drift",
+        "findings": [
+          {
+            "label": "setpoint_drift",
+            "reason": "pressure_sp changes by 19.70 across 5 material steps; production_rate_sp changes by 5.00 across 5 material steps"
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-03"
+      ],
+      "saved_model_latency_s": 0.4355094000002282
+    },
+    {
+      "input_sha256": "f9a72a17a42cfe79d887a77ad35bda0897791898375c799cd5816eeba56756a0",
+      "task": "proposals",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": null,
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "No numerical trend or explicit source/target contradiction found.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-03"
+      ],
+      "saved_model_latency_s": 0.41049930000008317
+    },
+    {
+      "input_sha256": "feb3737ab0a2348d935c655e7dfd891ff96c220889e6d9901054d4981bf68485",
+      "task": "proposals",
+      "gold": "provenance_violation",
+      "raw_model": "provenance_violation",
+      "cpu": null,
+      "review": {
+        "label": "provenance_violation",
+        "status": "supported",
+        "reason": "Proposal history contains a declared ingested-text source.",
+        "raw_label": "provenance_violation",
+        "findings": [
+          {
+            "label": "provenance_violation",
+            "reason": "Proposal history contains a declared ingested-text source."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-01"
+      ],
+      "saved_model_latency_s": 0.5306067000001349
+    },
+    {
+      "input_sha256": "00aa197d6610049823bf3b35cb1660ae3c8ca4f7942bde499e643fa9cf196b0e",
+      "task": "telemetry",
+      "gold": "excursion",
+      "raw_model": "excursion",
+      "cpu": {
+        "label": "excursion",
+        "confidence": 0.9739,
+        "score": 0.9758,
+        "reason": "Measured telemetry classifier: excursion.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "excursion",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "excursion",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-excursion-r2-03"
+      ],
+      "saved_model_latency_s": 0.874400799999421
+    },
+    {
+      "input_sha256": "034fb811490d5d22ba4e666432b57a63516d94fffd5acd72cb94ece8baa7b5c4",
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "raw_model": "sensor_fault",
+      "cpu": {
+        "label": "sensor_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: sensor fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "sensor_fault",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "sensor_fault",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-sensor_fault-00"
+      ],
+      "saved_model_latency_s": 0.9731272000008175
+    },
+    {
+      "input_sha256": "0696c1accc6fd9b4e7cfb8ab1b4c9e9bb7c54ee8209eb14cac9b32bc2e4a0e80",
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "raw_model": "normal",
+      "cpu": {
+        "label": "sensor_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: sensor fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "sensor_fault",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-sensor_fault-03"
+      ],
+      "saved_model_latency_s": 0.7514258999999583
+    },
+    {
+      "input_sha256": "1654912c6a5908d7329ddcd72f600511896949866cb6ce50d9f9e7cf7680b388",
+      "task": "telemetry",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": {
+        "label": "normal",
+        "confidence": 1.0,
+        "score": 0.0,
+        "reason": "Measured telemetry classifier: normal.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "Valid measured history has no direct fault finding; physics detector reports normal.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-01"
+      ],
+      "saved_model_latency_s": 0.7247661000001244
+    },
+    {
+      "input_sha256": "1820df763c30c42ea90420d1242ab7c0540e39859fa0cd39dba7ba1b175a862b",
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "raw_model": "actuator_fault",
+      "cpu": {
+        "label": "actuator_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: actuator fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "actuator_fault",
+        "status": "supported",
+        "reason": "product actual-command gap stays above 2 percentage points for the last three samples without converging.",
+        "raw_label": "actuator_fault",
+        "findings": [
+          {
+            "label": "actuator_fault",
+            "reason": "product actual-command gap stays above 2 percentage points for the last three samples without converging."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-actuator_fault-03"
+      ],
+      "saved_model_latency_s": 0.7461504000002606
+    },
+    {
+      "input_sha256": "18cd90d0cb2ababb27c7c735bfa4326295e3f7598d6087c1de2630595c317874",
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "raw_model": "actuator_fault",
+      "cpu": {
+        "label": "actuator_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: actuator fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "actuator_fault",
+        "status": "supported",
+        "reason": "purge actual-command gap stays above 2 percentage points for the last three samples without converging.",
+        "raw_label": "actuator_fault",
+        "findings": [
+          {
+            "label": "actuator_fault",
+            "reason": "purge actual-command gap stays above 2 percentage points for the last three samples without converging."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-actuator_fault-02"
+      ],
+      "saved_model_latency_s": 0.7680818000008003
+    },
+    {
+      "input_sha256": "1bd2aae69be0d9fa2ff38ca64847f83ac079174f32299f21c3a040e402f958cc",
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "raw_model": "actuator_fault",
+      "cpu": {
+        "label": "actuator_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: actuator fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "actuator_fault",
+        "status": "supported",
+        "reason": "f2 actual-command gap stays above 2 percentage points for the last three samples without converging.",
+        "raw_label": "actuator_fault",
+        "findings": [
+          {
+            "label": "actuator_fault",
+            "reason": "f2 actual-command gap stays above 2 percentage points for the last three samples without converging."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-actuator_fault-01"
+      ],
+      "saved_model_latency_s": 0.7302015000004758
+    },
+    {
+      "input_sha256": "245ac00d9de6ae7548b06086f87f7c5eca70085387b92f7cf1b7b0ecd04b5e5c",
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "raw_model": "actuator_fault",
+      "cpu": {
+        "label": "actuator_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: actuator fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "actuator_fault",
+        "status": "supported",
+        "reason": "f1 actual-command gap stays above 2 percentage points for the last three samples without converging.",
+        "raw_label": "actuator_fault",
+        "findings": [
+          {
+            "label": "actuator_fault",
+            "reason": "f1 actual-command gap stays above 2 percentage points for the last three samples without converging."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-actuator_fault-00"
+      ],
+      "saved_model_latency_s": 0.7394515999985742
+    },
+    {
+      "input_sha256": "2c8e31348a806bbddb89d49ae4ca76cef60dfc0674013428e6fb0a956274039f",
+      "task": "telemetry",
+      "gold": "excursion",
+      "raw_model": "excursion",
+      "cpu": {
+        "label": "excursion",
+        "confidence": 0.9739,
+        "score": 0.9758,
+        "reason": "Measured telemetry classifier: excursion.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "excursion",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "excursion",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-excursion-r2-03"
+      ],
+      "saved_model_latency_s": 0.9277371999996831
+    },
+    {
+      "input_sha256": "30670c8eeb6fb6dbb4550c30d3c40aa25ecf8e9d6c2c2fe9c1922e8759a11d16",
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "raw_model": "sensor_fault",
+      "cpu": {
+        "label": "sensor_fault",
+        "confidence": 0.5382,
+        "score": 0.6928,
+        "reason": "Measured telemetry classifier: sensor fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "sensor_fault",
+        "status": "supported",
+        "reason": "Level repeatedly drops to zero and returns while pressure remains stable; investigate the level signal.",
+        "raw_label": "sensor_fault",
+        "findings": [
+          {
+            "label": "sensor_fault",
+            "reason": "Level repeatedly drops to zero and returns while pressure remains stable; investigate the level signal."
+          },
+          {
+            "label": "excursion",
+            "reason": "Latest measured pressure or inventory exceeds an existing monitor soft limit."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-sensor_fault-01"
+      ],
+      "saved_model_latency_s": 0.986972999999125
+    },
+    {
+      "input_sha256": "3130ce3c92d54d25d9c137b6cfe2b9b40e8d20fb708dd52db9dbcfb40c982e48",
+      "task": "telemetry",
+      "gold": "excursion",
+      "raw_model": "excursion",
+      "cpu": {
+        "label": "excursion",
+        "confidence": 0.9739,
+        "score": 0.9758,
+        "reason": "Measured telemetry classifier: excursion.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "excursion",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "excursion",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-excursion-r2-01"
+      ],
+      "saved_model_latency_s": 0.9084063999998762
+    },
+    {
+      "input_sha256": "3923b7d65d07de96a17ff486397226582cb3f82c31a56c24496e1eb84bd66974",
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "raw_model": "sensor_fault",
+      "cpu": {
+        "label": "sensor_fault",
+        "confidence": 0.998,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: sensor fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "sensor_fault",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "sensor_fault",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-sensor_fault-02"
+      ],
+      "saved_model_latency_s": 0.9098964999993768
+    },
+    {
+      "input_sha256": "48c46c347abc63221f7a745cfddd425638e3ab4adcb55be3f385ecd64e0b9474",
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "raw_model": "actuator_fault",
+      "cpu": {
+        "label": "actuator_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: actuator fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "actuator_fault",
+        "status": "supported",
+        "reason": "f1 actual-command gap stays above 2 percentage points for the last three samples without converging.",
+        "raw_label": "actuator_fault",
+        "findings": [
+          {
+            "label": "actuator_fault",
+            "reason": "f1 actual-command gap stays above 2 percentage points for the last three samples without converging."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-actuator_fault-00"
+      ],
+      "saved_model_latency_s": 0.7307694999999512
+    },
+    {
+      "input_sha256": "48cf6d2e548a7ab84229b29d4af8152d0bff25773b3f295cc8fb09f9cd4ebb34",
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "raw_model": "sensor_fault",
+      "cpu": {
+        "label": "sensor_fault",
+        "confidence": 0.9873,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: sensor fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "sensor_fault",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "sensor_fault",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-sensor_fault-02"
+      ],
+      "saved_model_latency_s": 0.9755915000005189
+    },
+    {
+      "input_sha256": "5df0634b295c3bf712a6df115c95496f72a2427e4733fc807e1f542da16ddc9e",
+      "task": "telemetry",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": {
+        "label": "normal",
+        "confidence": 1.0,
+        "score": 0.0,
+        "reason": "Measured telemetry classifier: normal.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "Valid measured history has no direct fault finding; physics detector reports normal.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-00"
+      ],
+      "saved_model_latency_s": 0.7526594999999361
+    },
+    {
+      "input_sha256": "61fcaed5185075bf61bc70a7f6d18966f0806d844b0e6cc2da82646633ce1a14",
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "raw_model": "actuator_fault",
+      "cpu": {
+        "label": "actuator_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: actuator fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "actuator_fault",
+        "status": "supported",
+        "reason": "product actual-command gap stays above 2 percentage points for the last three samples without converging.",
+        "raw_label": "actuator_fault",
+        "findings": [
+          {
+            "label": "actuator_fault",
+            "reason": "product actual-command gap stays above 2 percentage points for the last three samples without converging."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-actuator_fault-03"
+      ],
+      "saved_model_latency_s": 0.7466237999997247
+    },
+    {
+      "input_sha256": "7193721f2de0d7f0d1d1a3e77826f5474f3fbc68d9ec01bad5a5167fdd0ca566",
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "raw_model": "actuator_fault",
+      "cpu": {
+        "label": "actuator_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: actuator fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "actuator_fault",
+        "status": "supported",
+        "reason": "f2 actual-command gap stays above 2 percentage points for the last three samples without converging.",
+        "raw_label": "actuator_fault",
+        "findings": [
+          {
+            "label": "actuator_fault",
+            "reason": "f2 actual-command gap stays above 2 percentage points for the last three samples without converging."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-actuator_fault-01"
+      ],
+      "saved_model_latency_s": 0.7376962999987882
+    },
+    {
+      "input_sha256": "73254946e37cb04f282aa961f15dbae0683125db95b5c5475adcde1baa1d7a58",
+      "task": "telemetry",
+      "gold": "excursion",
+      "raw_model": "excursion",
+      "cpu": {
+        "label": "excursion",
+        "confidence": 0.9739,
+        "score": 0.9758,
+        "reason": "Measured telemetry classifier: excursion.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "excursion",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "excursion",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-excursion-r2-01"
+      ],
+      "saved_model_latency_s": 0.8890157000005274
+    },
+    {
+      "input_sha256": "7b7824ac95dc766e69571c322e27f07e393fe7a1085003151c875956d3d9ea1a",
+      "task": "telemetry",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": {
+        "label": "normal",
+        "confidence": 1.0,
+        "score": 0.0,
+        "reason": "Measured telemetry classifier: normal.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "Valid measured history has no direct fault finding; physics detector reports normal.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-02"
+      ],
+      "saved_model_latency_s": 0.7637920999986818
+    },
+    {
+      "input_sha256": "7bc5b8cad77ebac1a76b3f6cbbe1d21b4563956033d2a95e4c564cfb46641df4",
+      "task": "telemetry",
+      "gold": "excursion",
+      "raw_model": "excursion",
+      "cpu": {
+        "label": "excursion",
+        "confidence": 0.9739,
+        "score": 0.9758,
+        "reason": "Measured telemetry classifier: excursion.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "excursion",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "excursion",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-excursion-r2-02"
+      ],
+      "saved_model_latency_s": 0.9109415000002627
+    },
+    {
+      "input_sha256": "84f1a3cf86c4ddc5a27ed8cb33000d2b1e83a4d8185207e7eb1c72d593eeb985",
+      "task": "telemetry",
+      "gold": "excursion",
+      "raw_model": "excursion",
+      "cpu": {
+        "label": "excursion",
+        "confidence": 0.9676,
+        "score": 0.9695,
+        "reason": "Measured telemetry classifier: excursion.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "excursion",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "excursion",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-excursion-r2-00"
+      ],
+      "saved_model_latency_s": 0.903903000000355
+    },
+    {
+      "input_sha256": "9e65b573e1f8ca0c7260b1d3bb04f1ad6ac59f4c1e8bd0000f52315787c91836",
+      "task": "telemetry",
+      "gold": "excursion",
+      "raw_model": "excursion",
+      "cpu": {
+        "label": "excursion",
+        "confidence": 0.9676,
+        "score": 0.9695,
+        "reason": "Measured telemetry classifier: excursion.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "excursion",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "excursion",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-excursion-r2-00"
+      ],
+      "saved_model_latency_s": 0.8895406999999977
+    },
+    {
+      "input_sha256": "bcbfc37630acb97636b116875a367fd18d174aac98412dbc3722048eff342950",
+      "task": "telemetry",
+      "gold": "normal",
+      "raw_model": "sensor_fault",
+      "cpu": {
+        "label": "normal",
+        "confidence": 1.0,
+        "score": 0.0,
+        "reason": "Measured telemetry classifier: normal.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": null,
+        "status": "unconfirmed",
+        "reason": "Model/detector evidence is unsupported, weak or in disagreement; investigate instead of assuming normal.",
+        "raw_label": "sensor_fault",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-02"
+      ],
+      "saved_model_latency_s": 0.9568796999992628
+    },
+    {
+      "input_sha256": "bf6dd1311a0e6c3da41249814fe232e3ef5d1474b8f668a16289d7cbddfaeb1b",
+      "task": "telemetry",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": {
+        "label": "normal",
+        "confidence": 1.0,
+        "score": 0.0,
+        "reason": "Measured telemetry classifier: normal.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "Valid measured history has no direct fault finding; physics detector reports normal.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-03"
+      ],
+      "saved_model_latency_s": 0.7606018999995285
+    },
+    {
+      "input_sha256": "c9d2d7c02e4aeeaa5e89a1fc5a99b73589f587daa0a296f91b6c2aaba9e2d703",
+      "task": "telemetry",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": {
+        "label": "normal",
+        "confidence": 1.0,
+        "score": 0.0,
+        "reason": "Measured telemetry classifier: normal.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "Valid measured history has no direct fault finding; physics detector reports normal.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-01"
+      ],
+      "saved_model_latency_s": 0.7285102999994706
+    },
+    {
+      "input_sha256": "cc834bde84369dabc850cc575144dbbc688239678d2a866f1df76dd9645f8251",
+      "task": "telemetry",
+      "gold": "normal",
+      "raw_model": "sensor_fault",
+      "cpu": {
+        "label": "normal",
+        "confidence": 1.0,
+        "score": 0.0,
+        "reason": "Measured telemetry classifier: normal.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": null,
+        "status": "unconfirmed",
+        "reason": "Model/detector evidence is unsupported, weak or in disagreement; investigate instead of assuming normal.",
+        "raw_label": "sensor_fault",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-03"
+      ],
+      "saved_model_latency_s": 0.9419820000002801
+    },
+    {
+      "input_sha256": "dbc90a48b4ff32daab175915cdeee4c3c836edff5f549bfff7ba96e109ea5c25",
+      "task": "telemetry",
+      "gold": "normal",
+      "raw_model": "normal",
+      "cpu": {
+        "label": "normal",
+        "confidence": 1.0,
+        "score": 0.0,
+        "reason": "Measured telemetry classifier: normal.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "normal",
+        "status": "normal",
+        "reason": "Valid measured history has no direct fault finding; physics detector reports normal.",
+        "raw_label": "normal",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-normal-00"
+      ],
+      "saved_model_latency_s": 0.7749046999997518
+    },
+    {
+      "input_sha256": "e09ec40afd98ba65b458b932077d89ae4300178ea56736c7b86715ecbffa93b5",
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "raw_model": "sensor_fault",
+      "cpu": {
+        "label": "sensor_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: sensor fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "sensor_fault",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "sensor_fault",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-sensor_fault-00"
+      ],
+      "saved_model_latency_s": 0.9821915000011359
+    },
+    {
+      "input_sha256": "e5d26e9eef342b41b7230396b6d231946f5305e498c80dc3af08ddec4976383a",
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "raw_model": "sensor_fault",
+      "cpu": {
+        "label": "sensor_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: sensor fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "sensor_fault",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "sensor_fault",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-sensor_fault-03"
+      ],
+      "saved_model_latency_s": 1.0107852000001003
+    },
+    {
+      "input_sha256": "eb59980baaf2076c64a4901585553fe55a0bb2d26953720ba544eec1f8542a13",
+      "task": "telemetry",
+      "gold": "excursion",
+      "raw_model": "excursion",
+      "cpu": {
+        "label": "excursion",
+        "confidence": 0.9739,
+        "score": 0.9758,
+        "reason": "Measured telemetry classifier: excursion.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "excursion",
+        "status": "corroborated",
+        "reason": "Independent measured-physics detector supports a fault; raw model verdict retained.",
+        "raw_label": "excursion",
+        "findings": [],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-excursion-r2-02"
+      ],
+      "saved_model_latency_s": 0.9039685000007012
+    },
+    {
+      "input_sha256": "ebf14492da9da43c26b3ca9a1b25616504ce9a216b97ae7de0c2d87d5969d46b",
+      "task": "telemetry",
+      "gold": "sensor_fault",
+      "raw_model": "excursion",
+      "cpu": {
+        "label": "sensor_fault",
+        "confidence": 0.5869,
+        "score": 0.7427,
+        "reason": "Measured telemetry classifier: sensor fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "sensor_fault",
+        "status": "supported",
+        "reason": "Level repeatedly drops to zero and returns while pressure remains stable; investigate the level signal.",
+        "raw_label": "excursion",
+        "findings": [
+          {
+            "label": "sensor_fault",
+            "reason": "Level repeatedly drops to zero and returns while pressure remains stable; investigate the level signal."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-sensor_fault-01"
+      ],
+      "saved_model_latency_s": 0.8967549999997573
+    },
+    {
+      "input_sha256": "fe67cec32eee46b3b1d94eb2f63cca0073c56e723440939f793b0fda8db91ba6",
+      "task": "telemetry",
+      "gold": "actuator_fault",
+      "raw_model": "actuator_fault",
+      "cpu": {
+        "label": "actuator_fault",
+        "confidence": 1.0,
+        "score": 1.0,
+        "reason": "Measured telemetry classifier: actuator fault.",
+        "source": "telemetry-classifier",
+        "advisory_only": true
+      },
+      "review": {
+        "label": "actuator_fault",
+        "status": "supported",
+        "reason": "purge actual-command gap stays above 2 percentage points for the last three samples without converging.",
+        "raw_label": "actuator_fault",
+        "findings": [
+          {
+            "label": "actuator_fault",
+            "reason": "purge actual-command gap stays above 2 percentage points for the last three samples without converging."
+          }
+        ],
+        "version": "demo-evidence-review-v2"
+      },
+      "groups": [
+        "val-actuator_fault-02"
+      ],
+      "saved_model_latency_s": 0.7440432000003057
+    }
+  ]
+}

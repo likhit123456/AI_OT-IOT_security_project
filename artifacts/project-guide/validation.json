@@ -1,0 +1,19 @@
+{
+  "tracked_paths_covered": 298,
+  "python_symbols_covered": 884,
+  "original_files_unchanged": true,
+  "pdfs": {
+    "SCRAM_Study_Guide.pdf": {
+      "pages": 111,
+      "short_pages": [],
+      "outline_entries": 22,
+      "extractable_characters": 303044
+    },
+    "SCRAM_Source_Companion.pdf": {
+      "pages": 658,
+      "short_pages": [],
+      "outline_entries": 399,
+      "extractable_characters": 2181945
+    }
+  }
+}

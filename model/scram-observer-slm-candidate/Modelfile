@@ -1,0 +1,6 @@
+FROM ./scram-observer-slm-q8_0.gguf
+PARAMETER num_ctx 3072
+PARAMETER temperature 0
+PARAMETER num_predict 128
+PARAMETER repeat_penalty 1.1
+PARAMETER repeat_last_n 3072

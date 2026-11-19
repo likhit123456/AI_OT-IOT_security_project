@@ -1,0 +1,232 @@
+{
+  "groups": {
+    "(root files)": {
+      "files": 27,
+      "bytes": 151464
+    },
+    ".git": {
+      "files": 638,
+      "bytes": 43089198
+    },
+    ".github": {
+      "files": 4,
+      "bytes": 2913
+    },
+    ".local-only": {
+      "files": 4,
+      "bytes": 172035428
+    },
+    ".tools": {
+      "files": 4181,
+      "bytes": 234203074
+    },
+    ".venv-train": {
+      "files": 44527,
+      "bytes": 5522690706
+    },
+    "artifacts": {
+      "files": 34,
+      "bytes": 2026052
+    },
+    "docker": {
+      "files": 1,
+      "bytes": 565
+    },
+    "enforcer": {
+      "files": 3,
+      "bytes": 21338
+    },
+    "experiments": {
+      "files": 31,
+      "bytes": 1954746
+    },
+    "images": {
+      "files": 10,
+      "bytes": 4516148
+    },
+    "l0_plant": {
+      "files": 8,
+      "bytes": 42185
+    },
+    "l3_brain": {
+      "files": 6,
+      "bytes": 29570
+    },
+    "live": {
+      "files": 12,
+      "bytes": 229600
+    },
+    "model": {
+      "files": 36,
+      "bytes": 3093736665
+    },
+    "monitor": {
+      "files": 12,
+      "bytes": 79075
+    },
+    "observer_merged_v2": {
+      "files": 13,
+      "bytes": 87210702
+    },
+    "packaging": {
+      "files": 10,
+      "bytes": 7275
+    },
+    "reference": {
+      "files": 5,
+      "bytes": 38662
+    },
+    "scripts": {
+      "files": 6,
+      "bytes": 27845
+    },
+    "simulation": {
+      "files": 44,
+      "bytes": 28352805
+    },
+    "sim_app": {
+      "files": 11,
+      "bytes": 114344
+    },
+    "tests": {
+      "files": 22,
+      "bytes": 142324
+    },
+    "training": {
+      "files": 31,
+      "bytes": 65960332
+    }
+  },
+  "local_nontracked_files": [
+    {
+      "path": ".local-only/release/scram-observer-v2-lora.zip",
+      "bytes": 70446599
+    },
+    {
+      "path": ".local-only/release/scram-observer-v3-lora.zip",
+      "bytes": 70462549
+    },
+    {
+      "path": ".local-only/release/scram-operator-lora.zip",
+      "bytes": 31125713
+    },
+    {
+      "path": ".local-only/release/SHA256SUMS.txt",
+      "bytes": 567
+    },
+    {
+      "path": "l0_plant/__pycache__/safety.cpython-313.pyc",
+      "bytes": 11363
+    },
+    {
+      "path": "l0_plant/__pycache__/__init__.cpython-313.pyc",
+      "bytes": 156
+    },
+    {
+      "path": "l3_brain/__pycache__/prompt_format.cpython-313.pyc",
+      "bytes": 3895
+    },
+    {
+      "path": "l3_brain/__pycache__/__init__.cpython-313.pyc",
+      "bytes": 156
+    },
+    {
+      "path": "model/scram-observer-gguf/scram-observer-v2-q4_k_m.gguf",
+      "bytes": 986047872
+    },
+    {
+      "path": "model/scram-observer-v3-gguf/scram-observer-v3-q4_k_m.gguf",
+      "bytes": 986047808
+    },
+    {
+      "path": "model/scram-observer-v3-gguf/lora/adapter_model.safetensors",
+      "bytes": 73911112
+    },
+    {
+      "path": "model/scram-operator-gguf/scram-operator-q4_k_m.gguf",
+      "bytes": 986048000
+    },
+    {
+      "path": "model/scram-operator-lora/adapter_model.safetensors",
+      "bytes": 36981856
+    },
+    {
+      "path": "monitor/__pycache__/governance.cpython-313.pyc",
+      "bytes": 9757
+    },
+    {
+      "path": "monitor/__pycache__/__init__.cpython-313.pyc",
+      "bytes": 155
+    },
+    {
+      "path": "observer_merged_v2/eval.json",
+      "bytes": 691348
+    },
+    {
+      "path": "observer_merged_v2/eval_observer_test_unseen.json",
+      "bytes": 387677
+    },
+    {
+      "path": "observer_merged_v2/eval_observer_val.json",
+      "bytes": 288551
+    },
+    {
+      "path": "observer_merged_v2/README.md",
+      "bytes": 4671
+    },
+    {
+      "path": "observer_merged_v2/train_log.json",
+      "bytes": 9913
+    },
+    {
+      "path": "observer_merged_v2/_evalcache_observer_test_unseen.jsonl",
+      "bytes": 278649
+    },
+    {
+      "path": "observer_merged_v2/_evalcache_observer_val.jsonl",
+      "bytes": 207301
+    },
+    {
+      "path": "observer_merged_v2/lora/adapter_config.json",
+      "bytes": 1181
+    },
+    {
+      "path": "observer_merged_v2/lora/adapter_model.safetensors",
+      "bytes": 73911112
+    },
+    {
+      "path": "observer_merged_v2/lora/chat_template.jinja",
+      "bytes": 2507
+    },
+    {
+      "path": "observer_merged_v2/lora/README.md",
+      "bytes": 5206
+    },
+    {
+      "path": "observer_merged_v2/lora/tokenizer.json",
+      "bytes": 11421892
+    },
+    {
+      "path": "observer_merged_v2/lora/tokenizer_config.json",
+      "bytes": 694
+    },
+    {
+      "path": "simulation/web_visualization/Build/ChemicalPlant.data.unityweb",
+      "bytes": 134
+    },
+    {
+      "path": "simulation/web_visualization/Build/ChemicalPlant.wasm.code.unityweb",
+      "bytes": 132
+    },
+    {
+      "path": "simulation/web_visualization/Build/ChemicalPlant.wasm.framework.unityweb",
+      "bytes": 130
+    },
+    {
+      "path": "simulation/web_visualization/Build/ChemicalPlant.wasm.symbols.unityweb",
+      "bytes": 132
+    }
+  ],
+  "scan_errors": [],
+  "excluded": "This generated project-guide directory. Dependency/Git file contents were not analyzed."
+}

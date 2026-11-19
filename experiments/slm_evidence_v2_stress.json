@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "declared_before_new_training_or_holdout_evaluation": true,
+  "seed": 3409,
+  "cases_per_variant": 20,
+  "variants": {
+    "frozen_level": "Use only new native-normal parents with measured level range at least 0.1 percentage points; replace all 16 level samples with the parent's first measured level",
+    "pressure_dropout": "Replace the last three measured pressure samples of new native-normal parents with zero"
+  },
+  "selection": "Shuffle eligible parents with the fixed seed and take at most 20; report a shortfall rather than duplicating",
+  "source": "Only the new frozen sealed recording groups",
+  "counts_as_new_independent_support": false,
+  "use_for_training_or_checkpoint_selection": false
+}

@@ -1,0 +1,57 @@
+{
+  "experiment_id": "qwen05b-observer-20261108-evidence-v2",
+  "status": "preparation_only",
+  "base": "Qwen/Qwen2.5-0.5B-Instruct",
+  "base_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "representation": "measured-evidence-v2",
+  "frozen_run04_may_be_modified": false,
+  "old_final_test_may_be_used_for_selection": false,
+  "training_prerequisites": [
+    "New versioned data manifest with exact per-example recording ID, time span, command provenance and label method",
+    "Human review of ambiguous scenario labels and target causal assertions; arithmetic flags alone cannot correct labels",
+    "New recording groups assigned to train, validation and sealed final test before constructing examples",
+    "Whole recording and all its proposal/telemetry/augmentation children remain in one split",
+    "Actual controller commands recorded with aligned readings; never substitute measured positions for absent commands",
+    "At least 30 cases per task/class in each validation and final split, spanning at least three source recordings per class",
+    "Constructed faults and proposal templates reported separately from native recordings and independent operator language",
+    "Pinned-tokenizer audit of final data: complete histories, no truncation, prompt plus 192 generated tokens at most 3072"
+  ],
+  "training_budget": {
+    "seed": 3408,
+    "initialization": "pinned base with fresh adapter and optimizer; never resume run04",
+    "main_runs_max": 1,
+    "smoke_optimizer_steps_max": 16,
+    "optimizer_steps_max": 180,
+    "epochs_max": 2,
+    "microbatch": 1,
+    "gradient_accumulation": 8,
+    "learning_rate": 0.0002,
+    "label_loss_weight": 10,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0,
+    "training_examples_max": 720,
+    "balancing": "up to 90 unique examples for each of eight task/class pairs; no duplicate padding",
+    "schedule": "Fixed complete horizon before training; stop at whichever epoch or step cap is reached first",
+    "objective_changes_during_run_allowed": false
+  },
+  "selection": {
+    "validation_every_optimizer_steps": 45,
+    "validation": "same fixed full new validation set at each checkpoint; greedy unconstrained generation",
+    "primary": "macro-F1 across eight task/class pairs, invalid outputs retained as errors",
+    "tie_break": "lower unweighted assistant-only cross entropy",
+    "early_stop": "two consecutive validation checkpoints without primary/tie-break improvement",
+    "require_final_validation_at_budget_end": true,
+    "comparisons": "pinned base, saved new adapter, F16/Q8 and unchanged V2/V3 on identical validation cases/runtime",
+    "quantization_policy": "experiments/slm_quantization_selection.json",
+    "final_test": "freeze selected artifact, representation, generation and hashes first; run new sealed test once"
+  },
+  "release_gates": "experiments/unified_observer_gates.json",
+  "defaults": "legacy V2/V3 until all quality, support, runtime and rollback gates pass",
+  "current_blockers": [
+    "Historical labels/explanations have not been human reviewed",
+    "No new independent recording/holdout manifest exists",
+    "WSL distribution enumeration denied in this agent; Docker engine unavailable",
+    "Ordinary Ollama candidate registration still returns Access is denied"
+  ]
+}

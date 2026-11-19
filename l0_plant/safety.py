@@ -66,6 +66,13 @@ class SafeHold:
                 "purge_valve_sp": clamp(d["purge"] + self.kp_purge * (pressure - self.p_target)),
                 "product_valve_sp": clamp(d["product"] * self.feed_frac + self.kl_product * (level - self.l_target))}
 
+    def inventory_lineup(self, pressure: float) -> dict:
+        """Replenish liquid without retaining an attacker's zero-feed lineup."""
+        return {"e_stop": 0, "f1_valve_sp": DESIGN_VALVES["f1"],
+                "f2_valve_sp": DESIGN_VALVES["f2"], "product_valve_sp": 0.0,
+                "purge_valve_sp": round(max(0.0, min(100.0,
+                    DESIGN_VALVES["purge"] + 0.04 * (pressure - 2700.0))), 2)}
+
 
 @dataclass(frozen=True)
 class TripLimits:
@@ -81,6 +88,8 @@ class TripLimits:
     pressure_rearm: float = 2800.0     # kPa
     level_low_rearm: float = 15.0      # %
     level_high_rearm: float = 85.0     # %
+    pressure_low: float = 2200.0       # prevent loss of reaction after feed starvation
+    pressure_low_rearm: float = 2500.0
 
 
 class SafetyInterlock:
@@ -112,6 +121,9 @@ class SafetyInterlock:
                 self._trip(f"level {level:.1f}% <= {lim.level_low:.1f}%", "level_low")
             elif level >= lim.level_high:
                 self._trip(f"level {level:.1f}% >= {lim.level_high:.1f}%", "level_high")
+            elif self.safe_hold is not None and pressure <= lim.pressure_low:
+                self._trip(f"pressure {pressure:.0f} <= {lim.pressure_low:.0f} kPa (feed starvation)",
+                           "pressure_low")
         if self.tripped:
             # Preserve the first cause for diagnosis, but never freeze hazard detection.
             self._sensor_fault |= not valid
@@ -123,6 +135,8 @@ class SafetyInterlock:
                     self._combined_low_level = True
                 if self.cause == "level_low" and level >= lim.level_high:
                     self.escalated = True
+                if self.cause == "pressure_low" and (pressure >= lim.pressure_high or level >= lim.level_high):
+                    self.escalated = True
             self.escalated |= self._sensor_fault or self._combined_low_level
         return self.tripped
 
@@ -132,6 +146,7 @@ class SafetyInterlock:
         if not (_valid(pressure) and _valid(level)):
             return False
         return (pressure <= lim.pressure_rearm
+                and (self.safe_hold is None or pressure >= lim.pressure_low_rearm)
                 and lim.level_low_rearm <= level <= lim.level_high_rearm)
 
     @property
@@ -142,7 +157,7 @@ class SafetyInterlock:
             return "emergency_stop"
         if self._combined_low_level:
             return "combined_hold"
-        if self.cause == "level_low" and not self.escalated:
+        if self.cause in ("level_low", "pressure_low") and not self.escalated:
             return "inventory_hold"
         if self.safe_hold is not None and not self.escalated:
             return "safe_hold"
@@ -171,9 +186,11 @@ class SafetyInterlock:
             open) - relieves pressure and drains an overfull vessel.
           * level_low: e_stop would OPEN the product valve and keep draining a
             vessel that is already too low. Instead close product to stop the
-            drain and leave the feed/purge valves where they are (they are
-            simply not written, so the simulator holds them) so inflow and
-            reaction make the level recover toward the re-arm band.
+            drain. With SafeHold, restore bounded design feeds and control
+            purge from the independent pressure channel. Without SafeHold,
+            feed and purge positions are left unchanged (classic behavior).
+          * pressure_low (SafeHold only): restore bounded design feeds and
+            retain inventory before the simulated reaction loses its feed.
 
         With a SafeHold configured and valid safety-channel readings passed in,
         pressure_high / level_high run the closed-loop safe-hold lineup instead
@@ -186,7 +203,15 @@ class SafetyInterlock:
             # Remove feed energy, vent vapour, and retain the remaining liquid.
             return {"e_stop": 0, "f1_valve_sp": 0.0, "f2_valve_sp": 0.0,
                     "purge_valve_sp": 100.0, "product_valve_sp": 0.0}
-        if self.cause == "level_low" and not self.escalated:
+        if self.cause in ("level_low", "pressure_low") and not self.escalated:
+            if self.safe_hold is not None and _valid(pressure) and _valid(level):
+                # Holding zero feeds cannot replenish the inventory. Restore a
+                # bounded design feed and retain liquid using the SIS channel.
+                # Combined/high-pressure hazards above always take precedence.
+                inputs = self.safe_hold.inventory_lineup(pressure)
+                if self.cause == "pressure_low" and level > self.safe_hold.l_target:
+                    inputs["product_valve_sp"] = self.safe_hold.lineup(pressure, level)["product_valve_sp"]
+                return inputs
             return {"e_stop": 0, "product_valve_sp": 0.0}
         hold = self.safe_hold
         if (hold is not None and self.cause in ("pressure_high", "level_high")

@@ -42,6 +42,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, model_validator
 
 from l0_plant.grfics_client import GrficsClient
+from l0_plant.owner import PlantOwner
 from scripts.reset_plant import reset_and_settle
 from sim_app.ai import Activity, Rescue, parse_commands
 
@@ -75,6 +76,7 @@ class Plant:
 
     def __init__(self, host: str = "127.0.0.1", port: int = 55555):
         self.host, self.port = host, port
+        self._owner = PlantOwner(host, port)
         self._io = threading.Lock()          # one request at a time on the socket
         self._control = threading.RLock()    # control ownership and E-stop precede valve writes
         self._data = threading.Lock()
@@ -97,6 +99,8 @@ class Plant:
     # ---- socket -------------------------------------------------------------
     def _txn(self, fn):
         with self._io:
+            if self._stop_poll.is_set():
+                raise ConnectionError("manual studio is stopped")
             try:
                 if self._client is None:
                     self._client = GrficsClient(self.host, self.port, timeout=3.0).connect()
@@ -121,9 +125,14 @@ class Plant:
     def start(self) -> "Plant":
         if self._poll_thread is not None and self._poll_thread.is_alive():
             return self
+        self._owner.acquire()
         self._stop_poll.clear()
         self._poll_thread = threading.Thread(target=self._poll, name="plant-poll", daemon=True)
-        self._poll_thread.start()
+        try:
+            self._poll_thread.start()
+        except BaseException:
+            self._owner.release()
+            raise
         return self
 
     def stop(self) -> None:
@@ -131,11 +140,15 @@ class Plant:
         self.rescue.stop("application shutdown")
         if self._poll_thread is not None:
             self._poll_thread.join(timeout=4.0)
-        with self._io:
+        # Wait for in-flight reset/manual work before releasing plant ownership.
+        # New socket transactions are refused once shutdown begins.
+        with self._reset_lock, self._control, self._io:
             if self._client is not None:
                 self._client.close()
                 self._client = None
-        self.connected = False
+            self.connected = False
+            if self._poll_thread is None or not self._poll_thread.is_alive():
+                self._owner.release()
 
     def _poll(self) -> None:
         while not self._stop_poll.is_set():
@@ -255,6 +268,9 @@ class Plant:
         if not self._reset_lock.acquire(blocking=False):
             raise HTTPException(409, "already resetting")
         with self._control:
+            if self._stop_poll.is_set():
+                self._reset_lock.release()
+                raise HTTPException(409, "manual studio is stopped")
             self.resetting = True
             self.rescue.stop("simulation reset")
             self._estop_latched = False

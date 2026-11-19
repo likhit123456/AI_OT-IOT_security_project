@@ -38,6 +38,7 @@ from contracts import ControlCommand, PlantState, SupervisoryTargets
 from enforcer.keel import Keel, KeelLimits, SisFrame
 from l0_plant import fault_injection as fi
 from l0_plant.grfics_client import GrficsClient
+from l0_plant.owner import PlantOwner
 from l0_plant.plant_service import PlantService
 from l0_plant.provenance_gate import CommandSigner, ProvenanceGate
 from l0_plant.safety import SafeHold, TripLimits
@@ -49,7 +50,7 @@ from l3_brain.policy import (BaselineOperator, LLMOperator, OllamaOperator,
                              ollama_available)
 from monitor.behavior_monitor import BehaviorMonitor, MonitorLimits
 from monitor.governance import Governor
-from monitor.observer import SplitObserver, make_split_observer
+from monitor.observer_runtime import ObserverRuntime, make_observer
 from monitor.sequential_monitor import SequentialMonitor, Suspicion
 from monitor.telemetry_classifier import approved_specialist
 from scripts.reset_plant import DESIGN_PURGE_VALVE_PCT, reset_and_settle
@@ -121,6 +122,10 @@ def _num(v):
     return None if v is None or (isinstance(v, float) and not math.isfinite(v)) else round(float(v), 3)
 
 
+class RunChangedError(ValueError):
+    """The action belongs to a superseded plant run."""
+
+
 class Engine:
     def __init__(self, brain: str = "ollama", limits: TripLimits = DEMO_LIMITS,
                  reset: bool = True, host: str = "127.0.0.1", port: int = 55555):
@@ -131,6 +136,9 @@ class Engine:
         self._q: "queue.Queue[Callable[[], None]]" = queue.Queue(maxsize=64)
         self._lock = threading.Lock()
         self._stop = threading.Event()
+        self._thread: Optional[threading.Thread] = None
+        self._lifecycle_lock = threading.Lock()
+        self._owner = PlantOwner(host, port)
         self.status = "starting"
         self.error = ""
         self.t0 = time.monotonic()
@@ -159,9 +167,16 @@ class Engine:
         self._auto_rearms: Deque[float] = deque()
         self._chat_p0: Optional[float] = None    # true pressure when the last command was given
         self.manual: dict = {}                   # valve -> % held in manual by the operator
+        self.observer: Optional[ObserverRuntime] = None
 
     # ------------------------------------------------------------------ setup
     def _make_brain(self, kind: str):
+        previous_policy = getattr(self, "policy", None)
+        if isinstance(previous_policy, LLMOperator):
+            previous_policy.reset()
+        previous_observer = getattr(self, "observer", None)
+        if previous_observer is not None:
+            previous_observer.reset()
         if kind == "ollama" and not ollama_available():
             self.log("brain", "Ollama / scram-operator unavailable: falling back to BaselineOperator")
             kind = "baseline"
@@ -170,6 +185,7 @@ class Engine:
         self.policy = policy
         self._seen_calls = 0
         self._chat_pending = None           # a new policy has no standing instruction
+        self._chat_followup = None
         # the slider is a cap; Keel's authority budget is the live value
         self.brain = AIOperator(policy=policy,
                                 authority_fn=self.effective_authority)
@@ -213,7 +229,10 @@ class Engine:
         except (OSError, ValueError, KeyError) as err:
             specialist = None
             self.log("observer", f"telemetry specialist unavailable: {err}")
-        self.observer: Optional[SplitObserver] = make_split_observer(telemetry_specialist=specialist)
+        previous_observer = getattr(self, "observer", None)
+        if previous_observer is not None:
+            previous_observer.close()
+        self.observer: Optional[ObserverRuntime] = make_observer(telemetry_specialist=specialist)
         self._obs_logged: dict = {}
         self._l2_sus = 0.0
         self._applied_cmd: Optional[ControlCommand] = None   # the command whose result self.state is
@@ -236,13 +255,47 @@ class Engine:
 
     # ------------------------------------------------------------- public API
     def start(self) -> "Engine":
-        threading.Thread(target=self._run, name="scram-control", daemon=True).start()
+        with self._lifecycle_lock:
+            if self._stop.is_set():
+                raise RuntimeError("Stopped engine cannot restart; create a new Engine")
+            if self._thread is None:
+                self._owner.acquire()
+                try:
+                    self._thread = threading.Thread(target=self._run, name="scram-control", daemon=True)
+                    self._thread.start()
+                except BaseException:
+                    self._owner.release()
+                    raise
         return self
 
     def stop(self) -> None:
         self._stop.set()
+        thread = self._thread
+        if thread is not None and thread is not threading.current_thread():
+            thread.join(timeout=5)
+        service = getattr(self, "svc", None)
+        if service is not None:
+            try:
+                service.stop()
+            except OSError as exc:
+                self.log("error", f"plant socket cleanup failed during shutdown: {exc}")
+        if thread is not None and thread.is_alive() and thread is not threading.current_thread():
+            thread.join(timeout=3)
+        if self.observer is not None:
+            self.observer.close()
+        # A slow reset may still be writing after the bounded join. Keep its
+        # lease until a later completed stop (or process exit).
+        if thread is None or not thread.is_alive():
+            self._owner.release()
+        self.status = "stopped"
 
-    def submit(self, action: str, **kw) -> str:
+    def submit(self, action: str, *, expected_run_id: str | None = None, **kw) -> str:
+        with self._lock:
+            run_id = self.run_id
+        if expected_run_id is not None and expected_run_id != run_id:
+            raise RunChangedError("The plant restarted. Wait for the new readings before retrying.")
+        if self._stop.is_set() or (self._thread is not None and not self._thread.is_alive()):
+            raise ValueError("The control loop is stopped. Restart the control room before sending actions.")
         fn = getattr(self, f"_act_{action}", None)
         if fn is None:
             raise ValueError(f"unknown action {action!r}")
@@ -253,10 +306,15 @@ class Engine:
         check = getattr(self, f"_check_{action}", None)
         if check is not None:
             check(**kw)
-        if action == "authority":           # cheap, thread-safe
-            return fn(**kw)
         try:
-            self._q.put_nowait(lambda: fn(**kw))
+            # All actions, including authority, run on the reset-owning thread.
+            # Never recapture run_id after validation or dispatch an immediate action.
+            def execute():
+                if run_id != self.run_id:
+                    self.log("action", f"cancelled {action}: request belongs to the previous plant run")
+                    return
+                fn(**kw)
+            self._q.put_nowait(execute)
         except queue.Full:
             raise ValueError("action queue is full; wait for pending actions to complete") from None
         return "queued"
@@ -273,10 +331,33 @@ class Engine:
     def _run(self) -> None:
         try:
             self._make_brain(self.brain_kind)
-            self._connect(self.want_reset)
         except Exception as e:                       # noqa: BLE001
             self.status, self.error = "error", f"{type(e).__name__}: {e}"
             self.log("error", f"startup failed: {self.error}")
+            return
+        reset = self.want_reset
+        while not self._stop.is_set():
+            try:
+                self._connect(reset)
+                self.error = ""
+                break
+            except (ConnectionError, OSError) as e:
+                # A published Docker port can accept TCP before the simulator
+                # serves JSON. Retry attachment, never repeated plant resets.
+                reset = False
+                service = getattr(self, "svc", None)
+                if service is not None:
+                    service.stop()
+                self.status = "waiting for plant connection; retrying"
+                self.error = f"{type(e).__name__}: {e}"
+                self.log("error", f"startup connection failed ({self.error}); retrying without reset")
+                if self._stop.wait(2.0):
+                    return
+            except Exception as e:                   # noqa: BLE001
+                self.status, self.error = "error", f"{type(e).__name__}: {e}"
+                self.log("error", f"startup failed: {self.error}")
+                return
+        else:
             return
         self.log("plant", f"control loop running; SIS trips at P >= {self.limits.pressure_high:.0f} kPa, "
                           f"level <= {self.limits.level_low:.0f}% or >= {self.limits.level_high:.0f}%")
@@ -287,6 +368,8 @@ class Engine:
                     self._run_action(self._q.get_nowait())
                 self._cycle()
             except (ConnectionError, OSError, ValueError) as e:
+                if self._stop.is_set():
+                    break
                 self._reconnect(e)
                 continue
             except Exception as e:                   # noqa: BLE001 - never kill the loop silently
@@ -347,12 +430,7 @@ class Engine:
                                          a_comp_sp=DESIGN_POINT["a_comp_pct"], rationale=INJECTED_RATIONALE)
                 self.brain.last_intent = bad
                 targets = self.brain._apply_authority(bad, state)
-        stick = self.scenarios.get("valve_stick")
-        if stick is not None and t >= stick["at"]:
-            del self.scenarios["valve_stick"]
-            self.svc.client.write_inputs({f"{stick['valve']}_stuck": 1})
-            self.faults[f"{stick['valve']}_valve"] = "capacity 50%, stuck"
-            self.log("attack", f"{stick['valve']} valve now STUCK in place: L1 keeps commanding it, the valve no longer follows")
+        self._advance_actuator_faults(t)
         self._last_targets = targets
         self._note_decision(state, targets, t)
         flags = self.monitor.observe(state, targets)
@@ -371,7 +449,8 @@ class Engine:
         # audit the brain's intent, not the authority-blended targets: below full
         # authority the blend tracks measured values and reads as a staircase
         intent = self.brain.last_intent or targets
-        if self._seq_reset_at_call is not None and self.policy.calls > self._seq_reset_at_call:
+        if (self._seq_reset_at_call is not None and self.policy.calls > self._seq_reset_at_call
+                and not (getattr(self.policy, "log", None) and self.policy.log[-1].get("discarded"))):
             self.seq_monitor.reset_all(SEQ_BASELINE)   # first post-re-arm model decision: start clean
             self._seq_reset_at_call = None
         if self._seq_reset_at_call is not None:
@@ -454,10 +533,14 @@ class Engine:
                 self.log("attack", "stolen-key attacker's commands are now overridden by the interlock")
             if self.manual:
                 self._release_manual("the SIS trip took the valves")
+            self._act_clear_note()
+            if isinstance(self.policy, LLMOperator):
+                self.policy.reset()
+            self._chat_followup = None
         if tripped and saf.escalated and not self._escalation_logged:
             self._escalation_logged = True
-            self.log("sis", f"safe-hold could not hold the pressure (>= {saf.safe_hold.runaway_kpa:.0f} kPa): "
-                            "escalated to e_stop until re-arm")
+            self.log("sis", f"SIS protection escalated ({saf.protection_mode}); "
+                            "protective lineup latched until safe re-arm or plant reset")
         self._was_tripped = tripped
         if tripped:
             self._auto_rearm(t)
@@ -472,7 +555,7 @@ class Engine:
         if saf.protection_mode == "combined_hold":
             return "combined hazard: feeds shut, purge open, product closed"
         if saf.protection_mode == "inventory_hold":
-            return "product valve closed, feeds held"
+            return "inventory recovery: bounded design feeds restored, product retained, pressure-controlled purge"
         if saf.safe_hold is not None and saf.cause in ("pressure_high", "level_high") and not saf.escalated:
             return "closed-loop safe-hold (feeds cut back, purge and product on the safety channel)"
         return "e_stop (feeds shut, purge + product open)"
@@ -508,7 +591,8 @@ class Engine:
                 self.decisions.append({**e, "t": round(t, 1), "brain": "scram-operator",
                                        "true": {"pressure": _num(truth.get("pressure")),
                                                 "level": _num(truth.get("liquid_level"))}})
-                if self._chat_pending is not None and e.get("note_id") == self._chat_pending:
+                if (not e.get("discarded") and self._chat_pending is not None
+                        and e.get("note_id") == self._chat_pending):
                     self._chat_pending = None
                     self._chat_add("brain", e.get("rationale") or "", sp=e["sp"], outcome=e["outcome"])
                     self._chat_followup = t + CHAT_FOLLOWUP_S
@@ -654,6 +738,7 @@ class Engine:
                     "lockout": self._lockout_logged,
                     "can_reset": saf.tripped and saf.can_reset(tr.get("pressure", 0.0), tr.get("liquid_level", 0.0)),
                     "limits": {"pressure_high": lim.pressure_high, "pressure_rearm": lim.pressure_rearm,
+                               "pressure_low": lim.pressure_low, "pressure_low_rearm": lim.pressure_low_rearm,
                                "level_low": lim.level_low, "level_low_rearm": lim.level_low_rearm,
                                "level_high": lim.level_high, "level_high_rearm": lim.level_high_rearm}},
             "gate": dict(self.gate_counts),
@@ -687,15 +772,31 @@ class Engine:
         return snap
 
     # ---------------------------------------------------------------- actions
-    def _act_authority(self, value: float) -> str:
+    def _check_authority(self, value: float) -> None:
         if not math.isfinite(float(value)):
             raise ValueError("authority must be finite")
+
+    def _act_authority(self, value: float) -> str:
+        self._check_authority(value)
         self.authority = max(0.0, min(1.0, float(value)))
         self.log("governance", f"authority set to {self.authority:.2f}")
         return "ok"
 
     def _act_brain(self, kind: str) -> None:
+        self._check_brain(kind)
+        if kind == self.brain_kind:
+            return
         self._make_brain(kind)
+
+    def _check_brain(self, kind: str) -> None:
+        if kind not in ("baseline", "ollama"):
+            raise ValueError("brain must be baseline or ollama")
+        if kind == "ollama" and not ollama_available():
+            raise ValueError("The trained scram-operator model is unavailable. Start Ollama with the model registered; the current brain is unchanged.")
+
+    def _check_actuator_fault(self, valve: str = "product", how: str = "demo") -> None:
+        if valve not in ACTUATOR_VALVES or how not in ("stuck", "cv", "demo"):
+            raise ValueError(f"actuator fault needs valve in {ACTUATOR_VALVES} and how in (stuck, cv, demo)")
 
     def _act_level_drift(self) -> None:
         fi.drift(self.svc.client, "tank_level", DRIFT_RATE_PCT_PER_HR)
@@ -716,27 +817,46 @@ class Engine:
         position never part); the capacity loss makes L1 start opening it first."""
         if valve not in ACTUATOR_VALVES or how not in ("stuck", "cv", "demo"):
             raise ValueError(f"actuator fault needs valve in {ACTUATOR_VALVES} and how in (stuck, cv, demo)")
-        self.svc.client.write_inputs({f"{valve}_stuck": 1} if how == "stuck" else {f"{valve}_cv_scale": 0.5})
+        self.scenarios.pop(f"valve_stick_{valve}", None)
+        self.svc.client.write_inputs({f"{valve}_stuck": int(how == "stuck"),
+                                      f"{valve}_cv_scale": 1.0 if how == "stuck" else 0.5})
         self.faults[f"{valve}_valve"] = "stuck" if how == "stuck" else "capacity 50%"
         if how == "demo":
-            self.scenarios["valve_stick"] = {"valve": valve, "at": self.now() + VALVE_STICK_AFTER_S}
+            self.scenarios[f"valve_stick_{valve}"] = {"valve": valve, "at": self.now() + VALVE_STICK_AFTER_S}
             self.log("attack", f"{valve} valve loses half its capacity: L1 starts opening it to hold level; "
                                f"in {VALVE_STICK_AFTER_S:.0f} s it sticks while L1 is still moving it")
             return
         self.log("attack", f"{valve} valve actuator fault ({'stuck in place' if how == 'stuck' else 'capacity halved'}): "
                            "L1 keeps commanding it, the valve no longer follows")
 
+    def _advance_actuator_faults(self, t: float) -> None:
+        for name, fault in list(self.scenarios.items()):
+            if name.startswith("valve_stick_") and t >= fault["at"]:
+                valve = fault["valve"]
+                self.svc.client.write_inputs({f"{valve}_stuck": 1})
+                del self.scenarios[name]
+                self.faults[f"{valve}_valve"] = "capacity 50%, stuck"
+                self.log("attack", f"{valve} valve now STUCK in place: L1 keeps commanding it, the valve no longer follows")
+
     def _act_forged(self, duration_s: float = 60.0) -> None:
+        duration_s = _duration(duration_s)
         t = self.now()
         self.scenarios["forged"] = {"until": t + duration_s, "next": t, "n": 0}
         self.log("attack", f"compromised agent starts injecting forged valve commands for {duration_s:.0f}s "
                            "(unsigned / wrong key / replayed)")
 
     def _act_operator_injection(self, duration_s: float = 60.0) -> None:
+        duration_s = _duration(duration_s)
         t = self.now()
         self.scenarios["operator_injection"] = {"t0": t, "until": t + duration_s}
         self.log("attack", f"injected 'advisory' reaches the AI operator for {duration_s:.0f}s: it starts raising "
                            "pressure and production setpoints in small steps (proposal-side attack)")
+
+    def _check_forged(self, duration_s: float = 60.0) -> None:
+        _duration(duration_s)
+
+    def _check_operator_injection(self, duration_s: float = 60.0) -> None:
+        _duration(duration_s)
 
     def _check_stolen_key(self, f1=100.0, f2=100.0, purge=0.0, product=0.0, duration_s=None) -> None:
         for name, v in (("f1", f1), ("f2", f2), ("purge", purge), ("product", product)):
@@ -778,8 +898,8 @@ class Engine:
             sev = float(severity)
         except (TypeError, ValueError):
             raise ValueError("severity must be a number") from None
-        if not math.isfinite(sev) or sev < 0 or (mode == "dropout" and sev > 1.0):
-            raise ValueError("severity must be >= 0 (a 0-1 fraction for dropout)")
+        if not math.isfinite(sev) or (mode != "drift" and sev < 0) or (mode == "dropout" and sev > 1.0):
+            raise ValueError("severity must be finite; noise is nonnegative and dropout is a 0-1 fraction")
 
     def _act_sensor_fault(self, channel: str, mode: str, severity=0.0) -> None:
         """Any of the simulator's native sensor faults on any channel (custom attack builder)."""
@@ -800,6 +920,7 @@ class Engine:
     def _check_chat(self, text: str) -> None:
         if not isinstance(text, str) or not text.strip():
             raise ValueError("message is empty")
+        commands.parse(text)
 
     def _act_chat(self, text: str) -> None:
         """Route an operator command: valve positions become a manual override (the AI never
@@ -810,6 +931,10 @@ class Engine:
         intent = self.brain.last_intent
         cur = {k: getattr(intent, k, None) for k in ("pressure_sp", "level_sp", "production_rate_sp", "a_comp_sp")} \
             if intent is not None else {}
+        if isinstance(getattr(self, "policy", None), BaselineOperator):
+            cur = dict(zip(("pressure_sp", "level_sp", "production_rate_sp", "a_comp_sp"),
+                           (self.policy.pressure_target, self.policy.level_target,
+                            self.policy.production_target, self.policy.a_comp_target)))
         cmd = commands.parse(text, cur)
         if cmd["kind"] == "release":
             self._chat_add("you", text)
@@ -819,8 +944,12 @@ class Engine:
                 self._chat_add("system", "No valves are in manual.")
             return
         if cmd["kind"] == "valves":
+            if self.svc.safety.tripped:
+                raise ValueError("The SIS owns the valves during a trip. Clear faults and wait for a safe re-arm, or reset the plant.")
             self._chat_add("you", text)
             self.manual.update(cmd["valves"])
+            if self.observer is not None:
+                self.observer.reset()
             names = {"f1": "Feed 1", "f2": "Feed 2", "purge": "Purge", "product": "Product"}
             what = ", ".join(f"{names[v]} {p:g}%" for v, p in cmd["valves"].items())
             self._chat_add("operator", f"Manual override: {what}. L1 and the AI stop moving "
@@ -831,11 +960,19 @@ class Engine:
             return
         if not isinstance(self.policy, LLMOperator):
             self._chat_add("you", text)
-            self._chat_add("system", "The baseline rule brain does not take instructions. "
-                                     "Switch to the trained model, or give a valve command (e.g. \"feed 1 to 40%\").")
+            if cmd["kind"] == "setpoints":
+                self.policy.instruct(cmd["sp"], text)
+                self._chat_add("system", "Baseline targets updated within the operating envelope. "
+                                         "Keel and the SIS retain final authority.")
+                self.log("brain", f"baseline operator targets updated: {commands.canonical(cmd['sp'])}")
+            else:
+                self._chat_add("system", "The baseline accepts explicit setpoints and valve commands. "
+                                         "Free-text model instructions require the trained model.")
             return
         note = cmd.get("note", text)
         nid = self.policy.set_note(note)
+        if self.observer is not None:
+            self.observer.reset()
         self._chat_pending, self._chat_followup = nid, None
         self._chat_add("you", text, note_id=nid, asked=cmd.get("sp"))
         self.log("brain", f'operator instruction to the AI: "{note[:160]}"')
@@ -843,17 +980,25 @@ class Engine:
     def _release_manual(self, why: str) -> None:
         names = ", ".join(self.manual)
         self.manual.clear()
+        if self.observer is not None:
+            self.observer.reset()
         # restart L1's loops from where the plant is now, so the hand-back is bumpless
         self.l1.bumpless(self.state, self._last_targets or DESIGN_TARGETS)
         self._chat_add("system", f"Manual valves ({names}) handed back to L1 ({why}).")
         self.log("plant", f"manual valves released ({why}): {names}")
 
     def _act_clear_note(self) -> None:
+        if isinstance(self.policy, BaselineOperator) and self.policy.note:
+            self.policy.clear_instruction()
+            self._chat_add("system", "Baseline instruction cleared; design targets restored.")
         if isinstance(self.policy, LLMOperator) and self.policy.note:
             self.policy.set_note(None)
+            if self.observer is not None:
+                self.observer.reset()
             self._chat_add("system", "Standing instruction cleared; the AI is back on its own judgement.")
             self.log("brain", "operator instruction cleared")
         self._chat_pending = None
+        self._chat_followup = None
 
     def _chat_defense_report(self) -> None:
         o = self.observer.last.get("proposals") if self.observer else None
@@ -882,11 +1027,21 @@ class Engine:
         self.faults.clear()
         self.scenarios.pop("forged", None)
         self.scenarios.pop("valve_stick", None)
+        for name in list(self.scenarios):
+            if name.startswith("valve_stick_"):
+                del self.scenarios[name]
         if self.scenarios.pop("stolen_key", None):
             self.log("attack", "stolen-key attacker stopped")
         if self.scenarios.pop("operator_injection", None):
             self.log("attack", "operator injection stopped; the brain is back on its own reading")
         self._act_clear_note()
+        if isinstance(self.policy, LLMOperator):
+            self.policy.reset()
+        if self.observer is not None:
+            self.observer.reset()
+        if hasattr(self, "seq_monitor"):
+            self.seq_monitor.reset_all(SEQ_BASELINE)
+            self._seq_reset_at_call = getattr(self.policy, "calls", None)
         if self.manual:
             self._release_manual("clear faults")
         self.log("plant", "all sensor and actuator faults cleared; attacks stopped")
@@ -895,11 +1050,14 @@ class Engine:
         if not self.svc.safety.tripped:
             self.log("sis", "interlock is not tripped")
         else:
-            self._auto_rearms.clear()       # a human re-arm also clears the auto re-arm lockout
             self._rearm(auto=False)
 
     def _rearm(self, auto: bool) -> None:
         if self.svc.reset_interlock():
+            if not auto:
+                self._auto_rearms.clear()
+            if isinstance(self.policy, LLMOperator):
+                self.policy.reset()
             v = DESIGN_VALVES
             self._applied_cmd = self.l1.sign(ControlCommand(
                 f1_valve=v["f1"], f2_valve=v["f2"], purge_valve=v["purge"], product_valve=v["product"]))
@@ -935,12 +1093,28 @@ class Engine:
                             f"(P {tr.get('pressure', 0):.0f} kPa, L {tr.get('liquid_level', 0):.1f}%)")
 
     def _act_reset_plant(self) -> None:
+        if isinstance(self.policy, LLMOperator):
+            self.policy.reset()
+        if self.observer is not None:
+            self.observer.reset()
         try:
             self.svc.stop()
         except Exception:                            # noqa: BLE001
             pass
         self.scenarios.clear()
         self.manual.clear()
+        self._chat_pending = self._chat_followup = self._chat_p0 = None
+        self._auto_rearms.clear()
+        self._last_targets = None
+        # Reset polling cursors too: old samples and AI decisions belong to the
+        # previous run, and must not be stitched into the recovered plant.
+        with self._lock:
+            self.run_id = uuid.uuid4().hex
+            self.history.clear()
+            self.decisions.clear()
+            self.monitor_flags.clear()
+            self._hist_seq = 0
+            self.snapshot_data = {}
         try:
             self._connect(reset=True)
         except Exception as e:                       # noqa: BLE001

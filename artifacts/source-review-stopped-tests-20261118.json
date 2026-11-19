@@ -1,0 +1,16 @@
+[
+  {
+    "pid": 58184,
+    "command": [
+      "C:\\Users\\likhi\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "artifacts/pytest-project-review-20261118"
+    ],
+    "reason": "Switching review to offline suite; live interlock test can reset and drive simulator"
+  }
+]

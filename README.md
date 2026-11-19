@@ -5,15 +5,18 @@ control, command provenance, and an independent simulated safety channel.
 
 The main application is the SCRAM control room in `live/`. The separate reactor
 studio in `sim_app/` is a direct-control sandbox. See
+[CURRENT_STATUS.md](CURRENT_STATUS.md) for current fixes, verification and open
+evaluation work. The following are historical reports:
 [QUALITY_IMPROVEMENTS.md](QUALITY_IMPROVEMENTS.md) for the reliability pass,
 [ACCURACY_IMPROVEMENTS.md](ACCURACY_IMPROVEMENTS.md) for later detector results, and
 [ARCHITECTURE.md](ARCHITECTURE.md) for the original design and trust assumptions.
 
 ## Run the control room
 
-Requires Python 3.11+, Docker Desktop, and the GRFICS simulation image. Ollama
-and the trained models are optional; the operator falls back to deterministic
-baseline control when its model is unavailable.
+Requires Python 3.11+, Docker Desktop, the GRFICS simulation image, the shared
+observer weights and the local llama.cpp runner described in [model setup](model/README.md).
+The optional Ollama operator falls back to deterministic baseline control when
+its own model is unavailable.
 
 Run the commands below from the repository root. Custom LLM weights are excluded
 from Git; see [model setup](model/README.md) for required files and registration.
@@ -28,6 +31,11 @@ python -m live
 Open http://127.0.0.1:8765. Normal startup resets the simulator to its design point.
 To attach without resetting, use `python -m live --no-reset --no-browser`.
 The plant's unauthenticated ports are published on loopback only.
+
+The control room now uses the React frontend in `frontend/`, with Overview,
+AI operator, Attack lab, and Telemetry pages. Its built assets ship in
+`live/static/`, so normal Python startup needs no Node.js or frontend server.
+See [frontend development](frontend/README.md) to edit and rebuild the UI.
 
 Ollama configuration is no longer changed on ordinary startup. Explicit setup
 is available with `python -m live --configure-ollama`. That option can persist
@@ -44,12 +52,29 @@ is available with `python -m live --configure-ollama`. That option can persist
 | UI | `live/`, `sim_app/` | Full control room and separate manual studio |
 | Data/evaluation | `training/`, `model/`, `experiments/` | Collection, training, artifacts and reproducible evaluations |
 
-Three local LLMs serve the full stack: `scram-operator`, `scram-observer` (proposal
-judgments), and `scram-observer-v3` (telemetry). A release-gated 236 kB CPU
+The default control room uses one shared fine-tuned demo observer for both proposal
+judgments and telemetry, with evidence review enabled. The V2/V3 observer weights
+are retired. The optional `scram-operator` is separate. A release-gated 236 kB CPU
 physics detector corrects advisory telemetry verdicts and preserves the original
 LLM label. It never contributes to authority or protective actuation. Its model,
 features and evaluation evidence are checked by hash before loading. See
 [accuracy improvements](ACCURACY_IMPROVEMENTS.md) for measured results and remaining gaps.
+
+The shared model is a demo and its combined model/rule accuracy has not been
+independently verified. `SCRAM_OBSERVER_MODE=none` explicitly selects CPU/rules
+only. Explicit unified settings may be used for a separately managed model server;
+the retired `legacy` mode is rejected. See [current status](CURRENT_STATUS.md).
+
+The shared-observer control room can also be launched with `RUN_SLM_CONTROL_ROOM.cmd`.
+It uses the exported demo model through one local llama.cpp runner and a baseline
+operator to limit resource use. Docker Desktop must be running for the simulator.
+The ordinary `python -m live` launch also manages the shared model server. See the
+[demo integration and independent results](artifacts/optimization/candidates/qwen05b-observer-20261118-demo01/NEXT_STEPS_REPORT.md)
+for measured behavior and remaining release blockers.
+Both demo launchers also enable input-evidence review: raw model predictions
+remain visible, unsupported alarms are marked unconfirmed, and explicit measured
+faults can be raised without waiting for model agreement. See
+[demo evidence review](training/DEMO_EVIDENCE_REVIEW.md) for behavior and limits.
 
 Measured composition values are fractions; composition setpoints are percentages.
 The `truth` field carries the independent simulated safety channel for L0/Keel
@@ -71,7 +96,15 @@ python -m sim_app
 Open http://127.0.0.1:8770. This path writes directly to the simulator and has no
 SCRAM interlock or provenance gate. Its stock `qwen2.5:1.5b` model parses commands;
 the trained operator runs rescue. E-stop cancels rescue, blocks later AI valve
-writes, and requires deliberate release. Avoid running two plant writers at once.
+writes, and requires deliberate release. Both applications now acquire the same
+exclusive simulator lease before their controller starts, including alternate
+HTTP ports and the shared-observer demo launch path. A second writer is refused.
+The lease is cooperative; direct socket clients and explicit attack scenarios
+can bypass it. Stop any older application process before launching updated code.
+
+Action requests require `application/json`, a local Host, and a matching local
+Origin when supplied. The supported development proxy is Vite on port 5173,
+forwarding to the control room on 8765; other browser origins are rejected.
 
 ## Verify and reproduce
 
@@ -114,7 +147,14 @@ node tests/frontend_smoke.cjs
 On Linux, CI uses `npx playwright install --with-deps chromium` to install browser
 system dependencies too. GitHub Actions defines offline, browser and Linux
 simulator checks. The two tests in `test_interlock_truth.py` reset and manipulate
-a real running simulator, so they are excluded from the ordinary offline run.
+a real running simulator. They now skip by default, including with plain
+`python -m pytest -q`; use `python -m pytest --run-live-simulator tests/test_interlock_truth.py`
+only when deliberately resetting and driving the simulator. Frontend API and
+freshness regressions can be checked with `npm.cmd test --prefix frontend`.
+
+The [functional source review](artifacts/SOURCE_REVIEW_20261118.md) records demo
+startup/shutdown, duplicate-launch, stale-dashboard and API error-handling fixes.
+Restart an already running control room and refresh the browser to load them.
 
 The bundled C++ source can be compiled and checked on Linux/WSL:
 
@@ -138,3 +178,7 @@ training environments, runtime logs and generated browser output are ignored.
 Obsolete local backups and caches were removed during upload cleanup. Use Git
 to publish the project so these ignore rules apply. JSON/JSONL model and dataset
 evidence retains its exact bytes across checkouts for hash verification.
+
+The completed shared observer SLM experiment, its failed replacement gates and
+continuation instructions are in [SLM_BUILD_REPORT.md](SLM_BUILD_REPORT.md) and
+[SLM_HANDOFF.md](SLM_HANDOFF.md). Legacy observers remain the default.

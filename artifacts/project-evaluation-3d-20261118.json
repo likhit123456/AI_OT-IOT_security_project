@@ -1,0 +1,8 @@
+{
+  "fixture": "Unity loader present, engine never became ready",
+  "elapsed_ms": 21000,
+  "calledRun": false,
+  "overlay_removed": true,
+  "real_browser": false,
+  "simulator_requests": false
+}

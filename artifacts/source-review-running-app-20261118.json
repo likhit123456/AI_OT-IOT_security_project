@@ -1,0 +1,34 @@
+{
+  "http": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 475
+    },
+    {
+      "path": "/assets/index-DqKx5mFd.js",
+      "status": 200,
+      "bytes": 294205
+    },
+    {
+      "path": "/assets/index-Bb7QFpAH.css",
+      "status": 200,
+      "bytes": 30899
+    },
+    {
+      "path": "/api/state?h=0&e=0",
+      "status": 200,
+      "bytes": 508496
+    }
+  ],
+  "state": {
+    "status": "running",
+    "error": "",
+    "telemetry_stale": false,
+    "cycles": 31840,
+    "run_id": "baef8c47de9e432fa28189dc6682fcd1"
+  },
+  "plant_writes": false,
+  "existing_session_preserved": true,
+  "duplicate_launch_rejected": true
+}

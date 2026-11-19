@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "mode": "legacy",
+  "seed": 0,
+  "before": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "logical_cpus": 16,
+    "gpu_csv": "NVIDIA GeForce RTX 3050 6GB Laptop GPU, 6144, 1111, 14, 5.96",
+    "memory": {
+      "system": {
+        "total": 16438312960,
+        "available": 1209016320,
+        "percent": 92.6,
+        "used": 15229296640,
+        "free": 1209016320
+      },
+      "process_rss_bytes": 26013696,
+      "cpu_percent": 0.0,
+      "runners": []
+    },
+    "ollama_version": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "installed": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "residency": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "weights": [
+      {
+        "path": "model\\scram-observer-gguf\\scram-observer-v2-q4_k_m.gguf",
+        "bytes": 986047872
+      },
+      {
+        "path": "model\\scram-observer-v3-gguf\\scram-observer-v3-q4_k_m.gguf",
+        "bytes": 986047808
+      },
+      {
+        "path": "model\\scram-operator-gguf\\scram-operator-q4_k_m.gguf",
+        "bytes": 986048000
+      }
+    ]
+  },
+  "real_inference": false,
+  "control_jitter_s": null,
+  "energy_joules": null,
+  "limitations": [
+    "Replay feed cost is not full plant control-loop timing.",
+    "Total GPU memory includes unrelated workloads.",
+    "RAM/RVRAM samples cannot isolate KV cache from weights.",
+    "Operator contention requires separately running the unchanged operator."
+  ],
+  "after": {
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+    "logical_cpus": 16,
+    "gpu_csv": "NVIDIA GeForce RTX 3050 6GB Laptop GPU, 6144, 1111, 9, 5.76",
+    "memory": {
+      "system": {
+        "total": 16438312960,
+        "available": 1241944064,
+        "percent": 92.4,
+        "used": 15196368896,
+        "free": 1241944064
+      },
+      "process_rss_bytes": 35487744,
+      "cpu_percent": 8.6,
+      "runners": []
+    },
+    "ollama_version": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "installed": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "residency": {
+      "unavailable": "<urlopen error timed out>"
+    },
+    "weights": [
+      {
+        "path": "model\\scram-observer-gguf\\scram-observer-v2-q4_k_m.gguf",
+        "bytes": 986047872
+      },
+      {
+        "path": "model\\scram-observer-v3-gguf\\scram-observer-v3-q4_k_m.gguf",
+        "bytes": 986047808
+      },
+      {
+        "path": "model\\scram-operator-gguf\\scram-operator-q4_k_m.gguf",
+        "bytes": 986048000
+      }
+    ]
+  }
+}

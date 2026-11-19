@@ -1,0 +1,2467 @@
+{
+  "base-validation.json": {
+    "metrics": {
+      "proposals": {
+        "n": 66,
+        "confusion": {
+          "rationale_mismatch": {
+            "unavailable": 19,
+            "normal": 5
+          },
+          "setpoint_drift": {
+            "normal": 14,
+            "unavailable": 10
+          },
+          "provenance_violation": {
+            "normal": 6
+          },
+          "normal": {
+            "normal": 10,
+            "unavailable": 2
+          }
+        },
+        "per_class": {
+          "rationale_mismatch": {
+            "support": 24,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "setpoint_drift": {
+            "support": 24,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "provenance_violation": {
+            "support": 6,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 0.2857142857142857
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 54,
+        "fault_classification_errors": 54,
+        "fault_denominator": 54,
+        "unavailable": 31,
+        "uncertainty_coverage": 0.4696969696969697,
+        "latency_s_mean": 10.5757757560603
+      },
+      "telemetry": {
+        "n": 409,
+        "confusion": {
+          "sensor_fault": {
+            "unavailable": 81,
+            "normal": 39
+          },
+          "actuator_fault": {
+            "normal": 28,
+            "unavailable": 92
+          },
+          "normal": {
+            "unavailable": 121,
+            "normal": 29
+          },
+          "excursion": {
+            "unavailable": 17,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 120,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "normal": {
+            "support": 150,
+            "recall": 0.19333333333333333,
+            "precision": 0.29591836734693877
+          },
+          "excursion": {
+            "support": 19,
+            "recall": 0.0,
+            "precision": 0.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 150,
+        "false_positive_rate": 0.0,
+        "missed_faults": 259,
+        "fault_classification_errors": 259,
+        "fault_denominator": 259,
+        "unavailable": 311,
+        "uncertainty_coverage": 0.7603911980440098,
+        "latency_s_mean": 10.65374757897279
+      },
+      "macro_f1": 0.08242536032944406
+    },
+    "telemetry_paths": {
+      "candidate": {
+        "n": 409,
+        "confusion": {
+          "sensor_fault": {
+            "unavailable": 81,
+            "normal": 39
+          },
+          "actuator_fault": {
+            "normal": 28,
+            "unavailable": 92
+          },
+          "normal": {
+            "unavailable": 121,
+            "normal": 29
+          },
+          "excursion": {
+            "unavailable": 17,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 120,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "normal": {
+            "support": 150,
+            "recall": 0.19333333333333333,
+            "precision": 0.29591836734693877
+          },
+          "excursion": {
+            "support": 19,
+            "recall": 0.0,
+            "precision": 0.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 150,
+        "false_positive_rate": 0.0,
+        "missed_faults": 259,
+        "fault_classification_errors": 259,
+        "fault_denominator": 259,
+        "unavailable": 311,
+        "uncertainty_coverage": 0.7603911980440098
+      },
+      "cpu": {
+        "n": 409,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 118,
+            "normal": 1,
+            "actuator_fault": 1
+          },
+          "actuator_fault": {
+            "actuator_fault": 120
+          },
+          "normal": {
+            "normal": 150
+          },
+          "excursion": {
+            "excursion": 17,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 120,
+            "recall": 0.9833333333333333,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 1.0,
+            "precision": 0.9917355371900827
+          },
+          "normal": {
+            "support": 150,
+            "recall": 1.0,
+            "precision": 0.9803921568627451
+          },
+          "excursion": {
+            "support": 19,
+            "recall": 0.8947368421052632,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 150,
+        "false_positive_rate": 0.0,
+        "missed_faults": 3,
+        "fault_classification_errors": 4,
+        "fault_denominator": 259,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "combined": {
+        "n": 409,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 118,
+            "normal": 1,
+            "actuator_fault": 1
+          },
+          "actuator_fault": {
+            "actuator_fault": 120
+          },
+          "normal": {
+            "normal": 150
+          },
+          "excursion": {
+            "excursion": 17,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 120,
+            "recall": 0.9833333333333333,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 1.0,
+            "precision": 0.9917355371900827
+          },
+          "normal": {
+            "support": 150,
+            "recall": 1.0,
+            "precision": 0.9803921568627451
+          },
+          "excursion": {
+            "support": 19,
+            "recall": 0.8947368421052632,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 150,
+        "false_positive_rate": 0.0,
+        "missed_faults": 3,
+        "fault_classification_errors": 4,
+        "fault_denominator": 259,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      }
+    },
+    "batch_size": 8,
+    "temperature": 0,
+    "max_new_tokens": 128,
+    "constrained_decoding": false
+  },
+  "adapter-validation.json": {
+    "metrics": {
+      "proposals": {
+        "n": 66,
+        "confusion": {
+          "rationale_mismatch": {
+            "rationale_mismatch": 24
+          },
+          "setpoint_drift": {
+            "setpoint_drift": 24
+          },
+          "provenance_violation": {
+            "provenance_violation": 6
+          },
+          "normal": {
+            "normal": 12
+          }
+        },
+        "per_class": {
+          "rationale_mismatch": {
+            "support": 24,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "setpoint_drift": {
+            "support": 24,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "provenance_violation": {
+            "support": 6,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 0,
+        "fault_classification_errors": 0,
+        "fault_denominator": 54,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 15.304053784848513
+      },
+      "telemetry": {
+        "n": 409,
+        "confusion": {
+          "sensor_fault": {
+            "normal": 82,
+            "actuator_fault": 9,
+            "sensor_fault": 26,
+            "excursion": 3
+          },
+          "actuator_fault": {
+            "actuator_fault": 31,
+            "normal": 66,
+            "sensor_fault": 22,
+            "excursion": 1
+          },
+          "normal": {
+            "normal": 121,
+            "actuator_fault": 14,
+            "sensor_fault": 11,
+            "excursion": 4
+          },
+          "excursion": {
+            "normal": 19
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 120,
+            "recall": 0.21666666666666667,
+            "precision": 0.4406779661016949
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 0.25833333333333336,
+            "precision": 0.5740740740740741
+          },
+          "normal": {
+            "support": 150,
+            "recall": 0.8066666666666666,
+            "precision": 0.4201388888888889
+          },
+          "excursion": {
+            "support": 19,
+            "recall": 0.0,
+            "precision": 0.0
+          }
+        },
+        "false_positives": 29,
+        "normal_denominator": 150,
+        "false_positive_rate": 0.19333333333333333,
+        "missed_faults": 167,
+        "fault_classification_errors": 202,
+        "fault_denominator": 259,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 15.517123004156357
+      },
+      "macro_f1": 0.6499170059877079
+    },
+    "telemetry_paths": {
+      "candidate": {
+        "n": 409,
+        "confusion": {
+          "sensor_fault": {
+            "normal": 82,
+            "actuator_fault": 9,
+            "sensor_fault": 26,
+            "excursion": 3
+          },
+          "actuator_fault": {
+            "actuator_fault": 31,
+            "normal": 66,
+            "sensor_fault": 22,
+            "excursion": 1
+          },
+          "normal": {
+            "normal": 121,
+            "actuator_fault": 14,
+            "sensor_fault": 11,
+            "excursion": 4
+          },
+          "excursion": {
+            "normal": 19
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 120,
+            "recall": 0.21666666666666667,
+            "precision": 0.4406779661016949
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 0.25833333333333336,
+            "precision": 0.5740740740740741
+          },
+          "normal": {
+            "support": 150,
+            "recall": 0.8066666666666666,
+            "precision": 0.4201388888888889
+          },
+          "excursion": {
+            "support": 19,
+            "recall": 0.0,
+            "precision": 0.0
+          }
+        },
+        "false_positives": 29,
+        "normal_denominator": 150,
+        "false_positive_rate": 0.19333333333333333,
+        "missed_faults": 167,
+        "fault_classification_errors": 202,
+        "fault_denominator": 259,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "cpu": {
+        "n": 409,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 118,
+            "normal": 1,
+            "actuator_fault": 1
+          },
+          "actuator_fault": {
+            "actuator_fault": 120
+          },
+          "normal": {
+            "normal": 150
+          },
+          "excursion": {
+            "excursion": 17,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 120,
+            "recall": 0.9833333333333333,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 1.0,
+            "precision": 0.9917355371900827
+          },
+          "normal": {
+            "support": 150,
+            "recall": 1.0,
+            "precision": 0.9803921568627451
+          },
+          "excursion": {
+            "support": 19,
+            "recall": 0.8947368421052632,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 150,
+        "false_positive_rate": 0.0,
+        "missed_faults": 3,
+        "fault_classification_errors": 4,
+        "fault_denominator": 259,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "combined": {
+        "n": 409,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 118,
+            "normal": 1,
+            "actuator_fault": 1
+          },
+          "actuator_fault": {
+            "actuator_fault": 120
+          },
+          "normal": {
+            "normal": 150
+          },
+          "excursion": {
+            "excursion": 17,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 120,
+            "recall": 0.9833333333333333,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 1.0,
+            "precision": 0.9917355371900827
+          },
+          "normal": {
+            "support": 150,
+            "recall": 1.0,
+            "precision": 0.9803921568627451
+          },
+          "excursion": {
+            "support": 19,
+            "recall": 0.8947368421052632,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 150,
+        "false_positive_rate": 0.0,
+        "missed_faults": 3,
+        "fault_classification_errors": 4,
+        "fault_denominator": 259,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      }
+    },
+    "batch_size": 8,
+    "temperature": 0,
+    "max_new_tokens": 128,
+    "constrained_decoding": false
+  },
+  "q4-validation.json": {
+    "metrics": {
+      "proposals": {
+        "n": 42,
+        "confusion": {
+          "rationale_mismatch": {
+            "rationale_mismatch": 12
+          },
+          "setpoint_drift": {
+            "setpoint_drift": 12
+          },
+          "provenance_violation": {
+            "provenance_violation": 6
+          },
+          "normal": {
+            "normal": 12
+          }
+        },
+        "per_class": {
+          "rationale_mismatch": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "setpoint_drift": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "provenance_violation": {
+            "support": 6,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 0,
+        "fault_classification_errors": 0,
+        "fault_denominator": 30,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 0.2816740047621265
+      },
+      "telemetry": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "normal": 8,
+            "actuator_fault": 2,
+            "sensor_fault": 2
+          },
+          "actuator_fault": {
+            "normal": 9,
+            "actuator_fault": 1,
+            "sensor_fault": 2
+          },
+          "normal": {
+            "normal": 10,
+            "sensor_fault": 2
+          },
+          "excursion": {
+            "normal": 12
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 0.16666666666666666,
+            "precision": 0.3333333333333333
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 0.08333333333333333,
+            "precision": 0.3333333333333333
+          },
+          "normal": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 0.2564102564102564
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.0,
+            "precision": 0.0
+          }
+        },
+        "false_positives": 2,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.16666666666666666,
+        "missed_faults": 29,
+        "fault_classification_errors": 33,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 0.6015902250000332
+      },
+      "macro_f1": 0.5934640522875818
+    },
+    "telemetry_paths": {
+      "candidate": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "normal": 8,
+            "actuator_fault": 2,
+            "sensor_fault": 2
+          },
+          "actuator_fault": {
+            "normal": 9,
+            "actuator_fault": 1,
+            "sensor_fault": 2
+          },
+          "normal": {
+            "normal": 10,
+            "sensor_fault": 2
+          },
+          "excursion": {
+            "normal": 12
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 0.16666666666666666,
+            "precision": 0.3333333333333333
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 0.08333333333333333,
+            "precision": 0.3333333333333333
+          },
+          "normal": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 0.2564102564102564
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.0,
+            "precision": 0.0
+          }
+        },
+        "false_positives": 2,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.16666666666666666,
+        "missed_faults": 29,
+        "fault_classification_errors": 33,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "cpu": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 12
+          },
+          "actuator_fault": {
+            "actuator_fault": 12
+          },
+          "normal": {
+            "normal": 12
+          },
+          "excursion": {
+            "excursion": 10,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 0.8571428571428571
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 2,
+        "fault_classification_errors": 2,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "combined": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 12
+          },
+          "actuator_fault": {
+            "actuator_fault": 12
+          },
+          "normal": {
+            "normal": 12
+          },
+          "excursion": {
+            "excursion": 10,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 0.8571428571428571
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 2,
+        "fault_classification_errors": 2,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      }
+    },
+    "by_group": {
+      "validation": {
+        "proposals": {
+          "n": 42,
+          "confusion": {
+            "rationale_mismatch": {
+              "rationale_mismatch": 12
+            },
+            "setpoint_drift": {
+              "setpoint_drift": 12
+            },
+            "provenance_violation": {
+              "provenance_violation": 6
+            },
+            "normal": {
+              "normal": 12
+            }
+          },
+          "per_class": {
+            "rationale_mismatch": {
+              "support": 12,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "setpoint_drift": {
+              "support": 12,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "provenance_violation": {
+              "support": 6,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "normal": {
+              "support": 12,
+              "recall": 1.0,
+              "precision": 1.0
+            }
+          },
+          "false_positives": 0,
+          "normal_denominator": 12,
+          "false_positive_rate": 0.0,
+          "missed_faults": 0,
+          "fault_classification_errors": 0,
+          "fault_denominator": 30,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 0.2816740047621265
+        },
+        "telemetry": {
+          "n": 48,
+          "confusion": {
+            "sensor_fault": {
+              "normal": 8,
+              "actuator_fault": 2,
+              "sensor_fault": 2
+            },
+            "actuator_fault": {
+              "normal": 9,
+              "actuator_fault": 1,
+              "sensor_fault": 2
+            },
+            "normal": {
+              "normal": 10,
+              "sensor_fault": 2
+            },
+            "excursion": {
+              "normal": 12
+            }
+          },
+          "per_class": {
+            "sensor_fault": {
+              "support": 12,
+              "recall": 0.16666666666666666,
+              "precision": 0.3333333333333333
+            },
+            "actuator_fault": {
+              "support": 12,
+              "recall": 0.08333333333333333,
+              "precision": 0.3333333333333333
+            },
+            "normal": {
+              "support": 12,
+              "recall": 0.8333333333333334,
+              "precision": 0.2564102564102564
+            },
+            "excursion": {
+              "support": 12,
+              "recall": 0.0,
+              "precision": 0.0
+            }
+          },
+          "false_positives": 2,
+          "normal_denominator": 12,
+          "false_positive_rate": 0.16666666666666666,
+          "missed_faults": 29,
+          "fault_classification_errors": 33,
+          "fault_denominator": 36,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 0.6015902250000332
+        },
+        "macro_f1": 0.5934640522875818
+      }
+    },
+    "runtime": "Ollama-bundled llama.cpp 0.8.0-dev 39febd2ad / CUDA v12; one loaded model at a time",
+    "temperature": 0,
+    "max_new_tokens": 128,
+    "constrained_decoding": false
+  },
+  "f16-validation.json": {
+    "metrics": {
+      "proposals": {
+        "n": 42,
+        "confusion": {
+          "rationale_mismatch": {
+            "rationale_mismatch": 12
+          },
+          "setpoint_drift": {
+            "setpoint_drift": 12
+          },
+          "provenance_violation": {
+            "provenance_violation": 6
+          },
+          "normal": {
+            "normal": 12
+          }
+        },
+        "per_class": {
+          "rationale_mismatch": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "setpoint_drift": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "provenance_violation": {
+            "support": 6,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 0,
+        "fault_classification_errors": 0,
+        "fault_denominator": 30,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 0.4162476666667014
+      },
+      "telemetry": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "normal": 9,
+            "actuator_fault": 1,
+            "sensor_fault": 2
+          },
+          "actuator_fault": {
+            "normal": 9,
+            "actuator_fault": 2,
+            "sensor_fault": 1
+          },
+          "normal": {
+            "normal": 11,
+            "sensor_fault": 1
+          },
+          "excursion": {
+            "normal": 12
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 0.16666666666666666,
+            "precision": 0.5
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 0.16666666666666666,
+            "precision": 0.6666666666666666
+          },
+          "normal": {
+            "support": 12,
+            "recall": 0.9166666666666666,
+            "precision": 0.2682926829268293
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.0,
+            "precision": 0.0
+          }
+        },
+        "false_positives": 1,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.08333333333333333,
+        "missed_faults": 30,
+        "fault_classification_errors": 32,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 0.8970831541666181
+      },
+      "macro_f1": 0.6164701257861636
+    },
+    "telemetry_paths": {
+      "candidate": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "normal": 9,
+            "actuator_fault": 1,
+            "sensor_fault": 2
+          },
+          "actuator_fault": {
+            "normal": 9,
+            "actuator_fault": 2,
+            "sensor_fault": 1
+          },
+          "normal": {
+            "normal": 11,
+            "sensor_fault": 1
+          },
+          "excursion": {
+            "normal": 12
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 0.16666666666666666,
+            "precision": 0.5
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 0.16666666666666666,
+            "precision": 0.6666666666666666
+          },
+          "normal": {
+            "support": 12,
+            "recall": 0.9166666666666666,
+            "precision": 0.2682926829268293
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.0,
+            "precision": 0.0
+          }
+        },
+        "false_positives": 1,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.08333333333333333,
+        "missed_faults": 30,
+        "fault_classification_errors": 32,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "cpu": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 12
+          },
+          "actuator_fault": {
+            "actuator_fault": 12
+          },
+          "normal": {
+            "normal": 12
+          },
+          "excursion": {
+            "excursion": 10,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 0.8571428571428571
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 2,
+        "fault_classification_errors": 2,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "combined": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 12
+          },
+          "actuator_fault": {
+            "actuator_fault": 12
+          },
+          "normal": {
+            "normal": 12
+          },
+          "excursion": {
+            "excursion": 10,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 0.8571428571428571
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 2,
+        "fault_classification_errors": 2,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      }
+    },
+    "by_group": {
+      "validation": {
+        "proposals": {
+          "n": 42,
+          "confusion": {
+            "rationale_mismatch": {
+              "rationale_mismatch": 12
+            },
+            "setpoint_drift": {
+              "setpoint_drift": 12
+            },
+            "provenance_violation": {
+              "provenance_violation": 6
+            },
+            "normal": {
+              "normal": 12
+            }
+          },
+          "per_class": {
+            "rationale_mismatch": {
+              "support": 12,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "setpoint_drift": {
+              "support": 12,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "provenance_violation": {
+              "support": 6,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "normal": {
+              "support": 12,
+              "recall": 1.0,
+              "precision": 1.0
+            }
+          },
+          "false_positives": 0,
+          "normal_denominator": 12,
+          "false_positive_rate": 0.0,
+          "missed_faults": 0,
+          "fault_classification_errors": 0,
+          "fault_denominator": 30,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 0.4162476666667014
+        },
+        "telemetry": {
+          "n": 48,
+          "confusion": {
+            "sensor_fault": {
+              "normal": 9,
+              "actuator_fault": 1,
+              "sensor_fault": 2
+            },
+            "actuator_fault": {
+              "normal": 9,
+              "actuator_fault": 2,
+              "sensor_fault": 1
+            },
+            "normal": {
+              "normal": 11,
+              "sensor_fault": 1
+            },
+            "excursion": {
+              "normal": 12
+            }
+          },
+          "per_class": {
+            "sensor_fault": {
+              "support": 12,
+              "recall": 0.16666666666666666,
+              "precision": 0.5
+            },
+            "actuator_fault": {
+              "support": 12,
+              "recall": 0.16666666666666666,
+              "precision": 0.6666666666666666
+            },
+            "normal": {
+              "support": 12,
+              "recall": 0.9166666666666666,
+              "precision": 0.2682926829268293
+            },
+            "excursion": {
+              "support": 12,
+              "recall": 0.0,
+              "precision": 0.0
+            }
+          },
+          "false_positives": 1,
+          "normal_denominator": 12,
+          "false_positive_rate": 0.08333333333333333,
+          "missed_faults": 30,
+          "fault_classification_errors": 32,
+          "fault_denominator": 36,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 0.8970831541666181
+        },
+        "macro_f1": 0.6164701257861636
+      }
+    },
+    "runtime": "Ollama-bundled llama.cpp 0.8.0-dev 39febd2ad / CUDA v12; one loaded model at a time",
+    "temperature": 0,
+    "max_new_tokens": 128,
+    "constrained_decoding": false
+  },
+  "q8-validation.json": {
+    "metrics": {
+      "proposals": {
+        "n": 42,
+        "confusion": {
+          "rationale_mismatch": {
+            "rationale_mismatch": 12
+          },
+          "setpoint_drift": {
+            "setpoint_drift": 12
+          },
+          "provenance_violation": {
+            "provenance_violation": 6
+          },
+          "normal": {
+            "normal": 12
+          }
+        },
+        "per_class": {
+          "rationale_mismatch": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "setpoint_drift": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "provenance_violation": {
+            "support": 6,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 0,
+        "fault_classification_errors": 0,
+        "fault_denominator": 30,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 0.2922324166663332
+      },
+      "telemetry": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "normal": 9,
+            "actuator_fault": 1,
+            "sensor_fault": 2
+          },
+          "actuator_fault": {
+            "actuator_fault": 4,
+            "normal": 6,
+            "sensor_fault": 2
+          },
+          "normal": {
+            "normal": 10,
+            "actuator_fault": 1,
+            "sensor_fault": 1
+          },
+          "excursion": {
+            "normal": 12
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 0.16666666666666666,
+            "precision": 0.4
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 0.3333333333333333,
+            "precision": 0.6666666666666666
+          },
+          "normal": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 0.2702702702702703
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.0,
+            "precision": 0.0
+          }
+        },
+        "false_positives": 2,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.16666666666666666,
+        "missed_faults": 27,
+        "fault_classification_errors": 30,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 0.6179424541667989
+      },
+      "macro_f1": 0.6359877284247033
+    },
+    "telemetry_paths": {
+      "candidate": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "normal": 9,
+            "actuator_fault": 1,
+            "sensor_fault": 2
+          },
+          "actuator_fault": {
+            "actuator_fault": 4,
+            "normal": 6,
+            "sensor_fault": 2
+          },
+          "normal": {
+            "normal": 10,
+            "actuator_fault": 1,
+            "sensor_fault": 1
+          },
+          "excursion": {
+            "normal": 12
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 0.16666666666666666,
+            "precision": 0.4
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 0.3333333333333333,
+            "precision": 0.6666666666666666
+          },
+          "normal": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 0.2702702702702703
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.0,
+            "precision": 0.0
+          }
+        },
+        "false_positives": 2,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.16666666666666666,
+        "missed_faults": 27,
+        "fault_classification_errors": 30,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "cpu": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 12
+          },
+          "actuator_fault": {
+            "actuator_fault": 12
+          },
+          "normal": {
+            "normal": 12
+          },
+          "excursion": {
+            "excursion": 10,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 0.8571428571428571
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 2,
+        "fault_classification_errors": 2,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "combined": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 12
+          },
+          "actuator_fault": {
+            "actuator_fault": 12
+          },
+          "normal": {
+            "normal": 12
+          },
+          "excursion": {
+            "excursion": 10,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 0.8571428571428571
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 2,
+        "fault_classification_errors": 2,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      }
+    },
+    "by_group": {
+      "validation": {
+        "proposals": {
+          "n": 42,
+          "confusion": {
+            "rationale_mismatch": {
+              "rationale_mismatch": 12
+            },
+            "setpoint_drift": {
+              "setpoint_drift": 12
+            },
+            "provenance_violation": {
+              "provenance_violation": 6
+            },
+            "normal": {
+              "normal": 12
+            }
+          },
+          "per_class": {
+            "rationale_mismatch": {
+              "support": 12,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "setpoint_drift": {
+              "support": 12,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "provenance_violation": {
+              "support": 6,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "normal": {
+              "support": 12,
+              "recall": 1.0,
+              "precision": 1.0
+            }
+          },
+          "false_positives": 0,
+          "normal_denominator": 12,
+          "false_positive_rate": 0.0,
+          "missed_faults": 0,
+          "fault_classification_errors": 0,
+          "fault_denominator": 30,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 0.2922324166663332
+        },
+        "telemetry": {
+          "n": 48,
+          "confusion": {
+            "sensor_fault": {
+              "normal": 9,
+              "actuator_fault": 1,
+              "sensor_fault": 2
+            },
+            "actuator_fault": {
+              "actuator_fault": 4,
+              "normal": 6,
+              "sensor_fault": 2
+            },
+            "normal": {
+              "normal": 10,
+              "actuator_fault": 1,
+              "sensor_fault": 1
+            },
+            "excursion": {
+              "normal": 12
+            }
+          },
+          "per_class": {
+            "sensor_fault": {
+              "support": 12,
+              "recall": 0.16666666666666666,
+              "precision": 0.4
+            },
+            "actuator_fault": {
+              "support": 12,
+              "recall": 0.3333333333333333,
+              "precision": 0.6666666666666666
+            },
+            "normal": {
+              "support": 12,
+              "recall": 0.8333333333333334,
+              "precision": 0.2702702702702703
+            },
+            "excursion": {
+              "support": 12,
+              "recall": 0.0,
+              "precision": 0.0
+            }
+          },
+          "false_positives": 2,
+          "normal_denominator": 12,
+          "false_positive_rate": 0.16666666666666666,
+          "missed_faults": 27,
+          "fault_classification_errors": 30,
+          "fault_denominator": 36,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 0.6179424541667989
+        },
+        "macro_f1": 0.6359877284247033
+      }
+    },
+    "runtime": "Ollama-bundled llama.cpp 0.8.0-dev 39febd2ad / CUDA v12; one loaded model at a time",
+    "temperature": 0,
+    "max_new_tokens": 128,
+    "constrained_decoding": false
+  },
+  "legacy-validation.json": {
+    "metrics": {
+      "proposals": {
+        "n": 42,
+        "confusion": {
+          "rationale_mismatch": {
+            "normal": 12
+          },
+          "setpoint_drift": {
+            "setpoint_drift": 4,
+            "normal": 8
+          },
+          "provenance_violation": {
+            "provenance_violation": 6
+          },
+          "normal": {
+            "normal": 12
+          }
+        },
+        "per_class": {
+          "rationale_mismatch": {
+            "support": 12,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "setpoint_drift": {
+            "support": 12,
+            "recall": 0.3333333333333333,
+            "precision": 1.0
+          },
+          "provenance_violation": {
+            "support": 6,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 0.375
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 20,
+        "fault_classification_errors": 20,
+        "fault_denominator": 30,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 0.6061894928568238
+      },
+      "telemetry": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "normal": 6,
+            "sensor_fault": 6
+          },
+          "actuator_fault": {
+            "actuator_fault": 12
+          },
+          "normal": {
+            "normal": 9,
+            "excursion": 1,
+            "sensor_fault": 2
+          },
+          "excursion": {
+            "excursion": 6,
+            "normal": 6
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 0.5,
+            "precision": 0.75
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 0.75,
+            "precision": 0.42857142857142855
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.5,
+            "precision": 0.8571428571428571
+          }
+        },
+        "false_positives": 3,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.25,
+        "missed_faults": 12,
+        "fault_classification_errors": 12,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 1.1770265083331803
+      },
+      "macro_f1": 0.6028110047846891
+    },
+    "telemetry_paths": {
+      "candidate": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "normal": 6,
+            "sensor_fault": 6
+          },
+          "actuator_fault": {
+            "actuator_fault": 12
+          },
+          "normal": {
+            "normal": 9,
+            "excursion": 1,
+            "sensor_fault": 2
+          },
+          "excursion": {
+            "excursion": 6,
+            "normal": 6
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 0.5,
+            "precision": 0.75
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 0.75,
+            "precision": 0.42857142857142855
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.5,
+            "precision": 0.8571428571428571
+          }
+        },
+        "false_positives": 3,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.25,
+        "missed_faults": 12,
+        "fault_classification_errors": 12,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "cpu": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 12
+          },
+          "actuator_fault": {
+            "actuator_fault": 12
+          },
+          "normal": {
+            "normal": 12
+          },
+          "excursion": {
+            "excursion": 10,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 0.8571428571428571
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 2,
+        "fault_classification_errors": 2,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "combined": {
+        "n": 48,
+        "confusion": {
+          "sensor_fault": {
+            "sensor_fault": 12
+          },
+          "actuator_fault": {
+            "actuator_fault": 12
+          },
+          "normal": {
+            "normal": 12
+          },
+          "excursion": {
+            "excursion": 10,
+            "normal": 2
+          }
+        },
+        "per_class": {
+          "sensor_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "normal": {
+            "support": 12,
+            "recall": 1.0,
+            "precision": 0.8571428571428571
+          },
+          "excursion": {
+            "support": 12,
+            "recall": 0.8333333333333334,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 12,
+        "false_positive_rate": 0.0,
+        "missed_faults": 2,
+        "fault_classification_errors": 2,
+        "fault_denominator": 36,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      }
+    },
+    "by_group": {
+      "validation": {
+        "proposals": {
+          "n": 42,
+          "confusion": {
+            "rationale_mismatch": {
+              "normal": 12
+            },
+            "setpoint_drift": {
+              "setpoint_drift": 4,
+              "normal": 8
+            },
+            "provenance_violation": {
+              "provenance_violation": 6
+            },
+            "normal": {
+              "normal": 12
+            }
+          },
+          "per_class": {
+            "rationale_mismatch": {
+              "support": 12,
+              "recall": 0.0,
+              "precision": 0.0
+            },
+            "setpoint_drift": {
+              "support": 12,
+              "recall": 0.3333333333333333,
+              "precision": 1.0
+            },
+            "provenance_violation": {
+              "support": 6,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "normal": {
+              "support": 12,
+              "recall": 1.0,
+              "precision": 0.375
+            }
+          },
+          "false_positives": 0,
+          "normal_denominator": 12,
+          "false_positive_rate": 0.0,
+          "missed_faults": 20,
+          "fault_classification_errors": 20,
+          "fault_denominator": 30,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 0.6061894928568238
+        },
+        "telemetry": {
+          "n": 48,
+          "confusion": {
+            "sensor_fault": {
+              "normal": 6,
+              "sensor_fault": 6
+            },
+            "actuator_fault": {
+              "actuator_fault": 12
+            },
+            "normal": {
+              "normal": 9,
+              "excursion": 1,
+              "sensor_fault": 2
+            },
+            "excursion": {
+              "excursion": 6,
+              "normal": 6
+            }
+          },
+          "per_class": {
+            "sensor_fault": {
+              "support": 12,
+              "recall": 0.5,
+              "precision": 0.75
+            },
+            "actuator_fault": {
+              "support": 12,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "normal": {
+              "support": 12,
+              "recall": 0.75,
+              "precision": 0.42857142857142855
+            },
+            "excursion": {
+              "support": 12,
+              "recall": 0.5,
+              "precision": 0.8571428571428571
+            }
+          },
+          "false_positives": 3,
+          "normal_denominator": 12,
+          "false_positive_rate": 0.25,
+          "missed_faults": 12,
+          "fault_classification_errors": 12,
+          "fault_denominator": 36,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 1.1770265083331803
+        },
+        "macro_f1": 0.6028110047846891
+      }
+    },
+    "runtime": "Ollama-bundled llama.cpp 0.8.0-dev 39febd2ad / CUDA v12; one loaded model at a time",
+    "temperature": 0,
+    "max_new_tokens": 128,
+    "constrained_decoding": false
+  },
+  "final-test.json": {
+    "metrics": {
+      "proposals": {
+        "n": 147,
+        "confusion": {
+          "normal": {
+            "normal": 27
+          },
+          "rationale_mismatch": {
+            "rationale_mismatch": 53
+          },
+          "setpoint_drift": {
+            "setpoint_drift": 43
+          },
+          "provenance_violation": {
+            "provenance_violation": 24
+          }
+        },
+        "per_class": {
+          "normal": {
+            "support": 27,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "rationale_mismatch": {
+            "support": 53,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "setpoint_drift": {
+            "support": 43,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "provenance_violation": {
+            "support": 24,
+            "recall": 1.0,
+            "precision": 1.0
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 27,
+        "false_positive_rate": 0.0,
+        "missed_faults": 0,
+        "fault_classification_errors": 0,
+        "fault_denominator": 120,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 0.2936557000000309
+      },
+      "telemetry": {
+        "n": 511,
+        "confusion": {
+          "normal": {
+            "normal": 65,
+            "excursion": 45,
+            "sensor_fault": 1
+          },
+          "excursion": {
+            "excursion": 114,
+            "normal": 6
+          },
+          "sensor_fault": {
+            "normal": 107,
+            "excursion": 47,
+            "sensor_fault": 3,
+            "actuator_fault": 3
+          },
+          "actuator_fault": {
+            "normal": 103,
+            "sensor_fault": 4,
+            "actuator_fault": 6,
+            "excursion": 7
+          }
+        },
+        "per_class": {
+          "normal": {
+            "support": 111,
+            "recall": 0.5855855855855856,
+            "precision": 0.2313167259786477
+          },
+          "excursion": {
+            "support": 120,
+            "recall": 0.95,
+            "precision": 0.5352112676056338
+          },
+          "sensor_fault": {
+            "support": 160,
+            "recall": 0.01875,
+            "precision": 0.375
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 0.05,
+            "precision": 0.6666666666666666
+          }
+        },
+        "false_positives": 46,
+        "normal_denominator": 111,
+        "false_positive_rate": 0.4144144144144144,
+        "missed_faults": 216,
+        "fault_classification_errors": 277,
+        "fault_denominator": 400,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0,
+        "latency_s_mean": 0.6039427745597118
+      },
+      "macro_f1": 0.6431318599092686
+    },
+    "telemetry_paths": {
+      "candidate": {
+        "n": 511,
+        "confusion": {
+          "normal": {
+            "normal": 65,
+            "excursion": 45,
+            "sensor_fault": 1
+          },
+          "excursion": {
+            "excursion": 114,
+            "normal": 6
+          },
+          "sensor_fault": {
+            "normal": 107,
+            "excursion": 47,
+            "sensor_fault": 3,
+            "actuator_fault": 3
+          },
+          "actuator_fault": {
+            "normal": 103,
+            "sensor_fault": 4,
+            "actuator_fault": 6,
+            "excursion": 7
+          }
+        },
+        "per_class": {
+          "normal": {
+            "support": 111,
+            "recall": 0.5855855855855856,
+            "precision": 0.2313167259786477
+          },
+          "excursion": {
+            "support": 120,
+            "recall": 0.95,
+            "precision": 0.5352112676056338
+          },
+          "sensor_fault": {
+            "support": 160,
+            "recall": 0.01875,
+            "precision": 0.375
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 0.05,
+            "precision": 0.6666666666666666
+          }
+        },
+        "false_positives": 46,
+        "normal_denominator": 111,
+        "false_positive_rate": 0.4144144144144144,
+        "missed_faults": 216,
+        "fault_classification_errors": 277,
+        "fault_denominator": 400,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "cpu": {
+        "n": 511,
+        "confusion": {
+          "normal": {
+            "normal": 111
+          },
+          "excursion": {
+            "excursion": 120
+          },
+          "sensor_fault": {
+            "sensor_fault": 116,
+            "actuator_fault": 19,
+            "normal": 25
+          },
+          "actuator_fault": {
+            "actuator_fault": 120
+          }
+        },
+        "per_class": {
+          "normal": {
+            "support": 111,
+            "recall": 1.0,
+            "precision": 0.8161764705882353
+          },
+          "excursion": {
+            "support": 120,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "sensor_fault": {
+            "support": 160,
+            "recall": 0.725,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 1.0,
+            "precision": 0.8633093525179856
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 111,
+        "false_positive_rate": 0.0,
+        "missed_faults": 25,
+        "fault_classification_errors": 44,
+        "fault_denominator": 400,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      },
+      "combined": {
+        "n": 511,
+        "confusion": {
+          "normal": {
+            "normal": 111
+          },
+          "excursion": {
+            "excursion": 120
+          },
+          "sensor_fault": {
+            "sensor_fault": 116,
+            "actuator_fault": 19,
+            "normal": 25
+          },
+          "actuator_fault": {
+            "actuator_fault": 120
+          }
+        },
+        "per_class": {
+          "normal": {
+            "support": 111,
+            "recall": 1.0,
+            "precision": 0.8161764705882353
+          },
+          "excursion": {
+            "support": 120,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "sensor_fault": {
+            "support": 160,
+            "recall": 0.725,
+            "precision": 1.0
+          },
+          "actuator_fault": {
+            "support": 120,
+            "recall": 1.0,
+            "precision": 0.8633093525179856
+          }
+        },
+        "false_positives": 0,
+        "normal_denominator": 111,
+        "false_positive_rate": 0.0,
+        "missed_faults": 25,
+        "fault_classification_errors": 44,
+        "fault_denominator": 400,
+        "unavailable": 0,
+        "uncertainty_coverage": 0.0
+      }
+    },
+    "by_group": {
+      "heldout_recording_proposals": {
+        "proposals": {
+          "n": 147,
+          "confusion": {
+            "normal": {
+              "normal": 27
+            },
+            "rationale_mismatch": {
+              "rationale_mismatch": 53
+            },
+            "setpoint_drift": {
+              "setpoint_drift": 43
+            },
+            "provenance_violation": {
+              "provenance_violation": 24
+            }
+          },
+          "per_class": {
+            "normal": {
+              "support": 27,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "rationale_mismatch": {
+              "support": 53,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "setpoint_drift": {
+              "support": 43,
+              "recall": 1.0,
+              "precision": 1.0
+            },
+            "provenance_violation": {
+              "support": 24,
+              "recall": 1.0,
+              "precision": 1.0
+            }
+          },
+          "false_positives": 0,
+          "normal_denominator": 27,
+          "false_positive_rate": 0.0,
+          "missed_faults": 0,
+          "fault_classification_errors": 0,
+          "fault_denominator": 120,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 0.2936557000000309
+        },
+        "telemetry": {
+          "n": 0,
+          "status": "not_run",
+          "reason": "unavailable backend, CPU-only run, or inapplicable task",
+          "latency_s_mean": null
+        },
+        "macro_f1": 1.0
+      },
+      "historical_sealed_telemetry": {
+        "proposals": {
+          "n": 0,
+          "status": "not_run",
+          "reason": "unavailable backend, CPU-only run, or inapplicable task",
+          "latency_s_mean": null
+        },
+        "telemetry": {
+          "n": 471,
+          "confusion": {
+            "normal": {
+              "normal": 65,
+              "excursion": 45,
+              "sensor_fault": 1
+            },
+            "excursion": {
+              "excursion": 114,
+              "normal": 6
+            },
+            "sensor_fault": {
+              "normal": 97,
+              "excursion": 17,
+              "sensor_fault": 3,
+              "actuator_fault": 3
+            },
+            "actuator_fault": {
+              "normal": 103,
+              "sensor_fault": 4,
+              "actuator_fault": 6,
+              "excursion": 7
+            }
+          },
+          "per_class": {
+            "normal": {
+              "support": 111,
+              "recall": 0.5855855855855856,
+              "precision": 0.23985239852398524
+            },
+            "excursion": {
+              "support": 120,
+              "recall": 0.95,
+              "precision": 0.6229508196721312
+            },
+            "sensor_fault": {
+              "support": 120,
+              "recall": 0.025,
+              "precision": 0.375
+            },
+            "actuator_fault": {
+              "support": 120,
+              "recall": 0.05,
+              "precision": 0.6666666666666666
+            }
+          },
+          "false_positives": 46,
+          "normal_denominator": 111,
+          "false_positive_rate": 0.4144144144144144,
+          "missed_faults": 206,
+          "fault_classification_errors": 237,
+          "fault_denominator": 360,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 0.606066973673086
+        },
+        "macro_f1": 0.30817190986609005
+      },
+      "synthetic_frozen_level_stress": {
+        "proposals": {
+          "n": 0,
+          "status": "not_run",
+          "reason": "unavailable backend, CPU-only run, or inapplicable task",
+          "latency_s_mean": null
+        },
+        "telemetry": {
+          "n": 20,
+          "confusion": {
+            "sensor_fault": {
+              "excursion": 20
+            }
+          },
+          "per_class": {
+            "sensor_fault": {
+              "support": 20,
+              "recall": 0.0,
+              "precision": 0.0
+            }
+          },
+          "false_positives": 0,
+          "normal_denominator": 0,
+          "false_positive_rate": null,
+          "missed_faults": 0,
+          "fault_classification_errors": 20,
+          "fault_denominator": 20,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 0.5584920899997087
+        },
+        "macro_f1": 0.0
+      },
+      "synthetic_pressure_dropout_stress": {
+        "proposals": {
+          "n": 0,
+          "status": "not_run",
+          "reason": "unavailable backend, CPU-only run, or inapplicable task",
+          "latency_s_mean": null
+        },
+        "telemetry": {
+          "n": 20,
+          "confusion": {
+            "sensor_fault": {
+              "normal": 10,
+              "excursion": 10
+            }
+          },
+          "per_class": {
+            "sensor_fault": {
+              "support": 20,
+              "recall": 0.0,
+              "precision": 0.0
+            }
+          },
+          "false_positives": 0,
+          "normal_denominator": 0,
+          "false_positive_rate": null,
+          "missed_faults": 10,
+          "fault_classification_errors": 20,
+          "fault_denominator": 20,
+          "unavailable": 0,
+          "uncertainty_coverage": 0.0,
+          "latency_s_mean": 0.5993685699997513
+        },
+        "macro_f1": 0.0
+      }
+    },
+    "runtime": "Ollama-bundled llama.cpp 0.8.0-dev 39febd2ad / CUDA v12; one loaded model at a time",
+    "temperature": 0,
+    "max_new_tokens": 128,
+    "constrained_decoding": false
+  }
+}

@@ -3,8 +3,9 @@ Integration test: the SCRAM interlock trips off the independent
 safety-instrumented sensor path even while a fault holds the basic control
 system's MEASURED view in-band.
 
-Requires the plant container to be running and reachable on 127.0.0.1:55555
-(docker compose up -d simulation). Skipped automatically if it isn't.
+Requires --run-live-simulator and a reachable plant on 127.0.0.1:55555.
+This test restarts the simulator and drives it to a trip; normal pytest runs
+skip it even if the demo container is running.
 
 Scenario:
   1. Freeze the pressure sensor (fault_injection.freeze) - its measured
@@ -41,14 +42,13 @@ def _plant_reachable() -> bool:
         return False
 
 
-pytestmark = pytest.mark.skipif(
-    not _plant_reachable(),
-    reason=f"plant not reachable on {HOST}:{PORT} (docker compose up -d simulation)",
-)
+pytestmark = pytest.mark.live_simulator
 
 
 @pytest.fixture
 def plant():
+    if not _plant_reachable():
+        pytest.skip(f"plant not reachable on {HOST}:{PORT}")
     # A previous run can leave valves pinned open (or any other mid-transient
     # position) on the container, which silently changes how long this test's
     # drive-to-trip takes. Reset to the designed operating point first so the

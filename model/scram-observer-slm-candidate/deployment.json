@@ -1,0 +1,19 @@
+{
+  "alias": "scram-observer-slm-candidate",
+  "weights_file": "scram-observer-slm-q8_0.gguf",
+  "weights_sha256": "a977ee4348510fa1f62e06304fd67598e58131f9752ad0069f860fcb4807e5d3",
+  "weights_bytes": 531067808,
+  "modelfile_sha256": "52b7c2ecbcb8bacbff04fa901b4638f7acc5c031e91947ff9607176ebe00a53f",
+  "base": "Qwen/Qwen2.5-0.5B-Instruct",
+  "base_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "parameter_count": 494032768,
+  "wire_schema": "slm-v1",
+  "context": 3072,
+  "selected_optimizer_step": 135,
+  "release_qualified": false,
+  "legacy_observer_weights_bytes": 1972095680,
+  "observer_install_weight_reduction_bytes": 1441027872,
+  "observer_install_weight_reduction_fraction": 0.7307089035355526,
+  "local_build_artifacts_retained": true,
+  "gpu_savings_claimed": false
+}

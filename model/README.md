@@ -1,7 +1,7 @@
 # SCRAM models
 
 Run all commands below from the repository root. The control room can run with
-`python -m live --brain baseline` without model weights or Ollama.
+`SCRAM_OBSERVER_MODE=none` with `python -m live --brain baseline` without LLM weights or Ollama.
 
 ## What is included
 
@@ -9,8 +9,8 @@ Run all commands below from the repository root. The control room can run with
 | --- | --- |
 | `scram-operator-gguf/` | Ollama definition for supervisory setpoint generation |
 | `scram-operator-lora/` | Operator adapter configuration, tokenizer and model card |
-| `scram-observer-gguf/` | Ollama definition for v2 proposal judgments |
-| `scram-observer-v3-gguf/` | v3 telemetry definition, adapter metadata and historical evaluations |
+| `scram-shared-observer/` | Shared F16 demo observer, deployment manifest and development evidence |
+| `scram-observer-gguf/`, `scram-observer-v3-gguf/` | Historical metadata and evaluation evidence; V2/V3 model weights are retired |
 | `telemetry-physics/` | Active advisory CPU detector, release policy and evaluation evidence |
 | `telemetry-classifier/` | Earlier restricted CPU classifier, used as a fallback |
 
@@ -27,25 +27,31 @@ public weights download. Place each file at the path in this table:
 | Ollama name | Required local weight file |
 | --- | --- |
 | `scram-operator` | `model/scram-operator-gguf/scram-operator-q4_k_m.gguf` |
-| `scram-observer` | `model/scram-observer-gguf/scram-observer-v2-q4_k_m.gguf` |
-| `scram-observer-v3` | `model/scram-observer-v3-gguf/scram-observer-v3-q4_k_m.gguf` |
 
 With Ollama installed and running:
 
 ```sh
 ollama create scram-operator -f model/scram-operator-gguf/Modelfile
-ollama create scram-observer -f model/scram-observer-gguf/Modelfile
-ollama create scram-observer-v3 -f model/scram-observer-v3-gguf/Modelfile
 ollama list
 ```
+
+The default shared observer uses `model/scram-shared-observer/app-deployment/scram-observer-demo-f16.gguf`,
+SHA-256 `f155e25ce8898a332c11191d70f36a308cf12a8d14fce6743f11c792959f561d`.
+The weight file is ignored by Git and must be supplied for a fresh clone. The
+launcher verifies its hash and fixed development report, then manages the local
+llama.cpp runner at port 11437. The current Windows setup expects Ollama's bundled
+CUDA llama-server at `%LOCALAPPDATA%/Programs/Ollama/lib/ollama/llama-server.exe`.
+Missing weights, a missing runner, or an occupied port cause startup to fail
+explicitly. The combined demo observer has not passed an independent accuracy test.
 
 The manual studio additionally uses the stock `qwen2.5:1.5b` parser model
 (`ollama pull qwen2.5:1.5b`). Manual buttons work without it.
 
 The live operator falls back to deterministic baseline control when unavailable.
-Observer routing tries the available models in the chains defined in
-[`monitor/observer.py`](../monitor/observer.py). CPU corrections apply to v3
-telemetry judgments; they are not a separate always-running observer.
+The active live runtime no longer selects V2/V3 observers. It runs the
+approved CPU detector independently on its own measured window, even with no
+LLM or malformed LLM output. CPU and LLM evidence are reported separately.
+Its pending evaluation is documented in [current status](../CURRENT_STATUS.md).
 
 ## Training and evaluation
 
@@ -62,7 +68,7 @@ The [observer notebook](../training/scram_observer_finetune.ipynb) now defaults 
 metadata and historical evaluations refer to the earlier datasets. This notebook
 is not a promise of byte-identical reconstruction of historical v2/v3 weights.
 
-See the [operator card](scram-operator-lora/README.md),
+See the [operator card](scram-operator-lora/README.md), the historical
 [v3 card](scram-observer-v3-gguf/lora/README.md), and
 [physics detector](telemetry-physics/README.md) for scope and evidence.
 

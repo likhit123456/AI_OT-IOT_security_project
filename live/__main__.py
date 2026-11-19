@@ -117,7 +117,7 @@ def ensure_ollama_cache_cap() -> None:
             print("[live] Ollama did not come up - the brain falls back to baseline")
 
 
-def main() -> int:
+def _main() -> int:
     ap = argparse.ArgumentParser(prog="python -m live")
     ap.add_argument("--port", type=int, default=8765)
     ap.add_argument("--brain", choices=("ollama", "baseline"), default="ollama")
@@ -151,16 +151,20 @@ def main() -> int:
         print("[live] Ollama is not serving 'scram-operator' - start Ollama, or the brain falls back to baseline")
 
     engine = Engine(brain=a.brain, limits=TripLimits() if a.production_limits else DEMO_LIMITS,
-                    reset=not a.no_reset).start()
+                    reset=not a.no_reset)
+    # Reserve the web port before creating a second plant-writing thread.
     srv = serve(engine, a.port)
-    url = f"http://127.0.0.1:{a.port}/"
-    print(f"[live] control room: {url}   (3D plant: http://localhost/)   Ctrl+C to stop")
-    if not a.no_browser:
-        webbrowser.open(url)
-    last = 0
+    serving = False
     try:
+        engine.start()
+        url = f"http://127.0.0.1:{a.port}/"
+        print(f"[live] control room: {url}   (3D plant: http://localhost/)   Ctrl+C to stop")
+        if not a.no_browser:
+            webbrowser.open(url)
+        last = 0
         import threading
         threading.Thread(target=srv.serve_forever, daemon=True).start()
+        serving = True
         while True:
             time.sleep(0.5)
             for e in engine.read(since_event=last)["events"]:
@@ -169,9 +173,42 @@ def main() -> int:
     except KeyboardInterrupt:
         print("\n[live] stopping")
     finally:
-        engine.stop()
-        srv.shutdown()
+        try:
+            engine.stop()
+        finally:
+            if serving:
+                srv.shutdown()
+            srv.server_close()
     return 0
+
+
+def main() -> int:
+    # Explicit experimental/disabled configurations are managed by their caller;
+    # ordinary startup owns and supervises the project's shared observer.
+    if any(arg in ("-h", "--help") for arg in sys.argv[1:]):
+        return _main()
+    mode = os.environ.get("SCRAM_OBSERVER_MODE")
+    if mode == "legacy":
+        raise RuntimeError("Legacy V2/V3 observers were retired; use the shared observer or SCRAM_OBSERVER_MODE=none")
+    if mode:
+        return _main()
+    from training.launch_demo_control_room import control_room_lease, settings, start, stop
+    with control_room_lease():
+        record = start()
+        original = {key: os.environ.get(key) for key in settings()}
+        os.environ.update(settings())
+        try:
+            print(f"[live] shared observer ready (PID {record['pid']})", flush=True)
+            return _main()
+        finally:
+            try:
+                stop()
+            finally:
+                for key, value in original.items():
+                    if value is None:
+                        os.environ.pop(key, None)
+                    else:
+                        os.environ[key] = value
 
 
 if __name__ == "__main__":

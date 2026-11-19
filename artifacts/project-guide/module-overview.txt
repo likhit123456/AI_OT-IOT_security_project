@@ -1,0 +1,1431 @@
+artifacts/accuracy-v2/parser-before.py
+AI operator for the clean sim. Two capabilities, no interlock or enforcer:
+
+1. parse_command(text): the STOCK qwen2.5:1.5b (Ollama) turns plain English into
+   one JSON action {action, valve, amount}, constrained by a JSON schema. A
+   small grammar check then settles "to N" (absolute) vs "by N" (relative),
+   which a 1.5B model mixes up; any correction is reported, never hidden.
+
+2. Rescue: the TRAINED scram-operator (Ollama, via l3_brain.policy.OllamaOperator
+   - same prompt format, parse, validate and envelope clamp it was trained for)
+   runs closed-loop every ~2 s. It reads the measured state and emits setpoints;
+   `regulate()` turns them into valve positions; the loop applies them and
+   stops once pressure and level are back near the design point.
+
+regulate() is deliberately simple and directionally correct for this TE model:
+    pressure above setpoint -> open purge, cut both feeds, open product a little
+    at setpoint             -> purge at its design opening (vents feed 1's inert B)
+    pressure below setpoint -> purge shut, feeds raised
+    production setpoint     -> both feeds scaled from the design lineup
+    level above setpoint    -> open product (below -> close it)
+It never drives feeds from product flow (the l1_stub's production loop does,
+and fights the level loop; that is the feed-cut bug it avoids).
+_direction; _post; _check; _ask; parse_command; _clause_for; parse_commands; _clamp; regulate; plant_state; Activity; Activity.__init__; Activity.add; Activity.since; Rescue; Rescue.__init__; Rescue.start; Rescue.stop; Rescue._apply; Rescue._finish; Rescue._run
+
+contracts.py
+SCRAM cross-layer contracts.
+
+This module is the single source of truth for the data that crosses the
+boundaries between the Purdue levels. Every layer imports its types from here
+so that L0/L1/L2/L3 can be developed independently and still interoperate.
+
+Ownership:
+    L0 (plant)        - you
+    L1 (control)      - team
+    L2 (supervisory)  - team
+    L3 (brain)        - you
+
+Data flow (one control cycle):
+
+    L3.decide(state) --> SupervisoryTargets
+          |  (governance clamps authority here, L1/L2 owned)
+          v
+    L1.regulate(targets, state) --> ControlCommand   (valve positions)
+          |
+          v
+    L0.apply(command) --> PlantState                 (next measured state)
+
+Units are physical engineering units, NOT the 0-65535 Modbus scaling. The L0
+service is the only place that knows about raw register scaling; everything
+above L0 works in real units.
+PlantState; PlantState.as_dict; SupervisoryTargets; SupervisoryTargets.as_dict; ControlCommand; ControlCommand.is_finite; ControlCommand.clamped; ControlCommand.as_dict
+
+enforcer/__init__.py
+
+
+
+enforcer/keel.py
+Keel -- the deterministic enforcer (spec layer "L1").
+
+Sits on the actuation path between L1 control (PI loops) and L0 PlantService:
+
+    L3 targets -> L1 regulate() -> ControlCommand -> Keel.step() -> signer -> L0
+
+What it adds on top of what L0 already has (l0_plant/safety.py is a binary,
+last-resort trip; provenance_gate.py checks WHO sent a command):
+
+  1. Rate-of-rise bound + time-to-trip projection on the independent SIS
+     channel: acts BEFORE the hard trip, gradually, instead of e_stop-or-nothing.
+  2. Load Line: cumulative budget over a sliding window (net pressure climb /
+     net level loss). Catches the slow "every step is legal" attack that a
+     per-step rate bound cannot see.
+  3. Divergence check: |measured - SIS| per channel. A spoofed or drifting
+     basic-control sensor shows up as disagreement between the two views.
+  4. Authority budget A in [0,1]: decays on evidence, recovers slowly when
+     clean. Scales how far any valve may move per cycle. Exposed via
+     `authority()` so it plugs straight into AIOperator(authority_fn=...).
+  5. Safe fallback: on a hazard, blend the command toward a cause-specific safe
+     valve lineup in proportion to severity (closest safe action, not a slam).
+  6. Hash-chained, HMAC-signed event log (tamper-evident).
+
+Design rules (these are the security argument -- keep them true):
+  * Deterministic. No ML, no network, no randomness, no wall clock (time is
+    passed in), so every run is replayable.
+  * Hazard decisions use ONLY the SIS channel (`sis`). The measured view is
+    used for the divergence check only; it can never relax a clamp.
+  * L2 suspicion is advisory: it can only LOWER authority, and its total
+    influence is floored (`l2_floor`), so a compromised/hostile L2 cannot
+    drive the plant to zero authority on its own (no DoS-by-monitor).
+  * The Keel never raises a command's magnitude; it only moves it toward safe.
+KeelLimits; SisFrame; SisFrame.from_state; SisFrame.valid; Reason; Decision; EventLog; EventLog.__init__; EventLog.append; EventLog.verify; _ramp; Keel; Keel.__init__; Keel.authority; Keel.note_gate_rejection; Keel.rearm; Keel.step; Keel._evaluate; Keel._update_authority; Keel._update_divert; Keel.safe_lineup; Keel._toward_safe; Keel._slew_limit; Keel._push; Keel._rate
+
+experiments/__init__.py
+
+
+
+experiments/adversarial_eval.py
+Red-team evaluation: does SCRAM's SIS-grounded interlock survive a combined
+attack that a behavior-only monitor cannot - a scripted, individually-legal
+adversarial setpoint sequence (experiments/adversarial_policy.py) PLUS a
+frozen pressure sensor (the simulator's own native fault interface,
+l0_plant/fault_injection.py), reset to the designed operating point before
+every run for reproducibility (scripts/reset_plant.py).
+
+Calibration (see scratchpad calib*.py during development, same container):
+  * the simulator's physics run on WALL-CLOCK time, not request count - with
+    feeds pinned open and purge/product pinned shut, truth pressure climbs at
+    ~3.7-3.8 kPa/s regardless of poll rate.
+  * the model hard-clamps truth pressure at 3200 kPa (confirmed empirically
+    by driving it there with no enforcer and watching it saturate).
+  * under e_stop (forced-safe), truth pressure falls at roughly 15-17 kPa/s;
+    level barely moves, so re-arm eligibility (pressure back under the
+    re-arm band) typically comes within ~10-15s of a trip in this scenario.
+
+Three conditions, same scenario, same reset point:
+  (a) no_enforcer   - nothing watches truth; valves obey the adversarial ask
+                      unconditionally.
+  (b) monitor_only  - a BehaviorMonitor (monitor/behavior_monitor.py) runs
+                      every cycle, watching ONLY measured + requested
+                      setpoints, but has no actuation path (consistent with
+                      it being a detector, not an interlock) - included to
+                      show it never raises a flag, not to show it stopping
+                      anything.
+  (c) sis_interlock - l0_plant.safety.SafetyInterlock, evaluated on the
+                      independent truth channel every cycle, force-safes the
+                      plant via e_stop the instant it trips.
+
+Part 4 sweeps the SIS trip threshold and records, per threshold: how much
+pressure margin below the physical hard clamp is preserved (damage
+prevented) vs. how long the plant sits forced-safe and how much production
+that forgoes (useful throughput lost) - the two sides of the same dial.
+Written to experiments/frontier_results.csv.
+
+Usage:
+    python -m experiments.adversarial_eval               # everything
+    python -m experiments.adversarial_ev
+RunResult; _setup; run_condition; run_three_way_comparison; run_frontier_sweep; main
+
+experiments/adversarial_policy.py
+Scripted "adversarial" L3 policy for the red-team evaluation
+(experiments/adversarial_eval.py) only - this is not a real L3 policy and is
+not wired into run_demo.py.
+
+It issues a smoothly ramped pressure/production setpoint sequence. Each
+individual request is unremarkable on its own - it never asks for anything
+above the monitor's own legal ceiling (monitor.behavior_monitor.MonitorLimits
+.pressure_max_kpa) and never jumps by more than a plausible step per cycle.
+It stands in for an operator (human or AI) that is simply pushing too hard,
+not for a compromised/malicious L3 - the point of the evaluation is that this
+"merely too aggressive, but individually legal" ask, combined with a frozen
+pressure sensor, is already enough to blind a behavior-only monitor and drive
+the plant toward the hard limit, with nothing unusual for such a monitor to
+catch anywhere in the request stream.
+AdversarialRamp; AdversarialRamp.__init__; AdversarialRamp.decide
+
+experiments/capstone_demo.py
+Capstone safety validation of the full two-ground enforcer: both attack
+channels at once, against the live plant, one timeline.
+
+  Ground 1 - command-origin integrity (l0_plant/provenance_gate.py): forged /
+             unsigned / replayed commands injected at the enforcer by a
+             "compromised agent" are rejected at admission and never reach the
+             plant (last-good is re-asserted).
+  Ground 2 - physics (l0_plant/safety.py): the basic-control level transmitter
+             drifts high (the simulator's NATIVE drift fault), so the measured
+             level looks fine while the true level falls; the SIS interlock,
+             reading the independent safety channel, trips on true physics,
+             closes product, and the level recovers to the re-arm band.
+
+The production path is used as-is: PlantService(gate=..., limits=...) with a
+signing L1. The only test-only knob is the 40% low-level trip (physics caps the
+drain at ~0.013 %/s; see level_drift_eval.py) - the production default is 5%.
+Reset to the operating point first. Results: experiments/capstone_results.json.
+
+Usage: python -m experiments.capstone_demo
+main; main.new_gate_events; main.log
+
+experiments/demo_rehearsal.py
+Dry run of DEMO_RUNBOOK.md on the live engine (same Engine the control room drives),
+with the same actions in the same order, recording what the audience would see at each step.
+
+    python experiments/demo_rehearsal.py [--from N] [--out FILE]   (default out: experiments/demo_rehearsal_results.json)
+
+Steps (DEMO_RUNBOOK.md): 1 clean -> 2 forged commands -> 3 operator injection -> 4 product
+valve fault -> 5 level-sensor drift (Keel catches the measured/safety-channel divergence) ->
+6 stolen key (SIS trips on the true pressure) -> re-arm. --from N starts at step N.
+p; snap; step
+
+experiments/eval_plant.py
+Research-only plant wrapper for the red-team evaluation harness
+(experiments/adversarial_eval.py).
+
+This is NOT the production L0 service. l0_plant/plant_service.py always
+enforces its interlock and has no bypass - that's intentional and this file
+does not change it. EvalPlant exists only so the evaluation can run its two
+counterfactual baseline conditions ("no enforcer" and "behavior-monitor-only")
+without a protective action in the loop, while still privately running the
+exact same SIS-grounded trip logic (l0_plant.safety.SafetyInterlock, evaluated
+against outputs/truth, never measured) every cycle for shadow scoring - so
+even the un-enforced runs can report "the real interlock would have tripped
+here." enforce=True reproduces PlantService.apply's behavior exactly (same
+class, same force-safe-via-e_stop action).
+EvalPlant; EvalPlant.__init__; EvalPlant.start; EvalPlant.stop; EvalPlant._to_state; EvalPlant.read; EvalPlant.apply; EvalPlant.reset_interlock
+
+experiments/level_drift_eval.py
+Instrumentation-fault test: SIS low-level interlock vs. a high-drifting
+basic-control-system LEVEL transmitter.
+
+Scenario
+--------
+The operator asks for a lower, perfectly legal level (level_sp = 30%). The
+basic-control level transmitter (`tank_level`, the `measured` view) is put
+into the simulator's NATIVE drift mode, which biases `measured` upward. L1
+regulates on `measured`, so it sees a level that is high / in-band, keeps the
+product valve open, and the TRUE level (the independent safety-grade channel,
+`outputs`) keeps falling toward the 5% low-level safety setpoint.
+
+Expected:
+  (a) a measured-only monitor (band / rate / setpoint-legality / staleness)
+      registers nothing: measured level moves plausibly and stays in-band.
+  (b) the SIS interlock, reading the safety-grade channel, trips at 5%.
+
+Only the simulator's native fault interface is used (l0_plant/fault_injection
+.drift on `tank_level`); there is no signal-corruption code here. The plant is
+reset to its designed operating point before every run.
+
+Physics notes (calibrated against the live container, see ARCHITECTURE.md):
+  * the sim runs on wall-clock time; truth level drains at only ~0.014 %/s
+    regardless of valve combination, so ~45 min from the 44% design point to
+    the 5% trip. Runs are therefore long; progress is flushed incrementally.
+  * native DRIFT accumulates `severity` units/hour of upward bias.
+
+Usage:
+    python -m experiments.level_drift_eval --pilot 120     # short calibration
+    python -m experiments.level_drift_eval                 # three conditions
+    python -m experiments.level_drift_eval --only sis_interlock
+decide; RunResult; run_condition; main
+
+experiments/level_frontier.py
+Low-level trip-threshold sweep under a persistent native drift fault on the
+basic-control level transmitter: damage prevented vs. throughput lost.
+
+Under the persistent fault, L1 regulates on a transmitter that reads high, so
+after every SIS trip -> product closed -> level recovers -> re-arm, L1 reopens
+the product valve and drains the vessel back to the trip point. The SIS thus
+cycles trip -> re-arm -> re-trip, and the fraction of time spent in the safed
+(tripped) state is the throughput given up.
+
+Per threshold (reset to the operating point first, native fault only):
+  * low-level trip = threshold, re-arm = threshold + 2 (same hysteresis as the
+    40/42 run in level_drift_eval.py); the behaviour monitor's soft low limit
+    is threshold + 2, so it tracks just above the trip it is being compared to.
+  * the run continues until WINDOW_S seconds after the FIRST trip (an equal
+    limit-cycle window for every threshold; time before the first trip is the
+    approach drain and differs by threshold, so it is reported separately).
+  * damage prevented = threshold - HAZARD_FLOOR_PCT (level margin preserved
+    above the 5% hazard floor); throughput lost = safed_time / window.
+
+Each process runs ONE threshold and appends its row to experiments/level_frontier_results.json.
+
+Usage:
+    python -m experiments.level_frontier --threshold 35   # one per process, appends
+run_threshold; main
+
+experiments/llm_operator_demo.py
+LLM operator demo: (1) closed loop from the operating point under normal
+operation; (2) the capstone attack (forged commands + drifting level
+transmitter) with the LLM operator as the brain.
+
+Model source (--brain, default auto):
+  * ollama - the operator model fine-tuned in this repo (training/ -> model/
+    scram-operator-gguf), served locally by Ollama (l3_brain.policy.OllamaOperator).
+    Also selected by SCRAM_OPERATOR=ollama.
+  * auto   - ollama if SCRAM_OPERATOR=ollama and it is up, else the scripted
+    stand-in.
+  * scripted - (or the auto fallback) a clearly-labelled SCRIPTED STAND-IN with the same
+    `client.messages.create` interface is used. It is not a language model: it
+    returns canned JSON (plus injected glitches - unparseable text and
+    out-of-envelope values) so the plumbing, the validator/clamp, the
+    hold-fallback and the enforcer can be exercised end to end.
+
+The thesis under test: the enforcer's guarantee (provenance gate + SIS
+interlock) does not depend on what the brain is.
+
+Each model decision is logged with what the brain SAW (measured level) next to
+the truth (eval-only), so a fooled operator is visible in the results.
+
+Usage: python -m experiments.llm_operator_demo [--brain auto|ollama|scripted]
+                                               [--part1-s 180] [--skip-capstone]
+ScriptedStandIn; ScriptedStandIn.__init__; ScriptedStandIn.create; WatchedBrain; WatchedBrain.__init__; WatchedBrain.step; make_operator; part1; part2; main
+
+experiments/observer_split_live.py
+Split-serving live check (python experiments/observer_split_live.py): proposals on v2 (feeds
+authority), telemetry on v3 (display only), operator brain on Ollama too - three models resident.
+Valve-fault phases (product cv, product stuck), then a short operator injection. Audits every
+v3 telemetry prompt against the parity gate and every observer verdict handed to governance;
+samples peak VRAM, the resident model set (/api/ps) and the control-loop cycle time.
+_sys_sampler; wrap_gov; wrap_gov.upd; p; tick; phase; save
+
+experiments/observer_v3_live.py
+Phase 4b live sanity set (python experiments/observer_v3_live.py), in-process on live.engine.Engine
+Audits every telemetry prompt against the v3 parity gate and every observer verdict handed
+to governance. Writes JSON results to argv[1] (default: experiments/observer_v3_live_results.json).
+wrap_gov; wrap_gov.upd; p; tick; phase; save
+
+experiments/observer_v3_proposal_replay.py
+Capture live proposal inputs (clean, then product cv fault) and replay each through v3 and v2.
+
+python experiments/observer_v3_proposal_replay.py [OUT]   (default: experiments/observer_v3_proposal_replay.json)
+grab; ask
+
+experiments/provenance_demo.py
+Provenance-gate demonstration: the case physics cannot catch.
+
+The injected command is individually inside every physical limit, so the SIS
+interlock never trips on it - only command-origin integrity can tell it apart
+from a legitimate command. Each scenario resets the plant to its operating
+point first; everything uses first-class interfaces only (the enforcer's
+apply() path, and the plant's own write protocol for the out-of-band case).
+
+  A  legit      authorized L1 (signed) issues command C        -> admitted, applied
+  B  forged     an unsigned copy of the identical C reaches the
+                enforcer                                       -> rejected, last-good held
+  C  oob+gate   C written directly to :55555, bypassing the
+                enforcer, gate active                          -> detected, last-good re-asserted
+  D  oob+nogate same direct write, no gate (legacy)            -> undetected, SIS silent
+
+Usage: python -m experiments.provenance_demo
+_valves; run; run.cycle; main
+
+experiments/safe_hold_tune.py
+Tune the SIS closed-loop safe-hold on the live simulator (the control room must be stopped).
+
+For each candidate gain set: reset the plant, drive it with the stolen-key lineup until the
+safety channel reads >= 3000 kPa, then run the safe-hold law from l0_plant/safety.py for
+`--hold` seconds and report whether / when the plant settles inside the re-arm band.
+
+    python -m experiments.safe_hold_tune [--hold 150]
+truth; run; _run; main
+
+l0_plant/__init__.py
+
+
+
+l0_plant/fault_injection.py
+L0 fault-injection helpers.
+
+Thin wrappers around the reactor's OWN documented sensor-fault interface
+(see sim/TE_process.cc's apply_sensor_fault / simulation/simulation/TE_process.cc
+in the running image). The simulator already exposes, as write-inputs, a fault
+mode and severity for each sensor channel, and already reports both the
+un-faulted value ("outputs") and the resulting faulted value ("measured") in
+its JSON. These helpers just name the modes and channels so callers don't have
+to remember magic numbers - there is no corruption logic here; all of it lives
+in the simulator.
+
+Modes (from TE_process.cc):
+    NONE    (0)  healthy - measured tracks outputs
+    FROZEN  (1)  measured holds at whatever it last was
+    DRIFT   (2)  measured accumulates an offset at `severity` units/hour
+    NOISE   (3)  measured = outputs +/- uniform(severity)
+    DROPOUT (4)  measured reads 0 for a `severity` fraction of each 10s window
+
+Channels: tank_pressure, tank_level, f1_flow, f2_flow, purge_flow,
+product_flow, analyzer (the analyzer channel covers A/B/C composition
+together, as a real GC samples them as one instrument).
+
+The safety interlock (l0_plant/safety.py) never reads "measured" - it reads
+"outputs" (truth) via PlantState.truth, so nothing set here can affect it.
+FaultMode; set_fault; freeze; drift; noise; dropout; clear; clear_all
+
+l0_plant/grfics_client.py
+L0 low-level client for the GRFICS Tennessee-Eastman simulator.
+
+The simulator (simulation/simulation/main.cc) is a C++ process that listens on
+TCP 55555 and speaks line-delimited JSON:
+
+    read :  {"request":"read"}\n
+            -> {"process":..., "outputs":{...}, "state":{...}, "measured":{...}}
+
+    write:  {"request":"write","data":{"inputs":{ <name>: <value>, ... }}}\n
+            -> same state object, post-update
+
+Accepted input names include the four valve setpoints (f1_valve_sp, f2_valve_sp,
+purge_valve_sp, product_valve_sp), e_stop, and the fault-injection parameters.
+Setpoints are in physical percent [0,100] - the simulator does the 0-65535
+scaling internally, so this client stays in engineering units.
+
+This client is deliberately thin: it owns the socket and the JSON framing and
+nothing else. Safety logic lives one layer up in safety.py so the interlock is
+independent of transport.
+GrficsClient; GrficsClient.__init__; GrficsClient.connect; GrficsClient.close; GrficsClient.__enter__; GrficsClient.__exit__; GrficsClient._txn; GrficsClient.read; GrficsClient.write_inputs
+
+l0_plant/plant_service.py
+L0 plant service.
+
+This is the clean boundary the rest of SCRAM sees. It:
+  * wraps the GRFICS socket client,
+  * translates raw simulator JSON into the shared PlantState contract,
+  * runs the independent SafetyInterlock every cycle and, when tripped,
+    overrides the incoming ControlCommand to force the plant safe.
+
+Everything above L0 talks to this class, never to GrficsClient directly.
+
+Note on the real/measured split: the simulator reports both the true physical
+values ("outputs") and the sensor-faulted values ("measured"). L0 publishes the
+MEASURED values as the live state (that is what a PLC/HMI really sees) and
+tucks the truth into PlantState.truth for eval only.
+
+The safety interlock is the one exception: it evaluates "outputs", modeled as
+a dedicated safety-instrumented sensor path independent of the basic control
+system, not "measured" (the basic control system's own instrumentation). A
+fault injected via l0_plant/fault_injection.py only ever touches "measured",
+so it can corrupt what L1/L2/L3 see in PlantState without being able to stop
+the interlock from tripping. This assumes standard SIS independence: the
+safety-instrumented path is out of the attacker's reach - see ARCHITECTURE.md.
+PlantService; PlantService.__init__; PlantService.start; PlantService.stop; PlantService._to_state; PlantService.read; PlantService.apply; PlantService.reset_interlock
+
+l0_plant/provenance_gate.py
+Command-origin integrity on the actuation path (defensive).
+
+The enforcer (PlantService) is the ONLY sanctioned writer to the plant
+(port 55555). The physics interlock (safety.py) grounds its veto in the
+process state; this module is the second ground: WHO issued the command. It
+catches the case physics cannot - a command that is individually within every
+physical limit (so the SIS never trips) but was not issued by the authorized
+path.
+
+Two mechanisms, with different jobs:
+
+1. Provenance check (commands that reach the enforcer). L1 signs each command
+   with a shared key (HMAC-SHA256 over a strictly increasing sequence number
+   plus the four valve positions). `ProvenanceGate.admit` rejects a command
+   with a missing/invalid tag or a replayed/stale sequence number, and the
+   enforcer re-asserts the last-good command instead.
+
+2. Readback audit (commands that DO NOT reach the enforcer). A write sent
+   straight to the plant socket never passes through admit(), so it can't be
+   prevented from here - the plant's JSON protocol has no authentication.
+   What the enforcer can do is notice: it knows exactly what it last wrote, so
+   any valve position or e_stop state on the plant that differs from that is,
+   by construction, someone else's write. `ProvenanceGate.audit` flags the
+   mismatch and the enforcer re-asserts last-good on its next write. Limits:
+   detection is per control cycle, so an out-of-band write can dwell for up
+   to one cycle; it is detected and bounded, not prevented. Preventing it
+   needs network-level controls (only the enforcer host may reach 55555) -
+   outside this code.
+
+Key handling: the key is supplied by the caller (e.g. from the environment);
+nothing here ships a default key.
+_tag; CommandSigner; CommandSigner.__init__; CommandSigner.sign; GateEvent; ProvenanceGate; ProvenanceGate.seed; ProvenanceGate.admit; ProvenanceGate._accept; ProvenanceGate._reject; ProvenanceGate.clear_e_stop; ProvenanceGate._event; ProvenanceGate.note_safe_state; ProvenanceGate.audit
+
+l0_plant/safety.py
+L0 hardware safety layer - the independent interlock ("SCRAM").
+
+This is the bottom of the SCRAM thesis: a last-resort protective layer that
+sits UNDER the AI and cannot be talked out of tripping. It does not know or
+care what L3 intends or how much authority governance granted; it watches a
+handful of physical variables and, if any crosses a hard limit, forces the
+plant into a safe state (feeds shut, relief paths open) by asserting the
+simulator's e_stop.
+
+Design rules:
+  * Trip logic depends ONLY on physical state, never on upstream intent. The
+    caller (plant_service.py) is responsible for handing this class the
+    reactor's "outputs" - modeled as a dedicated safety-instrumented sensor
+    path, independent of the basic control system - not the "measured" view
+    the basic control system itself sees. This assumes standard SIS
+    independence (the safety-instrumented path is out of the attacker's
+    reach); see ARCHITECTURE.md.
+  * Trips latch. Once tripped, the plant stays safed until an explicit,
+    deliberate reset (a human/operator action in the real thing) AND the
+    variables are back inside the re-arm band - exactly like a real reactor
+    scram that you cannot clear while still over-pressure.
+  * Limits here are protective trip points, set wider than the normal
+    operating envelope L1 regulates within, so the interlock only fires on a
+    genuine excursion - not on routine control action.
+  * A safety-channel reading that is missing or not a finite number trips the
+    interlock (cause "sis_sensor_fault", safe state e_stop): an SIS that cannot
+    read its own sensor fails safe rather than assuming all is well.
+  * Optional closed-loop safe-hold (SafeHold): instead of an e_stop that kills
+    the reaction, a pressure / high-level trip cuts the feeds back and works
+    purge and product on the safety channel until the plant is back inside the
+    re-arm band, still running. It escalates to e_stop on a runaway
+    (pressure >= SafeHold.runaway_kpa) and stays there until reset.
+_valid; SafeHold; SafeHold.lineup; TripLimits; SafetyInterlock; SafetyInterlock.__init__; SafetyInterlock.evaluate; SafetyInterlock.can_reset; SafetyInterlock.protection_mode; SafetyInterlock.reset; SafetyInterlock.safe_state_inputs; SafetyInterlock._trip
+
+l1_regulator.py
+L1 regulatory control: four PI loops that turn SupervisoryTargets into valve
+positions, and the signer that stamps every outgoing command for the
+provenance gate. Replaces l1_stub.py + live/engine.LiveL1 on the live path
+(the offline experiments keep the stub their saved results were produced with).
+
+Actuator mapping for the TE reactor (primary actuator per variable):
+    pressure    <- purge valve      (open purge -> vent -> pressure falls).
+                   Split range: at the design point purge sits almost shut
+                   (~0.4 %), so when the loop output goes below 0 it raises
+                   both feeds instead: u in [-FEED_SPAN, 0) maps linearly to a
+                   feed trim of 0..+FEED_TRIM_MAX. That is the only way to build
+                   pressure back after a vent / e-stop.
+    level       <- product valve    (open product -> drain -> level falls)
+    production  <- feed 1 valve     feedforward f1 = design f1 x sp/100, plus a
+                   SLOW PI trim on measured product flow
+    A in purge  <- feed 2 valve     (A-rich feed)
+
+Decoupling is by time scale, not by a model: level is the fast loop on the
+product valve; production only trims feed 1 slowly (outflow follows inflow
+through the level loop at steady state), so the two do not fight. Pressure
+uses purge (and the feeds only when purge is saturated shut); while it trims the
+feeds, the production trim is held, so it neither cuts feed 1 back against the
+pressure build-up nor winds up on the throughput change it causes.
+
+Units (the L1 seam): valves are percent [0, 100] (contracts.ControlCommand);
+a_comp_sp is mol PERCENT (e.g. 47.0) while the plant reports a_in_purge as a
+mole FRACTION (~0.47) - converted here, in one place (_a_pct).
+
+Every integrator has conditional-integration anti-windup and every output is
+clamped. Integration uses the real elapsed time the caller passes in (the old
+stub integrated a fixed 0.5 s per ~0.06 s cycle, ~8x too fast). Bumpless
+transfer: bumpless(state) re-seeds every integrator so the next output equals
+the valve positions the plant already holds (call on connect / re-arm); a loop
+whose setpoint goes None (authority 0 = hold) freezes its valve and re-seeds
+itself from that valve when a setpoint returns.
+PI; PI.__init__; PI.__call__; PI.track; _a_pct; L1Regulator; L1Regulator.__init__; L1Regulator.regulate; L1Regulator._resume; L1Regulator._seed; L1Regulator.bumpless; L1Regulator.sign
+
+l1_stub.py
+L1 control stub  --  TEAMMATE-OWNED LAYER. This is only a placeholder.
+
+Your teammate builds the real L1 (regulatory control). This stub exists so you
+can run L0 + L3 end-to-end today without waiting for it. It is a minimal set of
+PI loops that turn SupervisoryTargets into valve positions. Replace wholesale;
+do not build on it.
+
+Mapping used (standard for this reactor):
+    pressure  <- purge valve     (open purge -> vent -> pressure down)
+    level     <- product valve   (open product -> drain -> level down)
+    production<- feed 1 valve     (more feed -> more throughput)
+    A comp    <- feed 2 valve     (A-rich feed trim)
+
+Unit note (the L1 seam): the reactor reports A_in_purge as a mole FRACTION
+(~0.47), so PlantState.a_in_purge arrives as ~0.47. L3's a_comp_sp is written
+in mol PERCENT (contracts.py docstring), e.g. 47.0. Left unconverted, the
+comp loop sees a permanent ~46.5 error and saturates feed2 at its high clamp.
+L1 is where this gets reconciled: convert the measured fraction to percent
+before comparing against the percent target.
+_PI; _PI.__init__; _PI.__call__; L1ControlStub; L1ControlStub.__init__; L1ControlStub.regulate
+
+l3_brain/__init__.py
+
+
+
+l3_brain/operator.py
+L3 AI operator ("Brain").
+
+Owns the operating loop. Each cycle it:
+  1. takes the latest PlantState (handed down from L2/supervisory),
+  2. asks its Policy for SupervisoryTargets,
+  3. applies the governance authority clamp to those targets,
+  4. emits the targets downward (to L1, through governance).
+
+It deliberately does NOT talk to L0 or to valves. Its only output is intent.
+
+Governance seam: `authority_fn` is a callable the governance layer (teammate,
+L1/L2 boundary) provides; it returns the current 0..1 authority. Here we accept
+it as an injected dependency so the brain has no hard dependency on a layer it
+doesn't own. If none is supplied we assume full authority (useful for local
+L0+L3 testing before governance exists).
+
+Hard rule: this handshake (and the policy it wraps) reads ONLY
+PlantState's measured fields - pressure, level, product_flow, a_in_purge,
+valve positions. It never reads `.truth` (the independent SIS channel); that
+channel belongs solely to L0's interlock (l0_plant/safety.py). L3 is
+detection/governance logic operating on the same (possibly faulted) view the
+basic control system sees - the interlock is the only thing with eyes on
+ground truth, and it enforces safety regardless of what L3 asks for.
+
+Server-side model calls: if you later back the policy with a hosted model, make
+that call inside Policy.decide on the server - never ship keys/model calls to a
+client. The loop here is already server-side.
+AIOperator; AIOperator.__init__; AIOperator._apply_authority; AIOperator._apply_authority.blend; AIOperator.step; stub_authority_fn
+
+l3_brain/policy.py
+L3 policy: the decision function the AI operator runs.
+
+The operator (operator.py) owns the loop, logging and the governance handshake;
+the *policy* is just the swappable brain: state in, supervisory targets out.
+This keeps the seam clean so you can start with a transparent heuristic today
+and drop in an RL policy or an LLM-planner later without touching the loop or
+the contracts.
+
+A Policy must implement:  decide(state: PlantState) -> SupervisoryTargets
+Policy; Policy.decide; BaselineOperator; BaselineOperator.__init__; BaselineOperator.decide; Envelope; hold_targets; parse_llm_targets; build_state_prompt; LLMOperator; LLMOperator.__init__; LLMOperator.decide; LLMOperator._get_client; LLMOperator._call_model; LLMOperator.set_note; LLMOperator._user_prompt; LLMOperator._refresh; _http_post_json; OllamaOperator; OllamaOperator.__init__; OllamaOperator._call_model; ollama_available; make_policy
+
+l3_brain/prompt_format.py
+The operator prompt format - ONE definition shared by training and serving.
+
+training/build_dataset.py builds every fine-tune example with these functions,
+and l3_brain/policy.LLMOperator serves the model with the same ones, so the
+model is served exactly what it was trained on:
+
+  system = operator role + the plant's real design point + SIS limits + output contract
+  user   = state_to_json(state): measured PlantState fields as JSON (a_in_purge
+           as a mole fraction, values rounded to 4 dp, never `truth`)
+
+Change the format here and nowhere else; a model trained on the old format must
+be retrained.
+measured_dict; state_to_json; system_prompt
+
+live/__init__.py
+SCRAM live control room: the full stack on the live plant (python -m live).
+
+
+live/__main__.py
+SCRAM live: run the whole stack against the live plant and open the control room.
+
+    python -m live                      # trained model as the brain, demo SIS limits
+    python -m live --brain baseline     # rule-based brain instead
+    python -m live --production-limits  # 5% low-level trip (level-drift attack then takes ~50 min)
+    python -m live --no-reset           # attach to the plant as it is (no container restart)
+    python -m live --no-ollama-fix      # leave Ollama's configuration alone
+
+Starts the GRFICS simulation container if it is not running, then serves
+http://127.0.0.1:8765 (control room, embeds the 3D plant at http://localhost/).
+Persistent Ollama configuration is opt-in through --configure-ollama.
+plant_up; _ollama_up; _ollama_exe; _windows_user_env; _start_ollama; ensure_ollama_cache_cap; main
+
+live/commands.py
+Control-room chat router: turns an operator's typed command into something the plant acts on.
+
+  valves     "set feed 1 to 50%", "open both feeds to 100%", "close the purge"
+             -> a manual valve override (L1 holds the valve; Keel and the SIS still guard it).
+             The AI operator never chooses valve positions, so these never go to the model.
+  release    "release", "back to auto", "give the valves back" -> drop manual overrides
+  setpoints  "lower pressure to 2620", "raise production by 10", "level 50%"
+             -> a canonical instruction the operator model follows reliably
+  free       anything else: sent to the model verbatim (this is how prompt injection is tried)
+_valve_targets; _setpoints; parse; canonical
+
+live/engine.py
+SCRAM live engine: the whole stack running continuously against the live
+GRFICS plant, with the trained operator model as the brain.
+
+One control thread owns the plant connection and runs, every cycle:
+
+    L3  AIOperator(OllamaOperator 'scram-operator' | BaselineOperator)   intent
+          | governance authority (0..1, set from the control room)
+    L2  BehaviorMonitor (measured only) - flags, never acts
+    L1  L1Regulator (l1_regulator.py): four PI loops, bumpless, signs every command
+    L0  PlantService(gate=ProvenanceGate, limits=TripLimits) -> plant
+          SIS interlock on the independent safety channel
+
+Scenarios (attacks / faults) are queued from the HTTP thread and executed on
+the control thread, so nothing else ever touches the plant socket - except the
+"out-of-band write" scenario, which deliberately opens its own connection to
+:55555 the way an attacker on the plant network would.
+_pct; _duration; _num; Engine; Engine.__init__; Engine._make_brain; Engine.effective_authority; Engine.brain_label; Engine._connect; Engine.start; Engine.stop; Engine.submit; Engine.now; Engine.log; Engine._run; Engine._run_action; Engine._clear_actuator_faults; Engine._reconnect; Engine._cycle; Engine._safe_state_label; Engine._auto_rearm; Engine._note_decision; Engine._note_governance; Engine._log_observer_online; Engine._note_observer; Engine._gate_bookkeeping; Engine._inject_forged; Engine._record; Engine._snapshot; Engine.read; Engine._act_authority; Engine._act_brain; Engine._act_level_drift; Engine._act_pressure_dropout; Engine._act_actuator_fault; Engine._act_forged; Engine._act_operator_injection; Engine._check_stolen_key; Engine._act_stolen_key; Engine._check_oob_write; Engine._act_oob_write; Engine._check_sensor_fault; Engine._act_sensor_fault; Engine._chat_add; Engine._check_chat; Engine._act_chat; Engine._release_manual; Engine._act_clear_note; Engine._chat_defense_report; Engine._act_clear_faults; Engine._act_reset_interlock; Engine._rearm; Engine._act_reset_plant
+
+live/server.py
+Control-room HTTP server (stdlib only): serves live/static/ and a small JSON API.
+
+  GET  /api/state?h=<last history seq>&e=<last event id>   snapshot + new trend points + new events
+  POST /api/action  {"action": "...", ...}                  queue a scenario / operator action
+  GET  /grfics/reactor.html                                 the GRFICS 3D reactor alone, full-bleed
+  GET  /grfics/<path> (and /Build /TemplateData /data)     proxied to the plant's web server (:80), so
+                                                           the Unity build loads same-origin, without
+                                                           the GRFICS lab dashboard around it
+
+Binds to 127.0.0.1 only: the actions drive a (simulated) plant.
+make_handler; make_handler.Handler; make_handler.Handler.log_message; make_handler.Handler._send; make_handler.Handler._proxy; make_handler.Handler.do_GET; make_handler.Handler.do_POST; serve
+
+modbus_test.py
+
+
+
+monitor/__init__.py
+
+
+
+monitor/behavior_monitor.py
+Behavior-only anomaly monitor.
+
+This represents the kind of detector a conventional "AI safety" layer would
+plausibly ship: it watches the plant's measured telemetry and the setpoints
+the operator (L3) is requesting, and flags anything that looks outside a
+legal/plausible envelope - soft limits, a rate-of-change-too-HIGH cap, a
+per-cycle setpoint-step cap, AND a rate-of-change-too-LOW (staleness/frozen-
+sensor) check, the standard sensor-integrity check that catches a naive
+stuck-value fault. This is the checklist a sensor-integrity-conscious engineer
+would actually ship, not a strawman with an obvious hole left in on purpose.
+
+It is also, by construction, blind to anything that only shows up on the
+independent SIS channel (contracts.PlantState.truth). It reads ONLY the
+measured fields and the requested SupervisoryTargets - never `.truth` - the
+same restriction a real behavior-only/anomaly-based layer would have if it is
+built on top of the basic control system's own instrumentation. That is
+exactly the limitation the red-team evaluation in
+experiments/adversarial_eval.py demonstrates: a sensor fault that holds
+measured in-band blinds this monitor just as completely as it blinds a human
+operator looking at the same HMI, which is why SCRAM does not rely on this
+class (or anything like it) for protective action - see ARCHITECTURE.md.
+MonitorLimits; BehaviorMonitor; BehaviorMonitor.__init__; BehaviorMonitor.arm_settling; BehaviorMonitor.settling; BehaviorMonitor.ever_flagged; BehaviorMonitor.observe
+
+monitor/governance.py
+L2 governance: turns the L2 monitors' suspicion into an authority CEILING for the
+AI operator - the "when do we throttle the brain" decision.
+
+This SHAPES authority; it does not provide safety. The SIS (l0_plant/safety.py)
+stays the independent hard stop and Keel keeps its own physics / gate-driven
+authority; the operator gets min(Keel's authority, this ceiling).
+
+Inputs each cycle (routed exactly as in Phase 1):
+  * the rule monitor's score (SequentialMonitor), sampled every RULE_SAMPLE_S
+  * the observer's PROPOSAL-side verdicts (provenance_violation,
+    rationale_mismatch, setpoint_drift); telemetry verdicts are display-only
+  * the brain's latest pre-blend intent, for the recovery envelope check
+
+1. Debounce: suspicion only counts once corroborated - two CONSECUTIVE calls of
+   the same monitor both above TIER1 (for the observer: two consecutive verdicts
+   that are proposal-side attack labels). A one-off spike moves nothing.
+   Corroboration is temporal per monitor, not cross-monitor agreement, so the
+   observer can still catch what the rule monitor cannot see.
+2. Ceiling g(s): piecewise, monotonic non-increasing, bounded in [floor, 1]; the
+   floor is NONZERO so no verdict (single, repeated or hallucinated) can drive the
+   operator to 0.
+3. Rates: the applied ceiling falls toward g(s) fast (DROP_PER_S) and rises slowly
+   (RECOVER_PER_S), and only after suspicion has stayed below TIER1 for
+   CLEAN_WINDOW_S AND the operator's latest proposal is back inside the design
+   envelope - recovery is not just history aging out.
+ceiling; in_envelope; GovState; GovState.as_dict; Governor; Governor.__init__; Governor.reset; Governor._observer; Governor._rule; Governor.update
+
+monitor/observer.py
+L2 observer wrapper: the fine-tuned observer models as live ADVISORY detectors
+beside the rule-based SequentialMonitor. The two checks are served by different
+models, each on its strength (make_split_observer):
+  PROPOSALS  v2 (Ollama "scram-observer")   - feeds authority; v2's proposal head
+             raised no false alarms where v3's did
+             (experiments/observer_v3_proposal_replay.json). Fallback: none
+             (rule monitor only) - never v3.
+  TELEMETRY  v3 ("scram-observer-v3")       - display only; fallback v2, then nothing.
+Each path falls down its own chain after MAX_CONSECUTIVE_ERRORS backend errors.
+
+Each control cycle the engine calls feed(t, state, intent, commanded). An Observer
+keeps the inputs its model was trained on - the brain's last HISTORY_N proposals
+(sampled every PROPOSAL_EVERY_S) and/or the last WINDOW_N measured samples (every
+SAMPLE_S) - and runs its calls on a background thread, so the control loop never
+waits on a model. The split's two paths share one in-flight gate and check every
+SPLIT_CHECK_EVERY_S each: the request pattern the co-residency check validated
+(operator + v2 + v3 resident, no reloads). Requests pin keep_alive so idle gaps
+never unload a model.
+Serving three models needs LLAMA_ARG_CACHE_RAM=0 for Ollama (model/README.md):
+llama-server's default 8 GB-per-runner prompt cache otherwise exhausts host RAM.
+
+suspicion() is what Keel may consume, and it is ROUTED by input type: only the
+proposal-side labels (provenance_violation, rationale_mismatch, setpoint_drift)
+count; the observer's telemetry verdicts are shown but never fed to Keel - the
+rule monitors and the SIS own telemetry. normal -> 0; an attack label -> its
+score, floored at SCORE_FLOOR. Any bad, invalid or missing output -> 0 and a
+note, never a spurious alarm (same degrade-to-safe rule as the operator).
+
+The format module is injectable and brings its own window (WINDOW_N, SAMPLE_S).
+A format with TELEMETRY_COMMANDED (v3) also gets, per sample, the valve positions
+L1 last sent - the command whose result that sample is, exactly how the training
+recordings paired them - and both go through measured_dict's rounding, so a live
+window is built the way the training windows were.
+Verdict; Verdict.as_dict; _http_post_json; observer_available; Observer; Observer.__init__; Observer.reset; Observer.feed; Observer._maybe_check; Observer._run; Observer.suspicion; Observer.snapshot; _first_installed; SplitObserver; SplitObserver.__init__; SplitObserver._build; SplitObserver.available; SplitObserver.model; SplitObserver.feed; SplitObserver.last; SplitObserver.suspicion; SplitObserver.reset; SplitObserver.fallback; SplitObserver.snapshot; make_split_observer
+
+monitor/observer_v2_format.py
+The v2 L2 observer prompt format (observer_merged_v2), reproduced EXACTLY from its
+training data (training/observer_v2/observer_train.jsonl / observer_val.jsonl), so
+the served model sees byte-for-byte what it was trained on.
+tests/test_observer_v2_format.py rebuilds every stored input with these
+functions and compares the strings - change nothing here without that test.
+
+  system    = SYSTEM_PROMPT (verbatim from the dataset)
+  user      = telemetry_to_json(samples, window_s): the last WINDOW_N measured
+              samples, oldest first, one list per field
+            | proposals_to_json(proposals): the operator's last HISTORY_N
+              proposals, oldest first (setpoints, provenance tag, rationale)
+  assistant = {"label", "score", "reason"} with LABELS (7, incl. provenance_violation)
+
+Measured fields only, never the SIS channel. The v3 observer has its own format
+(monitor/observer_v3_format.py), which reuses this module's proposals turn verbatim.
+_r; telemetry_to_json; proposal_dict; proposals_to_json; messages; parse
+
+monitor/observer_v3_format.py
+The v3 L2 observer prompt format - ONE definition shared by training
+(training/build_observer_dataset.py) and, once v3 is trained, serving.
+
+v3 changes only the TELEMETRY side of v2 (monitor/observer_v2_format.py):
+  * a longer window: WINDOW_N samples at SAMPLE_S spacing (~15 s, v2: 6 samples
+    ~2.6 s), so slow drifts are visible
+  * every flow (v2 had no feed 2) and, per valve, the actual position next to the
+    position L1 commanded (<valve>_valve_pos / <valve>_valve_cmd) - the gap is
+    what an actuator fault looks like, and v2 could not see it
+The PROPOSALS turn, its system-prompt paragraph and the 7 labels are v2's,
+unchanged: v2's proposal-side examples are reused verbatim.
+
+Measured fields and L1's own commands only, never the SIS channel.
+_r; telemetry_to_json; messages; verdict_to_json
+
+monitor/physics_detector.py
+Release-gated measured-physics classifier, restricted to advisory telemetry.
+PhysicsDetector; PhysicsDetector.correct; approved_physics_detector
+
+monitor/physics_features.py
+Measured-only, process-invariant features for the TE telemetry detector.
+
+Mass balances explain legitimate valve/flow transients instead of treating large
+changes as faults. No labels, rationale, scenario names or SIS truth are inputs.
+_average; _balances; _balances.interval_distance; physics_features
+
+monitor/sequential_monitor.py
+Sequential (cumulative) monitor -- the spec's "Lookout" (L2), advisory only.
+
+BehaviorMonitor (monitor/behavior_monitor.py) judges ONE step at a time: a
+setpoint jump over a cap, a rate over a cap, a frozen signal. An attacker who
+keeps every step under those caps is invisible to it by construction (the
+"sub-threshold / distributed" attack). This monitor looks at the TRAJECTORY of
+what L3 asks for:
+
+  1. CUSUM per setpoint channel  - accumulates same-direction creep that no
+     single step reveals (e.g. 20 kPa steps under a 100 kPa step cap).
+  2. Same-sign run length        - n consecutive moves in one direction.
+  3. Rationale screen            - weak lexical check of the agent's free-text
+     rationale for injection-style language (the indirect-injection surface).
+  4. Keel corroboration          - if the trusted enforcer reports divergence /
+     rate-bound / load-line, suspicion is floored up (L2 reads Keel *events*,
+     never the SIS channel itself).
+
+Output is a score in [0,1] + a short reason, i.e. the spec's SuspicionSignal.
+It is ADVISORY: feed it to Keel.step(suspicion=...). It can only lower
+authority there, with a floor, so a defeated or hostile L2 cannot cause an
+unsafe actuation and cannot zero authority on its own.
+
+Like BehaviorMonitor it reads only measured fields + requested targets.
+Known limit (state it in the viva): a patient attacker can hold CUSUM below
+threshold too (Distributed Detectability Band). That is why Keel, not this
+class, is the gate.
+Suspicion; Suspicion.as_dict; _Chan; SequentialMonitor; SequentialMonitor.__init__; SequentialMonitor.observe; SequentialMonitor.reset_channel; SequentialMonitor.reset_all; SequentialMonitor._rationale
+
+monitor/telemetry_classifier.py
+Small advisory telemetry classifier; JSON trees, no sklearn runtime dependency.
+
+Only measured fields and commanded positions are features. This classifier does
+not control valves or contribute to governance authority.
+_stats; features; TelemetryClassifier; TelemetryClassifier.__init__; TelemetryClassifier.predict; TelemetryClassifier.correct; approved_specialist
+
+run_demo.py
+End-to-end SCRAM demo: L0 (yours) + L1 stub (teammate placeholder) + L3 (yours).
+
+Wires one closed control cycle against the live plant container on :55555:
+
+    L3 BaselineOperator.decide(state) -> SupervisoryTargets
+          |
+    L1ControlStub.regulate(targets, state, dt) -> ControlCommand
+          |
+    L0 PlantService.apply(command) -> next PlantState
+          |  (back up to the top of the next cycle)
+
+Demonstrates that:
+  * L3 only ever emits setpoints (never valves),
+  * L1 regulates to them (including the A_in_purge fraction/percent
+    reconciliation - see l1_stub.py),
+  * L0 publishes measured state and owns the independent interlock, which
+    stays armed (evaluating every cycle) without tripping under baseline
+    operation.
+
+Prereq: the plant container must be running and reachable on :55555:
+    docker compose up -d simulation
+main
+
+scripts/__init__.py
+
+
+
+scripts/check_simulator.py
+Exercise a separately launched Linux simulator on an unused port.
+
+Usage (Linux/WSL): python3 scripts/check_simulator.py artifacts/simulator/simulation
+Does not connect to or reset the application's simulator.
+main
+
+scripts/collect_accuracy_holdout.py
+Collect new isolated TE trajectories and seal a measured-telemetry benchmark.
+
+Run on Linux/WSL with a test-only accelerated binary. It starts its own simulator
+on an unused port and never connects to the application plant. Synthetic sensor
+and actuator-offset cases are identified as such in the manifest.
+IsolatedPlant; IsolatedPlant.__init__; IsolatedPlant.write; IsolatedPlant.close; window; collect; collect.add
+
+scripts/demo_authority.py
+Demo: the L3 governance authority handshake (l3_brain/operator.py) against
+the live plant container, at authority 1.0 / 0.5 / 0.0.
+
+Takes one real PlantState snapshot from the running container, then runs
+AIOperator.step() against it with three fixed authority_fn values to show the
+targets getting progressively more conservative - full request, blended
+toward current, then a true hold (all setpoints None). Does not drive the
+plant; read-only.
+
+Prereq: docker compose up -d simulation
+show; main
+
+scripts/reset_plant.py
+Reset the plant container to its designed operating point and confirm it has
+settled before a run depends on it.
+
+Why this exists: PlantService doesn't persist any state of its own, but the
+simulator container does, in the running TE process - whatever valve
+positions, e_stop, and sensor faults a previous run or test left behind carry
+over into the next one. A run that assumes it's starting near the ~2700 kPa /
+~44% design point can instead inherit a mid-transient state (e.g. valves
+pinned wide open from an aborted trip test), which silently turns a
+"baseline holds in band" demo into a recovery-transient demo, or makes an
+interlock trip test time out because truth is starting far from the limit.
+
+What `docker compose restart simulation` does: it restarts the container's
+PID 1 (supervisord), which respawns the simulation binary. The TE object
+lives only in that process's memory (no volume persists it), so a fresh
+process means a fresh TE() constructor - which calls steady_state() and
+lands pressure at 2700 kPa, liquid_level at ~44.2%, and all four valves at
+their physics-derived steady positions. Confirmed empirically: after a
+restart, truth drifts <1 kPa over the first 12 reads with no valve commands
+sent - it is already essentially settled, not just pointed at a target. This
+script still polls for stability rather than assuming that, so it also works
+if a future image version needs a real warmup.
+
+Usage:
+    python -m scripts.reset_plant                 # restart + wait, print the settled point
+    python -m scripts.reset_plant --no-restart     # skip the restart, just wait/confirm settled
+
+As a library:
+    from scripts.reset_plant import reset_and_settle
+    point = reset_and_settle()   # dict: pressure, level, valve positions, cycles_to_settle
+SettledPoint; restart_container; wait_reachable; wait_settled; wait_settled.read_once; set_design_purge; reset_and_settle; main
+
+scripts/review_findings.py
+Inspect the review findings after hardening, without real plant writes.
+
+Run: python -m scripts.review_findings
+The regression tests under tests/test_quality_hardening.py assert the corrected behavior.
+main; main.FakeClient; main.FakeClient.write_inputs; main.post
+
+sim_app/__init__.py
+Clean TE reactor operator sim (no interlock): python -m sim_app.
+
+
+sim_app/__main__.py
+python -m sim_app [--port 8770] [--no-browser]  -  starts the plant container if needed.
+plant_up; main
+
+sim_app/ai.py
+AI operator for the clean sim. Two capabilities, no interlock or enforcer:
+
+1. parse_command(text): the STOCK qwen2.5:1.5b (Ollama) turns plain English into
+   one JSON action {action, valve, amount}, constrained by a JSON schema. A
+   small grammar check then settles "to N" (absolute) vs "by N" (relative),
+   which a 1.5B model mixes up; any correction is reported, never hidden.
+
+2. Rescue: the TRAINED scram-operator (Ollama, via l3_brain.policy.OllamaOperator
+   - same prompt format, parse, validate and envelope clamp it was trained for)
+   runs closed-loop every ~2 s. It reads the measured state and emits setpoints;
+   `regulate()` turns them into valve positions; the loop applies them and
+   stops once pressure and level are back near the design point.
+
+regulate() is deliberately simple and directionally correct for this TE model:
+    pressure above setpoint -> open purge, cut both feeds, open product a little
+    at setpoint             -> purge at its design opening (vents feed 1's inert B)
+    pressure below setpoint -> purge shut, feeds raised
+    production setpoint     -> both feeds scaled from the design lineup
+    level above setpoint    -> open product (below -> close it)
+It never drives feeds from product flow (the l1_stub's production loop does,
+and fights the level loop; that is the feed-cut bug it avoids).
+_direction; _post; _check; _ask; parse_command; _ground_action; _clause_for; parse_commands; _clamp; regulate; plant_state; Activity; Activity.__init__; Activity.add; Activity.since; Rescue; Rescue.__init__; Rescue.start; Rescue.stop; Rescue._apply; Rescue._finish; Rescue._run
+
+sim_app/server.py
+TE reactor operator sim: a clean manual-control front end for the live GRFICS
+plant (:55555). No interlock, no provenance gate, no monitor, no attacker - the
+operator's valve moves go straight to the simulator.
+
+The sim's real manipulated inputs (TE_process.cc / the running image):
+    f1_valve_sp, f2_valve_sp, purge_valve_sp, product_valve_sp  (0-100 %)
+    e_stop                                                      (0/1)
+There is NO coolant / cooling input and no temperature state in this TE model;
+over-pressure is its failure mode.
+
+Rupture: GRFICS represents the explosion in its Unity 3D client, not the
+simulator. TenEastSimulationConnector polls pressure and, once it crosses
+`explosion_threshold`, latches `exploded` and plays ExplosionManager /
+PostExplosionEffects (vessel blown open, steam, camera shake, cracked glass).
+Measured on this image: intact at 3087 kPa, ruptured by 3122 kPa (threshold
+3100); it stays ruptured when pressure falls again and only a simulation reset
+clears it. The simulator itself clamps pressure at 3200 kPa. This server
+mirrors that latch so the page can show it.
+
+AI operator (sim_app/ai.py): plain-English commands parsed by the stock
+qwen2.5:1.5b, and a "save the reactor" closed loop flown by the trained
+scram-operator. Both go through the same valve path as the manual controls.
+
+Run:  python -m sim_app            (http://127.0.0.1:8770)
+_num; _serialized; _serialized.guarded; Plant; Plant.__init__; Plant._txn; Plant.read; Plant.write; Plant._clear_rupture; Plant.start; Plant.stop; Plant._poll; Plant._ingest; Plant.snapshot; Plant._check_writable; Plant.apply_valves; Plant.manipulate; Plant.reset; Manipulation; Manipulation.one_of; lifespan; get_state; manipulate; Command; command; rescue; stop_ai; reset; index; _FrontendFiles; _FrontendFiles.get_response
+
+simulation/simulation/remote_io/modbus/analyzer.py
+
+handleanalyzer
+
+simulation/simulation/remote_io/modbus/feed1.py
+
+handlefeed1
+
+simulation/simulation/remote_io/modbus/feed2.py
+
+handlefeed2
+
+simulation/simulation/remote_io/modbus/helper.py
+Helper for commandline etc.
+
+Contains common functions get get_command_line() to avoid duplicating
+code that are not relevant for the code as such, like e.g.
+get_command_line
+get_commandline; get_certificate
+
+simulation/simulation/remote_io/modbus/modbusdevice.py
+
+clamp_value; write_with_timeout; read_with_timeout; readData; writeData; run_device; run_device.maintain_connection
+
+simulation/simulation/remote_io/modbus/product.py
+
+handleproduct
+
+simulation/simulation/remote_io/modbus/purge.py
+
+handlepurge
+
+simulation/simulation/remote_io/modbus/remote_io.py
+MODIFIED Pymodbus Asynchronous Server Example
+--------------------------------------------------------------------------
+
+The asynchronous server is a high performance implementation using the
+twisted library as its backend.  This allows it to scale to many thousands
+of nodes which can be helpful for testing monitoring software.
+run_async_server
+
+simulation/simulation/remote_io/modbus/server_async.py
+Pymodbus asynchronous Server Example.
+
+An example of a multi threaded asynchronous server.
+
+usage::
+
+    server_async.py [-h] [--comm {tcp,udp,serial,tls}]
+                    [--framer {ascii,rtu,socket,tls}]
+                    [--log {critical,error,warning,info,debug}]
+                    [--port PORT] [--store {sequential,sparse,factory,none}]
+                    [--slaves SLAVES]
+
+    -h, --help
+        show this help message and exit
+    -c, --comm {tcp,udp,serial,tls}
+        set communication, default is tcp
+    -f, --framer {ascii,rtu,socket,tls}
+        set framer, default depends on --comm
+    -l, --log {critical,error,warning,info,debug}
+        set log level, default is info
+    -p, --port PORT
+        set port
+        set serial device baud rate
+    --store {sequential,sparse,factory,none}
+        set datastore type
+    --slaves SLAVES
+        set number of slaves to respond to
+
+The corresponding client can be started as:
+
+    python3 client_sync.py
+setup_server; run_async_server; async_helper
+
+simulation/simulation/remote_io/modbus/tank.py
+
+handletank
+
+tests/test_governance.py
+Fast tests for monitor/governance.py: ceiling shape, debounce, asymmetric rates, recovery gate.
+test_ceiling_is_monotonic_bounded_and_floored; verdict; test_one_observer_verdict_moves_nothing_two_consecutive_do; test_a_normal_verdict_between_spikes_breaks_the_streak; test_rule_monitor_needs_two_samples_a_second_apart; drive; test_drop_is_fast_recovery_slow_and_gated; test_floor_holds_under_sustained_maximal_suspicion; test_residual_rule_evidence_fades_fast_only_inside_the_envelope; test_residual_rule_evidence_fades_fast_only_inside_the_envelope.cusum; test_reattack_during_recovery_clamps_to_floor_fast; test_per_cycle_rule_checks_are_never_discounted; drive_src
+
+tests/test_interlock_truth.py
+Integration test: the SCRAM interlock trips off the independent
+safety-instrumented sensor path even while a fault holds the basic control
+system's MEASURED view in-band.
+
+Requires the plant container to be running and reachable on 127.0.0.1:55555
+(docker compose up -d simulation). Skipped automatically if it isn't.
+
+Scenario:
+  1. Freeze the pressure sensor (fault_injection.freeze) - its measured
+     reading stops moving at a healthy, in-band value.
+  2. Pin the feed valves open and the outflow valves shut via the normal L0
+     control path (plant.apply) to drive TRUE pressure toward the hard limit,
+     while confirming measured pressure never leaves its frozen band.
+  3. Assert the interlock still trips (on truth), latches, forces the plant
+     safe regardless of the commanded valves, and refuses reset_interlock()
+     until truth is back inside the re-arm band - all while the frozen sensor
+     is still reporting a healthy, in-band value throughout.
+_plant_reachable; plant; test_interlock_trips_on_truth_while_measured_stays_in_band; test_reset_interlock_rejected_when_not_tripped_is_noop
+
+tests/test_keel.py
+Fast pure-logic tests for enforcer/keel.py (no container, no network).
+state; run; test_nominal_with_noise_never_intervenes; test_pressure_ramp_is_clamped_before_the_sis_trip; test_slow_level_drain_trips_load_line_before_sis; test_divergence_from_spoofed_measurement_costs_authority; test_measured_view_can_never_relax_a_clamp; test_safety_moves_are_not_throttled; test_l2_alone_cannot_push_authority_below_floor; test_authority_recovers_slowly_when_clean; test_gate_rejections_lead_to_divert; test_invalid_sis_reading_fails_safe; test_event_log_chain_verifies_and_detects_tamper
+
+tests/test_l1_regulator.py
+Fast tests for l1_regulator.L1Regulator against a toy TE-like plant (no container).
+
+The toy plant only has the right SIGNS and rough magnitudes of the live plant
+(pressure ~0.13 kPa/s per % purge and ~0.035 kPa/s per % of total feed, with a
+5 s lag; level integrates product inflow minus outflow; A responds to feed 2).
+It exists to check loop structure - tracking, no sustained oscillation, no
+windup, units, bumpless transfer - not to tune gains (that is done live).
+ToyPlant; ToyPlant.__init__; ToyPlant.state; ToyPlant.step; run; fresh; test_holds_the_design_point; _settles; test_each_setpoint_step_settles_without_sustained_oscillation; test_no_windup_after_an_unreachable_setpoint; test_a_comp_setpoint_and_measurement_are_in_the_same_units; test_l1_commands_pass_the_gate_and_tampered_ones_do_not; test_bumpless_on_rearm_and_on_authority_hand_back
+
+tests/test_llm_operator.py
+Fast tests for l3_brain/policy.py's LLMOperator: output parser/validator and the
+operator's robustness behaviour. No network - the model client is a fake.
+make_state; test_parses_valid_output; test_clamps_to_envelope_and_says_so; test_null_and_missing_setpoints_mean_hold_that_field; test_tolerates_code_fence_and_surrounding_prose; test_custom_envelope_is_respected; test_rejects_malformed_output; test_ignores_extra_keys_including_valve_positions; test_rationale_is_truncated; test_prompt_uses_measured_fields_and_never_truth; test_served_user_turn_matches_dataset_format; test_served_system_prompt_uses_real_design_point; test_design_point_constant_matches_sim_reading; FakeClient; FakeClient.__init__; FakeClient.create; reply; make_op; is_hold; test_returns_model_decision; test_caches_between_intervals_and_refreshes_after; test_any_failure_degrades_to_hold_and_never_raises; test_no_client_degrades_to_hold; test_failed_call_is_not_retried_every_cycle; test_scrammed_plant_holds_without_calling_model; test_background_mode_never_blocks_decide; test_background_mode_never_blocks_decide.SlowClient; test_background_mode_never_blocks_decide.SlowClient.create; test_make_policy_defaults_to_baseline; test_make_policy_has_no_hosted_api_path; FakeOllama; FakeOllama.__init__; FakeOllama.__call__; ollama_reply; test_ollama_path_parses_trained_model_reply; test_ollama_reply_is_clamped_to_envelope; test_ollama_trained_hold_reply_is_a_hold; test_ollama_failure_degrades_to_hold; test_ollama_scrammed_plant_holds_without_calling_model; test_make_policy_ollama_selected_by_env; test_make_policy_ollama_unavailable_falls_back_to_baseline; test_ollama_available_is_false_when_server_unreachable
+
+tests/test_observer_dataset.py
+Fast tests for the v3 observer format and dataset builder (no container, no model).
+test_v3_prompt_changes_only_the_telemetry_paragraph; test_v3_telemetry_turn_has_long_window_all_flows_and_commanded_valves; built; _read; test_v2_proposal_examples_are_carried_over_byte_for_byte; test_builder_emits_valid_jsonl_with_the_requested_telemetry_counts
+
+tests/test_observer_v2_format.py
+Parity gate: monitor/observer_v2_format rebuilds EVERY stored v2 training/val input
+byte-for-byte, so the served v2 observer sees exactly what it was trained on.
+_examples; _rebuild; test_every_stored_input_is_rebuilt_byte_for_byte; test_live_floats_serialize_like_the_stored_numbers; test_assistant_turns_parse_under_the_v2_labels
+
+tests/test_observer_v3_format.py
+Parity gate: monitor/observer_v3_format rebuilds EVERY stored v3 train/val/unseen input
+byte-for-byte, so the served v3 observer sees exactly what it was trained on. The live
+wrapper builds its v3 telemetry through the same module; a live-built window must pass
+the same gate (tests/test_observer_wrapper.py and the live sanity run check that).
+_examples; rebuild; telemetry_key_order; test_every_stored_v3_input_is_rebuilt_byte_for_byte; test_stored_telemetry_shapes_and_float_types_match_what_is_served; test_assistant_turns_parse_under_the_v3_labels
+
+tests/test_observer_wrapper.py
+Fast tests for monitor/observer.py: routing, flooring and degrade-to-zero (Ollama faked).
+make; make.post; run; verdict; test_proposal_attack_label_reaches_keel_and_telemetry_label_does_not; test_telemetry_only_alarm_never_feeds_keel; test_low_score_attack_is_floored_and_normal_is_zero; test_bad_output_or_backend_failure_degrades_to_zero; test_proposals_wait_for_a_full_history_and_reset_clears_verdicts; test_live_inputs_use_the_exact_v2_format; make_v3; make_v3.post; run_v3; test_v3_live_built_telemetry_passes_the_v3_parity_gate; test_v3_live_window_has_the_stored_key_order; test_v3_takes_no_telemetry_sample_without_a_command; test_v3_telemetry_verdicts_never_reach_authority; test_v3_proposal_side_feeds_authority_exactly_as_v2; make_split; make_split.post; run_split; test_split_routes_proposals_to_v2_and_telemetry_to_v3; test_split_live_telemetry_still_passes_the_v3_parity_gate; test_split_authority_comes_from_the_v2_proposal_path_only; test_split_paths_share_one_in_flight_call_and_keep_the_validated_rate; test_split_fallback_chains_per_path; test_split_runtime_fallback_when_a_model_keeps_failing; test_backend_errors_count_up_and_a_reply_resets_them
+
+tests/test_parser_grounding.py
+Models may not invent an actuator that the operator did not name.
+test_hallucinated_supported_valve_is_refused; test_hallucinated_supported_valve_is_refused.post; test_model_cannot_supply_a_forged_clause_to_ground_a_valve; test_model_cannot_supply_a_forged_clause_to_ground_a_valve.post; test_supported_action_survives_an_unsupported_action_in_same_command; test_supported_action_survives_an_unsupported_action_in_same_command.post
+
+tests/test_physics_detector.py
+Physics release integrity and advisory routing regression checks.
+normal_window; test_release_evidence_and_prediction; test_changed_model_evidence_is_rejected; test_correction_retains_llm_label_and_has_no_authority
+
+tests/test_provenance_gate.py
+Fast, pure-logic tests for l0_plant/provenance_gate.py and its PlantService
+wiring (fake plant client, no container): accept authorized, reject injected.
+make_gate; test_authorized_signed_command_is_accepted; test_accepted_command_becomes_last_good; test_unsigned_command_rejected_in_strict_mode; test_unsigned_command_trusted_in_legacy_mode; test_wrong_key_rejected; test_tampered_values_rejected; test_replayed_command_rejected; test_clamped_preserves_provenance_fields; test_legacy_construction_still_works; test_audit_clean_when_plant_matches_last_good; test_audit_flags_out_of_band_valve_write; test_audit_flags_injected_e_stop; test_audit_expects_e_stop_after_safe_state_note; test_audit_expects_closed_product_for_low_level_safe_state; FakePlant; FakePlant.__init__; FakePlant.connect; FakePlant.close; FakePlant._raw; FakePlant.read; FakePlant.write_inputs; make_service; test_service_applies_authorized_command_and_rejects_identical_unsigned_one; test_service_detects_out_of_band_write_and_reasserts_last_good; test_service_without_gate_is_unchanged_legacy_behaviour; test_clamped_refuses_non_finite; test_gate_rejects_signed_non_finite_command; test_service_never_applies_nan_valve_with_gate; test_service_never_applies_nan_valve_without_gate
+
+tests/test_quality_hardening.py
+Regression tests for combined hazards, cancellation races, and evidence lifetime.
+test_combined_pressure_and_low_inventory_relieves_without_draining; test_sensor_loss_after_any_trip_escalates_and_latches; test_subprecision_tampering_is_rejected; test_observer_discards_inflight_result_after_reset; test_observer_discards_inflight_result_after_reset.post; test_observer_suspicion_expires_even_without_a_new_model_result; test_estop_during_inference_prevents_all_later_ai_writes; test_estop_during_inference_prevents_all_later_ai_writes.SlowOperator; test_estop_during_inference_prevents_all_later_ai_writes.SlowOperator.__init__; test_estop_during_inference_prevents_all_later_ai_writes.SlowOperator.decide; test_emergency_stop_serializes_with_a_pending_valve_write; test_polling_start_is_idempotent_and_shutdown_joins_worker; test_direct_nonfinite_batch_write_is_rejected; test_action_flood_is_bounded_without_blocking_control_thread; test_snapshot_marks_old_measurements_stale; test_failed_emergency_stop_is_pending_then_reasserted_on_reconnect; test_failed_emergency_stop_is_pending_then_reasserted_on_reconnect.Sim; test_failed_emergency_stop_is_pending_then_reasserted_on_reconnect.Sim.write_inputs; test_failed_emergency_stop_is_pending_then_reasserted_on_reconnect.disconnected
+
+tests/test_recovery_console.py
+SIS safe-hold + auto re-arm, operator chat, and custom-attack validation (fast: no container, no model).
+_tripped; test_pressure_trip_runs_the_safe_hold_instead_of_estop; test_safe_hold_eases_off_as_pressure_falls; test_runaway_escalates_to_estop_and_stays_latched_until_reset; test_sensor_fault_and_missing_readings_still_estop; test_gate_expects_the_whole_safe_hold_lineup; _engine_with_trip; test_auto_rearm_waits_for_a_stable_band; test_no_auto_rearm_outside_the_band; test_auto_rearm_locks_out_after_repeated_trips; _state; _fake_ollama; _fake_ollama.post; test_note_reaches_the_model_prompt_and_is_recorded_on_the_decision; test_chat_with_baseline_brain_explains_instead_of_failing; test_empty_chat_is_rejected_synchronously; test_bad_custom_attack_arguments_are_rejected; test_valve_orders_become_manual_overrides; test_setpoint_orders_keep_the_words_and_add_explicit_targets; test_manual_override_is_applied_and_released
+
+tests/test_review_fixes.py
+Regression tests for the 2026-10-23 code review fixes (fast: no container, no model).
+FakeClient; FakeClient.__init__; FakeClient.read; FakeClient.write_inputs; _svc; test_missing_safety_channel_trips_as_sensor_fault_not_level_low; test_rejected_command_with_no_last_good_holds_instead_of_crashing; test_reset_with_missing_safety_channel_stays_latched; _Fixed; _Fixed.decide; _state; test_nan_authority_holds_instead_of_granting_full_authority; _v; test_observer_evidence_clears_when_the_observer_disappears; test_stale_observer_verdict_stops_holding_the_ceiling; test_observer_releases_the_gate_when_building_a_prompt_fails; test_observer_releases_the_gate_when_building_a_prompt_fails.BadFmt; test_observer_releases_the_gate_when_building_a_prompt_fails.BadFmt.proposal_dict; test_observer_releases_the_gate_when_building_a_prompt_fails.BadFmt.proposals_to_json; test_bad_action_is_logged_not_treated_as_a_lost_connection; test_sim_app_ingest_tolerates_null_valve_positions; test_control_room_server_rejects_malformed_requests; test_control_room_server_rejects_malformed_requests._Eng; test_control_room_server_rejects_malformed_requests._Eng.read; test_control_room_server_rejects_malformed_requests._Eng.submit; test_control_room_server_rejects_malformed_requests.call
+
+tests/test_safety_unit.py
+Fast unit test for l0_plant/safety.py: pure logic, no container, no network.
+
+Feeds SafetyInterlock.evaluate()/reset() plain pressure/level numbers and
+checks trip, latch, override-while-tripped, and re-arm behavior. Should run
+in well under a second - if it doesn't, something is talking to the network.
+make_interlock; test_no_trip_within_normal_envelope; test_trips_on_high_pressure; test_trips_on_low_level; test_trips_on_high_level; test_does_not_trip_just_below_each_limit; test_trip_latches_even_after_values_recover; test_latched_trip_ignores_a_second_different_excursion; test_once_tripped_every_call_reports_tripped_regardless_of_values; test_reset_refused_while_still_outside_rearm_band; test_reset_refused_just_outside_rearm_band_on_level; test_reset_succeeds_once_inside_rearm_band; test_reset_on_untripped_interlock_is_a_noop; test_can_trip_again_after_a_clean_reset; test_low_level_trip_closes_product_and_does_not_estop; test_pressure_and_high_level_trips_still_estop; test_cause_latches_with_first_trip_and_clears_on_reset; test_invalid_reading_trips_with_sensor_fault; test_cannot_rearm_on_invalid_reading; test_monitor_settling_grace_mutes_only_staleness; test_monitor_settling_grace_mutes_only_staleness.moving; test_monitor_settling_grace_mutes_only_staleness.frozen_flags; test_flat_level_at_steady_state_is_not_frozen
+
+tests/test_sequential_monitor.py
+Fast tests for monitor/sequential_monitor.py, incl. the case BehaviorMonitor misses.
+st; test_staircase_evades_behavior_monitor_but_not_sequential; test_benign_wiggle_stays_low; test_same_setpoint_reissue_is_not_a_move; test_rationale_screen_flags_injection_language; test_keel_events_floor_the_score; test_back_off_and_return_scores_net_displacement; test_reversal_does_not_hide_a_net_staircase
+
+tests/test_sim_app_ai.py
+Fast tests for sim_app/ai.py: command parsing (Ollama mocked) and the rescue regulator.
+fake; fake.post; test_parse_command; test_parse_command_bad_json_is_unknown; state; test_regulator_high_pressure_opens_outlets_and_cuts_feeds; test_regulator_at_design_point_returns_design_lineup; test_regulator_low_pressure_shuts_purge_and_raises_feeds; test_regulator_level_high_opens_product; test_regulator_hold_when_model_holds
+
+tests/test_sim_app_bugs.py
+Regression tests for the sim_app bug fixes (no network, no plant: fakes only).
+FakeSim; FakeSim.__init__; FakeSim._raw; FakeSim.read; FakeSim.write_inputs; FakeSim.close; make_plant; test_estop_release_steps_from_real_valve_positions; test_valve_moves_refused_while_estop_on; test_setpoints_follow_external_writes; test_second_concurrent_reset_is_refused; test_second_concurrent_reset_is_refused.Pt; test_second_concurrent_reset_is_refused.slow_reset; fake_llm; test_direction_check_only_when_unambiguous; FakeOp; FakeOp.__init__; FakeOp.decide; RecPlant; RecPlant.__init__; RecPlant.read; RecPlant.write; RecPlant.apply_valves; fast; wait_until; rescue_threads; test_quick_stop_then_save_leaves_one_loop; test_stop_during_decision_writes_nothing_after; test_transient_read_failure_is_retried; test_persistent_read_failure_disengages_loudly; test_model_failures_disengage_after_three; test_low_pressure_boost_scales_with_deficit; test_design_purge_matches_te_steady_state_equations; test_regulator_keeps_design_purge_open_at_setpoint; test_reset_applies_design_purge; test_reset_applies_design_purge.Conn; test_reset_applies_design_purge.Conn.__enter__; test_reset_applies_design_purge.Conn.__exit__; test_reset_applies_design_purge.Conn.makefile; test_reset_applies_design_purge.Conn.makefile.F; test_reset_applies_design_purge.Conn.makefile.F.write; test_reset_applies_design_purge.Conn.makefile.F.flush; test_reset_applies_design_purge.Conn.makefile.F.readline; test_design_purge_retries_when_the_write_is_dropped; test_design_purge_retries_when_the_write_is_dropped.Conn; test_design_purge_retries_when_the_write_is_dropped.Conn.__enter__; test_design_purge_retries_when_the_write_is_dropped.Conn.__exit__; test_design_purge_retries_when_the_write_is_dropped.Conn.makefile; test_design_purge_retries_when_the_write_is_dropped.Conn.makefile.F; test_design_purge_retries_when_the_write_is_dropped.Conn.makefile.F.write; test_design_purge_retries_when_the_write_is_dropped.Conn.makefile.F.flush; test_design_purge_retries_when_the_write_is_dropped.Conn.makefile.F.readline; fake_multi; test_parse_commands_splits_and_checks_each_clause; test_parse_commands_checks_against_the_real_segment_when_clause_is_paraphrased; test_parse_commands_bad_output_is_one_unknown; test_parse_commands_caps_the_number_of_actions; _client; test_command_endpoint_applies_all_actions_in_order; test_command_endpoint_reports_partial_failure_and_keeps_going; test_command_endpoint_all_unknown_is_422; test_command_endpoint_refused_actions_are_409; test_shut_without_number_is_set_zero_and_fully_open_is_100; test_clause_naming_two_valves_gets_both
+
+tests/test_telemetry_quality.py
+Deployment policy, data leakage, and telemetry-only routing checks.
+test_clean_observer_split_has_no_prompt_or_recording_overlap; test_specialist_never_suppresses_an_existing_alarm; test_specialist_uses_confident_faults_only; test_bad_windows_are_not_interpreted_as_normal; test_specialist_verdict_never_reaches_proposal_suspicion; test_specialist_verdict_never_reaches_proposal_suspicion.Specialist; test_specialist_verdict_never_reaches_proposal_suspicion.Specialist.correct; test_shipped_specialist_matches_approved_model_digest
+
+tests/test_workspace_review.py
+Regression checks for the workspace review's input and session fixes.
+test_nonfinite_authority_does_not_change_operator_cap; test_nonfinite_manual_move_is_rejected; test_run_identity_is_stable_for_polling_and_changes_after_restart; test_connection_failure_overrides_last_healthy_snapshot
+
+training/__init__.py
+
+
+
+training/benchmark_command_parser.py
+Fresh, non-actuating benchmark of the manual studio's real parsing pipeline.
+
+The corpus is a small authored development set, not a representative language
+distribution. Exact action/valve/amount matching is required, including order.
+action; normalized; main
+
+training/benchmark_observer.py
+Fresh paired LLM/specialist evaluation on balanced clean held-out telemetry.
+
+Run: python -m training.benchmark_observer --per-class 12
+Never trains or selects parameters. Stores inputs' hashes, raw model responses,
+model IDs and dataset hashes so results can be reproduced and audited.
+summarize; run
+
+training/benchmark_physics_pair.py
+Paired non-actuating Ollama/physics replay on the frozen final holdout.
+main
+
+training/build_clean_observer_dataset.py
+Build an observer dataset with whole-recording holdouts and exact deduplication.
+
+The original v3 files remain historical evidence for their trained weights.
+Run: python -m training.build_clean_observer_dataset
+canonical; build
+
+training/build_dataset.py
+Build the operator fine-tune dataset from REAL plant states.
+
+  states.jsonl (collect_states.py)  --expert_policy-->  chat examples
+      system    = operator role + the plant's real design targets and SIS limits
+                  + the output JSON contract
+      user      = the measured state as JSON (PlantState field names; never truth)
+      assistant = setpoints + rationale JSON (the schema LLMOperator parses)
+
+The prompt format (system text + state JSON) comes from l3_brain/prompt_format.py,
+the same module LLMOperator serves with; the build asserts the system prompt is
+byte-identical to the one served (train/serve match).
+
+Split: exact-duplicate states are dropped, then each rollout is cut into
+contiguous 10 s blocks and ~11% of every rollout's blocks go to val, so val
+states are not interleaved 0.5 s neighbours of train states. If a rule ends up
+with no val example, one train block containing it is moved to val.
+
+Balance: within each split, every minority-rule example is kept and the
+"hold design targets" rule is downsampled to at most --cap-design (default 40%)
+of the split. Asserts no user-turn overlap between train and val.
+
+Usage: python -m training.build_dataset [--cap-design 0.4] [--seed 0]
+rule_of; histogram; main; main.balance
+
+training/build_observer_dataset.py
+Build the v3 L2 observer dataset (monitor/observer_v3_format.py).
+
+v3 fixes v2's TELEMETRY side only:
+  * PROPOSALS examples are v2's, carried over VERBATIM (user and assistant turns
+    byte-identical; only the system prompt is the v3 one, whose proposals
+    paragraph is itself v2's verbatim): training/observer_v2/observer_train.jsonl
+    -> train, observer_val.jsonl -> val.
+  * TELEMETRY examples are regenerated in the v3 format (15 s windows, every
+    flow, commanded vs actual valve), labelled by construction from REAL plant
+    recordings:
+      training/states.jsonl           collect_states.py: normal operation, setpoint
+                                      steps, pressure excursions, an SIS trip, native
+                                      sensor faults, valve degradation (no commanded
+                                      record: in normal operation commanded == actual)
+      training/observer_states.jsonl  collect_observer_states.py: 24 native sensor and
+                                      actuator faults with L1's commanded valves
+    plus sensor/actuator faults SYNTHESIZED onto real normal windows (one channel
+    or valve at a time, many modes / severities / onsets) for variety.
+
+Scenario-level holdout -> observer_unseen.jsonl (telemetry only; never trained on):
+  * whole rollouts: post_reset_kick, pressure_excursion_partial_feed, and one native
+    rollout per fault family (UNSEEN_NATIVE)
+  * synthesized sensor faults on purge_flow / a_in_purge (trained on the others) and
+    at severities beyond the training range
+  * synthesized actuator faults on f2 (trained on f1 / purge / product) and the
+    "offset" fault shape (trained on stuck / gain)
+val is a random split of the in-distribution pool (as v2's val was).
+
+Labels use the SIS pair only to decide what a window IS; the model input is
+measured values and L1's commands only.
+
+Usage: python -m training.build_observer_dataset [--seed 7]
+load_rollouts; windows; _sub; _cmd_of; _slope; tel; _win; reason_normal; reason_sensor; reason_actuator; reason_capacity; recorded_telemetry; _scale; synth_sensor; synth_actuator; synthesized_telemetry; v2_proposals; build; main
+
+training/collect_observer_states.py
+Collect REAL telemetry for the L2 observer fine-tune: the simulator's NATIVE
+sensor faults (fault_injection modes on several channels) and NATIVE actuator
+faults (stuck valves, valve capacity degradation), with the commanded valve
+positions recorded next to the measured state.
+
+training/states.jsonl (collect_states.py) already covers normal operation,
+excursions and a few sensor faults, but it never recorded what L1 commanded,
+so an actuator fault (commanded != actual) cannot be seen in it. These rollouts
+fill that gap and give the observer's unseen test set real, not synthesized,
+fault windows.
+
+Each rollout: reset to the operating point, run a fixed setpoint schedule (so
+the valves have something to do), switch the fault on at FAULT_ON_S, record at
+2 Hz. Records stream to a temp file and are appended to
+training/observer_states.jsonl only when the rollout completes; completed
+rollouts are skipped on rerun.
+
+Usage: python -m training.collect_observer_states [--only NAME] [--list]
+_sensor; _actuator; done_rollouts; run_rollout; main
+
+training/collect_states.py
+Collect REAL plant states from the live GRFICS simulator for the operator
+fine-tune. Nothing here is synthetic: every record is a read of the running
+Tennessee-Eastman process.
+
+Diversity comes from varying the CONDITIONS across rollouts - production /
+pressure targets, setpoint steps, a pressure excursion, post-reset kicks, and
+the simulator's native disturbances (sensor fault modes, valve capacity
+degradation, a stuck valve). The plant is reset to its operating point before
+every rollout; rollouts run one at a time.
+
+Each rollout is regulated by the L1 stub, driven either by a fixed target
+schedule or by the expert policy itself (on-policy states). The SIS interlock
+(production limits) stays active throughout; if it trips, the trip is recorded
+and the interlock is re-armed once the SIS channel allows.
+
+Recording: the measured state at 2 Hz. Each line holds the measured PlantState
+fields (what the operator sees) plus a `truth_eval_only` pressure/level pair
+that is NOT used for training. Bounded memory: records stream to a temp file
+and are appended to training/states.jsonl only when the rollout completes, so
+an interrupted run never leaves a half rollout; completed rollouts are skipped
+on rerun.
+
+Also writes training/design_point.json: the settled operating point read from
+the sim after the first reset (the expert's design targets).
+
+Usage: python -m training.collect_states [--only NAME] [--list] [--duration-scale 1.0]
+_ExpertBrain; _ExpertBrain.__init__; _ExpertBrain.__call__; write_design_point; done_rollouts; run_rollout; main
+
+training/eval_ollama.py
+Test the DEPLOYED operator model (the q4_k_m GGUF served by Ollama) - is it
+actually trained?
+
+  1. val      all held-out val states, fine-tuned model vs the stock base model
+              (same system prompt + state JSON, temperature 0)
+  2. probes   NEW states never in the data: a real nominal val state with
+              pressure / level / trip / dropout overridden, incl. combinations
+              that never occurred (high P + high L) and one rule with no
+              training data (low level). Labels come from the expert policy.
+
+Metrics: valid JSON accepted by LLMOperator's parser, hold accuracy (hold when
+the expert holds, act when it acts), per-setpoint mean abs error vs the expert.
+
+Usage: python -m training.eval_ollama [--models scram-operator qwen2.5:1.5b] [--val-n 0]
+Results: model/eval_ollama.json
+ask; score; val_cases; probe_cases; probe_cases.add; main
+
+training/evaluate_physics_holdout.py
+Freeze candidate, score sealed holdout once, and record a release decision.
+
+Release criteria are declared before opening holdout examples. This does not
+claim hardware validity; collection includes explicitly marked synthetic faults.
+main
+
+training/evaluate_telemetry_specialist.py
+Validate conservative correction policy, then replay it on historical LLM outputs.
+
+Validation determines activation. The historical test is a development comparison,
+not a fresh blind test or a new inference run of the LLM weights.
+below_sensor_noise_floor; main
+
+training/expert_policy.py
+Expert supervisory policy used to LABEL real plant states for the operator
+fine-tune. expert(state) -> (setpoints, rationale).
+
+Grounding (no invented numbers):
+  * DESIGN targets are the plant's own settled operating point, read from the
+    live simulator right after a reset (scripts/reset_plant.reset_and_settle)
+    and saved to training/design_point.json by collect_states.py.
+  * LIMITS are the SIS interlock's real trip / re-arm thresholds,
+    l0_plant.safety.TripLimits() production defaults (pressure trips at
+    3000 kPa and re-arms at 2800; level trips at 5% / 95% and re-arms inside
+    15-85%).
+
+The expert reads ONLY measured fields (what the operator sees through the basic
+process instrumentation) - never `truth`. It emits setpoints, never valves, in
+the same JSON schema LLMOperator parses (l3_brain/policy.parse_llm_targets).
+`state` may be a PlantState or a plain dict with the same measured keys.
+load_design_point; _get; _ramp; expert
+
+training/train_local.py
+Local QLoRA fine-tune of the L3 operator on an RTX 3050 (6 GB), adapted from
+the Colab notebook (Downloads/scram_operator_finetune.ipynb).
+
+  base     Qwen2.5-1.5B-Instruct, 4-bit (Unsloth bnb-4bit), LoRA r=16
+  data     training/train.jsonl, training/val.jsonl (real GRFICS states, expert labels)
+  format   every example is checked against l3_brain/prompt_format (the same
+           system prompt + state JSON LLMOperator serves), then rendered with
+           the Qwen chat template - train == serve
+  6 GB     batch 1 x grad-accum 8, max_seq_length 1024 (examples are ~520
+           tokens), gradient checkpointing on, 1 epoch (3 epochs overfit)
+  eval     on val: valid-JSON rate, per-setpoint mean abs error, hold accuracy
+  export   adapter -> merged 16-bit -> GGUF f16 (llama.cpp convert_hf_to_gguf.py)
+           -> q4_k_m (llama-quantize) in model/, plus an Ollama Modelfile
+
+Outputs (all under model/; weights are gitignored):
+  model/scram-operator-lora/      LoRA adapter + tokenizer
+  model/train_log.json            loss history + run config
+  model/eval_val.json             eval metrics + per-example predictions
+  model/scram-operator-gguf/      scram-operator-q4_k_m.gguf + Modelfile
+
+Stages (re-runnable; later stages load the saved adapter):
+  python -m training.train_local                  # train, eval, export
+  python -m training.train_local --stage eval     # or: export
+  python -m training.train_local --max-seq 768    # if it OOMs at 1024
+  (an interrupted train stage resumes from model/_trainer/checkpoint-*; delete that
+  folder to start fresh)
+
+Run with the training venv: .venv-train\Scripts\python -m training.train_local
+load_examples; load_model; train; train.to_ds; train.LogCB; train.LogCB.on_log; rule_of; evaluate; export; main
+
+training/train_physics_telemetry.py
+Fit and select measured-physics telemetry models on TRAIN/VALIDATION only.
+
+This program never opens the historical or clean unseen test examples except
+to exclude their exact user hashes from fitting. Fresh collection is separate.
+evaluate; main
+
+training/train_telemetry_classifier.py
+Train a CPU telemetry specialist and compare against unchanged recorded LLM results.
+
+No test-set fitting or hyperparameter search. Exports plain JSON for Python-only inference.
+Run: python -m training.train_telemetry_classifier
+load; metrics; main

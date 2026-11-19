@@ -125,7 +125,8 @@ class Governor:
 
     def _observer(self, verdict, t: float) -> None:
         """One observer call = one new proposals verdict (invalid ones are skipped)."""
-        if verdict is None or t - verdict.t > OBS_STALE_S:
+        if (verdict is None or t - verdict.t > OBS_STALE_S
+                or (getattr(verdict, "source", None) == "evidence-review" and verdict.label is None)):
             # no observer evidence (none yet, model gone, or stale): it holds nothing
             self._obs_corr, self._obs_label, self._obs_prev = 0.0, None, None
             return

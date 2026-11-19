@@ -1,0 +1,15 @@
+{
+  "declared_before_selected_candidate_quantization_evaluation": true,
+  "preferred_format": "Q4_K_M",
+  "reference": "selected checkpoint converted to F16 GGUF, same Ollama runtime and fixed validation subset",
+  "q4_acceptance": {
+    "proposal_per_class_recall_must_not_decrease": true,
+    "proposal_normal_false_positive_count_must_not_increase": true,
+    "invalid_response_count_must_not_increase": true,
+    "maximum_macro_f1_loss": 0.02
+  },
+  "fallback_if_q4_fails": "Evaluate Q8_0 once on the identical validation subset; retain F16 if neither quantization meets these criteria.",
+  "test_data_used_for_selection": false,
+  "does_not_relax_existing_release_gates": true,
+  "note": "An earlier step-45 Q4 export was a conversion/load preflight, not the selected deployment candidate. Actual tensor fallback types are recorded; Q4_K_M does not imply every tensor uses four bits."
+}

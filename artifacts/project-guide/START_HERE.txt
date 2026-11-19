@@ -1,0 +1,30 @@
+SCRAM PROJECT DOCUMENTATION - START HERE
+
+1. SCRAM_Study_Guide.pdf (111 pages)
+   Read this first. Architecture, source-grounded explanations, diagrams,
+   equations, worked examples, model/data lifecycle, APIs, tests and all 298 files.
+
+2. SCRAM_Source_Companion.pdf (658 pages)
+   Searchable numbered code/configuration, notebook cells and structural
+   walkthroughs for all 884 Python symbols. Bookmarks identify files.
+   Source docstrings are labeled; some preserve historical wording.
+
+3. TXT versions contain the same study text and the complete source companion.
+   Diagrams are in figures/. The generated minified Unity loader is included
+   only in the TXT source companion; its PDF entry explains its integration.
+
+4. inventory.json, coverage.json and validation.json record source coverage,
+   byte hashes, PDF checks and the fact that original tracked files did not change.
+   workspace-summary.json describes ignored/local dependencies and artifacts.
+
+Scope: all tracked project files; full readable code, configuration and notebook
+cells. Repeated datasets, model parameter arrays, binary weights, packet captures
+and generated vendor assets are explained/catalogued rather than decoded as
+handwritten code. Third-party environments/tool repositories are not reproduced.
+
+Saved evaluation charts are historical evidence, not fresh benchmark runs.
+No simulator, training job or deployment was started for this task.
+
+The PDF outline panel and contents pages support navigation. Source line numbers
+refer to the snapshot identified by inventory.json. Search a file path or a
+function name in either PDF/TXT when you want to return to a specific component.

@@ -14,6 +14,10 @@ model/**/*.npz
 model/**/checkpoint-*/
 model/**/optimizer*
 model/**/runs/
+model/scram-shared-observer/llama-server/
+model/scram-shared-observer/app-service-process.json
+model/scram-shared-observer/control-room*.json
+model/scram-shared-observer/control-room.lock
 # local training scratch
 training/_rollout_tmp.jsonl
 training/collect.log
@@ -60,6 +64,8 @@ scram_l1_l2_contrib.zip
 .venv/
 venv/
 node_modules/
+frontend/.npm-cache/
+frontend/*.tsbuildinfo
 .env
 .env.*
 !.env.example
@@ -78,3 +84,8 @@ artifacts/mobbin-public-web.html
 artifacts/accuracy-v2/simulator/plant
 simulation-test
 simulation-test.exe
+
+# Regenerable optimization inputs, optional training outputs and package caches.
+artifacts/optimization/multitask-prepared/
+artifacts/optimization/npm-cache/
+artifacts/optimization/candidates/

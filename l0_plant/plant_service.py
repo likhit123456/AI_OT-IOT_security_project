@@ -49,11 +49,15 @@ class PlantService:
         self._connected = False
 
     def start(self) -> "PlantService":
-        self.client.connect()
-        self._connected = True
-        if self.gate is not None and self.gate.last_good is None:
-            self.gate.seed(self.client.read().get("state", {}))
-        return self
+        try:
+            self.client.connect()
+            self._connected = True
+            if self.gate is not None and self.gate.last_good is None:
+                self.gate.seed(self.client.read().get("state", {}))
+            return self
+        except BaseException:
+            self.stop()
+            raise
 
     def stop(self) -> None:
         self.client.close()

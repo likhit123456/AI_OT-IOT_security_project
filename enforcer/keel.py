@@ -30,7 +30,8 @@ Design rules (these are the security argument -- keep them true):
   * L2 suspicion is advisory: it can only LOWER authority, and its total
     influence is floored (`l2_floor`), so a compromised/hostile L2 cannot
     drive the plant to zero authority on its own (no DoS-by-monitor).
-  * The Keel never raises a command's magnitude; it only moves it toward safe.
+  * The Keel moves commands toward a cause-specific safe lineup. Feed-starvation
+    recovery may restore bounded design feeds, only on the independent channel.
 """
 
 from __future__ import annotations
@@ -44,7 +45,7 @@ from dataclasses import dataclass, field, replace
 from typing import Deque, Dict, List, Optional, Tuple
 
 from contracts import ControlCommand, PlantState
-from l0_plant.safety import TripLimits
+from l0_plant.safety import DESIGN_VALVES, TripLimits
 
 VALVES = ("f1_valve", "f2_valve", "purge_valve", "product_valve")
 
@@ -56,6 +57,8 @@ class KeelLimits:
     # soft zone: Keel starts clamping this far inside the SIS trip point
     pressure_margin_kpa: float = 150.0
     level_margin_pct: float = 3.0           # soft zone starts at trip.level_low + this (whatever limit is configured)
+    pressure_low_kpa: float = 2400.0        # loss-of-feed recovery floor, inside the operator envelope
+    pressure_low_margin_kpa: float = 150.0
     # rate bound on the SIS channel (kPa/s, %/s), measured over rate_window_s
     pressure_rate_max: float = 2.0
     level_rate_max: float = 0.01
@@ -215,6 +218,13 @@ class Keel:
             hazard = max(reasons, key=lambda r: r.severity).hazard
             applied = self._toward_safe(applied, hazard, severity)
             exempt = tuple(self.safe_lineup(hazard, cmd))      # never throttle safety moves
+            # Retain inventory even when pressure recovery is the dominant
+            # hazard. Choosing only one reason used to lose this second clamp.
+            low = max((r.severity for r in reasons if r.hazard == "level_low"), default=0.0)
+            if low > 0 and sis.level < self.lim.trip.level_high - self.lim.level_margin_pct:
+                applied = replace(applied, product_valve=min(applied.product_valve,
+                                                            cmd.product_valve * (1 - min(1.0, low))))
+                exempt = (*exempt, "product_valve")
         applied = self._slew_limit(applied, dt, exempt)
 
         changed = any(abs(getattr(applied, v) - getattr(cmd, v)) > 1e-6 for v in VALVES)
@@ -239,6 +249,15 @@ class Keel:
             return [Reason("sis_invalid", "pressure_high", 1.0, f"SIS reading invalid {sis}")]
         self._push(self._p, t, sis.pressure, max(lim.window_s, lim.rate_window_s))
         self._push(self._l, t, sis.level, max(lim.level_window_s, lim.rate_window_s))
+
+        # A closed-feed command is not a high-pressure hazard, but can starve
+        # the reaction. Only independent pressure can authorize feed recovery;
+        # never restore feeds into a high-level vessel.
+        if sis.level < tr.level_high - lim.level_margin_pct:
+            s = _ramp(-sis.pressure, -(lim.pressure_low_kpa + lim.pressure_low_margin_kpa),
+                      -lim.pressure_low_kpa)
+            if s > 0:
+                out.append(Reason("soft_zone", "pressure_low", s, f"feed-starvation recovery P={sis.pressure:.0f}"))
 
         # soft zone (inside the SIS trip point)
         s = _ramp(sis.pressure, tr.pressure_high - lim.pressure_margin_kpa, tr.pressure_high)
@@ -327,6 +346,9 @@ class Keel:
             return {"product_valve": 0.0}
         if hazard == "level_high":
             return {"f1_valve": 0.0, "f2_valve": 0.0, "product_valve": 100.0}
+        if hazard == "pressure_low":
+            return {"f1_valve": DESIGN_VALVES["f1"], "f2_valve": DESIGN_VALVES["f2"],
+                    "purge_valve": 0.0}
         return {"f1_valve": 0.0, "f2_valve": 0.0, "purge_valve": 100.0}   # pressure_high / default
 
     def _toward_safe(self, cmd: ControlCommand, hazard: str, sev: float) -> ControlCommand:

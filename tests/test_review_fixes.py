@@ -150,7 +150,9 @@ def test_control_room_server_rejects_malformed_requests():
     def call(method, path, body=b""):
         h = H.__new__(H)
         h.path, h.rfile, h.wfile = path, io.BytesIO(body), io.BytesIO()
-        h.headers = {"Content-Length": str(len(body))}
+        h.headers = {"Content-Length": str(len(body)), "Content-Type": "application/json", "Host": "127.0.0.1:8765"}
+        from types import SimpleNamespace
+        h.server = SimpleNamespace(server_port=8765)
         h.request_version, h.requestline, h.command = "HTTP/1.1", f"{method} {path} HTTP/1.1", method
         sent = {}
         h.send_response = lambda code, msg=None: sent.setdefault("code", code)

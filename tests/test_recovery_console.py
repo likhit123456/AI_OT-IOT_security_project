@@ -184,6 +184,7 @@ def test_manual_override_is_applied_and_released():
     eng.brain = types.SimpleNamespace(last_intent=None)
     eng.state = types.SimpleNamespace(truth={"pressure": 2700.0})
     eng.l1 = types.SimpleNamespace(bumpless=lambda *a: None)
+    eng.svc = types.SimpleNamespace(safety=types.SimpleNamespace(tripped=False))
     eng._act_chat("set feed 1 to 40%")
     assert eng.manual == {"f1": 40.0} and eng.chat[-1]["role"] == "operator"
     eng._act_chat("release")

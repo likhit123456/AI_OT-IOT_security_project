@@ -27,7 +27,7 @@ Control flows down, state flows up:
   `a_comp_sp`, `authority` (0..1), `rationale`. `None` = hold.
 - `ControlCommand` (L1 out, L0 in): four valve positions in % [0,100]. L0 clamps.
 - `PlantState` (L0 up): measured process variables, valve positions, cost,
-  `scrammed` / `scram_reason`, and `truth` (eval-only).
+  `scrammed` / `scram_reason`, and `truth` (simulated safety channel and evaluation).
 - Everything above L0 works in engineering units, never 0-65535 Modbus scaling.
 - Contract changes are agreed with the teammates first; both sides build to them.
 
@@ -64,9 +64,10 @@ state:
   (frozen, drift, noise, dropout) to exercise L1/L2/L3 against corrupted
   signals.
 
-`PlantState` exposes `measured` as the live signal — that is what L1, L2 and
-L3 consume. `PlantState.truth` carries `outputs`, for eval/scoring only; it is
-never a production signal.
+`PlantState` exposes `measured` to the ordinary regulator, AI and behavior
+monitors. `PlantState.truth` carries `outputs` for the L0 safety interlock,
+Keel's independent safety checks, and evaluation/scoring. This separation is
+inside the simulation; it is not physically independent safety hardware.
 
 ## 5. The SCRAM interlock thesis
 
@@ -82,8 +83,13 @@ regardless of what L3 intends or how much authority governance granted:
 | pressure high, level high | `e_stop` (feeds shut, purge and product open) | relieves pressure / drains an overfull vessel |
 | level low | product valve closed; feed and purge valves held where they are (not written) | `e_stop` would open product and keep draining an already-low vessel; closing it lets inflow and reaction recover the level to the re-arm band |
 
-The first trip cause latches; a second hazard while latched does not change the
-safe state. A safety-channel reading that is missing or not a finite number trips
+The first trip cause remains latched for diagnosis, while additional hazards
+can escalate the protective action. Combined high pressure and low inventory
+shut feeds, open purge and close product, retaining liquid while relieving
+pressure. The live engine enables `SafeHold`, which uses bounded design feeds
+for low inventory or feed starvation and regulates pressure/level during other
+trips, escalating to E-stop on runaway. The table above describes the base
+interlock without that optional policy. A safety-channel reading that is missing or not a finite number trips
 too (cause `sis_sensor_fault`, safe state `e_stop`): the SIS fails safe when it
 cannot read its own sensor. A command with a non-finite valve value is never
 applied (the gate rejects it; without a gate the valves are held).
